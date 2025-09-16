@@ -1,0 +1,20 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Backend.Models
+{
+    public class Route
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public string Route_Data { get; set; }
+        [Required]
+        public string Total_Distance { get; set; }
+        public DateTime? Estimated_Duration { get; set; }
+        public int Driver_Id {  get; set; }
+        public int? Order_Placement_Id {  get; set; }
+
+        public virtual Driver Driver { get; set; }
+        public virtual Order_Placement Order_Placement { get; set; }
+    }
+}
