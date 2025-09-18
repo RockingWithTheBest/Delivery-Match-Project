@@ -24,6 +24,5 @@ namespace Backend.Models
         public List<Order_Placement>? Orders_Placed { get; set; } = new List<Order_Placement>();
 
         public virtual User User { get; set; }
-        public virtual Documents Documents { get; set; }
     }
 }

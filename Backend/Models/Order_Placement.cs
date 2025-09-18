@@ -37,9 +37,8 @@ namespace Backend.Models
         public DateTime Scheduled_At { get; set; }
         public DateTime Completed_On { get; set; }
         [Required]
-        public int Customer_Id {  get; set; }
-        public int? Driver_Id {  get; set; }
-        
+        public int? CustomerId {  get; set; }
+        public int? DriverId {  get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Driver Driver { get; set; }
     }

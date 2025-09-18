@@ -11,8 +11,8 @@ namespace Backend.Models
         [Required]
         public string Total_Distance { get; set; }
         public DateTime? Estimated_Duration { get; set; }
-        public int Driver_Id {  get; set; }
-        public int? Order_Placement_Id {  get; set; }
+        public int DriverId {  get; set; }
+        public int? Order_PlacementId {  get; set; }
 
         public virtual Driver Driver { get; set; }
         public virtual Order_Placement Order_Placement { get; set; }

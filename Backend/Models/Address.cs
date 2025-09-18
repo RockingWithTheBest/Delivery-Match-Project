@@ -14,7 +14,7 @@ namespace Backend.Models
         [StringLength(40)]
         public string City { get; set; }
         [Required]
-        public int User_Id {  get; set; }
+        public int UserId {  get; set; }
         public virtual User User {  get; set; }
     }
 }

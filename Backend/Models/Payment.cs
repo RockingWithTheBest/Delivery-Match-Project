@@ -11,8 +11,7 @@ namespace Backend.Models
         [Column(TypeName ="decimal(10,2)")]
         public decimal Amount {  get; set; }
         [Required]
-        [StringLength(30)]
-        public decimal Payment_Method { get; set; }
+        public string Payment_Method { get; set; }
         [Required]
         [StringLength(30)]
         public string Status {  get; set; }
@@ -25,7 +24,7 @@ namespace Backend.Models
         [Column(TypeName = "decimal(10,2)")]
         public decimal? Driver_Earnings { get; set; }
         [Required]
-        public int Order_Placement_Id {  get; set; }
+        public int Order_PlacementId {  get; set; }
 
         public virtual Order_Placement Order_Placement { get; set; }
     }

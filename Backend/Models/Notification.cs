@@ -14,8 +14,8 @@ namespace Backend.Models
         [Required]
         public string Message { get; set; }
         public bool? Is_Read { get; set; }
-        public int? User_Id {  get; set; }
+        public int? UserId {  get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

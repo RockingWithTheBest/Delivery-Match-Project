@@ -24,7 +24,7 @@ namespace Backend.Models
         [Column(TypeName = "decimal(8,2)")]
         public decimal Max_Volume { get; set; }
         [Required]
-        public int Driver_Id {  get; set; }
+        public int DriverId {  get; set; }
 
         public virtual Driver Driver { get; set; }
     }

@@ -15,8 +15,8 @@ namespace Backend.Models
         public decimal Net_Earnings { get;  set; }
         public string Is_Paid_Out {  get; set; }
         public string Earned_At {  get; set; }
-        public int? Driver_Id {  get; set; }
-        public int? Order_Placement_Id { get; set; }
+        public int? DriverId {  get; set; }
+        public int? Order_PlacementId { get; set; }
 
         public virtual Order_Placement Order_Placement { get; set; }
         public virtual Driver Driver { get; set; }

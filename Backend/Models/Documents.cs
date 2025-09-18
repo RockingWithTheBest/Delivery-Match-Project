@@ -19,8 +19,8 @@ namespace Backend.Models
         public string Reviewed_By {  get; set; }
         public DateTime Reviewed_At { get;  set; }
         [Required]
-        public int Driver_Id {  get; set; }
+        public int DriverId {  get; set; }
 
-        public Driver Driver { get; set; }
+        public virtual Driver Driver { get; set; }
     }
 }
