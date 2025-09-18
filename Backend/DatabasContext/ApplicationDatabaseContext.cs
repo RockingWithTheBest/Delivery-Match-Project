@@ -1,4 +1,5 @@
 ﻿using Backend.Models;
+using Backend.TrainingData;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.DatabasContext
@@ -12,17 +13,35 @@ namespace Backend.DatabasContext
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Earnings> Earnings { get; set; }
         public DbSet<Notification> Notifications { get; set; }  
-        public DbSet<Order_Items> Order_Items { get; set; }
-        public DbSet<Order_Tracking>Order_Trackings { get; set; }
-        public DbSet<Order_Placement> Order_Placement { get; set; }
+        public DbSet<Order_Items> OrderItems { get; set; }
+        public DbSet<Order_Tracking>OrderTrackings { get; set; }
+        public DbSet<Order_Placement> OrderPlacements { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Models.Route> Routes { get; set; }
         public DbSet<User>Users { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        //public override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Customer>()
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order_Placement>()
+                .Property(p => p.CustomerId)
+                .IsRequired(false);
+            modelBuilder.Entity<User>()
+                .Property(p => p.Password)
+                .HasMaxLength(20);
+            modelBuilder.ApplyConfiguration(new AddressData());
+            modelBuilder.ApplyConfiguration(new CustomerData());
+            modelBuilder.ApplyConfiguration(new DocumentData());
+            modelBuilder.ApplyConfiguration(new DriversData());
+            //modelBuilder.ApplyConfiguration(new EarningsData());
+            //modelBuilder.ApplyConfiguration(new NotificationData());
+            modelBuilder.ApplyConfiguration(new OrderItemsData());
+            modelBuilder.ApplyConfiguration(new OrderTrackingData());
+            modelBuilder.ApplyConfiguration(new OrderPlacmentData());
+            modelBuilder.ApplyConfiguration(new PaymentData());
+            //modelBuilder.ApplyConfiguration(new RouteData());
+            modelBuilder.ApplyConfiguration(new UserData());
+            modelBuilder.ApplyConfiguration(new VehicleData());
+        }
     }
 }
