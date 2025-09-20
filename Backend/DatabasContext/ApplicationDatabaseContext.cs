@@ -33,13 +33,13 @@ namespace Backend.DatabasContext
             modelBuilder.ApplyConfiguration(new CustomerData());
             modelBuilder.ApplyConfiguration(new DocumentData());
             modelBuilder.ApplyConfiguration(new DriversData());
-            //modelBuilder.ApplyConfiguration(new EarningsData());
+            modelBuilder.ApplyConfiguration(new EarningsData());
             //modelBuilder.ApplyConfiguration(new NotificationData());
             modelBuilder.ApplyConfiguration(new OrderItemsData());
             modelBuilder.ApplyConfiguration(new OrderTrackingData());
             modelBuilder.ApplyConfiguration(new OrderPlacmentData());
             modelBuilder.ApplyConfiguration(new PaymentData());
-            //modelBuilder.ApplyConfiguration(new RouteData());
+            modelBuilder.ApplyConfiguration(new TrainingData.RouteData());
             modelBuilder.ApplyConfiguration(new UserData());
             modelBuilder.ApplyConfiguration(new VehicleData());
         }
