@@ -26,6 +26,6 @@ namespace Backend.Models
         [Required]
         public int DriverId {  get; set; }
 
-        public virtual Driver Driver { get; set; }
+        public virtual Driver? Driver { get; set; }
     }
 }

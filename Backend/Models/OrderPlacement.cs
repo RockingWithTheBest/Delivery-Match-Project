@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
-    public class Order_Placement
+    public class OrderPlacement
     {
         [Key]
         public int Id { get; set; }

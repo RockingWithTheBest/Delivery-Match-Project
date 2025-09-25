@@ -26,6 +26,6 @@ namespace Backend.Models
         [Required]
         public int Order_PlacementId {  get; set; }
 
-        public virtual Order_Placement Order_Placement { get; set; }
+        public virtual OrderPlacement? Order_Placement { get; set; }
     }
 }

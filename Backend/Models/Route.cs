@@ -14,7 +14,7 @@ namespace Backend.Models
         public int DriverId {  get; set; }
         public int? Order_PlacementId {  get; set; }
 
-        public virtual Driver Driver { get; set; }
-        public virtual Order_Placement Order_Placement { get; set; }
+        public virtual Driver? Driver { get; set; }
+        public virtual OrderPlacement? Order_Placement { get; set; }
     }
 }
