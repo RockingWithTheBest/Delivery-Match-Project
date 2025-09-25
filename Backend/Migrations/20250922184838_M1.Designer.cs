@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20250918195431_M2")]
-    partial class M2
+    [Migration("20250922184838_M1")]
+    partial class M1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -4311,11 +4311,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.User", b =>
                 {
-                    b.Navigation("Customer")
-                        .IsRequired();
+                    b.Navigation("Customer");
 
-                    b.Navigation("Driver")
-                        .IsRequired();
+                    b.Navigation("Driver");
                 });
 #pragma warning restore 612, 618
         }
