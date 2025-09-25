@@ -15,7 +15,7 @@ namespace Backend.DatabasContext
         public DbSet<Notification> Notifications { get; set; }  
         public DbSet<Order_Items> OrderItems { get; set; }
         public DbSet<Order_Tracking>OrderTrackings { get; set; }
-        public DbSet<Order_Placement> OrderPlacements { get; set; }
+        public DbSet<OrderPlacement> OrderPlacements { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Models.Route> Routes { get; set; }
         public DbSet<User>Users { get; set; }
@@ -23,12 +23,16 @@ namespace Backend.DatabasContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Order_Placement>()
+            modelBuilder.Entity<OrderPlacement>()
                 .Property(p => p.CustomerId)
                 .IsRequired(false);
             modelBuilder.Entity<User>()
                 .Property(p => p.Password)
                 .HasMaxLength(20);
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Id)
+                .ValueGeneratedOnAdd();
             modelBuilder.ApplyConfiguration(new AddressData());
             modelBuilder.ApplyConfiguration(new CustomerData());
             modelBuilder.ApplyConfiguration(new DocumentData());

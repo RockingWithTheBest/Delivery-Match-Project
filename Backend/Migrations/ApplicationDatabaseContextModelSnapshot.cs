@@ -4308,11 +4308,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.User", b =>
                 {
-                    b.Navigation("Customer")
-                        .IsRequired();
+                    b.Navigation("Customer");
 
-                    b.Navigation("Driver")
-                        .IsRequired();
+                    b.Navigation("Driver");
                 });
 #pragma warning restore 612, 618
         }

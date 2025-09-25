@@ -1,0 +1,4156 @@
+[
+  {
+    "ContainingType": "Backend.Controllers.AddressController",
+    "Method": "AddAddress",
+    "RelativePath": "api/Address/Add-Addresses",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addressRecord",
+        "Type": "Backend.Models.Address",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.AddressController",
+    "Method": "DeleteAddress",
+    "RelativePath": "api/Address/Delete-An-Address-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.AddressController",
+    "Method": "UpdateAddress",
+    "RelativePath": "api/Address/Editing_Addresses",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "addressRecord",
+        "Type": "Backend.Models.Address",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.AddressController",
+    "Method": "GetById",
+    "RelativePath": "api/Address/Get-Addresses-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.AddressController",
+    "Method": "GetAll",
+    "RelativePath": "api/Address/Get-All-Addresses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.CustomerController",
+    "Method": "AddCustomer",
+    "RelativePath": "api/Customer/Add-Customer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerRecord",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.CustomerController",
+    "Method": "DeleteCustomer",
+    "RelativePath": "api/Customer/Delete-An-Customer-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.CustomerController",
+    "Method": "UpdateCustomer",
+    "RelativePath": "api/Customer/Edit-Customer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "customerRecord",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.CustomerController",
+    "Method": "GetAll",
+    "RelativePath": "api/Customer/Get-All-Customers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.CustomerController",
+    "Method": "AllOrderPlacementsByCustomerId",
+    "RelativePath": "api/Customer/Get-AllOrderPlacedByCustomer-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DocumentController",
+    "Method": "AddDoc",
+    "RelativePath": "api/Document/Add-Docs",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docRecord",
+        "Type": "Backend.Models.Documents",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DocumentController",
+    "Method": "DeleteDoc",
+    "RelativePath": "api/Document/Delete-A-Doc-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DocumentController",
+    "Method": "UpdateDoc",
+    "RelativePath": "api/Document/Editing-Docs",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "docRecord",
+        "Type": "Backend.Models.Documents",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DocumentController",
+    "Method": "GetAllDocs",
+    "RelativePath": "api/Document/Get-All-Docs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DriverController",
+    "Method": "AddDriver",
+    "RelativePath": "api/Driver/Add-Driver",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "driverRecord",
+        "Type": "Backend.Models.Driver",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DriverController",
+    "Method": "DeleteDriver",
+    "RelativePath": "api/Driver/Delete-A-Driver-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DriverController",
+    "Method": "UpdateDriver",
+    "RelativePath": "api/Driver/Editing-Driver",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "driverRecord",
+        "Type": "Backend.Models.Driver",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DriverController",
+    "Method": "GetAll",
+    "RelativePath": "api/Driver/Get-All-Drivers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DriverController",
+    "Method": "AllOrdersPlacedByDriverID",
+    "RelativePath": "api/Driver/Get-All-Orders-Placed-By-Driver-ID",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.EarningController",
+    "Method": "AddEarnings",
+    "RelativePath": "api/Earning/Add-Earnings",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "earningsRecord",
+        "Type": "Backend.Models.Earnings",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.EarningController",
+    "Method": "DeleteAddress",
+    "RelativePath": "api/Earning/Delete-An-Address-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.EarningController",
+    "Method": "UpdateEarnings",
+    "RelativePath": "api/Earning/Editing-Earnings",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "earningsRecord",
+        "Type": "Backend.Models.Earnings",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.EarningController",
+    "Method": "GetAll",
+    "RelativePath": "api/Earning/Get-All-Earnings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.EarningController",
+    "Method": "GetById",
+    "RelativePath": "api/Earning/Get-Earnings-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "AddNotification",
+    "RelativePath": "api/Notification/Add-Notification",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notificationRecord",
+        "Type": "Backend.Models.Notification",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "DeleteNotification",
+    "RelativePath": "api/Notification/Delete-An-Notification-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "UpdateNotification",
+    "RelativePath": "api/Notification/Editing-Notification",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "notificationRecord",
+        "Type": "Backend.Models.Notification",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "GetAll",
+    "RelativePath": "api/Notification/Get-All-Notification",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "GetById",
+    "RelativePath": "api/Notification/Get-Notification-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderItemsController",
+    "Method": "AddOrderItems",
+    "RelativePath": "api/OrderItems/Add-OrderItems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderItemRecord",
+        "Type": "Backend.Models.Order_Items",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderItemsController",
+    "Method": "DeleteOrderItems",
+    "RelativePath": "api/OrderItems/Delete-An-OrderItems-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderItemsController",
+    "Method": "UpdateOrderItems",
+    "RelativePath": "api/OrderItems/Editing-OrderItems",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "orderItemRecord",
+        "Type": "Backend.Models.Order_Items",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderItemsController",
+    "Method": "GetAll",
+    "RelativePath": "api/OrderItems/Get-All-OrderItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderItemsController",
+    "Method": "GetById",
+    "RelativePath": "api/OrderItems/Get-OrderItems-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "AddOrderPlacement",
+    "RelativePath": "api/OrderPlacement/Add-OrderPlacement",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderPlacementRecord",
+        "Type": "Backend.Models.OrderPlacement",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "DeleteOrderPlacement",
+    "RelativePath": "api/OrderPlacement/Delete-An-OrderPlacment-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "UpdateOrderPlacement",
+    "RelativePath": "api/OrderPlacement/Editing-Order-PlacementAddresses",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "orderPlacementRecord",
+        "Type": "Backend.Models.OrderPlacement",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "AllOrderPlacementRecordsByCustomerId",
+    "RelativePath": "api/OrderPlacement/Get-All-Order-Placement-Records-By-CustomerId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "AllOrderPlacementRecordsByDriverId",
+    "RelativePath": "api/OrderPlacement/Get-All-Order-Placement-Records-By-DriverId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "GetAll",
+    "RelativePath": "api/OrderPlacement/Get-All-OrderPlacements",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "GetById",
+    "RelativePath": "api/OrderPlacement/Get-Order-Single-Record-Placements-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderTrackingController",
+    "Method": "AddOrderTracking",
+    "RelativePath": "api/OrderTracking/Add-Order-Tracking",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Latitude",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Longitude",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Notes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TimeStamps",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_PlacementId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Weight",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Volume",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Price",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Distance",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Created_At",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Scheduled_At",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Completed_On",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.CustomerId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.DriverId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Driver",
+        "Type": "Backend.Models.Driver",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Customer",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderTrackingController",
+    "Method": "DeleteOrderTracking",
+    "RelativePath": "api/OrderTracking/Delete-An-Order-Tracking-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderTrackingController",
+    "Method": "UpdateOrderTracking",
+    "RelativePath": "api/OrderTracking/Editing-Order-Tracking",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Latitude",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Longitude",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Notes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TimeStamps",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_PlacementId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Weight",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Volume",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Price",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Distance",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Created_At",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Scheduled_At",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Completed_On",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.CustomerId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.DriverId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Driver",
+        "Type": "Backend.Models.Driver",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Customer",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderTrackingController",
+    "Method": "GetAll",
+    "RelativePath": "api/OrderTracking/Get-All-Order-Tracking",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.OrderTrackingController",
+    "Method": "GetById",
+    "RelativePath": "api/OrderTracking/Get-Order-Tracking-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.PaymentController",
+    "Method": "AddPayment",
+    "RelativePath": "api/Payment/Add-Payments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "payRecord",
+        "Type": "Backend.Models.Payment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.PaymentController",
+    "Method": "DeleteAddress",
+    "RelativePath": "api/Payment/Delete-An-Payment-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.PaymentController",
+    "Method": "GetAll",
+    "RelativePath": "api/Payment/Get-All-Payment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.PaymentController",
+    "Method": "GetById",
+    "RelativePath": "api/Payment/Get-Payment-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.PaymentController",
+    "Method": "UpdatePayment",
+    "RelativePath": "api/Payment/Payment",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "payRecord",
+        "Type": "Backend.Models.Payment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.RouteController",
+    "Method": "AddRoute",
+    "RelativePath": "api/Route/Add-Route",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Route_Data",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Total_Distance",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Estimated_Duration",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DriverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_PlacementId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Customer",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Weight",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Volume",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Price",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Distance",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Created_At",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Scheduled_At",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Completed_On",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.CustomerId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.DriverId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Driver",
+        "Type": "Backend.Models.Driver",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Customer",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.RouteController",
+    "Method": "DeleteRoute",
+    "RelativePath": "api/Route/Delete-A-Route-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.RouteController",
+    "Method": "UpdateRoute",
+    "RelativePath": "api/Route/Editing_Route",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Route_Data",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Total_Distance",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Estimated_Duration",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DriverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_PlacementId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Driver.User.Customer.User.Customer",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Up_Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Pick_Up_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Delivery_Contact",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Weight",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Volume",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Price",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Distance",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Created_At",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Scheduled_At",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Completed_On",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.CustomerId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.DriverId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Driver",
+        "Type": "Backend.Models.Driver",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Driver.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Customer.User.Customer.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Business_Type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Tax_Identification",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Orders",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Total_Spent",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.First_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Last_Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Drivers_License",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.License_Expiry",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Verified",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Is_Available",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Rating",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Completion_Rate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Total_Earnings",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.Orders_Placed",
+        "Type": "System.Collections.Generic.List\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Driver.User",
+        "Type": "Backend.Models.User",
+        "IsRequired": false
+      },
+      {
+        "Name": "Order_Placement.Driver.User.Customer.User.Customer",
+        "Type": "Backend.Models.Customer",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.RouteController",
+    "Method": "GetAll",
+    "RelativePath": "api/Route/Get-All-Route",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.RouteController",
+    "Method": "GetById",
+    "RelativePath": "api/Route/Get-Route-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "AddAddress",
+    "RelativePath": "api/User/Add-Users",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userRecord",
+        "Type": "Backend.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "DeleteAddress",
+    "RelativePath": "api/User/Delete-An-User-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/User/Editing-User",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userRecord",
+        "Type": "Backend.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "GetAll",
+    "RelativePath": "api/User/Get-All-Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "GetById",
+    "RelativePath": "api/User/Get-Users-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.VehicleController",
+    "Method": "AddVehicle",
+    "RelativePath": "api/Vehicle/Add-Vehcile",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vehicleRecord",
+        "Type": "Backend.Models.Vehicle",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.VehicleController",
+    "Method": "DeleteVehicle",
+    "RelativePath": "api/Vehicle/Delete-A-Vehcile-Record",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.VehicleController",
+    "Method": "UpdateVehicle",
+    "RelativePath": "api/Vehicle/Edit-Vehcile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "vehicleRecord",
+        "Type": "Backend.Models.Vehicle",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.VehicleController",
+    "Method": "GetAll",
+    "RelativePath": "api/Vehicle/Get-All-Vehcile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.VehicleController",
+    "Method": "GetById",
+    "RelativePath": "api/Vehicle/Get-Vehcile-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.WeatherForecast, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]
