@@ -2,7 +2,7 @@
 
 namespace Backend.Repository.Interface
 {
-    public interface IOrder_Tracking
+    public interface IOrderTracking
     {
         IEnumerable<Order_Tracking> GetAllTrackings();
         Order_Tracking GetSingleRecord(int Id);

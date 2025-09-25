@@ -2,7 +2,7 @@
 
 namespace Backend.Repository.Interface
 {
-    public interface IOrder_Items
+    public interface IOrderItems
     {
         IEnumerable<Order_Items> GetAllOrderItems();
         Order_Items GetSingleRecord(int Id);

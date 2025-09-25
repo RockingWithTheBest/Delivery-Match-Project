@@ -8,6 +8,6 @@ namespace Backend.Repository.Interface
         int AddCustomerRecord(Customer customer);
         int UpdateCustomerRecord(int Id,Customer customer);
         int DeleteCustomerRecord(int Id);
-        IEnumerable<Order_Placement> GetAllOrderPlacementsByCustomerId(int CustomerId);
+        IEnumerable<OrderPlacement> GetAllOrderPlacementsByCustomerId(int CustomerId);
     }
 }
