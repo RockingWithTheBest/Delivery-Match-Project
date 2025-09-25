@@ -16,7 +16,7 @@ namespace Backend.Repository.Implementation
         public int AddRoutesRecord(Models.Route route)
         {
             int textVariable = -1;
-            if (route.Id == 0)
+            if (route == null)
             {
                 return textVariable;
             }

@@ -16,7 +16,7 @@ namespace Backend.Repository.Implementation
         public int AddNotificationRecord(Notification notify)
         {
             int textVariable = -1;
-            if (notify.Id == 0)
+            if (notify == null)
             {
                 return textVariable;
             }

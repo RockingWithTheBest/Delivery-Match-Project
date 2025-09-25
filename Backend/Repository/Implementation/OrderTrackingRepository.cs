@@ -6,7 +6,7 @@ using System.Net;
 
 namespace Backend.Repository.Implementation
 {
-    public class OrderTrackingRepository : IOrder_Tracking
+    public class OrderTrackingRepository : IOrderTracking
     {
         private ApplicationDatabaseContext databaseContext;
         public OrderTrackingRepository(ApplicationDatabaseContext databaseContext)
@@ -16,7 +16,7 @@ namespace Backend.Repository.Implementation
         public int AddTrackingRecord(Order_Tracking tracking)
         {
             int textVariable = -1;
-            if (tracking.Id == 0)
+            if (tracking == null)
             {
                 return textVariable;
             }

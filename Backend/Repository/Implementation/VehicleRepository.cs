@@ -13,10 +13,10 @@ namespace Backend.Repository.Implementation
         {
             this.databaseContext = databaseContext;
         }
-        public int AddAddressRecord(Vehicle vehicle)
+        public int AddVehicleRecord(Vehicle vehicle)
         {
             int textVariable = -1;
-            if (vehicle.Id == 0)
+            if (vehicle == null)
             {
                 return textVariable;
             }

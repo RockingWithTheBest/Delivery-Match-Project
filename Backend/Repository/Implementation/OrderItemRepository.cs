@@ -5,7 +5,7 @@ using Backend.Repository.Interface;
 
 namespace Backend.Repository.Implementation
 {
-    public class OrderItemRepository : IOrder_Items
+    public class OrderItemRepository : IOrderItems
     {
         private ApplicationDatabaseContext databaseContext;
         public OrderItemRepository(ApplicationDatabaseContext databaseContext)
@@ -15,7 +15,7 @@ namespace Backend.Repository.Implementation
         public int AddOrderItemsRecord(Order_Items item)
         {
             int textVariable = -1;
-            if (item.Id == 0)
+            if (item == null)
             {
                 return textVariable;
             }

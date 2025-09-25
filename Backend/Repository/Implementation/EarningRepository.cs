@@ -15,7 +15,7 @@ namespace Backend.Repository.Implementation
         public int AddEarningsRecord(Earnings earns)
         {
             int textVariable = -1;
-            if (earns.Id == 0)
+            if (earns == null)
             {
                 return textVariable;
             }

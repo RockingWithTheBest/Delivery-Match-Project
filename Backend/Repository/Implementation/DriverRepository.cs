@@ -79,7 +79,7 @@ namespace Backend.Repository.Implementation
             }
             return testValue;
         }
-        public IEnumerable<Order_Placement> GetAllOrdersPlacedByDriverID(int DriverId)
+        public IEnumerable<OrderPlacement> GetAllOrdersPlacedByDriverID(int DriverId)
         {
             return databaseContext.OrderPlacements.Where(x=>x.Id == DriverId).ToList();
         }

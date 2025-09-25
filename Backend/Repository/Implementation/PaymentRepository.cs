@@ -15,7 +15,7 @@ namespace Backend.Repository.Implementation
         public int AddPaymentRecord(Payment pay)
         {
             int textVariable = -1;
-            if (pay.Id == 0)
+            if (pay == null)
             {
                 return textVariable;
             }

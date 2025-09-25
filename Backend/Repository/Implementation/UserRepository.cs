@@ -15,7 +15,8 @@ namespace Backend.Repository.Implementation
         public int AddUserRecord(User user)
         {
             int textVariable = -1;
-            if (user.Id == 0)
+
+            if (user == null)
             {
                 return textVariable;
             }
@@ -25,6 +26,8 @@ namespace Backend.Repository.Implementation
                 databaseContext.SaveChanges();
                 textVariable = user.Id;
             }
+                
+            
             return textVariable;
         }
 

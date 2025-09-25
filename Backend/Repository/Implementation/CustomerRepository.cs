@@ -53,7 +53,7 @@ namespace Backend.Repository.Implementation
             return databaseContext.Customers.ToList();
         }
 
-        public IEnumerable<Order_Placement> GetAllOrderPlacementsByCustomerId(int CustomerId)
+        public IEnumerable<OrderPlacement> GetAllOrderPlacementsByCustomerId(int CustomerId)
         {
             return databaseContext.OrderPlacements.Where(x=>x.Id==CustomerId).ToList();
         }

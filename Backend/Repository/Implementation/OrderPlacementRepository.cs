@@ -6,17 +6,17 @@ using System.Net;
 
 namespace Backend.Repository.Implementation
 {
-    public class OrderPLacementRepository : IOrder_Placement
+    public class OrderPLacementRepository : IOrderPlacement
     {
         private ApplicationDatabaseContext databaseContext;
         public OrderPLacementRepository(ApplicationDatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
         }
-        public int AddOrderPlacementRecord(Order_Placement order_Placement)
+        public int AddOrderPlacementRecord(OrderPlacement order_Placement)
         {
             int textVariable = -1;
-            if (order_Placement.Id == 0)
+            if (order_Placement == null)
             {
                 return textVariable;
             }
@@ -50,24 +50,24 @@ namespace Backend.Repository.Implementation
             return testValue;
         }
 
-        public IEnumerable<Order_Placement> GetAllOrderPlacement()
+        public IEnumerable<OrderPlacement> GetAllOrderPlacement()
         {
             return databaseContext.OrderPlacements.ToList();
         }
-        public IEnumerable<Order_Placement> GetAllOrderPlacementRecordsByCustomerId(int CustomerId)
+        public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByCustomerId(int CustomerId)
         {
             return databaseContext.OrderPlacements.Where(x=>x.Id==CustomerId).ToList();
         }
 
-        public IEnumerable<Order_Placement> GetAllOrderPlacementRecordsByDriverId(int DriverId)
+        public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByDriverId(int DriverId)
         {
             return databaseContext.OrderPlacements.Where(x => x.Id == DriverId).ToList();
         }
-        public Order_Placement GetSingleRecord(int Id)
+        public OrderPlacement GetSingleRecord(int Id)
         {
             return databaseContext.OrderPlacements.Where(temp => temp.Id == Id).FirstOrDefault();
         }
-        public int UpdateOrderPlacementRecord(int Id, Order_Placement record)
+        public int UpdateOrderPlacementRecord(int Id, OrderPlacement record)
         {
             int testValue = -1;
             if (Id <= 0 || record == null)
@@ -76,7 +76,7 @@ namespace Backend.Repository.Implementation
             }
             else
             {
-                Order_Placement updatedRecord = databaseContext.OrderPlacements.Where(temp => temp.Id == Id).FirstOrDefault();
+                OrderPlacement updatedRecord = databaseContext.OrderPlacements.Where(temp => temp.Id == Id).FirstOrDefault();
                 updatedRecord.Pick_Up_Contact = record.Pick_Up_Contact;
                 updatedRecord.Delivery_Contact = record.Delivery_Contact;
                 updatedRecord.Delivery_Up_Address = record.Delivery_Up_Address;

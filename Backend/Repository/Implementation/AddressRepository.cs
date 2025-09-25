@@ -14,15 +14,16 @@ namespace Backend.Repository.Implementation
         public int AddAddressRecord(Address address)
         {
             int textVariable = -1;
-            if(address.Id == 0)
-            {
-                return textVariable;
-            }
-            else
+            
+            if(address!=null)
             {
                 databaseContext.Addresses.Add(address);
                 databaseContext.SaveChanges();
                 textVariable = address.Id;
+            }
+            else
+            {
+                return textVariable;
             }
             return textVariable;
         }
