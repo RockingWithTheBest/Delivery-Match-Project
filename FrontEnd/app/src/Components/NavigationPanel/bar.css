@@ -1,0 +1,62 @@
+/* Header.css */
+.header-container {
+    display: flex;
+    gap: 700px;
+    width: 100%;
+    height: 0;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+    justify-content: center;
+    background-color:aliceblue
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+.text-gray-900 {
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.text-xl {
+    font-size: 1.25rem;
+}
+.logo {
+    height: 0;
+    padding: 0.5em;
+    will-change: filter;
+    transition: filter 300ms;
+    background-color: #3b82f6; /* bg-blue-600 */
+    border-radius: 0.5rem; /* rounded-lg */
+    margin-right: 0.75rem; /* 3 * 0.25rem */
+}
+
+.logo-icon {
+  height: 1.5rem; /* 6 * 0.25rem */
+  width: 1.5rem; /* 6 * 0.25rem */
+  color: white; /* text-white */
+}
+
+
+
+
+.get-startedbtn {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between items */
+}
+
+get-startedbtn.button {
+  background-color: #3b82f6; /* bg-blue-600 */
+  color: white; /* Text color */
+  padding: 0.5rem 1rem; /* Padding */
+  border-radius: 0.375rem; /* Rounded corners */
+  border: none; /* Remove border */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.2s; /* Smooth background transition */
+}
+
+get-startedbtn.button:hover {
+  background-color: #2563eb; /* Darker blue on hover */
+}

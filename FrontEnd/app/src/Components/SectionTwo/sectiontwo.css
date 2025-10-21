@@ -1,0 +1,81 @@
+.sectionTwoBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sectionTwoBody h2{
+  font-size: 1.875rem; /* Equivalent to text-3xl */
+  color: #1a202c; /* Equivalent to text-gray-900 */
+  margin-bottom: 1rem; /* Equivalent to mb-4 */
+}
+
+.sectionTwoBody p{
+  font-size: 1.125rem; /* Equivalent to text-lg */
+  color: #4a5568; /* Equivalent to text-gray-600 */
+  max-width: 42rem; /* Equivalent to max-w-2xl, which is 672px */
+  margin-left: auto; /* Equivalent to mx-auto */
+  margin-right: auto; /* Equivalent to mx-auto */
+}
+
+
+.cardSectionGrid {
+  display: grid;
+  grid-template-columns: 1fr; /* Default for mobile */
+  gap: 2rem; /* Adjust gap as needed */
+}
+
+@media (min-width: 768px) {
+  .cardSectionGrid {
+    grid-template-columns: repeat(2, 1fr); /* For medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardSectionGrid {
+    grid-template-columns: repeat(4, 1fr); /* For large screens */
+  }
+}
+
+.card {
+  background-color: #fff; /* Replace with your bg-card color */
+  color: #000; /* Replace with your text-card-foreground color */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 1rem; /* Equivalent to rounded-xl */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Equivalent to shadow-lg */
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Equivalent to hover:shadow-xl */
+}
+
+.card-content {
+  padding: 1.5rem; /* Equivalent to p-6 */
+  text-align: center;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem; /* Equivalent to mb-4 */
+}
+
+.icon {
+  padding: 0.75rem; /* Equivalent to p-3 */
+  background-color: #f9fafb; /* Equivalent to bg-gray-50 */
+  border-radius: 0.5rem; /* Equivalent to rounded-lg */
+}
+
+.title {
+  font-size: 1.125rem; /* Equivalent to text-lg */
+  margin-bottom: 0.5rem; /* Equivalent to mb-2 */
+}
+
+.description {
+  color: #4a5568; /* Equivalent to text-gray-600 */
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  line-height: 1.5; /* Equivalent to leading-relaxed */
+}

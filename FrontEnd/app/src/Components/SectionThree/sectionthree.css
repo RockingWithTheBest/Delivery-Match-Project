@@ -1,0 +1,58 @@
+.sectionThreeBody h2{
+  font-size: 1.875rem; /* Equivalent to text-3xl */
+  color: #1a202c; /* Equivalent to text-gray-900 */
+  margin-bottom: 1rem; /* Equivalent to mb-4 */
+}
+
+.sectionThreeBody p{
+  font-size: 1.125rem; /* Equivalent to text-lg */
+  color: #4a5568; /* Equivalent to text-gray-600 */
+  max-width: 42rem; /* Equivalent to max-w-2xl, which is 672px */
+  margin-left: auto; /* Equivalent to mx-auto */
+  margin-right: auto; /* Equivalent to mx-auto */
+}
+
+.forcustomers h3{
+    color: rgb(37 99 235 );
+}
+
+.fordrivers h3{
+    color: rgba(37, 235, 37, 0.669);
+}
+
+.choicesNew span {
+    background-color: rgb(37 99 235);
+    border-radius: 83%;
+    padding: 8px;
+    color: white;
+    height: 17px;
+    width: 14px;
+    text-align: center;
+}
+.choicesOld span {
+    background-color: rgba(37, 235, 37, 0.669);
+    border-radius: 83%;
+    padding: 8px;
+    color: white;
+    height: 17px;
+    width: 14px;
+    text-align: center;
+}
+.choicesNew, .choicesOld {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+}
+
+.CustomerAndDrivers {
+    display: flex;
+    align-items: center;
+    gap: 142px;
+}
+
+.SectionThreeBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(249 250 251 );
+}

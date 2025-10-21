@@ -1,0 +1,70 @@
+.sectionOneBody{
+    background-color: rgb(59 130 246 / 0.5);
+}
+.whychoose{
+    background-color: #ebf8ff; /* bg-blue-100 */
+    color: #2b6cb0; /* text-blue-800 */
+    border: 1px solid #bee3f8; /* border-blue-200 */
+    padding: 1rem; /* p-4 */
+    border-radius: 0.375rem; /* rounded */
+}
+
+.smartdelivery.h1 {
+  color: #1a202c; /* This is the equivalent of text-gray-900 */
+  font-size: 2.25rem; /* This is equivalent to text-4xl */
+  line-height: 1.25; /* This is equivalent to leading-tight */
+}
+
+.connectionverified{
+     color: #4a5568; /* This is the equivalent of text-gray-600 */
+    font-size: 1.125rem; /* This is equivalent to text-lg */
+    line-height: 1.625; 
+}
+
+.shipnow{
+    background-color:  rgb(37 99 235 );
+}
+
+.driveearn{
+    border-color: rgb(191 219 254)
+}
+
+
+.stat-number {
+  font-size: 1.5rem; /* This is equivalent to text-2xl */
+  color: #2563eb; /* This is equivalent to text-blue-600 */
+}
+
+.stat-label {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  color: #4a5568; /* Equivalent to text-gray-600 */
+}
+.devlivered-check, .live-tracking{
+    background-color: rgb(255 255 255);
+    border-color: rgb(120, 129, 139);
+    width: 137px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    gap: 12px;
+    border-radius: 5px;
+    padding: 6px;
+}
+
+.devlivered-check svg {
+    color: green;
+}
+
+.green-circle{
+  width: 0.75rem; /* Equivalent to w-3 */
+  height: 0.75rem; /* Equivalent to h-3 */
+  background-color: #48bb78; /* Equivalent to bg-green-500 */
+  border-radius: 9999px; /* Equivalent to rounded-full */
+}
+
+
+@media (min-width: 1024px) {
+  .smartdelivery.h1 {
+    font-size: 3.75rem; /* This is equivalent to lg:text-6xl */
+  }
+}

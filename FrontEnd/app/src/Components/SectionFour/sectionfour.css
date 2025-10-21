@@ -1,0 +1,16 @@
+.sectionFourBody {
+    background-color: rgb(37 99 235);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.sectionFourBody h2 {
+    color: #fff;
+}
+
+.sectionFourBody  button{
+    color: rgb(37 99 235);
+    background-color: #fff;
+}

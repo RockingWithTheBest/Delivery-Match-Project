@@ -1,0 +1,15 @@
+.footerDiv {
+    display: flex;
+    background-color: rgb(17 24 39);
+    align-items: center;
+    flex-direction: column;
+}
+.footerDiv svg {
+    padding: 9px;
+    color: white;
+    background-color: rgb(37 99 235);
+    border-radius: 8px;
+}
+.footerDiv p{
+    color: rgb(156 163 175)
+}
