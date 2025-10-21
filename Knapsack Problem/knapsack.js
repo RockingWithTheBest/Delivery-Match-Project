@@ -38,7 +38,7 @@ function knapsack(weights, values, capacity){
 
     for(let i = n; i>0 ; i--){
         if(dp[i][remainingCapacity]!=dp[i-1][remainingCapacity]){
-            selectedOrders.push(i - 1);
+            selectedOrders.push(i - 1);//used to record the index of an order that is included in the optimal solution
             remainingCapacity = remainingCapacity - weights[i-1]
         }
     }
