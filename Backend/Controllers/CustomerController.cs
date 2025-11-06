@@ -37,6 +37,18 @@ namespace Backend.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("Get-GetCustomerDetails-By-Id")]
+        public IActionResult GetSingleCustomer(int id)
+        {
+            var result = customer.GetCustomerDetails(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("Add-Customer")]
         public IActionResult AddCustomer(Customer customerRecord)
