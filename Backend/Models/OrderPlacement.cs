@@ -39,7 +39,7 @@ namespace Backend.Models
         [Required]
         public int? CustomerId {  get; set; }
         public int? DriverId {  get; set; }
-        public virtual Customer Customer { get; set; }
-        public virtual Driver Driver { get; set; }
+        public virtual Customer? Customer { get; set; }
+        public virtual Driver? Driver { get; set; }
     }
 }

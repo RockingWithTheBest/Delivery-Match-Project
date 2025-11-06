@@ -16,7 +16,7 @@ namespace Backend.Models
         public string Notes { get; set; }
         public DateTime? TimeStamps { get; set; }
         [Required]
-        public int Order_PlacementId {  get; set; }
+        public int? Order_PlacementId {  get; set; }
 
         public virtual OrderPlacement? Order_Placement { get; set; }
     }

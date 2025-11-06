@@ -18,7 +18,7 @@ namespace Backend.Models
         [Required]
         public string Special_Instructions { get; set; }
         [Required]
-        public int Order_PlacementId { get; set; }
+        public int? Order_PlacementId { get; set; }
 
 
         public virtual OrderPlacement? OrderPlacemnt {  get; set; }

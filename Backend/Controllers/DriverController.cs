@@ -86,5 +86,19 @@ namespace Backend.Controllers
                 return Ok($"Record with ID = {Id} has been successfully deleted");
             }
         }
+        [HttpPost]
+        [Route("Collection-Post")]
+        public IActionResult PostCollectionOrders(IEnumerable<OrderPlacement> orders, int DriverId)
+        {
+            if(orders == null || DriverId<0)
+            {
+                return BadRequest("Collection is null");
+            }
+            else
+            {
+                driver.AddCollectionOfOrdersPlaced(orders, DriverId);
+                return Ok("Successfully added");
+            }
+        }
     }
 }
