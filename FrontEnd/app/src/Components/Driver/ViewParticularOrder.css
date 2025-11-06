@@ -1,0 +1,235 @@
+img.truck2-icon {
+    width: 23px;
+}
+
+.each-order-line {
+    width: 53%;
+    border: 1px solid #4a55684f;
+    padding: 22px;
+    border-radius: 7px;
+}
+
+.each-order-line {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.order-details-container {
+    max-width: 775px;
+}
+
+.order-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.truck2-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.customer-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 20px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-pending { background: #ffd700; color: #333; }
+.status-intransit { background: #007bff; color: white; }
+.status-delivered { background: #28a745; color: white; }
+.status-cancelled { background: #dc3545; color: white; }
+
+/* Progress Bar */
+.progress-bar-container {
+    position: relative;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-bar.pending { background: #ffd700; }
+.progress-bar.intransit { background: #007bff; }
+.progress-bar.delivered { background: #28a745; }
+.progress-bar.cancelled { background: #dc3545; }
+
+.progress-percentage {
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Progress Steps */
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e9ecef;
+    z-index: 1;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.step-indicator.cancelled {
+    background: #dc3545;
+    color: white;
+}
+
+.progress-step.completed .step-indicator {
+    background: #28a745;
+    color: white;
+}
+
+.progress-step.current .step-indicator {
+    background: #007bff;
+    color: white;
+    transform: scale(1.1);
+}
+
+.step-label {
+    font-size: 12px;
+    color: #6c757d;
+    text-align: center;
+}
+
+.progress-step.completed .step-label,
+.progress-step.current .step-label {
+    color: #495057;
+    font-weight: bold;
+}
+
+.step-label.cancelled {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.cancelled-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Order Meta */
+.order-meta {
+    padding: 15px;
+    color: #1a202cab;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 200px;
+    margin-top: 10px;
+}
+
+.order-meta p {
+    margin: 5px 0;
+}
+
+.order-meta img {
+    width: 18px;
+    margin-right: 4px;
+}
+
+.order-meta strong{
+    color: #000;
+    font-size: 21px;
+}
+
+.order-meta p{
+    font-size: 21px;
+}
+
+.border-line {
+    border: 1px solid #a6abb338;
+    border-radius: 4px;
+}
+
+.item-details {
+    display: flex;
+    justify-content: center;
+    gap: 97px;
+    padding-bottom: 32px;
+}
+
+.item-details div {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.item-details strong {
+    margin-top: -25px;
+}
+.item-details .cost {
+    color: #28a745;
+}

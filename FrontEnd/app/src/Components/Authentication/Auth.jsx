@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 import './AuthStyle.css'
 const Registration=()=>{
@@ -13,12 +14,13 @@ const Registration=()=>{
     const [password, setPassword] =useState('')
     const [confirm_password, setConfirmPassword] = useState('')
     const [phone_number, setPhoneNumber] = useState('')
-     const [message, setMessage] = useState("");
+    const [message, setMessage] = useState("");
     const api_url ="https://localhost:7216/api/User/Add-Users"
-
+    const navigate = useNavigate()
+// navigate()
     const loginUser=(async)=>{
         try{
-
+            
         }
         catch(error){
             console.log("Message error", error)
@@ -30,27 +32,20 @@ const Registration=()=>{
 
         try{
             const user= {
-                first_name: first_name,
-                last_name: last_name,
-                email :email,
-                phone_number: phone_number,
-                password: password
+                First_Name: first_name,
+                Last_Name: last_name,
+                Email :email,
+                Phone: phone_number,
+                Password: password
             }
             const response = await axios.post(api_url, user)
             setMessage("Successfully registrated ", response.data);
-            console.log(response.data)
+            console.log("USER",response.data)
 
-
-             // Reset form
-            setFirstName('')
-            setLastName('')
-            setEmail('')
-            setPhoneNumber('')
-            setPassword('')
-            setConfirmPassword('')
         }
         catch(error){
-            console.log("Registration error", error)
+           console.log("Registration error", error);
+            console.log("Response data:", error.response?.data);
             setMessage("Registration failed: " + (error.response?.data?.message || error.message))
         }
     }
@@ -66,6 +61,39 @@ const Registration=()=>{
         setLoginBool(false)        
     }
 
+    const handleSignIn =async()=>{
+       
+        if(userType =='Client'){
+            navigate('/client')
+        }
+        else if(userType =='Driver'){
+            const responseUsers = await axios.get("https://localhost:7216/api/User/Get-All-Users")
+            const responseDrivers = await axios.get("https://localhost:7216/api/Driver/Get-All-Drivers")
+           
+            const allUsers = responseUsers.data
+            const allDrivers = responseDrivers.data
+
+            const user = allUsers.find(d=> d.Email === email && d.Password === password)
+          
+            if(user!=null){
+            
+            const driver = allDrivers.find(d=>d.UserId === user.Id)
+              console.log("USER",user)
+            console.log("DRIVER",driver)
+
+            
+            
+                navigate(`/driver/${user.Email}/${user.Password}/${driver.Id}`)
+            }
+            else{
+                alert("Click the Driver Option and enter your correct login details")
+            }
+
+            // const driver = await axios.get(`https://localhost:7216/api/Driver/Get-All-Orders-Placed-By-Driver-ID/${user.Id}`)
+            // console.log("XXXX",driver)
+        
+        }
+    }
     const handleClient = (event) => {
         event.preventDefault()
         console.log("Clicked Client")
@@ -103,7 +131,7 @@ const Registration=()=>{
 
 
             <div className='auth-container'>  
-                <form action=""  onSubmit={registerUser}  className="auth_form">
+                <form action="" className="auth_form">
                     <p>User Role {userType}</p>
                     <div className="form-selector">
                         <button onClick={SwitchToLogin} disabled={loginbool} className="">
@@ -165,7 +193,7 @@ const Registration=()=>{
                                     onChange={(e)=>setPassword(e.target.value)}/>
                             </div>
                             <div className='form-group-button'>
-                                <button type='submit' className='submit-button'>auth.signin</button>
+                                <button type='button' onClick={()=>handleSignIn()} className='submit-button'>auth.signin</button>
                             </div>
                             <div className="form-footer">
                                 <p className="forgot-password">Forgot your password?</p>
@@ -241,7 +269,7 @@ const Registration=()=>{
                                 <label>I agree to the Terms of Service and Privacy Policy</label>
                             </div>
                             <div className='form-group-button'>
-                                <button type='submit' className='signup-button'>Sign Up</button>
+                                <button type='button' onClick={()=>registerUser()} className='signup-button'>Sign Up</button>
                             </div>
                             <div className="form-footer">
                                 <p className="signup-prompt">Already have an account? <a href="/signup">auth.signin</a></p>
