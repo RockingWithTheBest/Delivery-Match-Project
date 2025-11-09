@@ -9,5 +9,6 @@ namespace Backend.Repository.Interface
         int UpdateDriverRecord(int Id,Driver driver);
         int DeleteDriverRecord(int Id);
         IEnumerable<OrderPlacement> GetAllOrdersPlacedByDriverID(int DriverId);
+        IEnumerable<OrderPlacement> AddCollectionOfOrdersPlaced(IEnumerable<OrderPlacement> OrdersPlaced, int DriverId);
     }
 }

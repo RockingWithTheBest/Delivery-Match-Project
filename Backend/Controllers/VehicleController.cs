@@ -36,6 +36,17 @@ namespace Backend.Controllers
             }
             return Ok(result);
         }
+        [HttpGet]
+        [Route("Get-Vehicle-By-DriverId")]
+        public IActionResult GetByDriverId(int DriverId)
+        {
+            var result = vehicle.GetVehicleByDriverId(DriverId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
 
         [HttpPost]
         [Route("Add-Vehcile")]

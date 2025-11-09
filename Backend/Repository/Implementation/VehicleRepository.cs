@@ -60,6 +60,11 @@ namespace Backend.Repository.Implementation
             return databaseContext.Vehicles.Where(temp => temp.Id == Id).FirstOrDefault();
         }
 
+        public Vehicle GetVehicleByDriverId(int DriverId)
+        {
+            return databaseContext.Vehicles.Where(temp => temp.DriverId == DriverId).FirstOrDefault();
+        }
+
         public int UpdateVehicleRecord(int Id, Vehicle record)
         {
             int testValue = -1;

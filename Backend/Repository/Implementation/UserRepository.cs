@@ -57,6 +57,8 @@ namespace Backend.Repository.Implementation
             return databaseContext.Users.ToList();
         }
 
+        
+
         public User GetSingleRecord(int Id)
         {
             return databaseContext.Users.Where(temp => temp.Id == Id).FirstOrDefault();

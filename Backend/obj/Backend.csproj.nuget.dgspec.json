@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj": {}
+    "E:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj": {
+    "E:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj",
+        "projectUniqueName": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "D:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj",
+        "projectPath": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\Delivery-Match-Project\\Backend\\obj\\",
+        "outputPath": "E:\\Desktop\\Delivery-Match-Project\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -112,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

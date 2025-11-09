@@ -1,6 +1,7 @@
 ﻿using Backend.DatabasContext;
 using Backend.Models;
 using Backend.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementation
 {
@@ -50,7 +51,7 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<Driver> GetAllDrivers()
         {
-            return databaseContext.Drivers.ToList();
+            return databaseContext.Drivers.Include(d=>d.Orders_Placed).ToList();
         }
 
         public int UpdateDriverRecord(int Id, Driver driver)
@@ -81,7 +82,23 @@ namespace Backend.Repository.Implementation
         }
         public IEnumerable<OrderPlacement> GetAllOrdersPlacedByDriverID(int DriverId)
         {
-            return databaseContext.OrderPlacements.Where(x=>x.Id == DriverId).ToList();
+            return databaseContext.OrderPlacements.Where(x=>x.DriverId == DriverId).ToList();
+        }
+
+        public IEnumerable<OrderPlacement> AddCollectionOfOrdersPlaced(IEnumerable<OrderPlacement> OrdersPlaced, int DriverId)
+        {
+            List<OrderPlacement> result = new List<OrderPlacement>();
+            if(OrdersPlaced!=null && DriverId > 0)
+            {
+                foreach (var order in OrdersPlaced)
+                {
+                    order.DriverId = DriverId; // This is the crucial line!
+                }
+                databaseContext.OrderPlacements.AddRange(OrdersPlaced);
+                databaseContext.SaveChanges();
+                result = OrdersPlaced.ToList();
+            }
+            return result;
         }
     }
 }

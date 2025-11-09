@@ -158,6 +158,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Backend.Controllers.CustomerController",
+    "Method": "GetSingleCustomer",
+    "RelativePath": "api/Customer/Get-GetCustomerDetails-By-Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Backend.Controllers.DocumentController",
     "Method": "AddDoc",
     "RelativePath": "api/Document/Add-Docs",
@@ -232,6 +248,27 @@
         "Name": "driverRecord",
         "Type": "Backend.Models.Driver",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DriverController",
+    "Method": "PostCollectionOrders",
+    "RelativePath": "api/Driver/Collection-Post",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orders",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Backend.Models.OrderPlacement, Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "DriverId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -687,7 +724,7 @@
       },
       {
         "Name": "Order_PlacementId",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -1364,7 +1401,7 @@
       },
       {
         "Name": "Order_PlacementId",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -4126,6 +4163,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.VehicleController",
+    "Method": "GetByDriverId",
+    "RelativePath": "api/Vehicle/Get-Vehicle-By-DriverId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DriverId",
         "Type": "System.Int32",
         "IsRequired": false
       }

@@ -58,6 +58,15 @@ namespace Backend.Repository.Implementation
             return databaseContext.OrderPlacements.Where(x=>x.Id==CustomerId).ToList();
         }
 
+        public Customer GetCustomerDetails(int Id)
+        {
+            return databaseContext.Customers.Where(x => x.Id == Id).FirstOrDefault();
+        }
+        //public User GetSingleUserRecordByCustomerId(int UserId)
+        //{
+        //    return databaseContext.Users.Where(user => user.Id == UserId).FirstOrDefault();
+        //}
+
         public int UpdateCustomerRecord(int Id, Customer customer)
         {
            int testValue = 0;

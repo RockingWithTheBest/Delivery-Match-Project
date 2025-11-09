@@ -6,6 +6,7 @@ namespace Backend.Repository.Interface
     {
         IEnumerable<Vehicle> GetAllVehicles();
         Vehicle GetSingleRecord(int Id);
+        Vehicle GetVehicleByDriverId(int DriverId);
         int AddVehicleRecord(Vehicle vehicle);
         int UpdateVehicleRecord(int Id, Vehicle record);
         int DeleteVehicleRecord(int Id);
