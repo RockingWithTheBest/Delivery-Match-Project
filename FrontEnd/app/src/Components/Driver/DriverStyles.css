@@ -134,16 +134,16 @@ p.driver-tag {
     border: 1px solid #ccc;
     margin: 5px;
     background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    max-height: 664px;
+    height: 92px;
     overflow-y: auto;
     border-radius: 11px;
 }
 
 .all-order-list {
     border: 1px solid #4a55684f;
-    padding: 22px;
+    padding: 7px;
+    padding-right: 13px;
+    padding-left: 13px;
     border-radius: 7px;
 }
 .ordertimeline-main {
@@ -241,5 +241,5 @@ p.driver-tag {
 }
 
 p.myorders {
-    font-size: 25px;
+    font-size: 18px;
 }

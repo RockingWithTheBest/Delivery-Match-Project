@@ -59,6 +59,44 @@ const ViewParticularOrder=({orderPlacementId})=>{
         return progressMap[status] || { percentage: 0, steps: [], currentStep: 0 };
     }
 
+    const getTimelineStatus = (order) => {
+        const timelineSteps = [
+            { 
+                label: "Order Placed", 
+                completed: true, // Always completed once order exists
+                date: order?.Order?.Created_At,
+                description: "Order was placed by customer"
+            },
+            { 
+                label: "Assigned Driver", 
+                completed: order?.Order?.DriverId != null,
+                date: order?.Order?.Scheduled_At,
+                description: "Driver assigned to delivery"
+            },
+            { 
+                label: "Order Picked Up", 
+                completed: order?.Order?.Status === "In Transit" || order?.Order?.Status === "Delivered",
+                date: order?.Order?.Scheduled_At,
+                description: "Driver picked up the package"
+            },
+            { 
+                label: "In Transit", 
+                completed: order?.Order?.Status === "In Transit" || order?.Order?.Status === "Delivered",
+                date: order?.Order?.Scheduled_At,
+                description: "Package is on the way"
+            },
+            { 
+                label: "Delivered", 
+                completed: order?.Order?.Status === "Delivered",
+                date: order?.Order?.Completed_On,
+                description: "Package delivered successfully"
+            }
+        ];
+
+        return timelineSteps;
+    }
+
+
     useEffect(()=>{
         getOrderPlacements()         
     },[orderPlacementId])
@@ -67,8 +105,10 @@ const ViewParticularOrder=({orderPlacementId})=>{
             {order ? (
                 <div className="order-details-container">
                     <div className="order-header">
-                        <img src={TruckIcon} className="truck2-icon" alt="" />
-                        <p>Order ORD-{orderPlacementId}</p>
+                        <div>
+                            <img src={TruckIcon} className="truck2-icon" alt="" />
+                            <p>Order ORD-{orderPlacementId}</p>
+                        </div>                      
 
                         <span className={`status-badge status-${order.Order.Status.toLowerCase()}`}>
                                 {order.Order.Status}
@@ -76,8 +116,26 @@ const ViewParticularOrder=({orderPlacementId})=>{
                     </div>
 
                     <div className="customer-info">
-                        <p>Customer: {order.User.First_Name} {order.User.Doe_Name}</p>
-                        <p><strong>Business:</strong> {order.Customer.Business_Name}</p>
+                        <div className="customer-header">
+                            <div className="customer-avatar">
+                                {order.User.First_Name?.charAt(0).toUpperCase()}
+                                {order.User.Last_Name?.charAt(0).toUpperCase()}
+                            </div>
+                            <div className="customer-details">
+                                <p className="customer-name">
+                                    {order.User.First_Name} {order.User.Last_Name}
+                                </p>
+                                <p className="business-name">
+                                    <strong>Business:</strong> {order.Customer.Business_Name}
+                                </p>
+                                {order.Customer.Rating && (
+                                    <div className="customer-rating">
+                                        <span className="rating-stars">{"★".repeat(Math.floor(parseFloat(order.Customer.Rating)))}</span>
+                                        <span className="rating-value">{order.Customer.Rating}/5</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
 
                     <div className="progress-section">
@@ -136,8 +194,40 @@ const ViewParticularOrder=({orderPlacementId})=>{
                             <strong>{order.Order.Status}</strong>
                         </div>
                     </div> 
-                    <div className="border-line"></div>                
-                </div>                    
+                    <div className="border-line"></div>
+              
+                    <div className="actual-timeline">
+                        <h3>Order Timeline</h3>
+                        <div className="timeline-container">
+                            {getTimelineStatus(order).map((step, index) => (
+                                <div key={step.label} className="timeline-step">
+                                    <div className="timeline-content">
+                                        <div className={`timeline-indicator ${step.completed ? 'completed' : 'pending'}`}>
+                                            {step.completed ? (
+                                                <div className="checkmark">✓</div>
+                                            ) : (
+                                                <div className="step-number">{index + 1}</div>
+                                            )}
+                                        </div>
+                                        <div className="timeline-info">
+                                            <p className="timeline-label">{step.label}</p>
+                                            {step.date && (
+                                                <p className="timeline-date">
+                                                    {new Date(step.date).toLocaleDateString()}
+                                                </p>
+                                            )}
+                                            <p className="timeline-description">{step.description}</p>
+                                        </div>
+                                    </div>
+                                    {index < getTimelineStatus(order).length - 1 && (
+                                        <div className={`timeline-connector ${step.completed ? 'completed' : ''}`}></div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>                   
+                    </div>                
+                </div>                          
+                          
                 ):(
                     <p>Loading order data...</p>
                 )}
