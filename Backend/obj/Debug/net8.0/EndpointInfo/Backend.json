@@ -7695,11 +7695,13 @@
             "format": "int32"
           },
           "brand": {
-            "minLength": 1,
+            "maxLength": 50,
+            "minLength": 0,
             "type": "string"
           },
           "model": {
-            "minLength": 1,
+            "maxLength": 50,
+            "minLength": 0,
             "type": "string"
           },
           "make_Year": {
@@ -7707,11 +7709,13 @@
             "format": "date"
           },
           "color": {
-            "minLength": 1,
+            "maxLength": 50,
+            "minLength": 0,
             "type": "string"
           },
           "license_Plate": {
-            "minLength": 1,
+            "maxLength": 10,
+            "minLength": 0,
             "type": "string"
           },
           "max_Weight": {

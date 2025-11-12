@@ -8,14 +8,18 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(50)]
         public string Brand {  get; set; }
         [Required]
+        [StringLength(50)]
         public string Model { get; set; }
         [Required]
         public DateOnly Make_Year { get; set; }
         [Required]
+        [StringLength(50)]
         public string Color {  get; set; }
         [Required]
+        [StringLength(10)]
         public string License_Plate { get; set; }
         [Required]
         [Column(TypeName ="decimal(8,2)")]

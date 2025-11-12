@@ -1,10 +1,15 @@
 import React from 'react'
 import Car from './assets/car.png'
+import { useNavigate } from 'react-router-dom'
 import './sectionone.css'
 
 
 const SectionOne=()=>{
+    const navigate =useNavigate()
 
+    const NavigateToAuthPage=()=>{
+        navigate('/authpage')
+    }
     const stats = [
     { number: "10K+", label: "Active Drivers" },
     { number: "50K+", label:"Deliveries Completed" },
@@ -26,8 +31,8 @@ const SectionOne=()=>{
                     From single packages to bulk shipments, our AI-powered platform 
                     optimizes routes and reduces costs.</p>
                     <div>
-                        <button className='shipnow'>Ship Now</button>
-                        <button className='driveearn'>Drive & Earn</button>
+                        <button onClick={()=>NavigateToAuthPage()} className='shipnow'>Ship Now</button>
+                        <button onClick={()=>NavigateToAuthPage()}  className='driveearn'>Drive & Earn</button>
                     </div>                    
                 </div>
                 <div className="ratings">
