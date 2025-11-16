@@ -24,8 +24,8 @@ namespace Backend.Models
         [Column(TypeName = "decimal(10,2)")]
         public decimal? Driver_Earnings { get; set; }
         [Required]
-        public int Order_PlacementId {  get; set; }
+        public int OrderPlacementId {  get; set; }
 
-        public virtual OrderPlacement? Order_Placement { get; set; }
+        public virtual OrderPlacement? OrderPlacement { get; set; }
     }
 }

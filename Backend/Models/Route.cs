@@ -12,9 +12,9 @@ namespace Backend.Models
         public string Total_Distance { get; set; }
         public DateTime? Estimated_Duration { get; set; }
         public int DriverId {  get; set; }
-        public int? Order_PlacementId {  get; set; }
+        public int? OrderPlacementId {  get; set; }
 
         public virtual Driver? Driver { get; set; }
-        public virtual OrderPlacement? Order_Placement { get; set; }
+        public virtual OrderPlacement? OrderPlacement { get; set; }
     }
 }

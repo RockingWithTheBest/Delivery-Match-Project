@@ -22,6 +22,6 @@ namespace Backend.Models
         public string Password { get; set; }
 
         public virtual Driver? Driver { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
     }
 }

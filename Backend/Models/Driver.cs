@@ -21,7 +21,7 @@ namespace Backend.Models
         public decimal Total_Earnings { get; set; }
         [Required]
         public int UserId {  get; set; }
-        public List<OrderPlacement>? Orders_Placed { get; set; } = new List<OrderPlacement>();
+        public List<OrderPlacement>? OrdersPlaced { get; set; } = new List<OrderPlacement>();
 
         public virtual User? User { get; set; }
     }

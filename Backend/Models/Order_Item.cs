@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Backend.AdditionalClasses;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
@@ -17,8 +18,10 @@ namespace Backend.Models
         public decimal Weight_Per_Item { get; set; }
         [Required]
         public string Special_Instructions { get; set; }
-        [Required]
-        public int? Order_PlacementId { get; set; }
+        //[Required]
+        public OrderDimension? Dimension { get; set; }
+  
+        public int? OrderPlacementId { get; set; }
 
 
         public virtual OrderPlacement? OrderPlacemnt {  get; set; }
