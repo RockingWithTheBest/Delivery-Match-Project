@@ -1,0 +1,180 @@
+.new-order {
+    border-radius: 6px;
+    background-color: white;
+    border: 2px solid #80808059;
+    margin: 0 auto;
+    padding: 20px;
+    width: 67%;
+}
+
+.new-order-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.new-order-header h2 {
+    margin-top: 0px;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.new-order-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.order-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    padding: 12px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.input-group input[type="datetime-local"] {
+    cursor: pointer;
+}
+
+.input-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.input-group input[type="number"]::-webkit-outer-spin-button,
+.input-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.enter-item-details,
+.find-driver {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 160px;
+}
+
+.enter-item-details, button.submit-new-order {
+    background-color: #6c757d;
+    color: white;
+}
+
+.enter-item-details:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.find-driver {
+    background-color: #007bff;
+    color: white;
+}
+
+.find-driver:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .new-order {
+        padding: 15px;
+    }
+    
+    .new-order-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .new-order-header p {
+        font-size: 1rem;
+    }
+    
+    .order-details-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .enter-item-details,
+    .find-driver {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .new-order {
+        padding: 10px;
+    }
+    
+    .new-order-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .input-group input {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .enter-item-details,
+    .find-driver {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Additional small screen optimization */
+@media (max-width: 360px) {
+    .order-details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .input-group {
+        min-width: 0;
+    }
+}
