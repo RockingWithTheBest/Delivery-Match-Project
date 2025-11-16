@@ -1,0 +1,85 @@
+button.saved-address {
+    background: black;
+    color: white;
+}
+
+.address-part-1 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.address-part-1 div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.addresses {
+    width: 67vw;
+    background: white;
+    padding: 35px;
+    border-radius: 8px;
+    border: 2px solid #80808021;
+}
+
+img.location-saved-address-icon {
+    width: 27px;
+}
+
+.addres-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 1px solid #80808078;
+    border-radius: 6px;
+    padding: 33px;
+}
+
+.address-part-1 p{
+    font-size: 18px;
+}
+
+.addres-input-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.addres-input-group input {
+    padding: 12px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+input.address-label{
+    padding: 12px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    width: 37%;
+    box-sizing: border-box;
+}
+
+.addres-input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.addres-input-group input[type="datetime-local"] {
+    cursor: pointer;
+}
+
+.addres-input-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.addres-input-group input[type="number"]::-webkit-outer-spin-button,
+.addres-input-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
