@@ -9,5 +9,6 @@ namespace Backend.Repository.Interface
         int AddAddressRecord(Address address);
         int UpdateAddressRecord(int Id, Address record);
         int DeleteAddressRecord(int Id);
+        IEnumerable<Address> GetAddressListByUserId(int UserId);
     }
 }

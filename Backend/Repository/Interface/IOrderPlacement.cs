@@ -11,6 +11,7 @@ namespace Backend.Repository.Interface
         int AddOrderPlacementRecord(OrderPlacement order_Placement);
         int UpdateOrderPlacementRecord(int Id, OrderPlacement record);
         int DeleteOrderPlacementRecord(int Id);
-
+        string AddBulkOrdersWithItems(List<OrderPlacement> orders, List<Order_Items> orderItems, int ClientId);
+        int AddBulkOrdersWithClientId(List<OrderPlacement> BulkOrders, int ClientId);
     }
 }
