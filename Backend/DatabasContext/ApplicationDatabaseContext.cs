@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿using Backend.AdditionalClasses;
+using Backend.Models;
 using Backend.TrainingData;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,8 @@ namespace Backend.DatabasContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<OrderDimension>()
+            //    .HasNoKey();
             modelBuilder.Entity<OrderPlacement>()
                 .Property(p => p.CustomerId)
                 .IsRequired(false);
