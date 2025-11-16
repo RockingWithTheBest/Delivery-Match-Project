@@ -8,11 +8,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class M1 : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "OrderDimension",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Length = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    Height = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    Width = table.Column<decimal>(type: "decimal(5,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDimension", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -164,13 +179,12 @@ namespace Backend.Migrations
                     Delivery_Contact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Weight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Volume = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Distance = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Scheduled_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Completed_On = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Completed_On = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     DriverId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -195,11 +209,11 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Brand = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Make_Year = table.Column<DateOnly>(type: "date", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    License_Plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    License_Plate = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Max_Weight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Max_Volume = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: false)
@@ -227,7 +241,7 @@ namespace Backend.Migrations
                     Is_Paid_Out = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Earned_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: true),
-                    Order_PlacementId = table.Column<int>(type: "int", nullable: true)
+                    OrderPlacementId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -238,8 +252,8 @@ namespace Backend.Migrations
                         principalTable: "Drivers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Earnings_OrderPlacements_Order_PlacementId",
-                        column: x => x.Order_PlacementId,
+                        name: "FK_Earnings_OrderPlacements_OrderPlacementId",
+                        column: x => x.OrderPlacementId,
                         principalTable: "OrderPlacements",
                         principalColumn: "Id");
                 });
@@ -252,19 +266,24 @@ namespace Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Item_Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Weight_Per_Item = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Weight_Per_Item = table.Column<decimal>(type: "decimal(8,2", nullable: false),
                     Special_Instructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Order_PlacementId = table.Column<int>(type: "int", nullable: false)
+                    DimensionId = table.Column<int>(type: "int", nullable: true),
+                    OrderPlacementId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderItems_OrderPlacements_Order_PlacementId",
-                        column: x => x.Order_PlacementId,
+                        name: "FK_OrderItems_OrderDimension_DimensionId",
+                        column: x => x.DimensionId,
+                        principalTable: "OrderDimension",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_OrderItems_OrderPlacements_OrderPlacementId",
+                        column: x => x.OrderPlacementId,
                         principalTable: "OrderPlacements",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -278,14 +297,14 @@ namespace Backend.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TimeStamps = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Order_PlacementId = table.Column<int>(type: "int", nullable: false)
+                    OrderPlacementId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderTrackings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderTrackings_OrderPlacements_Order_PlacementId",
-                        column: x => x.Order_PlacementId,
+                        name: "FK_OrderTrackings_OrderPlacements_OrderPlacementId",
+                        column: x => x.OrderPlacementId,
                         principalTable: "OrderPlacements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -304,14 +323,14 @@ namespace Backend.Migrations
                     Processed_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Platform_Fee = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     Driver_Earnings = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
-                    Order_PlacementId = table.Column<int>(type: "int", nullable: false)
+                    OrderPlacementId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payments_OrderPlacements_Order_PlacementId",
-                        column: x => x.Order_PlacementId,
+                        name: "FK_Payments_OrderPlacements_OrderPlacementId",
+                        column: x => x.OrderPlacementId,
                         principalTable: "OrderPlacements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -327,7 +346,7 @@ namespace Backend.Migrations
                     Total_Distance = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Estimated_Duration = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DriverId = table.Column<int>(type: "int", nullable: false),
-                    Order_PlacementId = table.Column<int>(type: "int", nullable: true)
+                    OrderPlacementId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -339,8 +358,8 @@ namespace Backend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Routes_OrderPlacements_Order_PlacementId",
-                        column: x => x.Order_PlacementId,
+                        name: "FK_Routes_OrderPlacements_OrderPlacementId",
+                        column: x => x.OrderPlacementId,
                         principalTable: "OrderPlacements",
                         principalColumn: "Id");
                 });
@@ -423,62 +442,33 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "OrderPlacements",
-                columns: new[] { "Id", "Completed_On", "Created_At", "CustomerId", "Delivery_Contact", "Delivery_Up_Address", "Description", "Distance", "DriverId", "Pick_Up_Address", "Pick_Up_Contact", "Price", "Scheduled_At", "Status", "Volume", "Weight" },
+                columns: new[] { "Id", "Completed_On", "Created_At", "CustomerId", "Delivery_Contact", "Delivery_Up_Address", "Description", "DriverId", "Pick_Up_Address", "Pick_Up_Contact", "Price", "Scheduled_At", "Status", "Volume", "Weight" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", 1, "Jane Smith", "456 Elm St", "Electronics", "10 miles", null, "123 Main St", "John Doe", 300.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.0m, 5.5m },
-                    { 2, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", 1, "Alice Brown", "789 Oak St", "Computers", "15 miles", null, "123 Main St", "John Doe", 500.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 3.0m },
-                    { 3, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", 1, "Bob White", "101 Pine St", "Accessories", "8 miles", null, "123 Main St", "John Doe", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.5m },
-                    { 4, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", 1, "Lucy Green", "202 Maple St", "Furniture", "12 miles", null, "123 Main St", "John Doe", 600.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m },
-                    { 5, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", 2, "Tom Brown", "30 Center St", "Fresh Produce", "5 miles", null, "25 Market St", "Alice Green", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 6.0m },
-                    { 6, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", 2, "Sarah White", "35 Park Ave", "Dairy Products", "10 miles", null, "25 Market St", "Alice Green", 300.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 4.0m, 8.0m },
-                    { 7, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", 2, "Daniel Black", "40 Broadway", "Packaged Goods", "7 miles", null, "25 Market St", "Alice Green", 250.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 4.5m },
-                    { 8, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", 2, "Emma Red", "45 Fifth St", "Beverages", "15 miles", null, "25 Market St", "Alice Green", 400.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 5.0m },
-                    { 9, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", 3, "Jim Doe", "50 Snack Ave", "Fast Food Order", "3 miles", null, "45 Fast Food Rd", "Alice Johnson", 50.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 1.0m, 2.0m },
-                    { 10, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", 3, "Kate Brown", "55 Snack Ave", "Burger Order", "2 miles", null, "45 Fast Food Rd", "Alice Johnson", 30.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 0.5m, 1.5m },
-                    { 11, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", 3, "Ben White", "60 Snack Ave", "Pizza Order", "1.5 miles", null, "45 Fast Food Rd", "Alice Johnson", 40.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.5m },
-                    { 12, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", 3, "Beth Green", "65 Snack Ave", "Dessert Order", "2 miles", null, "45 Fast Food Rd", "Alice Johnson", 20.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 1.5m, 3.0m },
-                    { 13, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", 4, "Alice Johnson", "110 Library Lane", "Books", "1 mile", null, "100 Book St", "John Smith", 25.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 0.5m, 1.0m },
-                    { 14, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", 4, "Bob White", "120 Library Lane", "Textbooks", "2 miles", null, "100 Book St", "John Smith", 45.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 0.75m, 1.5m },
-                    { 15, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", 4, "Charlie Black", "130 Library Lane", "Novels", "3 miles", null, "100 Book St", "John Smith", 50.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.0m },
-                    { 16, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", 4, "David Green", "140 Library Lane", "Magazines", "4 miles", null, "100 Book St", "John Smith", 30.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 1.25m, 2.5m },
-                    { 17, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", 5, "James Black", "160 Home Lane", "Home Goods", "5 miles", null, "150 Home St", "Emily White", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.0m, 3.5m },
-                    { 18, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", 5, "Sarah Green", "170 Home Lane", "Furniture", "10 miles", null, "150 Home St", "Emily White", 800.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 2.5m, 4.0m },
-                    { 19, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", 5, "Paul Red", "180 Home Lane", "Kitchenware", "3 miles", null, "150 Home St", "Emily White", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.0m },
-                    { 20, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", 5, "Jessica Blue", "190 Home Lane", "Decorations", "2 miles", null, "150 Home St", "Emily White", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 0.5m, 1.5m },
-                    { 21, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", 6, "Anna Green", "210 Gym Lane", "Gym Equipment", "6 miles", null, "200 Fitness St", "Mike Brown", 500.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 5.0m },
-                    { 22, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", 6, "Laura Black", "220 Gym Lane", "Fitness Apparel", "3 miles", null, "200 Fitness St", "Mike Brown", 150.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 2.5m },
-                    { 23, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", 6, "Cathy White", "230 Gym Lane", "Health Supplements", "5 miles", null, "200 Fitness St", "Mike Brown", 300.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 3.0m },
-                    { 24, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", 6, "Sarah Blue", "240 Gym Lane", "Yoga Mats", "4 miles", null, "200 Fitness St", "Mike Brown", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m },
-                    { 25, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", null, "Bob", "456 Elm St", "Electronics", "10 miles", 1, "123 Main St", "Alice", 300.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.0m, 5.5m },
-                    { 26, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", null, "Tom", "789 Oak St", "Computers", "15 miles", 1, "123 Main St", "Alice", 500.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 3.0m },
-                    { 27, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", null, "Sarah", "101 Pine St", "Accessories", "8 miles", 1, "123 Main St", "Alice", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.5m },
-                    { 28, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", null, "Emma", "202 Maple St", "Furniture", "12 miles", 1, "123 Main St", "Alice", 600.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m },
-                    { 29, new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-05", null, "Luke", "303 Cedar St", "Books", "3 miles", 1, "123 Main St", "Alice", 50.00m, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 0.5m, 1.0m },
-                    { 30, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-01", null, "Alice", "30 Center St", "Fresh Produce", "5 miles", 2, "25 Market St", "Bob", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 6.0m },
-                    { 31, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-02", null, "Sara", "35 Park Ave", "Dairy Products", "10 miles", 2, "25 Market St", "Bob", 300.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 4.0m, 8.0m },
-                    { 32, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-03", null, "Daniel", "40 Broadway", "Packaged Goods", "7 miles", 2, "25 Market St", "Bob", 250.00m, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 4.5m },
-                    { 33, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-04", null, "Emma", "45 Fifth St", "Beverages", "15 miles", 2, "25 Market St", "Bob", 400.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 5.0m },
-                    { 34, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-05", null, "Chris", "50 Main St", "Snacks", "2 miles", 2, "25 Market St", "Bob", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 1.5m, 3.0m },
-                    { 35, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-06", null, "Diana", "450 Lake St", "Clothing", "12 miles", 3, "400 River Rd", "Charlie", 350.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.5m, 7.0m },
-                    { 36, new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-07", null, "Evan", "460 Ocean St", "Footwear", "14 miles", 3, "400 River Rd", "Charlie", 200.00m, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 2.0m, 6.5m },
-                    { 37, new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-08", null, "Fiona", "470 Sea St", "Accessories", "10 miles", 3, "400 River Rd", "Charlie", 150.00m, new DateTime(2023, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.5m, 5.0m },
-                    { 38, new DateTime(2023, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-09", null, "Gina", "480 Shore St", "Home Goods", "8 miles", 3, "400 River Rd", "Charlie", 300.00m, new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m },
-                    { 39, new DateTime(2023, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-10", null, "Hank", "490 Hill St", "Stationery", "5 miles", 3, "400 River Rd", "Charlie", 80.00m, new DateTime(2023, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 1.0m, 3.5m },
-                    { 40, new DateTime(2023, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-11", null, "Ethan", "60 Blue St", "Gadgets", "3 miles", 4, "50 Green St", "Diana", 120.00m, new DateTime(2023, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 1.2m, 2.5m },
-                    { 41, new DateTime(2023, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-12", null, "Frank", "70 Yellow St", "Electronics", "4 miles", 4, "50 Green St", "Diana", 250.00m, new DateTime(2023, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 3.0m },
-                    { 42, new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-13", null, "Grace", "80 Pink St", "Home Appliances", "6 miles", 4, "50 Green St", "Diana", 400.00m, new DateTime(2023, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 5.0m },
-                    { 43, new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-14", null, "Henry", "90 Gray St", "Books", "2 miles", 4, "50 Green St", "Diana", 50.00m, new DateTime(2023, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 0.5m, 1.5m },
-                    { 44, new DateTime(2023, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-15", null, "Ivy", "100 Black St", "Clothing", "7 miles", 4, "50 Green St", "Diana", 320.00m, new DateTime(2023, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 4.0m },
-                    { 45, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-16", null, "Jack", "85 Orange St", "Furniture", "10 miles", 5, "75 Red St", "Ethan", 600.00m, new DateTime(2023, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 6.0m },
-                    { 46, new DateTime(2023, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-17", null, "Liam", "95 Violet St", "Kitchenware", "5 miles", 5, "75 Red St", "Ethan", 150.00m, new DateTime(2023, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.0m, 2.5m },
-                    { 47, new DateTime(2023, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-18", null, "Mia", "105 Indigo St", "Decor", "6 miles", 5, "75 Red St", "Ethan", 300.00m, new DateTime(2023, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 3.5m },
-                    { 48, new DateTime(2023, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-18", null, "Nora", "115 Brown St", "Toy", "6 miles", 5, "75 Red St", "Ethan", 300.00m, new DateTime(2023, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 1.0m },
-                    { 49, new DateTime(2023, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-20", null, "Olivia", "125 Gray St", "Toys", "3 miles", 5, "75 Red St", "Ethan", 180.00m, new DateTime(2023, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.5m, 4.0m },
-                    { 50, new DateTime(2023, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-21", null, "Peter", "160 White St", "Groceries", "4 miles", 6, "150 Black St", "Frank", 100.00m, new DateTime(2023, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 1.0m, 2.0m },
-                    { 51, new DateTime(2023, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-22", null, "Kyle", "170 Yellow St", "Clothes", "5 miles", 6, "150 Black St", "Frank", 200.00m, new DateTime(2023, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 3.0m },
-                    { 52, new DateTime(2023, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-23", null, "Laura", "180 Green St", "Electronics", "7 miles", 6, "150 Black St", "Frank", 300.00m, new DateTime(2023, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 4.0m },
-                    { 53, new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "2023-09-24", null, "Nancy", "190 Blue St", "Books", "2 miles", 6, "150 Black St", "Frank", 50.00m, new DateTime(2023, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 0.5m, 1.5m }
+                    { 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Jane Smith", "456 Elm St", "Electronics", null, "123 Main St", "John Doe", 300.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.0m, 5.5m },
+                    { 2, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Alice Brown", "789 Oak St", "Computers", null, "123 Main St", "John Doe", 500.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 3.0m },
+                    { 3, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Bob White", "101 Pine St", "Accessories", null, "123 Main St", "John Doe", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.5m },
+                    { 4, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Lucy Green", "202 Maple St", "Furniture", null, "123 Main St", "John Doe", 600.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m },
+                    { 5, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Tom Brown", "30 Center St", "Fresh Produce", null, "25 Market St", "Alice Green", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 6.0m },
+                    { 6, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Sarah White", "35 Park Ave", "Dairy Products", null, "25 Market St", "Alice Green", 300.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 4.0m, 8.0m },
+                    { 7, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Daniel Black", "40 Broadway", "Packaged Goods", null, "25 Market St", "Alice Green", 250.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 4.5m },
+                    { 8, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Emma Red", "45 Fifth St", "Beverages", null, "25 Market St", "Alice Green", 400.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 5.0m },
+                    { 9, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Jim Doe", "50 Snack Ave", "Fast Food Order", null, "45 Fast Food Rd", "Alice Johnson", 50.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 1.0m, 2.0m },
+                    { 10, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Kate Brown", "55 Snack Ave", "Burger Order", null, "45 Fast Food Rd", "Alice Johnson", 30.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 0.5m, 1.5m },
+                    { 11, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Ben White", "60 Snack Ave", "Pizza Order", null, "45 Fast Food Rd", "Alice Johnson", 40.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.5m },
+                    { 12, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Beth Green", "65 Snack Ave", "Dessert Order", null, "45 Fast Food Rd", "Alice Johnson", 20.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 1.5m, 3.0m },
+                    { 13, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Alice Johnson", "110 Library Lane", "Books", null, "100 Book St", "John Smith", 25.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 0.5m, 1.0m },
+                    { 14, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Bob White", "120 Library Lane", "Textbooks", null, "100 Book St", "John Smith", 45.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 0.75m, 1.5m },
+                    { 15, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Charlie Black", "130 Library Lane", "Novels", null, "100 Book St", "John Smith", 50.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.0m },
+                    { 16, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "David Green", "140 Library Lane", "Magazines", null, "100 Book St", "John Smith", 30.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 1.25m, 2.5m },
+                    { 17, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "James Black", "160 Home Lane", "Home Goods", null, "150 Home St", "Emily White", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.0m, 3.5m },
+                    { 18, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Sarah Green", "170 Home Lane", "Furniture", null, "150 Home St", "Emily White", 800.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 2.5m, 4.0m },
+                    { 19, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Paul Red", "180 Home Lane", "Kitchenware", null, "150 Home St", "Emily White", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.0m },
+                    { 20, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Jessica Blue", "190 Home Lane", "Decorations", null, "150 Home St", "Emily White", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 0.5m, 1.5m },
+                    { 21, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Anna Green", "210 Gym Lane", "Gym Equipment", null, "200 Fitness St", "Mike Brown", 500.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 5.0m },
+                    { 22, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Laura Black", "220 Gym Lane", "Fitness Apparel", null, "200 Fitness St", "Mike Brown", 150.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 2.5m },
+                    { 23, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Cathy White", "230 Gym Lane", "Health Supplements", null, "200 Fitness St", "Mike Brown", 300.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 3.0m },
+                    { 24, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Sarah Blue", "240 Gym Lane", "Yoga Mats", null, "200 Fitness St", "Mike Brown", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m }
                 });
 
             migrationBuilder.InsertData(
@@ -495,81 +485,39 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Earnings",
-                columns: new[] { "Id", "DriverId", "Earned_At", "Gross_Amount", "Is_Paid_Out", "Net_Earnings", "Order_PlacementId", "Platform_Fee" },
-                values: new object[,]
-                {
-                    { 1, 1, "2023-09-15 22:00:00", 1350.00m, "Yes", 1304.00m, 13, 46.00m },
-                    { 2, 2, "2023-09-15 23:00:00", 1650.00m, "Yes", 1597.00m, 14, 53.00m },
-                    { 3, 3, "2023-09-15", 630.00m, "Partial", 609.00m, 15, 21.00m },
-                    { 4, 4, "2023-09-15 19:00:00", 1300.00m, "Yes", 1253.00m, 10, 47.00m },
-                    { 5, 5, "2023-09-15 20:00:00", 970.00m, "Yes", 934.00m, 11, 36.00m },
-                    { 6, 6, "2023-09-15 21:00:00", 245.00m, "Yes", 245.00m, 12, 0.00m }
-                });
-
-            migrationBuilder.InsertData(
                 table: "OrderItems",
-                columns: new[] { "Id", "Item_Name", "Order_PlacementId", "Quantity", "Special_Instructions", "Weight_Per_Item" },
+                columns: new[] { "Id", "DimensionId", "Item_Name", "OrderPlacementId", "Quantity", "Special_Instructions", "Weight_Per_Item" },
                 values: new object[,]
                 {
-                    { 1, "Laptop", 1, 1, "Handle with care", 2.50m },
-                    { 2, "Mouse", 2, 2, "Wireless", 0.10m },
-                    { 3, "Keyboard", 3, 1, "Mechanical", 0.75m },
-                    { 4, "Desk", 4, 1, "Assembly required", 15.00m },
-                    { 5, "Chair", 5, 1, "Comfortable", 5.00m },
-                    { 6, "Phone", 6, 1, "New model", 0.20m },
-                    { 7, "Charger", 7, 1, "Fast charging", 0.15m },
-                    { 8, "Couch", 8, 1, "Delivery on ground floor only", 30.00m },
-                    { 9, "Coffee Table", 9, 1, "Glass top", 10.00m },
-                    { 10, "T-Shirt", 10, 5, "Various colors", 0.25m },
-                    { 11, "Jeans", 11, 2, "Brand: XYZ", 0.75m },
-                    { 12, "Fruits Basket", 12, 1, "Seasonal fruits", 3.00m },
-                    { 13, "Vegetable Basket", 13, 1, "Organic", 3.00m },
-                    { 14, "Cookbook", 14, 1, "Best seller", 1.00m },
-                    { 15, "Spices Set", 15, 1, "Variety pack", 0.50m },
-                    { 16, "Headphones", 16, 1, "Noise cancelling", 0.30m },
-                    { 17, "Bluetooth Speaker", 17, 1, "Waterproof", 0.80m },
-                    { 18, "Backpack", 18, 1, "For travel", 0.50m },
-                    { 19, "Water Bottle", 19, 1, "Insulated", 0.20m },
-                    { 20, "Camera", 20, 1, "Includes accessories", 1.50m },
-                    { 21, "Tripod", 21, 1, "Adjustable height", 1.00m },
-                    { 22, "Blanket", 22, 1, "Soft and warm", 1.00m },
-                    { 23, "Pillow", 23, 2, "Memory foam", 0.50m },
-                    { 24, "Rug", 24, 1, "Non-slip", 5.00m },
-                    { 25, "Curtains", 25, 2, "Blackout style", 1.00m },
-                    { 26, "Bedding Set", 26, 1, "King size", 2.00m },
-                    { 27, "Towels", 27, 4, "Soft and absorbent", 0.25m },
-                    { 28, "Pet Food", 28, 1, "For dogs", 10.00m },
-                    { 29, "Pet Toys", 29, 3, "Variety pack", 0.50m },
-                    { 30, "Garden Tools", 30, 5, "Assorted tools", 1.50m },
-                    { 31, "Plant Seeds", 31, 10, "Mixed vegetables", 0.05m },
-                    { 32, "Laptop Stand", 32, 1, "Adjustable height", 1.00m },
-                    { 33, "Mouse Pad", 33, 1, "Large size", 0.20m },
-                    { 34, "USB Hub", 34, 1, "4 ports", 0.30m },
-                    { 35, "Monitor", 35, 1, "27 inch", 5.00m },
-                    { 36, "HDMI Cable", 36, 1, "3 meters", 0.10m },
-                    { 37, "Wireless Router", 37, 1, "Dual band", 0.50m },
-                    { 38, "Wi-Fi Extender", 38, 1, "For large homes", 0.30m },
-                    { 39, "Surge Protector", 39, 1, "8 outlets", 0.40m },
-                    { 40, "Smartwatch", 40, 1, "Fitness tracking", 0.20m },
-                    { 41, "Fitness Tracker", 41, 1, "Water resistant", 0.15m },
-                    { 42, "Yoga Mat", 42, 1, "Non-slip", 1.00m },
-                    { 43, "Dumbbells", 43, 2, "Adjustable weight", 2.00m },
-                    { 44, "Kettlebell", 44, 1, "For strength training", 5.00m },
-                    { 45, "Resistance Bands", 45, 1, "Set of 5", 0.50m },
-                    { 46, "Jump Rope", 46, 1, "Adjustable length", 0.25m },
-                    { 47, "Protein Powder", 47, 1, "Chocolate flavor", 1.00m },
-                    { 48, "Meal Prep Containers", 48, 1, "Set of 5", 1.00m },
-                    { 49, "Blender", 49, 1, "High speed", 3.00m },
-                    { 50, "Juicer", 50, 1, "For fruits and veggies", 2.50m },
-                    { 51, "Coffee Maker", 51, 1, "Auto shut off", 3.00m },
-                    { 52, "Tea Kettle", 52, 1, "Stainless steel", 1.00m },
-                    { 53, "Cookware Set", 53, 1, "Non-stick", 5.00m }
+                    { 1, null, "Laptop", 1, 1, "Handle with care", 2.50m },
+                    { 2, null, "Mouse", 2, 2, "Wireless", 0.10m },
+                    { 3, null, "Keyboard", 3, 1, "Mechanical", 0.75m },
+                    { 4, null, "Desk", 4, 1, "Assembly required", 15.00m },
+                    { 5, null, "Chair", 5, 1, "Comfortable", 5.00m },
+                    { 6, null, "Phone", 6, 1, "New model", 0.20m },
+                    { 7, null, "Charger", 7, 1, "Fast charging", 0.15m },
+                    { 8, null, "Couch", 8, 1, "Delivery on ground floor only", 30.00m },
+                    { 9, null, "Coffee Table", 9, 1, "Glass top", 10.00m },
+                    { 10, null, "T-Shirt", 10, 5, "Various colors", 0.25m },
+                    { 11, null, "Jeans", 11, 2, "Brand: XYZ", 0.75m },
+                    { 12, null, "Fruits Basket", 12, 1, "Seasonal fruits", 3.00m },
+                    { 13, null, "Vegetable Basket", 13, 1, "Organic", 3.00m },
+                    { 14, null, "Cookbook", 14, 1, "Best seller", 1.00m },
+                    { 15, null, "Spices Set", 15, 1, "Variety pack", 0.50m },
+                    { 16, null, "Headphones", 16, 1, "Noise cancelling", 0.30m },
+                    { 17, null, "Bluetooth Speaker", 17, 1, "Waterproof", 0.80m },
+                    { 18, null, "Backpack", 18, 1, "For travel", 0.50m },
+                    { 19, null, "Water Bottle", 19, 1, "Insulated", 0.20m },
+                    { 20, null, "Camera", 20, 1, "Includes accessories", 1.50m },
+                    { 21, null, "Tripod", 21, 1, "Adjustable height", 1.00m },
+                    { 22, null, "Blanket", 22, 1, "Soft and warm", 1.00m },
+                    { 23, null, "Pillow", 23, 2, "Memory foam", 0.50m },
+                    { 24, null, "Rug", 24, 1, "Non-slip", 5.00m }
                 });
 
             migrationBuilder.InsertData(
                 table: "OrderTrackings",
-                columns: new[] { "Id", "Latitude", "Longitude", "Notes", "Order_PlacementId", "Status", "TimeStamps" },
+                columns: new[] { "Id", "Latitude", "Longitude", "Notes", "OrderPlacementId", "Status", "TimeStamps" },
                 values: new object[,]
                 {
                     { 1, "34.0522", "-118.2437", "Picked up from warehouse", 1, "In Transit", new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified) },
@@ -595,41 +543,12 @@ namespace Backend.Migrations
                     { 21, "34.0522", "-118.2437", "Waiting for dispatch", 21, "In Warehouse", new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 22, "34.0522", "-118.2437", "On route to delivery", 22, "In Transit", new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified) },
                     { 23, "34.0522", "-118.2437", "Awaiting confirmation", 23, "Pending", new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 24, "34.0522", "-118.2437", "Picked up", 24, "In Transit", new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 25, "34.0522", "-118.2437", "On the way", 25, "In Transit", new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 26, "34.0522", "-118.2437", "Delivered to customer", 26, "Delivered", new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 27, "34.0522", "-118.2437", "On the way", 27, "In Transit", new DateTime(2023, 9, 15, 11, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 28, "34.0522", "-118.2437", "Received by customer", 28, "Delivered", new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 29, "34.0522", "-118.2437", "Awaiting pickup", 29, "Pending", new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 30, "34.0522", "-118.2437", "Picked up", 30, "In Transit", new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 31, "34.0522", "-118.2437", "On the way", 31, "In Transit", new DateTime(2023, 9, 15, 9, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 32, "34.0522", "-118.2437", "Delivered successfully", 32, "Delivered", new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 33, "34.0522", "-118.2437", "Waiting for dispatch", 33, "In Warehouse", new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 34, "34.0522", "-118.2437", "On route to delivery", 34, "In Transit", new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 35, "34.0522", "-118.2437", "Awaiting confirmation", 35, "Pending", new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 36, "34.0522", "-118.2437", "Picked up", 36, "In Transit", new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 37, "34.0522", "-118.2437", "On the way to destination", 37, "In Transit", new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 38, "34.0522", "-118.2437", "Delivered successfully", 38, "Delivered", new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 39, "34.0522", "-118.2437", "Waiting for dispatch", 39, "In Warehouse", new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 40, "34.0522", "-118.2437", "On route to delivery", 40, "In Transit", new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 41, "34.0522", "-118.2437", "Awaiting confirmation", 41, "Pending", new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 42, "34.0522", "-118.2437", "Picked up", 42, "In Transit", new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 43, "34.0522", "-118.2437", "On the way", 43, "In Transit", new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 44, "34.0522", "-118.2437", "Received by customer", 44, "Delivered", new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 45, "34.0522", "-118.2437", "Awaiting pickup", 45, "Pending", new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 46, "34.0522", "-118.2437", "Picked up", 46, "In Transit", new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 47, "34.0522", "-118.2437", "On the way", 47, "In Transit", new DateTime(2023, 9, 15, 9, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 48, "34.0522", "-118.2437", "Delivered successfully", 48, "Delivered", new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 49, "34.0522", "-118.2437", "Waiting for dispatch", 49, "In Warehouse", new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 50, "34.0522", "-118.2437", "On route to delivery", 50, "In Transit", new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 51, "34.0522", "-118.2437", "Awaiting confirmation", 51, "Pending", new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 52, "34.0522", "-118.2437", "Picked up", 52, "In Transit", new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 53, "34.0522", "-118.2437", "On the way to destination", 53, "In Transit", new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 24, "34.0522", "-118.2437", "Picked up", 24, "In Transit", new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Payments",
-                columns: new[] { "Id", "Amount", "Driver_Earnings", "Order_PlacementId", "Payment_Method", "Platform_Fee", "Processed_At", "Status", "Transaction_Identification" },
+                columns: new[] { "Id", "Amount", "Driver_Earnings", "OrderPlacementId", "Payment_Method", "Platform_Fee", "Processed_At", "Status", "Transaction_Identification" },
                 values: new object[,]
                 {
                     { 1, 300.00m, 290.00m, 1, "Credit Card", 10.00m, "2023-09-15 10:00:00", "Completed", "TXN001" },
@@ -655,37 +574,12 @@ namespace Backend.Migrations
                     { 21, 150.00m, 145.00m, 21, "Debit Card", 5.00m, null, "Pending", "TXN021" },
                     { 22, 300.00m, 290.00m, 22, "Credit Card", 10.00m, "2023-09-16 15:00:00", "Completed", "TXN022" },
                     { 23, 200.00m, 192.00m, 23, "Bank Transfer", 8.00m, "2023-09-16 16:00:00", "Completed", "TXN023" },
-                    { 24, 80.00m, 80.00m, 24, "Cash", 0.00m, "2023-09-16 17:00:00", "Completed", "TXN024" },
-                    { 25, 300.00m, 290.00m, 25, "Credit Card", 10.00m, "2023-09-16 18:00:00", "Completed", "TXN025" },
-                    { 26, 450.00m, 435.00m, 26, "PayPal", 15.00m, "2023-09-16 19:00:00", "Completed", "TXN026" },
-                    { 27, 150.00m, 145.00m, 27, "Debit Card", 5.00m, null, "Pending", "TXN027" },
-                    { 28, 700.00m, 675.00m, 28, "Credit Card", 25.00m, "2023-09-16 20:00:00", "Completed", "TXN028" },
-                    { 29, 250.00m, 240.00m, 29, "Bank Transfer", 10.00m, "2023-09-16 21:00:00", "Completed", "TXN029" },
-                    { 30, 90.00m, 90.00m, 30, "Cash", 0.00m, "2023-09-16 22:00:00", "Completed", "TXN030" },
-                    { 31, 350.00m, 338.00m, 31, "Credit Card", 12.00m, "2023-09-16 23:00:00", "Completed", "TXN031" },
-                    { 32, 500.00m, 485.00m, 32, "PayPal", 15.00m, "2023-09-17 10:00:00", "Completed", "TXN032" },
-                    { 33, 180.00m, 174.00m, 33, "Debit Card", 6.00m, null, "Pending", "TXN033" },
-                    { 34, 650.00m, 628.00m, 34, "Credit Card", 22.00m, "2023-09-17 11:00:00", "Completed", "TXN034" },
-                    { 35, 220.00m, 212.00m, 35, "Bank Transfer", 8.00m, "2023-09-17 12:00:00", "Completed", "TXN035" },
-                    { 36, 75.00m, 75.00m, 36, "Cash", 0.00m, "2023-09-17 13:00:00", "Completed", "TXN036" },
-                    { 37, 400.00m, 386.00m, 37, "Credit Card", 14.00m, "2023-09-17 14:00:00", "Completed", "TXN037" },
-                    { 38, 600.00m, 580.00m, 38, "PayPal", 20.00m, "2023-09-17 15:00:00", "Completed", "TXN038" },
-                    { 39, 150.00m, 145.00m, 39, "Debit Card", 5.00m, null, "Pending", "TXN039" },
-                    { 40, 300.00m, 290.00m, 40, "Credit Card", 10.00m, "2023-09-17 16:00:00", "Completed", "TXN040" },
-                    { 41, 200.00m, 192.00m, 41, "Bank Transfer", 8.00m, "2023-09-17 17:00:00", "Completed", "TXN041" },
-                    { 42, 80.00m, 80.00m, 42, "Cash", 0.00m, "2023-09-17 18:00:00", "Completed", "TXN042" },
-                    { 43, 300.00m, 290.00m, 43, "Credit Card", 10.00m, "2023-09-17 19:00:00", "Completed", "TXN043" },
-                    { 44, 450.00m, 435.00m, 44, "PayPal", 15.00m, "2023-09-17 20:00:00", "Completed", "TXN044" },
-                    { 45, 150.00m, 145.00m, 45, "Debit Card", 5.00m, null, "Pending", "TXN045" },
-                    { 46, 700.00m, 675.00m, 46, "Credit Card", 25.00m, "2023-09-15 10:00:00", "Completed", "TXN046" },
-                    { 47, 250.00m, 240.00m, 47, "Bank Transfer", 10.00m, "2023-09-15 11:00:00", "Completed", "TXN047" },
-                    { 48, 90.00m, 90.00m, 48, "Cash", 0.00m, "2023-09-15 12:00:00", "Completed", "TXN048" },
-                    { 49, 350.00m, 90.00m, 49, "Credit Card", 12.00m, "2023-09-15 13:00:00", "Completed", "TXN049" }
+                    { 24, 80.00m, 80.00m, 24, "Cash", 0.00m, "2023-09-16 17:00:00", "Completed", "TXN024" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Routes",
-                columns: new[] { "Id", "DriverId", "Estimated_Duration", "Order_PlacementId", "Route_Data", "Total_Distance" },
+                columns: new[] { "Id", "DriverId", "Estimated_Duration", "OrderPlacementId", "Route_Data", "Total_Distance" },
                 values: new object[,]
                 {
                     { 1, 1, new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified), 1, "Route 1 Data", "15.2 km" },
@@ -711,36 +605,7 @@ namespace Backend.Migrations
                     { 21, 3, new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified), 21, "Route 21 Data", "16.7 km" },
                     { 22, 4, new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified), 22, "Route 22 Data", "21.9 km" },
                     { 23, 5, new DateTime(2024, 1, 1, 2, 20, 0, 0, DateTimeKind.Unspecified), 23, "Route 23 Data", "14.3 km" },
-                    { 24, 6, new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified), 24, "Route 24 Data", "19.8 km" },
-                    { 25, 1, new DateTime(2024, 1, 1, 3, 50, 0, 0, DateTimeKind.Unspecified), 25, "Route 25 Data", "26.8 km" },
-                    { 26, 2, new DateTime(2024, 1, 1, 2, 5, 0, 0, DateTimeKind.Unspecified), 26, "Route 26 Data", "12.9 km" },
-                    { 27, 3, new DateTime(2024, 1, 1, 3, 20, 0, 0, DateTimeKind.Unspecified), 27, "Route 27 Data", "23.1 km" },
-                    { 28, 4, new DateTime(2024, 1, 1, 2, 45, 0, 0, DateTimeKind.Unspecified), 28, "Route 28 Data", "17.4 km" },
-                    { 29, 5, new DateTime(2024, 1, 1, 3, 35, 0, 0, DateTimeKind.Unspecified), 29, "Route 29 Data", "22.7 km" },
-                    { 30, 6, new DateTime(2024, 1, 1, 2, 25, 0, 0, DateTimeKind.Unspecified), 30, "Route 30 Data", "15.6 km" },
-                    { 31, 1, new DateTime(2024, 1, 1, 3, 10, 0, 0, DateTimeKind.Unspecified), 31, "Route 31 Data", "20.5 km" },
-                    { 32, 2, new DateTime(2024, 1, 1, 3, 40, 0, 0, DateTimeKind.Unspecified), 32, "Route 32 Data", "25.2 km" },
-                    { 33, 3, new DateTime(2024, 1, 1, 2, 15, 0, 0, DateTimeKind.Unspecified), 33, "Route 33 Data", "13.8 km" },
-                    { 34, 4, new DateTime(2024, 1, 1, 2, 50, 0, 0, DateTimeKind.Unspecified), 34, "Route 34 Data", "18.9 km" },
-                    { 35, 5, new DateTime(2024, 1, 1, 3, 30, 0, 0, DateTimeKind.Unspecified), 35, "Route 35 Data", "24.6 km" },
-                    { 36, 6, new DateTime(2024, 1, 1, 2, 35, 0, 0, DateTimeKind.Unspecified), 36, "Route 36 Data", "16.2 km" },
-                    { 37, 1, new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified), 37, "Route 37 Data", "21.7 km" },
-                    { 38, 2, new DateTime(2024, 1, 1, 2, 20, 0, 0, DateTimeKind.Unspecified), 38, "Route 38 Data", "14.6 km" },
-                    { 39, 3, new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified), 39, "Route 39 Data", "19.3 km" },
-                    { 40, 4, new DateTime(2024, 1, 1, 3, 45, 0, 0, DateTimeKind.Unspecified), 40, "Route 40 Data", "26.4 km" },
-                    { 41, 5, new DateTime(2024, 1, 1, 1, 55, 0, 0, DateTimeKind.Unspecified), 41, "Route 41 Data", "12.4 km" },
-                    { 42, 6, new DateTime(2024, 1, 1, 3, 25, 0, 0, DateTimeKind.Unspecified), 42, "Route 42 Data", "23.8 km" },
-                    { 43, 1, new DateTime(2024, 1, 1, 2, 40, 0, 0, DateTimeKind.Unspecified), 43, "Route 43 Data", "17.1 km" },
-                    { 44, 2, new DateTime(2024, 1, 1, 3, 20, 0, 0, DateTimeKind.Unspecified), 44, "Route 44 Data", "22.2 km" },
-                    { 45, 3, new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified), 45, "Route 45 Data", "15.3 km" },
-                    { 46, 4, new DateTime(2024, 1, 1, 3, 5, 0, 0, DateTimeKind.Unspecified), 46, "Route 46 Data", "20.8 km" },
-                    { 47, 5, new DateTime(2024, 1, 1, 3, 50, 0, 0, DateTimeKind.Unspecified), 47, "Route 47 Data", "25.9 km" },
-                    { 48, 6, new DateTime(2024, 1, 1, 2, 10, 0, 0, DateTimeKind.Unspecified), 48, "Route 48 Data", "13.2 km" },
-                    { 49, 1, new DateTime(2024, 1, 1, 2, 50, 0, 0, DateTimeKind.Unspecified), 49, "Route 49 Data", "18.6 km" },
-                    { 50, 2, new DateTime(2024, 1, 1, 3, 35, 0, 0, DateTimeKind.Unspecified), 50, "Route 50 Data", "24.1 km" },
-                    { 51, 3, new DateTime(2024, 1, 1, 2, 40, 0, 0, DateTimeKind.Unspecified), 51, "Route 51 Data", "16.9 km" },
-                    { 52, 4, new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified), 52, "Route 52 Data", "21.4 km" },
-                    { 53, 5, new DateTime(2024, 1, 1, 2, 25, 0, 0, DateTimeKind.Unspecified), 53, "Route 53 Data", "14.7 km" }
+                    { 24, 6, new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified), 24, "Route 24 Data", "19.8 km" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -771,9 +636,9 @@ namespace Backend.Migrations
                 column: "DriverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Earnings_Order_PlacementId",
+                name: "IX_Earnings_OrderPlacementId",
                 table: "Earnings",
-                column: "Order_PlacementId");
+                column: "OrderPlacementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_UserId",
@@ -781,9 +646,16 @@ namespace Backend.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItems_Order_PlacementId",
+                name: "IX_OrderItems_DimensionId",
                 table: "OrderItems",
-                column: "Order_PlacementId");
+                column: "DimensionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderPlacementId",
+                table: "OrderItems",
+                column: "OrderPlacementId",
+                unique: true,
+                filter: "[OrderPlacementId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderPlacements_CustomerId",
@@ -796,14 +668,14 @@ namespace Backend.Migrations
                 column: "DriverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderTrackings_Order_PlacementId",
+                name: "IX_OrderTrackings_OrderPlacementId",
                 table: "OrderTrackings",
-                column: "Order_PlacementId");
+                column: "OrderPlacementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_Order_PlacementId",
+                name: "IX_Payments_OrderPlacementId",
                 table: "Payments",
-                column: "Order_PlacementId");
+                column: "OrderPlacementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Routes_DriverId",
@@ -811,9 +683,9 @@ namespace Backend.Migrations
                 column: "DriverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Routes_Order_PlacementId",
+                name: "IX_Routes_OrderPlacementId",
                 table: "Routes",
-                column: "Order_PlacementId");
+                column: "OrderPlacementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_DriverId",
@@ -850,6 +722,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
+
+            migrationBuilder.DropTable(
+                name: "OrderDimension");
 
             migrationBuilder.DropTable(
                 name: "OrderPlacements");
