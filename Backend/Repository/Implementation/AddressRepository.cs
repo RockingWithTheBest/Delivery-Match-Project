@@ -48,7 +48,10 @@ namespace Backend.Repository.Implementation
             }
             return testValue;
         }
-
+        public IEnumerable<Address>GetAddressListByUserId(int UserId)
+        {
+            return databaseContext.Addresses.ToList().Where(u => u.UserId == UserId);
+        }
         public IEnumerable<Address> GetAllAddresses()
         {
             return databaseContext.Addresses.ToList();

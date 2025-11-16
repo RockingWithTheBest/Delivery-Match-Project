@@ -2,6 +2,7 @@
 using Backend.Models;
 using Backend.Repository.Implementation;
 using Backend.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementation
 {
@@ -51,7 +52,7 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<Order_Items> GetAllOrderItems()
         {
-            return databaseContext.OrderItems.ToList();
+            return databaseContext.OrderItems.Include(d => d.Dimension).ToList();
         }
 
         public Order_Items GetSingleRecord(int Id)

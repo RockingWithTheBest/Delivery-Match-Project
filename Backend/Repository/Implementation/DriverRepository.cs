@@ -51,7 +51,7 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<Driver> GetAllDrivers()
         {
-            return databaseContext.Drivers.Include(d=>d.Orders_Placed).ToList();
+            return databaseContext.Drivers.Include(d=>d.OrdersPlaced).ToList();
         }
 
         public int UpdateDriverRecord(int Id, Driver driver)

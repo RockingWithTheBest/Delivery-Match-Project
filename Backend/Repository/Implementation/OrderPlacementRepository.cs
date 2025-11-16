@@ -1,8 +1,8 @@
-﻿using Backend.DatabasContext;
+﻿using Backend.AdditionalClasses;
+using Backend.DatabasContext;
 using Backend.Models;
-using Backend.Repository.Implementation;
 using Backend.Repository.Interface;
-using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementation
 {
@@ -28,6 +28,19 @@ namespace Backend.Repository.Implementation
             }
             return textVariable;
         }
+        public int AddBulkOrdersWithClientId(List<OrderPlacement> BulkOrders, int ClientId)
+        {
+            if (BulkOrders != null)
+            {  
+                databaseContext.OrderPlacements.AddRange(BulkOrders);
+                databaseContext.SaveChanges(); // This only saves OrderPlacements
+                return ClientId;
+            }
+            else
+            {
+                return -1;
+            }
+        }
 
         public int DeleteOrderPlacementRecord(int Id)
         {
@@ -52,7 +65,7 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<OrderPlacement> GetAllOrderPlacement()
         {
-            return databaseContext.OrderPlacements.ToList();
+            return databaseContext.OrderPlacements.Include(d=>d.Order_Items).ToList();
         }
         public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByCustomerId(int CustomerId)
         {
@@ -84,7 +97,7 @@ namespace Backend.Repository.Implementation
                 updatedRecord.Volume = record.Volume;
                 updatedRecord.Price = record.Price;
                 updatedRecord.Description = record.Description;
-                updatedRecord.Distance = record.Distance;
+                //updatedRecord.Distance = record.Distance;
                 updatedRecord.Created_At = record.Created_At;
                 updatedRecord.Scheduled_At = record.Scheduled_At;
                 updatedRecord.Completed_On = record.Completed_On;
@@ -92,6 +105,100 @@ namespace Backend.Repository.Implementation
                 testValue = record.Id;
             }
             return testValue;
+        }
+
+        public string AddBulkOrdersWithItems(List<OrderPlacement> orders, List<Order_Items> orderItems, int ClientId)
+        {
+            
+            {
+                try
+                {
+                    if (orders == null || !orders.Any())
+                    {
+                        return "No orders provided";
+                    }
+
+                    if (orderItems == null || !orderItems.Any())
+                    {
+                        return "No items provided";
+                    }
+
+                    if (orderItems.Count != orderItems.Count)
+                    {
+                        return "Number of orders and order items must match";
+                    }
+
+                    var createdOrders = new List<OrderPlacement>();
+
+                    // Add all orders first
+                    for(int i=0;i<orders.Count;i++)
+                    {
+                        var order = orders[i];
+                        
+                        var orderPlacement = new OrderPlacement
+                        {
+                            Pick_Up_Address = order.Pick_Up_Address,
+                            Delivery_Up_Address = order.Delivery_Up_Address,
+                            Pick_Up_Contact = order.Pick_Up_Contact,
+                            Delivery_Contact = order.Delivery_Contact,
+                            Weight = order.Weight,
+                            Volume = order.Volume,
+                            Description = order.Description,
+                            Status = order.Status,
+                            Price = order.Price,
+                            Created_At = DateTime.Now,
+                            Scheduled_At = order.Scheduled_At,
+                            Completed_On = order.Completed_On,
+                            CustomerId = ClientId
+                        };
+          
+
+                        databaseContext.OrderPlacements.Add(orderPlacement);
+                        databaseContext.SaveChanges();// Save to get the Id
+                        createdOrders.Add(orderPlacement);
+                        Console.WriteLine("ID", orderPlacement.Id);
+                    }
+                    
+                    for (int i = 0; i < orderItems.Count; i++)
+                    {
+                        var order = orders[i];
+                        var item = orderItems[i];
+                        var orderitem = new Order_Items
+                        {
+                            Item_Name = item.Item_Name,
+                            Quantity = item.Quantity,
+                            Weight_Per_Item = item.Weight_Per_Item,
+                            Special_Instructions = item.Special_Instructions,
+                            Dimension = new OrderDimension
+                            {
+                                Length = item.Dimension.Length,
+                                Height = item.Dimension.Height,
+                                Width = item.Dimension.Width
+                            },
+                            OrderPlacementId = order.Id // Set the relationship
+                        };
+
+                        databaseContext.OrderItems.Add(item);
+                        databaseContext.SaveChanges();
+                    }
+
+                    // Now add order items with the generated Order IDs
+
+
+
+                    //commit transaction
+          
+
+                    return $"Successfully added {orders.Count} orders with their items";
+                    //return createdOrders;
+                }
+                catch (Exception ex)
+                {
+                    //transaction.Rollback();
+                    return $"Error: {ex.Message}";
+                }
+            }
+            
         }
     }
 }

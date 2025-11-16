@@ -55,7 +55,7 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<OrderPlacement> GetAllOrderPlacementsByCustomerId(int CustomerId)
         {
-            return databaseContext.OrderPlacements.Where(x=>x.Id==CustomerId).ToList();
+            return databaseContext.OrderPlacements.Where(x=>x.CustomerId==CustomerId).ToList();
         }
 
         public Customer GetCustomerDetails(int Id)
