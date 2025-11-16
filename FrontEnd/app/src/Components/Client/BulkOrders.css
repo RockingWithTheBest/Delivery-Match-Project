@@ -1,0 +1,130 @@
+.bulk-order-sections {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid rgba(0, 0, 0, 0.2);   
+    border-radius: 12px;
+    width: 69%;
+    background: white;
+}
+
+img.doc-upload {
+    width: 20px;
+}
+
+img.down-facing-upload-icon {
+    width: 23px;
+}
+img.upload-icon {
+    width: 50px;
+}
+.b-o-upload p {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+p.multiple-orders-upload {
+    margin-top: -16px;
+}
+
+.bulk-part-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.b-o-upload {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+button.bulk-upload-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 2px solid black;
+    color: black;
+}
+
+.bulk-part-2 {
+    border: 2px dotted #6b95c9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 96%;
+    margin-top: 17px;
+}
+.bulk-part-3 {
+    border: 2px dotted black;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 96%;
+    margin-top: 17px;
+}
+.bulk-part-2 p, .bulk-part-3 p{
+    margin-top: -11px;
+}
+
+.bulk-part-4 h3 {
+    font-weight: 500;
+}
+
+.dotted-border:hover {
+    border-color: #007bff;
+    background-color: #e7f3ff;
+}
+
+.upload-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.bulk-upload-btn, .upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.bulk-upload-btn:hover, .upload-btn:hover {
+    background-color: #0056b3;
+}
+
+.down-facing-upload-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.file-upload-wrapper {
+    margin: 15px 0;
+}
+
+.file-info {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .bulk-upload-container {
+        grid-template-columns: 1fr;
+    }
+}
