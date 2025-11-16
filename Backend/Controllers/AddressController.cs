@@ -27,6 +27,22 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
+        [Route("Get-Address-ListBy-UserId")] 
+        public IActionResult Get_AddressListByUserId(int UserId)
+        {
+            if ((address.GetAddressListByUserId(UserId)) == null)
+            {
+                return NotFound();
+            }
+            var descripto = new
+            {
+                messageText = "Successfully return list",
+                list = address.GetAddressListByUserId(UserId)
+            };
+            return Ok(descripto);
+        }
+
+        [HttpGet]
         [Route("Get-Addresses-By-Id")]
         public IActionResult GetById(int id)
         {

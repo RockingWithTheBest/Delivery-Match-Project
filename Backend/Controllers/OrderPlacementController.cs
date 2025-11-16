@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿using Backend.DTOs;
+using Backend.Models;
 using Backend.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,11 +72,64 @@ namespace Backend.Controllers
             }
             else
             {
-                orderPlacement.AddOrderPlacementRecord(orderPlacementRecord);
-                return Ok("Successfully added order record");
+                var createdOrder = orderPlacement.AddOrderPlacementRecord(orderPlacementRecord);
+                return Ok(createdOrder);
             }
         }
 
+        [HttpPost]
+        [Route("Add-Bulk-OrderPlacement")]
+
+        public IActionResult AddBulkOrderPlacement(List<OrderPlacement>BulkOrderList, int ClientId)
+        {
+            if (BulkOrderList == null || ClientId ==null)
+            {
+                return BadRequest("The order record your provided is NULL");
+            }
+            else
+            {
+                int Id = orderPlacement.AddBulkOrdersWithClientId(BulkOrderList,ClientId);
+                return Ok($"Successfully added bulky orders with client id = {Id}");
+            }
+        }
+
+        [HttpPost]
+        [Route("Add-Bulk-OrderPlacement-With-Items")]
+        public IActionResult AddBulkOrderPlacementWithItems(BulkOrderDto bulkOrderDto, int ClientId)
+        {
+            if (bulkOrderDto == null || bulkOrderDto.OrdersPlacmentsDto == null || bulkOrderDto.OrderItemsDto == null)
+            {
+                return BadRequest("The bulk order data you provided is NULL");
+            }
+
+            if (ClientId <= 0)
+            {
+                return BadRequest("Invalid Client ID");
+            }
+
+            if (bulkOrderDto.OrdersPlacmentsDto.Count != bulkOrderDto.OrderItemsDto.Count)
+            {
+                return BadRequest("Number of orders and order items must match");
+            }
+
+            try
+            {
+                var result = orderPlacement.AddBulkOrdersWithItems(
+                    bulkOrderDto.OrdersPlacmentsDto,
+                    bulkOrderDto.OrderItemsDto,
+                    ClientId
+                );
+                return Ok(new
+                {
+                    Message = "Successfully added bulk orders with items",
+                    CreatedOrders = result
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
         [HttpPut]
         [Route("Editing-Order-PlacementAddresses")]
         public IActionResult UpdateOrderPlacement(int Id, OrderPlacement orderPlacementRecord)
