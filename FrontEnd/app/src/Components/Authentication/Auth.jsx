@@ -64,7 +64,21 @@ const Registration=()=>{
     const handleSignIn =async()=>{
        
         if(userType =='Client'){
-            navigate('/client')
+            const responseUsers = await axios.get("https://localhost:7216/api/User/Get-All-Users")
+            const responseClients = await axios.get("https://localhost:7216/api/Customer/Get-All-Customers")
+
+            const allUsers = responseUsers.data
+            const allClients = responseClients.data
+
+            const user = allUsers.find(d=> d.Email === email && d.Password === password)
+
+            if(user!=null){
+                const client = allClients.find(d=>d.UserId === user.Id)
+                navigate(`/client/${user.Email}/${user.Password}/${client.Id}`)
+            }
+            else{
+                alert("Click the Client Option and enter your correct login details")
+            }
         }
         else if(userType =='Driver'){
             const responseUsers = await axios.get("https://localhost:7216/api/User/Get-All-Users")
@@ -76,22 +90,12 @@ const Registration=()=>{
             const user = allUsers.find(d=> d.Email === email && d.Password === password)
           
             if(user!=null){
-            
-            const driver = allDrivers.find(d=>d.UserId === user.Id)
-              console.log("USER",user)
-            console.log("DRIVER",driver)
-
-            
-            
+                const driver = allDrivers.find(d=>d.UserId === user.Id)
                 navigate(`/driver/${user.Email}/${user.Password}/${driver.Id}`)
             }
             else{
                 alert("Click the Driver Option and enter your correct login details")
             }
-
-            // const driver = await axios.get(`https://localhost:7216/api/Driver/Get-All-Orders-Placed-By-Driver-ID/${user.Id}`)
-            // console.log("XXXX",driver)
-        
         }
     }
     const handleClient = (event) => {
