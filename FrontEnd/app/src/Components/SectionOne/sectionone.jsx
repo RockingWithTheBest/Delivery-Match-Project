@@ -1,5 +1,6 @@
 import React from 'react'
 import Car from './assets/car.png'
+import Truck from './assets/blue-delivery-truck-svgrepo-com.svg'
 import { useNavigate } from 'react-router-dom'
 import './sectionone.css'
 
@@ -20,43 +21,47 @@ const SectionOne=()=>{
     return(
         <div>
             <section className='sectionOneBody'>
-                <div className='whychoose'>
-                    <span>Why Choose DeliveryMatch?</span>
-                </div>
-                <div className='smartdelivery'>
-                    <h1>Smart Delivery Platform</h1>
-                </div>
-                <div>
-                    <p className='connectionverified'>Connect with verified drivers for efficient goods delivery. 
-                    From single packages to bulk shipments, our AI-powered platform 
-                    optimizes routes and reduces costs.</p>
+                <div className='first-part'>
+                    <div className='whychoose'>
+                        <span>Why Choose DeliveryMatch?</span>
+                    </div>
+                    <div className='smartdelivery'>
+                        <p>Smart Delivery Platform</p>
+                    </div>
                     <div>
-                        <button onClick={()=>NavigateToAuthPage()} className='shipnow'>Ship Now</button>
-                        <button onClick={()=>NavigateToAuthPage()}  className='driveearn'>Drive & Earn</button>
-                    </div>                    
-                </div>
-                <div className="ratings">
-                    {stats.map((stat,index)=>(
-                        <div key={index} className="stat-item">
-                            <span className="stat-number">{stat.number}</span>
-                            <span className="stat-label">{stat.label}</span>
-                        </div>
-                    ))}
-                </div>
+                        <p className='connectionverified'>Connect with verified drivers for efficient goods delivery. 
+                        From single packages to bulk shipments, our AI-powered platform 
+                        optimizes routes and reduces costs.</p>
+                        <div className='nav-buttons'>
+                            <button onClick={()=>NavigateToAuthPage()} className='shipnow'>Ship Now</button>
+                            <button onClick={()=>NavigateToAuthPage()}  className='driveearn'>
+                                <img src={Truck}  alt="" />
+                                Drive & Earn
+                            </button>
+                        </div>                    
+                    </div>
+                    <div className="ratings">
+                        {stats.map((stat,index)=>(
+                            <div key={index} className="stat-item">
+                                <span className="stat-number">{stat.number}</span>
+                                <span className="stat-label">{stat.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>              
                 <div>
-                    <img src={Car} alt="" />
-                    
-                    
+                    <div className='live-tracking'>
+                        <div class="green-circle"></div>
+                        <span>Live Tracking</span>
+                    </div>
+                    <img src={Car} className="car-tracking" alt="" />
                 </div>
                 <div  className="devlivered-check">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big h-5 w-5 text-green-500">
                     <path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
                     <span>Delivered</span>
                 </div>
-                <div className='live-tracking'>
-                    <div class="green-circle"></div>
-                    <span>Live Tracking</span>
-                </div>
+                
             </section>
         </div>
     );

@@ -1,21 +1,40 @@
 import React from 'react'
-import { Truck, Package, Users, Globe, Shield, Clock, Star, CheckCircle, MapPin } from 'lucide-react';
+import Truck from './Icons/delivery-truck-svgrepo-com.svg'
+import WorldIcon from "../Icons/world-alt-svgrepo-com.svg"
+import { useNavigate } from 'react-router-dom'
 import './bar.css'
 
 const Bar=()=>{
+    const navigate = useNavigate()
+
+    const navigateToAuthenticationPage=()=>{
+        navigate("/authpage")
+    }
     return(
         <div className='header-container'>
             <div className='logo-container'>
-                {/* <div className='logo'>
-                    <Truck className='logo-icon'/>
-                </div> */}
-                 <h1 className="text-xl text-gray-900">DeliveryMatch</h1>
+                <img src={Truck} alt="" className="delivery-shipping-truck" />
+                <p className="text-xl text-gray-900">DeliveryMatch</p>
             </div>
-            <div className="get-startedbtn">
-                <button>Get Started</button>
-            </div>
+            
+           <div className="get-startedbtn">
+                <div className='language-dropdown-bar'>
+                <div className='world-lang'>
+                    <img className='myword-icon' src={WorldIcon}/>
+                    <select id="language">
+                        <option value="us" selected>us English</option>
+                        <option value="ru" >ru Russian</option>
+                    </select> 
+                </div>                    
+                </div>
+                <div >
+                    <button onClick={()=>navigateToAuthenticationPage()}>Get Started</button>
+                </div>
+           </div>
+           
         </div>
     );
 }
 
 export default Bar
+

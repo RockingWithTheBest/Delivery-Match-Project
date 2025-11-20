@@ -154,6 +154,7 @@ const Dashboard = () => {
                                     </div>
                                 )}
                             </div>
+                            
                             <div className="upload-section">
                                 <div className="upload-controls">
                                     <input

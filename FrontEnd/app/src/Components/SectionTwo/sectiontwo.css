@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 127px;
 }
 
-.sectionTwoBody h2{
-  font-size: 1.875rem; /* Equivalent to text-3xl */
-  color: #1a202c; /* Equivalent to text-gray-900 */
-  margin-bottom: 1rem; /* Equivalent to mb-4 */
+.sectionTwoBody h5 {
+    font-size: 36px;
+    font-weight: 400;
+    margin: 28px;
 }
 
 .sectionTwoBody p{
@@ -17,25 +18,26 @@
   margin-left: auto; /* Equivalent to mx-auto */
   margin-right: auto; /* Equivalent to mx-auto */
 }
+p.build-efficient  {
+    text-align: center;
+    font-size: 19px;
+}
 
+.card p {
+    font-size: 14px;
+}
 
+.card h3 {
+    font-size: 20px;
+    font-weight: 500;
+}
 .cardSectionGrid {
   display: grid;
   grid-template-columns: 1fr; /* Default for mobile */
   gap: 2rem; /* Adjust gap as needed */
 }
 
-@media (min-width: 768px) {
-  .cardSectionGrid {
-    grid-template-columns: repeat(2, 1fr); /* For medium screens */
-  }
-}
 
-@media (min-width: 1024px) {
-  .cardSectionGrid {
-    grid-template-columns: repeat(4, 1fr); /* For large screens */
-  }
-}
 
 .card {
   background-color: #fff; /* Replace with your bg-card color */
@@ -78,4 +80,16 @@
   color: #4a5568; /* Equivalent to text-gray-600 */
   font-size: 0.875rem; /* Equivalent to text-sm */
   line-height: 1.5; /* Equivalent to leading-relaxed */
+}
+
+@media (min-width: 768px) {
+  .cardSectionGrid {
+    grid-template-columns: repeat(2, 1fr); /* For medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardSectionGrid {
+    grid-template-columns: repeat(4, 1fr); /* For large screens */
+  }
 }

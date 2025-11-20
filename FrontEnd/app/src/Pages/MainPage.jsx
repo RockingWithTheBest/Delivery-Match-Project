@@ -10,7 +10,7 @@ const MainPage=()=>{
     return(
         <div className='mainpage'>
             <div>
-                 {/* <NavigationBar/> */}
+                 <NavigationBar/>
             </div>
             <div>
                 <SectionOne/>

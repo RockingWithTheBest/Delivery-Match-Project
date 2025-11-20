@@ -6,8 +6,8 @@ const SectionTwo=()=>{
   
     return(
         <div className='sectionTwoBody'>
-            <h2 >Why Choose DeliveryMatch?</h2>
-            <p>Built for efficiency, designed for scale. 
+            <h5>Why Choose DeliveryMatch?</h5>
+            <p className='build-efficient'>Built for efficiency, designed for scale. 
                 Our platform revolutionizes how goods move from point A to point B.</p>
 
             <div className="cardSectionGrid">

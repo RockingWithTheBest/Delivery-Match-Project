@@ -1,0 +1,74 @@
+.ordertimeline-main-track-client {
+    display: flex;
+    justify-content: center;
+    gap: 29px;
+    width: 73%;
+}
+
+.all-order-list-track-client {
+    border: 1px solid #4a55684f;
+    padding: 7px;
+    padding-right: 13px;
+    padding-left: 13px;
+    border-radius: 7px;
+}
+
+p.myorders-track-client {
+    font-size: 18px;
+}
+
+.order-container-track-client {
+    width: 13rem;
+    padding: 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    margin: 5px;
+    background-color: #f8f9fa;
+    height: 92px;
+    overflow-y: auto;
+    border-radius: 11px;
+}
+.order-container-track-client:hover { 
+    background-color:#87ceeb3d 
+}
+
+.order-header-track-client h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.order-item-track-client.selected .order-header-track-client h3 {
+    color: #007acc;
+}
+.order-item-track-client.selected .customer-name {
+    color: #005a99;
+}
+
+.order-item-track-client:hover {
+    border-color: #87ceeb;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    background-color:black
+}
+
+.order-item-track-client.selected {
+    border-color: #87ceeb;
+    background-color: #e6f7ff;
+    box-shadow: 0 4px 12px rgba(135, 206, 235, 0.3);
+}
+
+/* Order Header */
+.order-header-track-client h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+.order-contentr-track-client {
+    color: #666;
+}
+
+.order-contentr-track-client p {
+    margin: 5px 0;
+}

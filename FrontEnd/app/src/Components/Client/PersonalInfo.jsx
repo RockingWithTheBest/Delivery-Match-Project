@@ -72,9 +72,7 @@ const PersonalInfo=({customerDetails})=>{
                 alert("Profile updated successfully!")
             }
             catch(e){
-                alert("Enter details please")
-                console.log("ERROR", e.message)
-                
+                console.log("ERROR", e.message)             
             }
         }
      

@@ -104,6 +104,7 @@ const KnapsackAlgorithm=()=>{
                 setError('')
     
                 const orderDensity = orderPlacements.map(order=>Math.round(parseFloat(order.Weight/order.Volume)))
+
                 const values = orderPlacements.map(order=>Math.round(parseFloat(order.Price)))
                 const vehicleCapacity = Math.round(parseFloat(selectedVehicle.Max_Weight/selectedVehicle.Max_Volume))
                 console.log(vehicleCapacity)

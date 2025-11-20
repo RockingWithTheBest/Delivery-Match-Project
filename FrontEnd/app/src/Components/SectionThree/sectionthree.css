@@ -55,4 +55,15 @@
     flex-direction: column;
     align-items: center;
     background-color: rgb(249 250 251 );
+    padding: 63px;
+}
+
+h2.how-it-works {
+    font-size: 37px;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+
+p.simple-steps {
+    font-size: 22px;
 }

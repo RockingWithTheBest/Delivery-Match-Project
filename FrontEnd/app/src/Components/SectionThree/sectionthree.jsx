@@ -17,8 +17,8 @@ const SectionThree =()=> {
     ]
     return(
        <div className='SectionThreeBody'>
-            <h2>How It Works</h2>
-            <p>Simple steps to get your delivery moving</p>
+            <h2 className='how-it-works'>How It Works</h2>
+            <p className='simple-steps'>Simple steps to get your delivery moving</p>
             <div className='CustomerAndDrivers'>
                 <div className='forcustomers'>
                     <h3>For Customers</h3>

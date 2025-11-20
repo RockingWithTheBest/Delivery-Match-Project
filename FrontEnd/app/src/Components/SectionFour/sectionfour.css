@@ -3,14 +3,25 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 59px;
 }
 
 
 .sectionFourBody h2 {
     color: #fff;
+    font-size: 27px;
+    font-weight: 400;
+    margin-bottom: 0;
 }
 
 .sectionFourBody  button{
     color: rgb(37 99 235);
     background-color: #fff;
+    font-size: 16px;
+}
+
+.sectionFourBody p {
+    color: #dee2e6;
+    font-size: 19px;
+    text-align: center;
 }

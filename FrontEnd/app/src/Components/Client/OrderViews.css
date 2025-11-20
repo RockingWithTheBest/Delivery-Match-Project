@@ -8,14 +8,11 @@ img.truck2-icon {
     gap: 11px;
 }
 
-.each-order-line {
-    width: 53%;
+.each-order-line-track-order{
+    width: 100%;
     border: 1px solid #4a55684f;
     padding: 22px;
     border-radius: 7px;
-}
-
-.each-order-line {
     padding: 20px;
     background: white;
     border-radius: 10px;
