@@ -32,8 +32,8 @@ const NewOrder=()=>{
                 Delivery_Up_Address:deliveryAddress,
                 Pick_Up_Contact:pickupContact,
                 Delivery_Contact:deliveryContact,
-                Weight:weight,
-                Volume:volume,
+                // Weight:weight,
+                // Volume:volume,
                 Description:desciption,
                 Status:status,
                 Price:price,
@@ -125,7 +125,7 @@ const NewOrder=()=>{
                         required
                     />
                 </div>
-                <div className="input-group">
+                {/* <div className="input-group">
                     <label htmlFor="">Total Weight (kg)</label>
                     <input 
                         type="text"
@@ -146,7 +146,7 @@ const NewOrder=()=>{
                         onChange={(e)=>setVolume(e.target.value)}
                         required
                     />
-                </div>
+                </div> */}
                 <div className="input-group">
                     <label htmlFor="">Description</label>
                     <input 
