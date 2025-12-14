@@ -2,6 +2,7 @@
 using Backend.Models;
 using Backend.Repository.Implementation;
 using Backend.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementation
 {
@@ -31,6 +32,54 @@ namespace Backend.Repository.Implementation
             return textVariable;
         }
 
+        public User AddUserWithClient(User client)
+        {
+            User record = new User
+            {
+                First_Name = "",
+                Last_Name = "",
+                Password = "",
+                Phone = "",
+                Driver = null,
+                Customer = null
+            };
+
+            if (record == null)
+            {
+                return record;
+            }
+            else
+            {
+                databaseContext.Users.Add(client);
+                databaseContext.SaveChanges();
+                return client;
+            }
+        }
+
+        public User AddUserWithDriver(User driver)
+        {
+            User record = new User
+            {
+                First_Name = "",
+                Last_Name = "",
+                Password = "",
+                Phone = "",
+                Driver = null,
+                Customer = null
+            };
+
+            if (record == null)
+            {
+                return record;
+            }
+            else
+            {
+                databaseContext.Users.Add(driver);
+                databaseContext.SaveChanges();
+                return driver;
+            }
+        }
+
         public int DeleteUserRecord(int Id)
         {
             int testValue = -1;
@@ -54,14 +103,20 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<User> GetAllUsers()
         {
-            return databaseContext.Users.ToList();
+            return databaseContext.Users
+                .Include(u=>u.Customer)
+                .Include(x=>x.Driver)
+                .ToList();
         }
 
         
 
         public User GetSingleRecord(int Id)
         {
-            return databaseContext.Users.Where(temp => temp.Id == Id).FirstOrDefault();
+            return databaseContext.Users
+                .Include(u => u.Customer)
+                .Include(x => x.Driver)
+                .Where(temp => temp.Id == Id).FirstOrDefault();
         }
 
         public int UpdateUserRecord(int Id, User record)

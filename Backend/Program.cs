@@ -29,7 +29,7 @@ internal class Program
         builder.Services.AddDbContext<ApplicationDatabaseContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DeliveryMatchString")));
 
-        // Register ITrying with its implementation
+        // Register implementation
         builder.Services.AddScoped<IAddress, AddressRepository>();
         builder.Services.AddScoped<ICustomer, CustomerRepository>();
         builder.Services.AddScoped<IDocuments, DocumentRepository>();

@@ -8,5 +8,6 @@ namespace Backend.Repository.Interface
         int AddDocumentRecord(Documents document);
         int UpdateDocumentRecord(int Id,Documents document);
         int DeleteDocumentRecord(int Id);
+        Documents GetSingleDocumentDetails(int Id);
     }
 }

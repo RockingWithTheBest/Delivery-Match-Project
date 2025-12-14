@@ -65,7 +65,10 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<OrderPlacement> GetAllOrderPlacement()
         {
-            return databaseContext.OrderPlacements.Include(d=>d.Order_Items).ToList();
+            return databaseContext.OrderPlacements
+                .Include(d => d.Order_Items)
+                    .ThenInclude(i => i.OrderDimension)
+            .ToList();
         }
         public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByCustomerId(int CustomerId)
         {
@@ -93,14 +96,15 @@ namespace Backend.Repository.Implementation
                 updatedRecord.Pick_Up_Contact = record.Pick_Up_Contact;
                 updatedRecord.Delivery_Contact = record.Delivery_Contact;
                 updatedRecord.Delivery_Up_Address = record.Delivery_Up_Address;
-                updatedRecord.Weight = record.Weight;
-                updatedRecord.Volume = record.Volume;
+                //updatedRecord.Weight = record.Weight;
+                //updatedRecord.Volume = record.Volume;
                 updatedRecord.Price = record.Price;
                 updatedRecord.Description = record.Description;
                 //updatedRecord.Distance = record.Distance;
                 updatedRecord.Created_At = record.Created_At;
                 updatedRecord.Scheduled_At = record.Scheduled_At;
                 updatedRecord.Completed_On = record.Completed_On;
+                updatedRecord.DriverId = record.DriverId;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }
@@ -141,8 +145,8 @@ namespace Backend.Repository.Implementation
                             Delivery_Up_Address = order.Delivery_Up_Address,
                             Pick_Up_Contact = order.Pick_Up_Contact,
                             Delivery_Contact = order.Delivery_Contact,
-                            Weight = order.Weight,
-                            Volume = order.Volume,
+                            //Weight = order.Weight,
+                            //Volume = order.Volume,
                             Description = order.Description,
                             Status = order.Status,
                             Price = order.Price,
@@ -169,12 +173,13 @@ namespace Backend.Repository.Implementation
                             Quantity = item.Quantity,
                             Weight_Per_Item = item.Weight_Per_Item,
                             Special_Instructions = item.Special_Instructions,
-                            Dimension = new OrderDimension
-                            {
-                                Length = item.Dimension.Length,
-                                Height = item.Dimension.Height,
-                                Width = item.Dimension.Width
-                            },
+                            //Dimension = new OrderDimension
+                            //{
+                            //    Length = item.Dimension.Length,
+                            //    Height = item.Dimension.Height,
+                            //    Width = item.Dimension.Width
+                            //},
+                            OrderDimension = item.OrderDimension,
                             OrderPlacementId = order.Id // Set the relationship
                         };
 

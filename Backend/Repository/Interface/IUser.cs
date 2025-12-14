@@ -9,6 +9,9 @@ namespace Backend.Repository.Interface
         int AddUserRecord(User address);
         int UpdateUserRecord(int Id, User record);
         int DeleteUserRecord(int Id);
-        
+        User AddUserWithDriver(User driver);
+        User AddUserWithClient(User client);
+
+
     }
 }

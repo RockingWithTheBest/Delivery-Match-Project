@@ -52,7 +52,7 @@ namespace Backend.Repository.Implementation
 
         public IEnumerable<Order_Items> GetAllOrderItems()
         {
-            return databaseContext.OrderItems.Include(d => d.Dimension).ToList();
+            return databaseContext.OrderItems.Include(d => d.OrderDimension).ToList();
         }
 
         public Order_Items GetSingleRecord(int Id)

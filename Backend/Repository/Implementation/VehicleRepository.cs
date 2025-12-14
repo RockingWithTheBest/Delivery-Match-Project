@@ -81,7 +81,7 @@ namespace Backend.Repository.Implementation
                 updatedRecord.Make_Year = record.Make_Year;
                 updatedRecord.Color = record.Color;
                 updatedRecord.License_Plate = record.License_Plate;
-                updatedRecord.Max_Volume = record.Max_Volume;
+                //updatedRecord.Max_Volume = record.Max_Volume;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }

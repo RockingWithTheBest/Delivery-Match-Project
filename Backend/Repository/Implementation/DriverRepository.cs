@@ -54,6 +54,10 @@ namespace Backend.Repository.Implementation
             return databaseContext.Drivers.Include(d=>d.OrdersPlaced).ToList();
         }
 
+        public Driver GetDriverDetails(int Id)
+        {
+            return databaseContext.Drivers.Where(x => x.Id == Id).FirstOrDefault();
+        }
         public int UpdateDriverRecord(int Id, Driver driver)
         {
             int testValue = -1;

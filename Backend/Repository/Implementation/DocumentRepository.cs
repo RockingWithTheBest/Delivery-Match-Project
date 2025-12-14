@@ -27,7 +27,10 @@ namespace Backend.Repository.Implementation
             }
             return testValue;
         }
-
+        public Documents GetSingleDocumentDetails(int DriverId)
+        {
+            return databaseContext.Documents.Where(d => d.DriverId == DriverId).FirstOrDefault();
+        }
         public int DeleteDocumentRecord(int Id)
         {
             int testValue = -1;
