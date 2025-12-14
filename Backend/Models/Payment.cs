@@ -11,6 +11,7 @@ namespace Backend.Models
         [Column(TypeName ="decimal(10,2)")]
         public decimal Amount {  get; set; }
         [Required]
+        [StringLength(20)]
         public string Payment_Method { get; set; }
         [Required]
         [StringLength(30)]
@@ -18,7 +19,7 @@ namespace Backend.Models
         [Required]
         [StringLength(30)]
         public string Transaction_Identification { get; set; }
-        public string? Processed_At { get; set; }
+        public DateTime? Processed_At { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         public decimal? Platform_Fee { get; set; }
         [Column(TypeName = "decimal(10,2)")]

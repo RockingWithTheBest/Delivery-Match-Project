@@ -54,6 +54,39 @@ namespace Backend.Controllers
             return Ok("Added"+userRecord);
         }
 
+        [HttpPost]
+        [Route("Add-User-With-Client")]
+        public IActionResult AddUserWithClientRecord(User Client)
+        {
+            if (Client == null)
+            {
+                return BadRequest("The user record your provided is NULL");
+            }
+            var newRecord = user.AddUserWithClient(Client);
+            var recordAdded = new
+            {
+                message = "Added",
+                Client = Client
+            };
+            return Ok(newRecord);
+        }
+        [HttpPost]
+        [Route("Add-User-With-Driver")]
+        public IActionResult AddUserWithDriverRecord(User Driver)
+        {
+            if (Driver == null)
+            {
+                return BadRequest("The user record your provided is NULL");
+            }
+            var newRecord = user.AddUserWithDriver(Driver);
+            var recordAdded = new  {
+                message =  "Added",
+                Driver = Driver
+            };
+
+            return Ok(newRecord);
+        }
+
         [HttpPut]
         [Route("Editing-User")]
         public IActionResult UpdateUser(int Id, User userRecord)

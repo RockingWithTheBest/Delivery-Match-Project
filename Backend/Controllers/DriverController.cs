@@ -72,6 +72,20 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Get-Single-Driver-Details")]
+        public IActionResult GetSingleDriverDetails(int Id)
+        {
+            var driverRecord = driver.GetDriverDetails(Id);
+            if(driverRecord == null)
+            {
+                return BadRequest("The Id you provided is LESS THAN OR EQUAL to Zero");
+            }
+            else
+            {
+                return Ok(driverRecord);
+            }
+        }
         [HttpDelete]
         [Route("Delete-A-Driver-Record")]
         public IActionResult DeleteDriver(int Id)

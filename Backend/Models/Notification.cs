@@ -10,8 +10,10 @@ namespace Backend.Models
         [StringLength(40)]
         public string Type {  get; set; }
         [Required]
+        [StringLength(30)]
         public string Title {  get; set; }
         [Required]
+        [StringLength(50)]
         public string Message { get; set; }
         public bool? Is_Read { get; set; }
         public int? UserId {  get; set; }

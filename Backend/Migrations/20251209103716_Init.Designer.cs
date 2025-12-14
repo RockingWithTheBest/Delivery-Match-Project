@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20251116202321_Initial")]
-    partial class Initial
+    [Migration("20251209103716_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,12 +39,212 @@ namespace Backend.Migrations
                     b.Property<decimal>("Length")
                         .HasColumnType("decimal(5,2)");
 
+                    b.Property<int>("OrderItemsId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Width")
                         .HasColumnType("decimal(5,2)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderItemsId")
+                        .IsUnique();
+
                     b.ToTable("OrderDimension");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Height = 2.50m,
+                            Length = 35.00m,
+                            OrderItemsId = 1,
+                            Width = 25.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Height = 3.50m,
+                            Length = 10.00m,
+                            OrderItemsId = 2,
+                            Width = 6.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Height = 4.00m,
+                            Length = 45.00m,
+                            OrderItemsId = 3,
+                            Width = 15.00m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Height = 75.00m,
+                            Length = 120.00m,
+                            OrderItemsId = 4,
+                            Width = 60.00m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Height = 90.00m,
+                            Length = 65.00m,
+                            OrderItemsId = 5,
+                            Width = 65.00m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Height = 85.00m,
+                            Length = 200.00m,
+                            OrderItemsId = 8,
+                            Width = 90.00m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Height = 45.00m,
+                            Length = 120.00m,
+                            OrderItemsId = 9,
+                            Width = 60.00m
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Height = 0.50m,
+                            Length = 200.00m,
+                            OrderItemsId = 22,
+                            Width = 150.00m
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Height = 15.00m,
+                            Length = 50.00m,
+                            OrderItemsId = 23,
+                            Width = 50.00m
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Height = 0.50m,
+                            Length = 240.00m,
+                            OrderItemsId = 24,
+                            Width = 160.00m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Height = 0.80m,
+                            Length = 15.00m,
+                            OrderItemsId = 6,
+                            Width = 7.50m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Height = 2.50m,
+                            Length = 10.00m,
+                            OrderItemsId = 7,
+                            Width = 5.00m
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Height = 8.00m,
+                            Length = 20.00m,
+                            OrderItemsId = 16,
+                            Width = 18.00m
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Height = 8.00m,
+                            Length = 20.00m,
+                            OrderItemsId = 17,
+                            Width = 8.00m
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Height = 8.00m,
+                            Length = 12.00m,
+                            OrderItemsId = 20,
+                            Width = 9.00m
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Height = 150.00m,
+                            Length = 35.00m,
+                            OrderItemsId = 21,
+                            Width = 35.00m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Height = 2.00m,
+                            Length = 30.00m,
+                            OrderItemsId = 10,
+                            Width = 25.00m
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Height = 5.00m,
+                            Length = 40.00m,
+                            OrderItemsId = 11,
+                            Width = 20.00m
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Height = 25.00m,
+                            Length = 30.00m,
+                            OrderItemsId = 12,
+                            Width = 30.00m
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Height = 25.00m,
+                            Length = 30.00m,
+                            OrderItemsId = 13,
+                            Width = 30.00m
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Height = 4.00m,
+                            Length = 25.00m,
+                            OrderItemsId = 14,
+                            Width = 20.00m
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Height = 8.00m,
+                            Length = 15.00m,
+                            OrderItemsId = 15,
+                            Width = 10.00m
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Height = 15.00m,
+                            Length = 45.00m,
+                            OrderItemsId = 18,
+                            Width = 30.00m
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Height = 7.50m,
+                            Length = 25.00m,
+                            OrderItemsId = 19,
+                            Width = 7.50m
+                        });
                 });
 
             modelBuilder.Entity("Backend.Models.Address", b =>
@@ -57,7 +257,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("Address_Line")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -66,7 +267,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("Label")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -201,12 +403,13 @@ namespace Backend.Migrations
 
                     b.Property<string>("Tax_Identification")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Total_Orders")
+                    b.Property<int?>("Total_Orders")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Total_Spent")
+                    b.Property<decimal?>("Total_Spent")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("UserId")
@@ -309,26 +512,29 @@ namespace Backend.Migrations
 
                     b.Property<string>("File_Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Rejection_Reason")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("Reviewed_At")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Reviewed_By")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Uploaded_At")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Uploaded_At")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -348,7 +554,7 @@ namespace Backend.Migrations
                             Reviewed_At = new DateTime(2023, 9, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Reviewed_By = "Bob Smith",
                             Status = "Pending",
-                            Uploaded_At = "2023-09-02"
+                            Uploaded_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -361,7 +567,7 @@ namespace Backend.Migrations
                             Reviewed_At = new DateTime(2023, 9, 3, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             Reviewed_By = "Charlie Brown",
                             Status = "Rejected",
-                            Uploaded_At = "2023-09-03"
+                            Uploaded_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -374,7 +580,7 @@ namespace Backend.Migrations
                             Reviewed_At = new DateTime(2023, 9, 4, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Reviewed_By = "Diana Prince",
                             Status = "Approved",
-                            Uploaded_At = "2023-09-04"
+                            Uploaded_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -387,7 +593,7 @@ namespace Backend.Migrations
                             Reviewed_At = new DateTime(2023, 9, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Reviewed_By = "Ethan Hunt",
                             Status = "Pending",
-                            Uploaded_At = "2023-09-05"
+                            Uploaded_At = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -400,7 +606,7 @@ namespace Backend.Migrations
                             Reviewed_At = new DateTime(2023, 9, 6, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Reviewed_By = "Fiona Gallagher",
                             Status = "Approved",
-                            Uploaded_At = "2023-09-06"
+                            Uploaded_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -414,11 +620,13 @@ namespace Backend.Migrations
 
                     b.Property<string>("Completion_Rate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Drivers_License")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<bool>("Is_Available")
                         .HasColumnType("bit");
@@ -431,7 +639,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("Rating")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal>("Total_Earnings")
                         .HasColumnType("decimal(10,2)");
@@ -532,16 +741,16 @@ namespace Backend.Migrations
                     b.Property<int?>("DriverId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Earned_At")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateOnly>("Earned_At")
+                        .HasColumnType("date");
 
                     b.Property<decimal>("Gross_Amount")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Is_Paid_Out")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<decimal>("Net_Earnings")
                         .HasColumnType("decimal(10,2)");
@@ -574,11 +783,13 @@ namespace Backend.Migrations
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -609,7 +820,7 @@ namespace Backend.Migrations
                     b.Property<DateTime>("Created_At")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Delivery_Contact")
@@ -648,13 +859,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Volume")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.Property<decimal>("Weight")
-                        .HasColumnType("decimal(8,2)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -678,9 +884,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Doe",
                             Price = 300.00m,
                             Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Delivered",
-                            Volume = 2.0m,
-                            Weight = 5.5m
+                            Status = "Delivered"
                         },
                         new
                         {
@@ -695,9 +899,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Doe",
                             Price = 500.00m,
                             Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "In Transit",
-                            Volume = 1.5m,
-                            Weight = 3.0m
+                            Status = "In Transit"
                         },
                         new
                         {
@@ -712,9 +914,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Doe",
                             Price = 150.00m,
                             Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Pending",
-                            Volume = 1.0m,
-                            Weight = 2.5m
+                            Status = "Pending"
                         },
                         new
                         {
@@ -729,9 +929,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Doe",
                             Price = 600.00m,
                             Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Cancelled",
-                            Volume = 2.5m,
-                            Weight = 4.0m
+                            Status = "Cancelled"
                         },
                         new
                         {
@@ -746,9 +944,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Green",
                             Price = 200.00m,
                             Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Delivered",
-                            Volume = 3.0m,
-                            Weight = 6.0m
+                            Status = "Delivered"
                         },
                         new
                         {
@@ -763,9 +959,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Green",
                             Price = 300.00m,
                             Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "In Transit",
-                            Volume = 4.0m,
-                            Weight = 8.0m
+                            Status = "In Transit"
                         },
                         new
                         {
@@ -780,9 +974,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Green",
                             Price = 250.00m,
                             Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Pending",
-                            Volume = 2.0m,
-                            Weight = 4.5m
+                            Status = "Pending"
                         },
                         new
                         {
@@ -797,9 +989,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Green",
                             Price = 400.00m,
                             Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Cancelled",
-                            Volume = 2.5m,
-                            Weight = 5.0m
+                            Status = "Cancelled"
                         },
                         new
                         {
@@ -814,9 +1004,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Johnson",
                             Price = 50.00m,
                             Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Delivered",
-                            Volume = 1.0m,
-                            Weight = 2.0m
+                            Status = "Delivered"
                         },
                         new
                         {
@@ -831,9 +1019,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Johnson",
                             Price = 30.00m,
                             Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "In Transit",
-                            Volume = 0.5m,
-                            Weight = 1.5m
+                            Status = "In Transit"
                         },
                         new
                         {
@@ -848,9 +1034,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Johnson",
                             Price = 40.00m,
                             Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Pending",
-                            Volume = 1.0m,
-                            Weight = 2.5m
+                            Status = "Pending"
                         },
                         new
                         {
@@ -865,9 +1049,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Alice Johnson",
                             Price = 20.00m,
                             Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Cancelled",
-                            Volume = 1.5m,
-                            Weight = 3.0m
+                            Status = "Cancelled"
                         },
                         new
                         {
@@ -882,9 +1064,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Smith",
                             Price = 25.00m,
                             Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Delivered",
-                            Volume = 0.5m,
-                            Weight = 1.0m
+                            Status = "Delivered"
                         },
                         new
                         {
@@ -899,9 +1079,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Smith",
                             Price = 45.00m,
                             Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "In Transit",
-                            Volume = 0.75m,
-                            Weight = 1.5m
+                            Status = "In Transit"
                         },
                         new
                         {
@@ -916,9 +1094,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Smith",
                             Price = 50.00m,
                             Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Pending",
-                            Volume = 1.0m,
-                            Weight = 2.0m
+                            Status = "Pending"
                         },
                         new
                         {
@@ -933,9 +1109,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "John Smith",
                             Price = 30.00m,
                             Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Cancelled",
-                            Volume = 1.25m,
-                            Weight = 2.5m
+                            Status = "Cancelled"
                         },
                         new
                         {
@@ -950,9 +1124,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Emily White",
                             Price = 200.00m,
                             Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Delivered",
-                            Volume = 2.0m,
-                            Weight = 3.5m
+                            Status = "Delivered"
                         },
                         new
                         {
@@ -967,9 +1139,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Emily White",
                             Price = 800.00m,
                             Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "In Transit",
-                            Volume = 2.5m,
-                            Weight = 4.0m
+                            Status = "In Transit"
                         },
                         new
                         {
@@ -984,9 +1154,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Emily White",
                             Price = 150.00m,
                             Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Pending",
-                            Volume = 1.0m,
-                            Weight = 2.0m
+                            Status = "Pending"
                         },
                         new
                         {
@@ -1001,9 +1169,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Emily White",
                             Price = 100.00m,
                             Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Cancelled",
-                            Volume = 0.5m,
-                            Weight = 1.5m
+                            Status = "Cancelled"
                         },
                         new
                         {
@@ -1018,9 +1184,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Mike Brown",
                             Price = 500.00m,
                             Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Delivered",
-                            Volume = 3.0m,
-                            Weight = 5.0m
+                            Status = "Delivered"
                         },
                         new
                         {
@@ -1035,9 +1199,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Mike Brown",
                             Price = 150.00m,
                             Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "In Transit",
-                            Volume = 1.5m,
-                            Weight = 2.5m
+                            Status = "In Transit"
                         },
                         new
                         {
@@ -1052,9 +1214,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Mike Brown",
                             Price = 300.00m,
                             Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Pending",
-                            Volume = 2.0m,
-                            Weight = 3.0m
+                            Status = "Pending"
                         },
                         new
                         {
@@ -1069,9 +1229,7 @@ namespace Backend.Migrations
                             Pick_Up_Contact = "Mike Brown",
                             Price = 100.00m,
                             Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = "Cancelled",
-                            Volume = 2.5m,
-                            Weight = 4.0m
+                            Status = "Cancelled"
                         });
                 });
 
@@ -1083,15 +1241,12 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("DimensionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Item_Name")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int?>("OrderPlacementId")
+                    b.Property<int>("OrderPlacementId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -1099,18 +1254,16 @@ namespace Backend.Migrations
 
                     b.Property<string>("Special_Instructions")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Weight_Per_Item")
-                        .HasColumnType("decimal(8,2");
+                        .HasColumnType("decimal(8,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DimensionId");
-
                     b.HasIndex("OrderPlacementId")
-                        .IsUnique()
-                        .HasFilter("[OrderPlacementId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("OrderItems");
 
@@ -1343,22 +1496,26 @@ namespace Backend.Migrations
 
                     b.Property<string>("Latitude")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Longitude")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Notes")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<int>("OrderPlacementId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<DateTime?>("TimeStamps")
                         .HasColumnType("datetime2");
@@ -1631,13 +1788,14 @@ namespace Backend.Migrations
 
                     b.Property<string>("Payment_Method")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<decimal?>("Platform_Fee")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("Processed_At")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("Processed_At")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -1664,7 +1822,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 1,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 10.00m,
-                            Processed_At = "2023-09-15 10:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN001"
                         },
@@ -1676,7 +1834,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 2,
                             Payment_Method = "PayPal",
                             Platform_Fee = 15.00m,
-                            Processed_At = "2023-09-15 12:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN002"
                         },
@@ -1699,7 +1857,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 4,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 20.00m,
-                            Processed_At = "2023-09-15 14:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN004"
                         },
@@ -1711,7 +1869,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 5,
                             Payment_Method = "Bank Transfer",
                             Platform_Fee = 8.00m,
-                            Processed_At = "2023-09-15 15:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN005"
                         },
@@ -1723,7 +1881,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 6,
                             Payment_Method = "Cash",
                             Platform_Fee = 0.00m,
-                            Processed_At = "2023-09-15 16:00:00",
+                            Processed_At = new DateTime(2023, 12, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN006"
                         },
@@ -1735,7 +1893,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 7,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 10.00m,
-                            Processed_At = "2023-09-15 17:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 17, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN007"
                         },
@@ -1747,7 +1905,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 8,
                             Payment_Method = "PayPal",
                             Platform_Fee = 15.00m,
-                            Processed_At = "2023-09-15 18:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN008"
                         },
@@ -1770,7 +1928,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 10,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 25.00m,
-                            Processed_At = "2023-09-15 19:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN010"
                         },
@@ -1782,7 +1940,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 11,
                             Payment_Method = "Bank Transfer",
                             Platform_Fee = 10.00m,
-                            Processed_At = "2023-09-15 20:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN011"
                         },
@@ -1794,7 +1952,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 12,
                             Payment_Method = "Cash",
                             Platform_Fee = 0.00m,
-                            Processed_At = "2023-09-15 21:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN012"
                         },
@@ -1806,7 +1964,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 13,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 12.00m,
-                            Processed_At = "2023-09-15 22:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN013"
                         },
@@ -1818,7 +1976,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 14,
                             Payment_Method = "PayPal",
                             Platform_Fee = 15.00m,
-                            Processed_At = "2023-09-15 23:00:00",
+                            Processed_At = new DateTime(2023, 9, 15, 23, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN014"
                         },
@@ -1841,7 +1999,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 16,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 22.00m,
-                            Processed_At = "2023-09-16 10:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN016"
                         },
@@ -1853,7 +2011,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 17,
                             Payment_Method = "Bank Transfer",
                             Platform_Fee = 8.00m,
-                            Processed_At = "2023-09-16 11:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN017"
                         },
@@ -1865,7 +2023,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 18,
                             Payment_Method = "Cash",
                             Platform_Fee = 0.00m,
-                            Processed_At = "2023-09-16 12:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN018"
                         },
@@ -1877,7 +2035,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 19,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 14.00m,
-                            Processed_At = "2023-09-16 13:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN019"
                         },
@@ -1889,7 +2047,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 20,
                             Payment_Method = "PayPal",
                             Platform_Fee = 20.00m,
-                            Processed_At = "2023-09-16 14:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN020"
                         },
@@ -1912,7 +2070,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 22,
                             Payment_Method = "Credit Card",
                             Platform_Fee = 10.00m,
-                            Processed_At = "2023-09-16 15:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN022"
                         },
@@ -1924,7 +2082,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 23,
                             Payment_Method = "Bank Transfer",
                             Platform_Fee = 8.00m,
-                            Processed_At = "2023-09-16 16:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN023"
                         },
@@ -1936,7 +2094,7 @@ namespace Backend.Migrations
                             OrderPlacementId = 24,
                             Payment_Method = "Cash",
                             Platform_Fee = 0.00m,
-                            Processed_At = "2023-09-16 17:00:00",
+                            Processed_At = new DateTime(2023, 9, 16, 17, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
                             Transaction_Identification = "TXN024"
                         });
@@ -1961,11 +2119,13 @@ namespace Backend.Migrations
 
                     b.Property<string>("Route_Data")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Total_Distance")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -2204,7 +2364,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("First_Name")
                         .IsRequired()
@@ -2362,6 +2523,12 @@ namespace Backend.Migrations
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<decimal>("Length")
+                        .HasColumnType("decimal(8,2)");
+
                     b.Property<string>("License_Plate")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -2370,9 +2537,6 @@ namespace Backend.Migrations
                     b.Property<DateOnly>("Make_Year")
                         .HasColumnType("date");
 
-                    b.Property<decimal>("Max_Volume")
-                        .HasColumnType("decimal(8,2)");
-
                     b.Property<decimal>("Max_Weight")
                         .HasColumnType("decimal(8,2)");
 
@@ -2380,6 +2544,9 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Width")
+                        .HasColumnType("decimal(8,2)");
 
                     b.HasKey("Id");
 
@@ -2391,75 +2558,98 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Brand = "Toyota",
-                            Color = "Blue",
+                            Brand = "Ford",
+                            Color = "White",
                             DriverId = 1,
-                            License_Plate = "ABC1234",
-                            Make_Year = new DateOnly(2020, 1, 1),
-                            Max_Volume = 3.50m,
+                            Height = 250m,
+                            Length = 620m,
+                            License_Plate = "LU1 VAN",
+                            Make_Year = new DateOnly(2021, 1, 1),
                             Max_Weight = 1500.00m,
-                            Model = "Camry"
+                            Model = "Transit Luton",
+                            Width = 230m
                         },
                         new
                         {
                             Id = 2,
-                            Brand = "Honda",
-                            Color = "Red",
+                            Brand = "Mercedes-Benz",
+                            Color = "Silver",
                             DriverId = 2,
-                            License_Plate = "XYZ5678",
-                            Make_Year = new DateOnly(2019, 1, 1),
-                            Max_Volume = 3.20m,
-                            Max_Weight = 1400.00m,
-                            Model = "Civic"
+                            Height = 260m,
+                            Length = 650m,
+                            License_Plate = "LU2 VAN",
+                            Make_Year = new DateOnly(2020, 1, 1),
+                            Max_Weight = 1700.00m,
+                            Model = "Sprinter Luton",
+                            Width = 240m
                         },
                         new
                         {
                             Id = 3,
-                            Brand = "Ford",
-                            Color = "Black",
+                            Brand = "Iveco",
+                            Color = "Blue",
                             DriverId = 3,
-                            License_Plate = "LMN9101",
-                            Make_Year = new DateOnly(2021, 1, 1),
-                            Max_Volume = 5.00m,
+                            Height = 270m,
+                            Length = 680m,
+                            License_Plate = "LU3 VAN",
+                            Make_Year = new DateOnly(2022, 1, 1),
                             Max_Weight = 2000.00m,
-                            Model = "F-150"
+                            Model = "Daily Luton",
+                            Width = 240m
                         },
                         new
                         {
                             Id = 4,
-                            Brand = "Chevrolet",
-                            Color = "White",
+                            Brand = "Volkswagen",
+                            Color = "Red",
                             DriverId = 4,
-                            License_Plate = "QRS2345",
-                            Make_Year = new DateOnly(2022, 1, 1),
-                            Max_Volume = 5.50m,
-                            Max_Weight = 2200.00m,
-                            Model = "Silverado"
+                            Height = 265m,
+                            Length = 660m,
+                            License_Plate = "LU4 VAN",
+                            Make_Year = new DateOnly(2021, 1, 1),
+                            Max_Weight = 1800.00m,
+                            Model = "Crafter Luton",
+                            Width = 235m
                         },
                         new
                         {
                             Id = 5,
-                            Brand = "Nissan",
-                            Color = "Silver",
+                            Brand = "Renault",
+                            Color = "Yellow",
                             DriverId = 5,
-                            License_Plate = "TUV6789",
-                            Make_Year = new DateOnly(2021, 1, 1),
-                            Max_Volume = 3.80m,
+                            Height = 255m,
+                            Length = 630m,
+                            License_Plate = "LU5 VAN",
+                            Make_Year = new DateOnly(2023, 1, 1),
                             Max_Weight = 1600.00m,
-                            Model = "Altima"
+                            Model = "Master Luton",
+                            Width = 230m
                         },
                         new
                         {
                             Id = 6,
-                            Brand = "Hyundai",
+                            Brand = "Peugeot",
                             Color = "Green",
                             DriverId = 6,
-                            License_Plate = "JKL3456",
-                            Make_Year = new DateOnly(2023, 1, 1),
-                            Max_Volume = 3.00m,
-                            Max_Weight = 1400.00m,
-                            Model = "Elantra"
+                            Height = 270m,
+                            Length = 670m,
+                            License_Plate = "LU6 VAN",
+                            Make_Year = new DateOnly(2022, 1, 1),
+                            Max_Weight = 1900.00m,
+                            Model = "Boxer Luton",
+                            Width = 240m
                         });
+                });
+
+            modelBuilder.Entity("Backend.AdditionalClasses.OrderDimension", b =>
+                {
+                    b.HasOne("Backend.Models.Order_Items", "Order_Items")
+                        .WithOne("OrderDimension")
+                        .HasForeignKey("Backend.AdditionalClasses.OrderDimension", "OrderItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order_Items");
                 });
 
             modelBuilder.Entity("Backend.Models.Address", b =>
@@ -2534,7 +2724,9 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Backend.Models.Customer", "Customer")
                         .WithMany("OrdersPlaced")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Backend.Models.Driver", "Driver")
                         .WithMany("OrdersPlaced")
@@ -2547,15 +2739,11 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Order_Items", b =>
                 {
-                    b.HasOne("Backend.AdditionalClasses.OrderDimension", "Dimension")
-                        .WithMany()
-                        .HasForeignKey("DimensionId");
-
                     b.HasOne("Backend.Models.OrderPlacement", "OrderPlacemnt")
                         .WithOne("Order_Items")
-                        .HasForeignKey("Backend.Models.Order_Items", "OrderPlacementId");
-
-                    b.Navigation("Dimension");
+                        .HasForeignKey("Backend.Models.Order_Items", "OrderPlacementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("OrderPlacemnt");
                 });
@@ -2623,6 +2811,11 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.OrderPlacement", b =>
                 {
                     b.Navigation("Order_Items");
+                });
+
+            modelBuilder.Entity("Backend.Models.Order_Items", b =>
+                {
+                    b.Navigation("OrderDimension");
                 });
 
             modelBuilder.Entity("Backend.Models.User", b =>

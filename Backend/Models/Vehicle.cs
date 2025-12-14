@@ -24,10 +24,19 @@ namespace Backend.Models
         [Required]
         [Column(TypeName ="decimal(8,2)")]
         public decimal Max_Weight {  get; set; }
+        //[Required]
+        //[Column(TypeName = "decimal(8,2)")]
+        //public decimal Max_Volume { get; set; }
         [Required]
         [Column(TypeName = "decimal(8,2)")]
-        public decimal Max_Volume { get; set; }
+        public decimal Length { get; set; }
         [Required]
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal Width { get; set; }
+        [Required]
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal Height { get; set; }
+
         public int DriverId {  get; set; }
 
         public virtual Driver? Driver { get; set; }

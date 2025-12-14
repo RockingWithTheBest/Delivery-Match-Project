@@ -25,6 +25,17 @@ namespace Backend.Controllers
             return Ok(documents.GetAllDocuments());
         }
 
+        [HttpGet]
+        [Route("Get-Single-Doc")]
+        public IActionResult GetSingleDoc(int DriverId)
+        {
+            if ((documents.GetSingleDocumentDetails(DriverId)) == null)
+            {
+                return NotFound();
+            }
+            return Ok(documents.GetSingleDocumentDetails(DriverId));
+        }
+
         [HttpPost]
         [Route("Add-Docs")]
         public IActionResult AddDoc(Documents docRecord)

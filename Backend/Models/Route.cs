@@ -7,8 +7,10 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(50)]
         public string Route_Data { get; set; }
         [Required]
+        [StringLength(20)]
         public string Total_Distance { get; set; }
         public DateTime? Estimated_Duration { get; set; }
         public int DriverId {  get; set; }

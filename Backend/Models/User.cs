@@ -7,6 +7,7 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(40)]
         public string Email { get; set; }
         [Required]
         [StringLength(20)]

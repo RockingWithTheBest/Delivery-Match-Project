@@ -13,8 +13,9 @@ namespace Backend.Models
         public decimal Platform_Fee { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         public decimal Net_Earnings { get;  set; }
+        [StringLength(30)]
         public string Is_Paid_Out {  get; set; }
-        public string Earned_At {  get; set; }
+        public DateOnly Earned_At {  get; set; }
         public int? DriverId {  get; set; }
         public int? OrderPlacementId { get; set; }
 

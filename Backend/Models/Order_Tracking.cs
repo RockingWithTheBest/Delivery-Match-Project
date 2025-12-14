@@ -7,12 +7,16 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(40)]
         public string Latitude { get; set; }
         [Required]
+        [StringLength(40)]
         public string Longitude { get; set; }
         [Required]
+        [StringLength(30)]
         public string Status { get; set; }
         [Required]
+        [StringLength(40)]
         public string Notes { get; set; }
         public DateTime? TimeStamps { get; set; }
         [Required]

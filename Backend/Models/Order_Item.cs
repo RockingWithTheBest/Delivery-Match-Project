@@ -14,16 +14,15 @@ namespace Backend.Models
         [Required]
         public int Quantity {  get; set; }
         [Required]
-        [Column(TypeName ="decimal(8,2")]
+        [Column(TypeName ="decimal(8,2)")]
         public decimal Weight_Per_Item { get; set; }
         [Required]
+        [StringLength(50)]
         public string Special_Instructions { get; set; }
-        //[Required]
-        public OrderDimension? Dimension { get; set; }
-  
-        public int? OrderPlacementId { get; set; }
+        [Required]
+        public int OrderPlacementId { get; set; }
 
-
+        public virtual OrderDimension? OrderDimension { get; set; }
         public virtual OrderPlacement? OrderPlacemnt {  get; set; }
     }
 }

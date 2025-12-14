@@ -8,33 +8,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "OrderDimension",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Length = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
-                    Height = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
-                    Width = table.Column<decimal>(type: "decimal(5,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDimension", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     First_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Last_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -51,8 +36,8 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Label = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address_Line = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Label = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Address_Line = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -75,10 +60,10 @@ namespace Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Business_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Business_Type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Tax_Identification = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tax_Identification = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Rating = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Total_Orders = table.Column<int>(type: "int", nullable: false),
-                    Total_Spent = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    Total_Orders = table.Column<int>(type: "int", nullable: true),
+                    Total_Spent = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -98,12 +83,12 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Drivers_License = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Drivers_License = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     License_Expiry = table.Column<DateOnly>(type: "date", nullable: false),
                     Is_Verified = table.Column<bool>(type: "bit", nullable: false),
                     Is_Available = table.Column<bool>(type: "bit", nullable: false),
-                    Rating = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Completion_Rate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Completion_Rate = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Total_Earnings = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -125,8 +110,8 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Is_Read = table.Column<bool>(type: "bit", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -147,12 +132,12 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Document_Type = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    File_Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    File_Url = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Expiry_Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rejection_Reason = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Uploaded_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Reviewed_By = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Rejection_Reason = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Uploaded_At = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Reviewed_By = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Reviewed_At = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -177,15 +162,13 @@ namespace Backend.Migrations
                     Delivery_Up_Address = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Pick_Up_Contact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Delivery_Contact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Weight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    Volume = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Scheduled_At = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Completed_On = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -195,7 +178,8 @@ namespace Backend.Migrations
                         name: "FK_OrderPlacements_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderPlacements_Drivers_DriverId",
                         column: x => x.DriverId,
@@ -215,7 +199,9 @@ namespace Backend.Migrations
                     Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     License_Plate = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Max_Weight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    Max_Volume = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Length = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Width = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Height = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -238,8 +224,8 @@ namespace Backend.Migrations
                     Gross_Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     Platform_Fee = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     Net_Earnings = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Is_Paid_Out = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Earned_At = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Is_Paid_Out = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Earned_At = table.Column<DateOnly>(type: "date", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: true),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -266,24 +252,19 @@ namespace Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Item_Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Weight_Per_Item = table.Column<decimal>(type: "decimal(8,2", nullable: false),
-                    Special_Instructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DimensionId = table.Column<int>(type: "int", nullable: true),
-                    OrderPlacementId = table.Column<int>(type: "int", nullable: true)
+                    Weight_Per_Item = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    Special_Instructions = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    OrderPlacementId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderItems_OrderDimension_DimensionId",
-                        column: x => x.DimensionId,
-                        principalTable: "OrderDimension",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_OrderItems_OrderPlacements_OrderPlacementId",
                         column: x => x.OrderPlacementId,
                         principalTable: "OrderPlacements",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,10 +273,10 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Latitude = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Longitude = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     TimeStamps = table.Column<DateTime>(type: "datetime2", nullable: true),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -317,10 +298,10 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Payment_Method = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Payment_Method = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Transaction_Identification = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Processed_At = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Processed_At = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Platform_Fee = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     Driver_Earnings = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: false)
@@ -342,8 +323,8 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Route_Data = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Total_Distance = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Route_Data = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Total_Distance = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Estimated_Duration = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DriverId = table.Column<int>(type: "int", nullable: false),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: true)
@@ -362,6 +343,28 @@ namespace Backend.Migrations
                         column: x => x.OrderPlacementId,
                         principalTable: "OrderPlacements",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDimension",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Length = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    Height = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    Width = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    OrderItemsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDimension", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderDimension_OrderItems_OrderItemsId",
+                        column: x => x.OrderItemsId,
+                        principalTable: "OrderItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -433,86 +436,86 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Document_Type", "DriverId", "Expiry_Date", "File_Url", "Rejection_Reason", "Reviewed_At", "Reviewed_By", "Status", "Uploaded_At" },
                 values: new object[,]
                 {
-                    { 2, "Insurance", 1, new DateOnly(2025, 5, 15), "http://example.com/documents/insurance1.pdf", "Awaiting verification", new DateTime(2023, 9, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), "Bob Smith", "Pending", "2023-09-02" },
-                    { 3, "Registration", 2, new DateOnly(2026, 3, 1), "http://example.com/documents/registration1.pdf", "Expired document", new DateTime(2023, 9, 3, 11, 0, 0, 0, DateTimeKind.Unspecified), "Charlie Brown", "Rejected", "2023-09-03" },
-                    { 4, "Vehicle Inspection", 3, new DateOnly(2025, 11, 30), "http://example.com/documents/inspection1.pdf", "None", new DateTime(2023, 9, 4, 12, 0, 0, 0, DateTimeKind.Unspecified), "Diana Prince", "Approved", "2023-09-04" },
-                    { 5, "Driving History", 4, new DateOnly(2025, 8, 20), "http://example.com/documents/history1.pdf", "Awaiting submission", new DateTime(2023, 9, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), "Ethan Hunt", "Pending", "2023-09-05" },
-                    { 6, "Medical Certificate", 6, new DateOnly(2025, 1, 14), "http://example.com/documents/medical1.pdf", "None", new DateTime(2023, 9, 6, 14, 0, 0, 0, DateTimeKind.Unspecified), "Fiona Gallagher", "Approved", "2023-09-06" }
+                    { 2, "Insurance", 1, new DateOnly(2025, 5, 15), "http://example.com/documents/insurance1.pdf", "Awaiting verification", new DateTime(2023, 9, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), "Bob Smith", "Pending", new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Registration", 2, new DateOnly(2026, 3, 1), "http://example.com/documents/registration1.pdf", "Expired document", new DateTime(2023, 9, 3, 11, 0, 0, 0, DateTimeKind.Unspecified), "Charlie Brown", "Rejected", new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Vehicle Inspection", 3, new DateOnly(2025, 11, 30), "http://example.com/documents/inspection1.pdf", "None", new DateTime(2023, 9, 4, 12, 0, 0, 0, DateTimeKind.Unspecified), "Diana Prince", "Approved", new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Driving History", 4, new DateOnly(2025, 8, 20), "http://example.com/documents/history1.pdf", "Awaiting submission", new DateTime(2023, 9, 5, 13, 0, 0, 0, DateTimeKind.Unspecified), "Ethan Hunt", "Pending", new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, "Medical Certificate", 6, new DateOnly(2025, 1, 14), "http://example.com/documents/medical1.pdf", "None", new DateTime(2023, 9, 6, 14, 0, 0, 0, DateTimeKind.Unspecified), "Fiona Gallagher", "Approved", new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 table: "OrderPlacements",
-                columns: new[] { "Id", "Completed_On", "Created_At", "CustomerId", "Delivery_Contact", "Delivery_Up_Address", "Description", "DriverId", "Pick_Up_Address", "Pick_Up_Contact", "Price", "Scheduled_At", "Status", "Volume", "Weight" },
+                columns: new[] { "Id", "Completed_On", "Created_At", "CustomerId", "Delivery_Contact", "Delivery_Up_Address", "Description", "DriverId", "Pick_Up_Address", "Pick_Up_Contact", "Price", "Scheduled_At", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Jane Smith", "456 Elm St", "Electronics", null, "123 Main St", "John Doe", 300.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.0m, 5.5m },
-                    { 2, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Alice Brown", "789 Oak St", "Computers", null, "123 Main St", "John Doe", 500.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 3.0m },
-                    { 3, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Bob White", "101 Pine St", "Accessories", null, "123 Main St", "John Doe", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.5m },
-                    { 4, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Lucy Green", "202 Maple St", "Furniture", null, "123 Main St", "John Doe", 600.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m },
-                    { 5, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Tom Brown", "30 Center St", "Fresh Produce", null, "25 Market St", "Alice Green", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 6.0m },
-                    { 6, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Sarah White", "35 Park Ave", "Dairy Products", null, "25 Market St", "Alice Green", 300.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 4.0m, 8.0m },
-                    { 7, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Daniel Black", "40 Broadway", "Packaged Goods", null, "25 Market St", "Alice Green", 250.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 4.5m },
-                    { 8, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Emma Red", "45 Fifth St", "Beverages", null, "25 Market St", "Alice Green", 400.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 5.0m },
-                    { 9, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Jim Doe", "50 Snack Ave", "Fast Food Order", null, "45 Fast Food Rd", "Alice Johnson", 50.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 1.0m, 2.0m },
-                    { 10, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Kate Brown", "55 Snack Ave", "Burger Order", null, "45 Fast Food Rd", "Alice Johnson", 30.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 0.5m, 1.5m },
-                    { 11, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Ben White", "60 Snack Ave", "Pizza Order", null, "45 Fast Food Rd", "Alice Johnson", 40.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.5m },
-                    { 12, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Beth Green", "65 Snack Ave", "Dessert Order", null, "45 Fast Food Rd", "Alice Johnson", 20.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 1.5m, 3.0m },
-                    { 13, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Alice Johnson", "110 Library Lane", "Books", null, "100 Book St", "John Smith", 25.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 0.5m, 1.0m },
-                    { 14, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Bob White", "120 Library Lane", "Textbooks", null, "100 Book St", "John Smith", 45.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 0.75m, 1.5m },
-                    { 15, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Charlie Black", "130 Library Lane", "Novels", null, "100 Book St", "John Smith", 50.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.0m },
-                    { 16, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "David Green", "140 Library Lane", "Magazines", null, "100 Book St", "John Smith", 30.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 1.25m, 2.5m },
-                    { 17, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "James Black", "160 Home Lane", "Home Goods", null, "150 Home St", "Emily White", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 2.0m, 3.5m },
-                    { 18, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Sarah Green", "170 Home Lane", "Furniture", null, "150 Home St", "Emily White", 800.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 2.5m, 4.0m },
-                    { 19, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Paul Red", "180 Home Lane", "Kitchenware", null, "150 Home St", "Emily White", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 1.0m, 2.0m },
-                    { 20, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Jessica Blue", "190 Home Lane", "Decorations", null, "150 Home St", "Emily White", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 0.5m, 1.5m },
-                    { 21, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Anna Green", "210 Gym Lane", "Gym Equipment", null, "200 Fitness St", "Mike Brown", 500.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered", 3.0m, 5.0m },
-                    { 22, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Laura Black", "220 Gym Lane", "Fitness Apparel", null, "200 Fitness St", "Mike Brown", 150.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit", 1.5m, 2.5m },
-                    { 23, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Cathy White", "230 Gym Lane", "Health Supplements", null, "200 Fitness St", "Mike Brown", 300.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", 2.0m, 3.0m },
-                    { 24, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Sarah Blue", "240 Gym Lane", "Yoga Mats", null, "200 Fitness St", "Mike Brown", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled", 2.5m, 4.0m }
+                    { 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Jane Smith", "456 Elm St", "Electronics", null, "123 Main St", "John Doe", 300.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered" },
+                    { 2, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Alice Brown", "789 Oak St", "Computers", null, "123 Main St", "John Doe", 500.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit" },
+                    { 3, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Bob White", "101 Pine St", "Accessories", null, "123 Main St", "John Doe", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending" },
+                    { 4, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Lucy Green", "202 Maple St", "Furniture", null, "123 Main St", "John Doe", 600.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled" },
+                    { 5, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Tom Brown", "30 Center St", "Fresh Produce", null, "25 Market St", "Alice Green", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered" },
+                    { 6, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Sarah White", "35 Park Ave", "Dairy Products", null, "25 Market St", "Alice Green", 300.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit" },
+                    { 7, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Daniel Black", "40 Broadway", "Packaged Goods", null, "25 Market St", "Alice Green", 250.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending" },
+                    { 8, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Emma Red", "45 Fifth St", "Beverages", null, "25 Market St", "Alice Green", 400.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled" },
+                    { 9, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Jim Doe", "50 Snack Ave", "Fast Food Order", null, "45 Fast Food Rd", "Alice Johnson", 50.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered" },
+                    { 10, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Kate Brown", "55 Snack Ave", "Burger Order", null, "45 Fast Food Rd", "Alice Johnson", 30.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit" },
+                    { 11, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Ben White", "60 Snack Ave", "Pizza Order", null, "45 Fast Food Rd", "Alice Johnson", 40.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending" },
+                    { 12, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Beth Green", "65 Snack Ave", "Dessert Order", null, "45 Fast Food Rd", "Alice Johnson", 20.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled" },
+                    { 13, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Alice Johnson", "110 Library Lane", "Books", null, "100 Book St", "John Smith", 25.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered" },
+                    { 14, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Bob White", "120 Library Lane", "Textbooks", null, "100 Book St", "John Smith", 45.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit" },
+                    { 15, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Charlie Black", "130 Library Lane", "Novels", null, "100 Book St", "John Smith", 50.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending" },
+                    { 16, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "David Green", "140 Library Lane", "Magazines", null, "100 Book St", "John Smith", 30.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled" },
+                    { 17, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "James Black", "160 Home Lane", "Home Goods", null, "150 Home St", "Emily White", 200.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered" },
+                    { 18, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Sarah Green", "170 Home Lane", "Furniture", null, "150 Home St", "Emily White", 800.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit" },
+                    { 19, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Paul Red", "180 Home Lane", "Kitchenware", null, "150 Home St", "Emily White", 150.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending" },
+                    { 20, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Jessica Blue", "190 Home Lane", "Decorations", null, "150 Home St", "Emily White", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled" },
+                    { 21, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Anna Green", "210 Gym Lane", "Gym Equipment", null, "200 Fitness St", "Mike Brown", 500.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered" },
+                    { 22, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Laura Black", "220 Gym Lane", "Fitness Apparel", null, "200 Fitness St", "Mike Brown", 150.00m, new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "In Transit" },
+                    { 23, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Cathy White", "230 Gym Lane", "Health Supplements", null, "200 Fitness St", "Mike Brown", 300.00m, new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending" },
+                    { 24, new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Sarah Blue", "240 Gym Lane", "Yoga Mats", null, "200 Fitness St", "Mike Brown", 100.00m, new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancelled" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "Brand", "Color", "DriverId", "License_Plate", "Make_Year", "Max_Volume", "Max_Weight", "Model" },
+                columns: new[] { "Id", "Brand", "Color", "DriverId", "Height", "Length", "License_Plate", "Make_Year", "Max_Weight", "Model", "Width" },
                 values: new object[,]
                 {
-                    { 1, "Toyota", "Blue", 1, "ABC1234", new DateOnly(2020, 1, 1), 3.50m, 1500.00m, "Camry" },
-                    { 2, "Honda", "Red", 2, "XYZ5678", new DateOnly(2019, 1, 1), 3.20m, 1400.00m, "Civic" },
-                    { 3, "Ford", "Black", 3, "LMN9101", new DateOnly(2021, 1, 1), 5.00m, 2000.00m, "F-150" },
-                    { 4, "Chevrolet", "White", 4, "QRS2345", new DateOnly(2022, 1, 1), 5.50m, 2200.00m, "Silverado" },
-                    { 5, "Nissan", "Silver", 5, "TUV6789", new DateOnly(2021, 1, 1), 3.80m, 1600.00m, "Altima" },
-                    { 6, "Hyundai", "Green", 6, "JKL3456", new DateOnly(2023, 1, 1), 3.00m, 1400.00m, "Elantra" }
+                    { 1, "Ford", "White", 1, 250m, 620m, "LU1 VAN", new DateOnly(2021, 1, 1), 1500.00m, "Transit Luton", 230m },
+                    { 2, "Mercedes-Benz", "Silver", 2, 260m, 650m, "LU2 VAN", new DateOnly(2020, 1, 1), 1700.00m, "Sprinter Luton", 240m },
+                    { 3, "Iveco", "Blue", 3, 270m, 680m, "LU3 VAN", new DateOnly(2022, 1, 1), 2000.00m, "Daily Luton", 240m },
+                    { 4, "Volkswagen", "Red", 4, 265m, 660m, "LU4 VAN", new DateOnly(2021, 1, 1), 1800.00m, "Crafter Luton", 235m },
+                    { 5, "Renault", "Yellow", 5, 255m, 630m, "LU5 VAN", new DateOnly(2023, 1, 1), 1600.00m, "Master Luton", 230m },
+                    { 6, "Peugeot", "Green", 6, 270m, 670m, "LU6 VAN", new DateOnly(2022, 1, 1), 1900.00m, "Boxer Luton", 240m }
                 });
 
             migrationBuilder.InsertData(
                 table: "OrderItems",
-                columns: new[] { "Id", "DimensionId", "Item_Name", "OrderPlacementId", "Quantity", "Special_Instructions", "Weight_Per_Item" },
+                columns: new[] { "Id", "Item_Name", "OrderPlacementId", "Quantity", "Special_Instructions", "Weight_Per_Item" },
                 values: new object[,]
                 {
-                    { 1, null, "Laptop", 1, 1, "Handle with care", 2.50m },
-                    { 2, null, "Mouse", 2, 2, "Wireless", 0.10m },
-                    { 3, null, "Keyboard", 3, 1, "Mechanical", 0.75m },
-                    { 4, null, "Desk", 4, 1, "Assembly required", 15.00m },
-                    { 5, null, "Chair", 5, 1, "Comfortable", 5.00m },
-                    { 6, null, "Phone", 6, 1, "New model", 0.20m },
-                    { 7, null, "Charger", 7, 1, "Fast charging", 0.15m },
-                    { 8, null, "Couch", 8, 1, "Delivery on ground floor only", 30.00m },
-                    { 9, null, "Coffee Table", 9, 1, "Glass top", 10.00m },
-                    { 10, null, "T-Shirt", 10, 5, "Various colors", 0.25m },
-                    { 11, null, "Jeans", 11, 2, "Brand: XYZ", 0.75m },
-                    { 12, null, "Fruits Basket", 12, 1, "Seasonal fruits", 3.00m },
-                    { 13, null, "Vegetable Basket", 13, 1, "Organic", 3.00m },
-                    { 14, null, "Cookbook", 14, 1, "Best seller", 1.00m },
-                    { 15, null, "Spices Set", 15, 1, "Variety pack", 0.50m },
-                    { 16, null, "Headphones", 16, 1, "Noise cancelling", 0.30m },
-                    { 17, null, "Bluetooth Speaker", 17, 1, "Waterproof", 0.80m },
-                    { 18, null, "Backpack", 18, 1, "For travel", 0.50m },
-                    { 19, null, "Water Bottle", 19, 1, "Insulated", 0.20m },
-                    { 20, null, "Camera", 20, 1, "Includes accessories", 1.50m },
-                    { 21, null, "Tripod", 21, 1, "Adjustable height", 1.00m },
-                    { 22, null, "Blanket", 22, 1, "Soft and warm", 1.00m },
-                    { 23, null, "Pillow", 23, 2, "Memory foam", 0.50m },
-                    { 24, null, "Rug", 24, 1, "Non-slip", 5.00m }
+                    { 1, "Laptop", 1, 1, "Handle with care", 2.50m },
+                    { 2, "Mouse", 2, 2, "Wireless", 0.10m },
+                    { 3, "Keyboard", 3, 1, "Mechanical", 0.75m },
+                    { 4, "Desk", 4, 1, "Assembly required", 15.00m },
+                    { 5, "Chair", 5, 1, "Comfortable", 5.00m },
+                    { 6, "Phone", 6, 1, "New model", 0.20m },
+                    { 7, "Charger", 7, 1, "Fast charging", 0.15m },
+                    { 8, "Couch", 8, 1, "Delivery on ground floor only", 30.00m },
+                    { 9, "Coffee Table", 9, 1, "Glass top", 10.00m },
+                    { 10, "T-Shirt", 10, 5, "Various colors", 0.25m },
+                    { 11, "Jeans", 11, 2, "Brand: XYZ", 0.75m },
+                    { 12, "Fruits Basket", 12, 1, "Seasonal fruits", 3.00m },
+                    { 13, "Vegetable Basket", 13, 1, "Organic", 3.00m },
+                    { 14, "Cookbook", 14, 1, "Best seller", 1.00m },
+                    { 15, "Spices Set", 15, 1, "Variety pack", 0.50m },
+                    { 16, "Headphones", 16, 1, "Noise cancelling", 0.30m },
+                    { 17, "Bluetooth Speaker", 17, 1, "Waterproof", 0.80m },
+                    { 18, "Backpack", 18, 1, "For travel", 0.50m },
+                    { 19, "Water Bottle", 19, 1, "Insulated", 0.20m },
+                    { 20, "Camera", 20, 1, "Includes accessories", 1.50m },
+                    { 21, "Tripod", 21, 1, "Adjustable height", 1.00m },
+                    { 22, "Blanket", 22, 1, "Soft and warm", 1.00m },
+                    { 23, "Pillow", 23, 2, "Memory foam", 0.50m },
+                    { 24, "Rug", 24, 1, "Non-slip", 5.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -551,30 +554,30 @@ namespace Backend.Migrations
                 columns: new[] { "Id", "Amount", "Driver_Earnings", "OrderPlacementId", "Payment_Method", "Platform_Fee", "Processed_At", "Status", "Transaction_Identification" },
                 values: new object[,]
                 {
-                    { 1, 300.00m, 290.00m, 1, "Credit Card", 10.00m, "2023-09-15 10:00:00", "Completed", "TXN001" },
-                    { 2, 500.00m, 485.00m, 2, "PayPal", 15.00m, "2023-09-15 12:00:00", "Completed", "TXN002" },
+                    { 1, 300.00m, 290.00m, 1, "Credit Card", 10.00m, new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN001" },
+                    { 2, 500.00m, 485.00m, 2, "PayPal", 15.00m, new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN002" },
                     { 3, 150.00m, 145.00m, 3, "Debit Card", 5.00m, null, "Pending", "TXN003" },
-                    { 4, 600.00m, 580.00m, 4, "Credit Card", 20.00m, "2023-09-15 14:00:00", "Completed", "TXN004" },
-                    { 5, 200.00m, 192.00m, 5, "Bank Transfer", 8.00m, "2023-09-15 15:00:00", "Completed", "TXN005" },
-                    { 6, 80.00m, 80.00m, 6, "Cash", 0.00m, "2023-09-15 16:00:00", "Completed", "TXN006" },
-                    { 7, 300.00m, 290.00m, 7, "Credit Card", 10.00m, "2023-09-15 17:00:00", "Completed", "TXN007" },
-                    { 8, 450.00m, 435.00m, 8, "PayPal", 15.00m, "2023-09-15 18:00:00", "Completed", "TXN008" },
+                    { 4, 600.00m, 580.00m, 4, "Credit Card", 20.00m, new DateTime(2023, 9, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN004" },
+                    { 5, 200.00m, 192.00m, 5, "Bank Transfer", 8.00m, new DateTime(2023, 9, 15, 15, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN005" },
+                    { 6, 80.00m, 80.00m, 6, "Cash", 0.00m, new DateTime(2023, 12, 16, 13, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN006" },
+                    { 7, 300.00m, 290.00m, 7, "Credit Card", 10.00m, new DateTime(2023, 9, 15, 17, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN007" },
+                    { 8, 450.00m, 435.00m, 8, "PayPal", 15.00m, new DateTime(2023, 9, 15, 18, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN008" },
                     { 9, 150.00m, 145.00m, 9, "Debit Card", 5.00m, null, "Pending", "TXN009" },
-                    { 10, 700.00m, 675.00m, 10, "Credit Card", 25.00m, "2023-09-15 19:00:00", "Completed", "TXN010" },
-                    { 11, 250.00m, 240.00m, 11, "Bank Transfer", 10.00m, "2023-09-15 20:00:00", "Completed", "TXN011" },
-                    { 12, 90.00m, 90.00m, 12, "Cash", 0.00m, "2023-09-15 21:00:00", "Completed", "TXN012" },
-                    { 13, 350.00m, 338.00m, 13, "Credit Card", 12.00m, "2023-09-15 22:00:00", "Completed", "TXN013" },
-                    { 14, 500.00m, 485.00m, 14, "PayPal", 15.00m, "2023-09-15 23:00:00", "Completed", "TXN014" },
+                    { 10, 700.00m, 675.00m, 10, "Credit Card", 25.00m, new DateTime(2023, 9, 15, 19, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN010" },
+                    { 11, 250.00m, 240.00m, 11, "Bank Transfer", 10.00m, new DateTime(2023, 9, 15, 20, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN011" },
+                    { 12, 90.00m, 90.00m, 12, "Cash", 0.00m, new DateTime(2023, 9, 15, 21, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN012" },
+                    { 13, 350.00m, 338.00m, 13, "Credit Card", 12.00m, new DateTime(2023, 9, 15, 22, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN013" },
+                    { 14, 500.00m, 485.00m, 14, "PayPal", 15.00m, new DateTime(2023, 9, 15, 23, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN014" },
                     { 15, 180.00m, 174.00m, 15, "Debit Card", 6.00m, null, "Pending", "TXN015" },
-                    { 16, 650.00m, 628.00m, 16, "Credit Card", 22.00m, "2023-09-16 10:00:00", "Completed", "TXN016" },
-                    { 17, 220.00m, 212.00m, 17, "Bank Transfer", 8.00m, "2023-09-16 11:00:00", "Completed", "TXN017" },
-                    { 18, 75.00m, 75.00m, 18, "Cash", 0.00m, "2023-09-16 12:00:00", "Completed", "TXN018" },
-                    { 19, 400.00m, 386.00m, 19, "Credit Card", 14.00m, "2023-09-16 13:00:00", "Completed", "TXN019" },
-                    { 20, 600.00m, 580.00m, 20, "PayPal", 20.00m, "2023-09-16 14:00:00", "Completed", "TXN020" },
+                    { 16, 650.00m, 628.00m, 16, "Credit Card", 22.00m, new DateTime(2023, 9, 16, 10, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN016" },
+                    { 17, 220.00m, 212.00m, 17, "Bank Transfer", 8.00m, new DateTime(2023, 9, 16, 11, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN017" },
+                    { 18, 75.00m, 75.00m, 18, "Cash", 0.00m, new DateTime(2023, 9, 16, 12, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN018" },
+                    { 19, 400.00m, 386.00m, 19, "Credit Card", 14.00m, new DateTime(2023, 9, 16, 13, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN019" },
+                    { 20, 600.00m, 580.00m, 20, "PayPal", 20.00m, new DateTime(2023, 9, 16, 14, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN020" },
                     { 21, 150.00m, 145.00m, 21, "Debit Card", 5.00m, null, "Pending", "TXN021" },
-                    { 22, 300.00m, 290.00m, 22, "Credit Card", 10.00m, "2023-09-16 15:00:00", "Completed", "TXN022" },
-                    { 23, 200.00m, 192.00m, 23, "Bank Transfer", 8.00m, "2023-09-16 16:00:00", "Completed", "TXN023" },
-                    { 24, 80.00m, 80.00m, 24, "Cash", 0.00m, "2023-09-16 17:00:00", "Completed", "TXN024" }
+                    { 22, 300.00m, 290.00m, 22, "Credit Card", 10.00m, new DateTime(2023, 9, 16, 15, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN022" },
+                    { 23, 200.00m, 192.00m, 23, "Bank Transfer", 8.00m, new DateTime(2023, 9, 16, 16, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN023" },
+                    { 24, 80.00m, 80.00m, 24, "Cash", 0.00m, new DateTime(2023, 9, 16, 17, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN024" }
                 });
 
             migrationBuilder.InsertData(
@@ -606,6 +609,37 @@ namespace Backend.Migrations
                     { 22, 4, new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified), 22, "Route 22 Data", "21.9 km" },
                     { 23, 5, new DateTime(2024, 1, 1, 2, 20, 0, 0, DateTimeKind.Unspecified), 23, "Route 23 Data", "14.3 km" },
                     { 24, 6, new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified), 24, "Route 24 Data", "19.8 km" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrderDimension",
+                columns: new[] { "Id", "Height", "Length", "OrderItemsId", "Width" },
+                values: new object[,]
+                {
+                    { 1, 2.50m, 35.00m, 1, 25.00m },
+                    { 2, 3.50m, 10.00m, 2, 6.00m },
+                    { 3, 4.00m, 45.00m, 3, 15.00m },
+                    { 4, 75.00m, 120.00m, 4, 60.00m },
+                    { 5, 90.00m, 65.00m, 5, 65.00m },
+                    { 6, 0.80m, 15.00m, 6, 7.50m },
+                    { 7, 2.50m, 10.00m, 7, 5.00m },
+                    { 8, 85.00m, 200.00m, 8, 90.00m },
+                    { 9, 45.00m, 120.00m, 9, 60.00m },
+                    { 10, 2.00m, 30.00m, 10, 25.00m },
+                    { 11, 5.00m, 40.00m, 11, 20.00m },
+                    { 12, 25.00m, 30.00m, 12, 30.00m },
+                    { 13, 25.00m, 30.00m, 13, 30.00m },
+                    { 14, 4.00m, 25.00m, 14, 20.00m },
+                    { 15, 8.00m, 15.00m, 15, 10.00m },
+                    { 16, 8.00m, 20.00m, 16, 18.00m },
+                    { 17, 8.00m, 20.00m, 17, 8.00m },
+                    { 18, 15.00m, 45.00m, 18, 30.00m },
+                    { 19, 7.50m, 25.00m, 19, 7.50m },
+                    { 20, 8.00m, 12.00m, 20, 9.00m },
+                    { 21, 150.00m, 35.00m, 21, 35.00m },
+                    { 22, 0.50m, 200.00m, 22, 150.00m },
+                    { 23, 15.00m, 50.00m, 23, 50.00m },
+                    { 24, 0.50m, 240.00m, 24, 160.00m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -646,16 +680,16 @@ namespace Backend.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItems_DimensionId",
-                table: "OrderItems",
-                column: "DimensionId");
+                name: "IX_OrderDimension_OrderItemsId",
+                table: "OrderDimension",
+                column: "OrderItemsId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderPlacementId",
                 table: "OrderItems",
                 column: "OrderPlacementId",
-                unique: true,
-                filter: "[OrderPlacementId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderPlacements_CustomerId",
@@ -709,7 +743,7 @@ namespace Backend.Migrations
                 name: "Notifications");
 
             migrationBuilder.DropTable(
-                name: "OrderItems");
+                name: "OrderDimension");
 
             migrationBuilder.DropTable(
                 name: "OrderTrackings");
@@ -724,7 +758,7 @@ namespace Backend.Migrations
                 name: "Vehicles");
 
             migrationBuilder.DropTable(
-                name: "OrderDimension");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "OrderPlacements");

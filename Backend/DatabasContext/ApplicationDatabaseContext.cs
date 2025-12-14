@@ -28,7 +28,7 @@ namespace Backend.DatabasContext
             //    .HasNoKey();
             modelBuilder.Entity<OrderPlacement>()
                 .Property(p => p.CustomerId)
-                .IsRequired(false);
+                .IsRequired(true);
             modelBuilder.Entity<User>()
                 .Property(p => p.Password)
                 .HasMaxLength(20);
@@ -36,6 +36,14 @@ namespace Backend.DatabasContext
             modelBuilder.Entity<User>()
                 .Property(u => u.Id)
                 .ValueGeneratedOnAdd();
+
+            // Configure one - to - one relationship with Order_Items as principal
+            modelBuilder.Entity<Order_Items>()
+                .HasOne(o=>o.OrderDimension)
+                .WithOne(d=>d.Order_Items)
+                .HasForeignKey<OrderDimension>(z => z.OrderItemsId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.ApplyConfiguration(new AddressData());
             modelBuilder.ApplyConfiguration(new CustomerData());
             modelBuilder.ApplyConfiguration(new DocumentData());
@@ -49,6 +57,7 @@ namespace Backend.DatabasContext
             modelBuilder.ApplyConfiguration(new TrainingData.RouteData());
             modelBuilder.ApplyConfiguration(new UserData());
             modelBuilder.ApplyConfiguration(new VehicleData());
+            modelBuilder.ApplyConfiguration(new OrderDimensionsData());
         }
     }
 }

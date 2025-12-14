@@ -8,6 +8,7 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(30)]
         public string Drivers_License {  get; set; }
         [Required]
         public DateOnly License_Expiry { get; set; }
@@ -15,7 +16,9 @@ namespace Backend.Models
         public bool Is_Verified { get; set; }
         [Required]
         public bool Is_Available { get; set; }
+        [StringLength(10)]
         public string Rating {  get; set; }
+        [StringLength(30)]
         public string Completion_Rate {  get; set; }
         [Column(TypeName ="decimal(10,2)")]
         public decimal Total_Earnings { get; set; }
