@@ -20,8 +20,6 @@ const BulkOrders =()=>{
                 'Delivery_Up_Address': '456 Oak Ave, City', 
                 'Pick_Up_Contact': '+1234567890',
                 'Delivery_Contact': '+0987654321',
-                'Weight': '15.50',
-                'Volume': '12.30',
                 'Description': 'Office documents',
                 'Status': 'Pending',
                 'Price': '25.00',
@@ -42,8 +40,6 @@ const BulkOrders =()=>{
                 'Delivery_Up_Address': '321 Elm St, City',
                 'Pick_Up_Contact': '+1122334455', 
                 'Delivery_Contact': '+5566778899',
-                'Weight': '10.25',
-                'Volume': '3.75',
                 'Description': 'Electronics equipment',
                 'Status': 'Pending',
                 'Price': '345.50',
@@ -126,8 +122,6 @@ const BulkOrders =()=>{
                 Delivery_Up_Address: row.Delivery_Up_Address || '',
                 Pick_Up_Contact: row.Pick_Up_Contact || '',
                 Delivery_Contact: row.Delivery_Contact || '',
-                Weight: parseFloat(row.Weight) || 0,
-                Volume: parseFloat(row.Volume) || 0,
                 Description: row.Description || '',
                 Status: row.Status || 'Pending',
                 Price: parseFloat(row.Price) || 0,
@@ -140,7 +134,7 @@ const BulkOrders =()=>{
                     Quantity:parseInt(row.Quantity) || 1,
                     Weight_Per_Item:parseFloat(row.Weight_Per_Item) || '',
                     Special_Instructions:row.Special_Instructions,
-                    Dimension:{
+                    orderDimension:{
                         Length:parseFloat(row.DimensionLength),
                         Height:parseFloat(row.DimensionHeight),
                         Width:parseFloat(row.DimensionWidth)
