@@ -11,14 +11,61 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [driverRecord, setDriverRecord] = useState('')
+    const url = "https://localhost:7216/api"
 
     const handleToggle = () => {
         setIsActive(!isActive);
         // Here you can also make an API call to update the driver status in your backend
         console.log(`Driver status changed to: ${!isActive ? 'Active' : 'Inactive'}`);
+        setAvailableBool(!isActive)
     };
+    const handleDriverRecord=async()=>{
+        try{
+            const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
+                params:{
+                    Id:parseInt(DriverId)
+                }
+            })
+            setDriverRecord(response.data)
+        }
+        catch (error) {
+            console.error('Failed to get driver record:', error);
+       
+        }
+    }
+    const setAvailableBool=async(avail_parameter)=>{
+        try{
+            const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
+                params:{
+                    Id:parseInt(DriverId)
+                }
+            })
 
-     const handleFileSelect = (event) => {
+            const driver = {
+                Drivers_License:response.data.Drivers_License,
+                License_Expiry:response.data.License_Expiry,
+                Is_Verified:response.data.Is_Verified,
+                Is_Available:avail_parameter,
+                Rating:response.data.Rating,
+                Completion_Rate:response.data.Completion_Rate,
+                Total_Earnings:response.data.Total_Earnings,
+                UserId:response.data.UserId,
+            }
+            setDriverRecord(driver)
+            await axios.put(`${url}/Driver/Editing-Driver`,driver,{
+                params:{
+                    Id:parseInt(DriverId)
+                }
+            })
+        }
+        catch (error) {
+            console.error('Upload failed:', error);
+            alert('Failed to upload image');
+        }
+    }
+
+    const handleFileSelect = (event) => {
         const file = event.target.files[0];
         if (file) {
             // Validate file type
@@ -85,8 +132,6 @@ const Dashboard = () => {
                     }
             })
             setVehicle(response.data)
-            console.log("EEE", response.data)
-
         }
         catch(e){
             console.log("ERROR", e.Message)
@@ -99,13 +144,29 @@ const Dashboard = () => {
         if(DriverId){
             fetchVehicle()
         }
-        
     },[DriverId])
 
+    useEffect(()=>{
+        handleDriverRecord()
+    })
     return (
-        <div>
+        <div className='dashboard-component'>
             <div className="dashboard-status">
-            <h2>Driver Status</h2>
+                
+                <div className="toggle-container">
+                        <h2>Driver Status</h2>
+                        <label className="toggle-label">
+                            <input 
+                                type="checkbox" 
+                                checked={isActive}
+                                onChange={handleToggle}
+                                className="toggle-input"
+                            />
+                            <span className="toggle-slider">
+                                <span className="toggle-knob"></span>
+                            </span>
+                        </label>
+                </div>
             <div className="status-container">
                 <div className="status-info">
                     <span className={`status-text ${isActive ? 'active' : 'inactive'}`}>
@@ -119,18 +180,18 @@ const Dashboard = () => {
                     </p>
                 </div>
                 
-                <div className="toggle-container">
-                    <label className="toggle-label">
-                        <input 
-                            type="checkbox" 
-                            checked={isActive}
-                            onChange={handleToggle}
-                            className="toggle-input"
-                        />
-                        <span className="toggle-slider">
-                            <span className="toggle-knob"></span>
-                        </span>
-                    </label>
+                
+                <div className="driver-rating">
+                    {driverRecord ?(
+                        <p><i className="icon-star">⭐</i>{driverRecord.Rating} Rating</p>
+                    ):
+                        <p>The driver does have a rating</p>}
+                </div>
+                 <div className="driver-license">
+                    {driverRecord?(
+                        <p><i className="icon-license">🪪</i> License Id - {driverRecord.Drivers_License}</p>
+                    ):
+                        <p>The driver does have a License</p>}                    
                 </div>
             </div>
             </div>
