@@ -1,8 +1,31 @@
-.AuthComponent{
-    background-color: white;
+.AuthComponent {
+    background-color: #f9f9f9;
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 107px;
 }
 
+img.back-arrow-class {
+    width: 20px;
+    cursor: pointer;
+}
+
+.AuthComponent h3 {
+    font-size: 55px;
+    font-weight: 300;
+    margin: 0;
+    margin-top: 78px;
+}
+
+.continue-as {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 36px;
+}
 .languagedropdown {
     display: flex;
     align-items: center; /* This centers items vertically */
@@ -15,7 +38,7 @@
     align-items: center;
     padding: 2rem;
     background-color: #f9f9f9;
-    height: 100vh; /* Full height for centering */
+    /* height: 100vh; Full height for centering */
 }
 
 .auth_form {
@@ -128,6 +151,7 @@ button.choice_user_selector  {
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 button.choice_user_selector div {

@@ -1,8 +1,9 @@
 import {useState} from 'react'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
-
+import BackArrow from './Icons/arrow-back.svg'
 import './AuthStyle.css'
+
 const Registration=()=>{
 
     const [loginbool, setLoginBool] = useState(true)
@@ -15,7 +16,7 @@ const Registration=()=>{
     const [confirm_password, setConfirmPassword] = useState('')
     const [phone_number, setPhoneNumber] = useState('')
     const [message, setMessage] = useState("");
-    const api_url ="https://localhost:7216/api/User/Add-Users"
+    const api_url ="https://localhost:7216/api"
     const navigate = useNavigate()
 // navigate()
     const loginUser=(async)=>{
@@ -27,21 +28,61 @@ const Registration=()=>{
         }
     }
 
-    const registerUser = async(e)=> {
-        e.preventDefault()
+    const [businessName, setBusinessName] = useState(null)
+    const [businessType, setBusinessType] = useState(null)
+    const [tax_dentification, setTaxIdentification] = useState(null)
+    const [rating, setRating] = useState('4.5')
+
+    const [driverLicense, setDriverLicense] = useState(null)
+    const [licenseExpiry, setLicenseExpiry] = useState(null)
+    const [completionRate, setCompletionRate] = useState('20%')
+    const registerUser = async()=> {
+        // e.preventDefault()
 
         try{
-            const user= {
-                First_Name: first_name,
-                Last_Name: last_name,
-                Email :email,
-                Phone: phone_number,
-                Password: password
+            if(userType == 'Client'){
+                const Client = {
+                    Email:email,
+                    Phone:phone_number,
+                    First_Name:first_name,
+                    Last_Name:last_name,
+                    Password:password,
+                    Customer:{
+                        Business_Name:businessName,
+                        Business_Type:businessType,
+                        Tax_Identification:tax_dentification,
+                        Rating:rating,
+                    }
+                }
+                console.log("ABOUT TO",Client)
+               
+                const response = await axios.post(`${api_url}/User/Add-User-With-Client`, Client)
+                setMessage("Successfully registrated-client ", response.data);
+                alert("Successfully registered Client")
             }
-            const response = await axios.post(api_url, user)
-            setMessage("Successfully registrated ", response.data);
-            console.log("USER",response.data)
-
+            else if(userType=='Driver'){
+                const Driver = {
+                    Email:email,
+                    Phone:phone_number,
+                    First_Name:first_name,
+                    Last_Name:last_name,
+                    Password:password,
+                    Driver:{
+                        Drivers_License:driverLicense,
+                        License_Expiry:licenseExpiry,
+                        Is_Verified: true,
+                        Is_Available:false,
+                        Rating:'3.0',
+                        Completion_Rate:completionRate,
+                        Total_Earnings: parseFloat(0)               
+                    }
+                }
+                
+                const response = await axios.post(`${api_url}/User/Add-User-With-Driver`,Driver)
+                setMessage("Successfully registrated-driver ", response.data);
+                console.log("USER",response)
+                alert("Successfully registered Driver")
+            }
         }
         catch(error){
            console.log("Registration error", error);
@@ -71,13 +112,13 @@ const Registration=()=>{
             const allClients = responseClients.data
 
             const user = allUsers.find(d=> d.Email === email && d.Password === password)
-
-            if(user!=null){
+            console.log("RESPONSE", user)
+            if(user.Customer!=null){
                 const client = allClients.find(d=>d.UserId === user.Id)
                 navigate(`/client/${user.Email}/${user.Password}/${client.Id}`)
             }
-            else{
-                alert("Click the Client Option and enter your correct login details")
+            else {
+                alert("Click the Driver Option and enter your correct login details")
             }
         }
         else if(userType =='Driver'){
@@ -89,12 +130,12 @@ const Registration=()=>{
 
             const user = allUsers.find(d=> d.Email === email && d.Password === password)
           
-            if(user!=null){
+            if(user.Driver!=null){
                 const driver = allDrivers.find(d=>d.UserId === user.Id)
                 navigate(`/driver/${user.Email}/${user.Password}/${driver.Id}`)
             }
             else{
-                alert("Click the Driver Option and enter your correct login details")
+                alert("Click the Client Option and enter your correct login details")
             }
         }
     }
@@ -110,33 +151,20 @@ const Registration=()=>{
          setUserType('Driver');
          console.log("Clicked Driver")     
     }
+
+    const handleNavigateBackToMainPage =()=>{
+        navigate("/")
+    }
+  
+    
     return(
         <div className='AuthComponent'>
-            <span>Regitstration</span>
-           
-          
-            {/* <div className="languagedropdown">
-                <svg xmlns="http://www.w3.org/2000/svg" className="my-custom-globe-icon">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-                    <path d="M2 12h20"></path>
-                </svg>
-                <span>🇺🇸</span>
-               <span data-slot="select-value" class="select-value">
-                    <div className="languagedropdown">
-                        <span>🇺🇸</span>
-                        <span>English</span>
-                    </div>
-                </span>
-            </div> */}
-            {/* <div className='auth-container-login'>
-              
-            </div> */}
-
-
+            <h3>Authentication Page</h3>          
+            <p className='continue-as'>Continue as {userType}</p>
             <div className='auth-container'>  
+                
                 <form action="" className="auth_form">
-                    <p>User Role {userType}</p>
+                    <img src={BackArrow} alt="" className='back-arrow-class'  title="Click to go back to main page" onClick={()=>handleNavigateBackToMainPage()} />
                     <div className="form-selector">
                         <button onClick={SwitchToLogin} disabled={loginbool} className="">
                             Login
@@ -268,6 +296,65 @@ const Registration=()=>{
                                     value={confirm_password}
                                     onChange={(e)=>setConfirmPassword(e.target.value)}/>
                             </div>
+                             {userType=='Client' &&(
+                                <div>
+                                    <div className='form-group'>
+                                        <label htmlFor="password">Business Name</label>
+                                        <input 
+                                            type="text" 
+                                            id="business_name" 
+                                            required
+                                            placeholder='Enter your Business Name' 
+                                            value={businessName}
+                                            onChange={(e)=>setBusinessName(e.target.value)}/>
+                                    </div>
+                                    <div className='form-group'>
+                                        <label htmlFor="password">Business Type</label>
+                                        <input 
+                                            type="text" 
+                                            id="business_type" 
+                                            required
+                                            placeholder='Enter your Business Type' 
+                                            value={businessType}
+                                            onChange={(e)=>setBusinessType(e.target.value)}/>
+                                    </div>
+                                    <div className='form-group'>
+                                        <label htmlFor="password">Tax Identififcation</label>
+                                        <input 
+                                            type="text" 
+                                            id="tax_identififcation" 
+                                            required
+                                            placeholder='Enter your Tax Identififcation' 
+                                            value={tax_dentification}
+                                            onChange={(e)=>setTaxIdentification(e.target.value)}/>
+                                    </div>
+                                </div>
+                            )}
+
+                             {userType=='Driver' &&(
+                                <div>
+                                    <div className='form-group'>
+                                        <label htmlFor="password">Driver License</label>
+                                        <input 
+                                            type="text" 
+                                            id="driver_license" 
+                                            required
+                                            placeholder='Enter your Driver License' 
+                                            value={driverLicense}
+                                            onChange={(e)=>setDriverLicense(e.target.value)}/>
+                                    </div>  
+                                    <div className='form-group'>
+                                        <label htmlFor="password">License Expiry Date</label>
+                                        <input 
+                                            type="date" 
+                                            id="license_expiry" 
+                                            required
+                                            placeholder='Enter your License Expiry Date' 
+                                            value={licenseExpiry}
+                                            onChange={(e)=>setLicenseExpiry(e.target.value)}/>
+                                    </div>   
+                                </div>           
+                            )}
                             <div>
                                 <input type='checkbox' id="termsofagreement"/>
                                 <label>I agree to the Terms of Service and Privacy Policy</label>
@@ -276,10 +363,10 @@ const Registration=()=>{
                                 <button type='button' onClick={()=>registerUser()} className='signup-button'>Sign Up</button>
                             </div>
                             <div className="form-footer">
-                                <p className="signup-prompt">Already have an account? <a href="/signup">auth.signin</a></p>
+                                <p className="signup-prompt">Already have an account? <a href="/authpage">auth.signin</a></p>
                             </div>
-                        </>
-                    )}                   
+                        </>                      
+                    )}                                 
                 </form>
             </div>
             
