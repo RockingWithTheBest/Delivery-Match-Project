@@ -1,0 +1,100 @@
+.driver-form-personal-info, .vehicle-form-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.input-group-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.person-edit-info, .vehicle-edit-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.person-edit-info button, .vehicle-edit-info  button {
+    border: 2px solid #00000038;
+    background: black;
+    height: 47px;
+    color: white;
+}
+
+.person-edit-info img, .vehicle-edit-info img{
+    width: 20px;
+}
+
+.person-edit-info div, .vehicle-edit-info  div{
+    display: flex;
+    flex-direction: row;
+    gap: 21px;
+    align-items: center;
+}
+
+.persoal-info-driver, .vehicle-info-component {
+    width: 114%;
+    border: 2px solid #8080805c;
+    border-radius: 13px;
+    padding: 69px;
+    background: white;
+}
+
+.input-group-info label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.input-group-info input {
+    padding: 12px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-group-info input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.input-group-info input[type="datetime-local"] {
+    cursor: pointer;
+}
+
+.input-group-info input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.input-group-info input[type="number"]::-webkit-outer-spin-button,
+.input-group-info input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .driver-form-personal-info, .vehicle-form-info {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {   
+    .input-group-info input {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .input-group-info {
+        min-width: 0;
+    }
+    .driver-form-personal-info , .vehicle-form-info {
+        grid-template-columns: 1fr;
+    }
+}
