@@ -1,0 +1,96 @@
+/* Completion Bar Styles */
+.completion-bar {
+    width: 125%;
+    background: white;
+    border-radius: 8px;
+    padding: 23px;
+    display: flex;
+    flex-direction: column;
+}
+
+.completion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.completion-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.completion-percentage {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.progress-container {
+    width: 100%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #000000;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+/* Existing styles for the rest of the profile */
+.driver-profile {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-first-part {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.client-abbreviation {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.client-details h3 {
+    margin: 0 0 8px 0;
+    color: #333;
+}
+
+.client-details p {
+    margin: 4px 0;
+    color: #666;
+}
+
+.driver-sub-nav {
+    cursor: pointer;
+    padding: 7px;
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    color: black;
+    background-color: #eeeef5;
+    border-radius: 26px;
+    align-items: center;
+    gap: 193px;
+    width: 128%;
+}
