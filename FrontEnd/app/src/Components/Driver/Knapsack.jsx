@@ -14,6 +14,7 @@ const KnapsackAlgorithm=()=>{
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const {DriverId}=useParams()
+    const url = "https://localhost:7216/api";
 
     const getAllDriverRecords=async()=>{
         try{
@@ -224,14 +225,35 @@ const KnapsackAlgorithm=()=>{
                 const PlacementIds = selectedOrders.map(order=>order.Id)
                 try{
                     const id = selectedOrders[0].Id;
-                    console.log("Hey", selectedOrders)
+                    
                     // for(const id of PlacementIds){
                     //     await axios.delete(`https://localhost:7216/api/OrderPlacement/Delete-An-OrderPlacment-Record`, {
                     //         params: { Id: id }
                     //     });                       
                     // }
-                    // for(const id)
-                    await axios.put();
+                    for(const item of selectedOrders){
+                        console.log("Hey", item)
+                        const updateItem={
+                            CompletedOn:item.CompletedOn,
+                            CreatedAt:item.CreatedAt,
+                            CustomerId:item.CustomerId,
+                            DeliveryContact:item.DeliveryContact,
+                            DeliveryUpAddress:item.DeliveryUpAddress,
+                            Description:item.Description,
+                            PickUpAddress:item.PickUpAddress,
+                            PickUpContact:item.PickUpContact,
+                            Price:item.Price,
+                            ScheduledAt:item.ScheduledAt,
+                            Status:item.Status,
+                            DriverId:parseInt(DriverId)
+                        }
+                        await axios.put(`${url}/OrderPlacement/Editing-Order-PlacementAddresses`,updateItem,{
+                            params:{
+                                Id:parseInt(item.Id)
+                            }
+                        });
+                    }
+                    
                     // const ordersData = selectedOrders.map(order => ({
                     //     ...order,
                     //     // Remove the Id since we're creating new records
