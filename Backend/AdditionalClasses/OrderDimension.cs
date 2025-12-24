@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Backend.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.AdditionalClasses
@@ -9,12 +10,16 @@ namespace Backend.AdditionalClasses
         public int Id { get; set; }
         [Required]
         [Column(TypeName = "decimal(5,2)")]
-        public decimal Length {  get; set; }
+        public decimal Length { get; set; }
         [Required]
         [Column(TypeName = "decimal(5,2)")]
-        public decimal Height {  get; set; }
+        public decimal Height { get; set; }
         [Required]
         [Column(TypeName = "decimal(5,2)")]
-        public decimal Width {  get; set; }
+        public decimal Width { get; set; }
+
+        [Required]
+        public int OrderItemsId { get; set; }
+        public virtual OrderItems? OrderItems {  get; set; }
     }
 }

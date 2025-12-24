@@ -81,12 +81,12 @@ namespace Backend.Repository.Implementation
             else
             {
                 var updateRecord = databaseContext.Customers.Where(temp => temp.Id == Id).FirstOrDefault();
-                updateRecord.Business_Name = customer.Business_Name;
-                updateRecord.Business_Type = customer.Business_Type;
-                updateRecord.Tax_Identification = customer.Tax_Identification;
+                updateRecord.BusinessName = customer.BusinessName;
+                updateRecord.BusinessType = customer.BusinessType;
+                updateRecord.TaxIdentification = customer.TaxIdentification;
                 updateRecord.Rating = customer.Rating;
-                updateRecord.Total_Orders = customer.Total_Orders;
-                updateRecord.Total_Spent = customer.Total_Spent;
+                updateRecord.TotalOrders = customer.TotalOrders;
+                updateRecord.TotalSpent = customer.TotalSpent;
                 databaseContext.SaveChanges();
                 testValue = updateRecord.Id;
             }

@@ -11,7 +11,7 @@ namespace Backend.Models
         public string Label { get; set; }
         [Required]
         [StringLength(50)]
-        public string Address_Line { get; set; }
+        public string AddressLine { get; set; }
         [Required]
         [StringLength(40)]
         public string City { get; set; }

@@ -73,7 +73,7 @@ namespace Backend.Repository.Implementation
                 updatedRecord.Type = notify.Type;
                 updatedRecord.Title = notify.Title;
                 updatedRecord.Message = notify.Message;
-                updatedRecord.Is_Read = notify.Is_Read;
+                updatedRecord.IsRead = notify.IsRead;
                 databaseContext.SaveChanges();
                 testValue = updatedRecord.Id;
             }

@@ -13,7 +13,7 @@ namespace Backend.Repository.Implementation
         {
             this.databaseContext = databaseContext;
         }
-        public int AddTrackingRecord(Order_Tracking tracking)
+        public int AddTrackingRecord(OrderTracking tracking)
         {
             int textVariable = -1;
             if (tracking == null)
@@ -49,17 +49,17 @@ namespace Backend.Repository.Implementation
             return testValue;
         }
 
-        public IEnumerable<Order_Tracking> GetAllTrackings()
+        public IEnumerable<OrderTracking> GetAllTrackings()
         {
             return databaseContext.OrderTrackings.ToList();
         }
 
-        public Order_Tracking GetSingleRecord(int Id)
+        public OrderTracking GetSingleRecord(int Id)
         {
             return databaseContext.OrderTrackings.Where(temp => temp.Id == Id).FirstOrDefault();
         }
 
-        public int UpdateTrackingRecord(int Id, Order_Tracking tracking)
+        public int UpdateTrackingRecord(int Id, OrderTracking tracking)
         {
             int testValue = -1;
             if (Id <= 0 || tracking == null)
@@ -68,7 +68,7 @@ namespace Backend.Repository.Implementation
             }
             else
             {
-                Order_Tracking updatedRecord = databaseContext.OrderTrackings.Where(temp => temp.Id == Id).FirstOrDefault();
+                OrderTracking updatedRecord = databaseContext.OrderTrackings.Where(temp => temp.Id == Id).FirstOrDefault();
                 updatedRecord.Longitude = tracking.Longitude;
                 updatedRecord.Latitude = tracking.Latitude;
                 updatedRecord.Status = tracking.Status;

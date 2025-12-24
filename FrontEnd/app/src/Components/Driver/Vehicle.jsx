@@ -50,11 +50,11 @@ const Vehicle =({driverDetails})=>{
             const vehicleInfo ={
                 Brand:brand,
                 Model:model,
-                Make_Year:makeYear,
+                MakeYear:makeYear,
                 Color:color,
-                License_Plate:licensePlate,
-                Max_Weight:parseFloat(maxWeight),
-                Max_Volume:parseFloat(maxVolume),
+                LicensePlate:licensePlate,
+                MaxWeight:parseFloat(maxWeight),
+                MaxVolume:parseFloat(maxVolume),
                 DriverId:parseInt(DriverId)
             }
             
@@ -79,11 +79,11 @@ const Vehicle =({driverDetails})=>{
             
             setBrand(response.data.Brand)
             setModel(response.data.Model)
-            setMakeYear(response.data.Make_Year)
+            setMakeYear(response.data.MakeYear)
             setColor(response.data.Color)
-            setLicensePlate(response.data.License_Plate)
-            setMaxVolume(response.data.Max_Volume)
-            setMaxWieght(response.data.Max_Weight)
+            setLicensePlate(response.data.LicensePlate)
+            setMaxVolume(response.data.MaxVolume)
+            setMaxWieght(response.data.MaxWeight)
     }
     useEffect(()=>{
         handleReloads()
@@ -91,22 +91,22 @@ const Vehicle =({driverDetails})=>{
 
     useEffect(()=>{
             if(driverDetails){
-                setLicensePlate(driverDetails.License_Plate || "")
+                setLicensePlate(driverDetails.LicensePlate || "")
                 setEmail(driverDetails.Email || "")
                 setPhone(driverDetails.Phone || "")
                 setFirstName(driverDetails.FirstName || "")
                 setLastName(driverDetails.LastName || "")
-                setCompletionRate(driverDetails.Completion_Rate || "")
+                setCompletionRate(driverDetails.CompletionRate || "")
                 setRating(driverDetails.Rating || "")
-                setIsVerified(driverDetails.Is_Verified || "")
+                setIsVerified(driverDetails.IsVerified || "")
                 setLicenseExpiry(driverDetails.LicenseExpiry || "")
                 setDriverLicense(driverDetails.DrivingLicense || "")
-                setTotalEarning(driverDetails.Total_Earnings || "")
+                setTotalEarning(driverDetails.TotalEarnings || "")
                 setBrand(driverDetails.Brand || "")
                 setModel(driverDetails.Model || "")
-                setMakeYear(driverDetails.Make_Year || "")
-                setMaxWieght(driverDetails.Max_Weight || "")
-                setMaxVolume(driverDetails.Max_Volume || "")
+                setMakeYear(driverDetails.MakeYear || "")
+                setMaxWieght(driverDetails.MaxWeight || "")
+                setMaxVolume(driverDetails.MaxVolume || "")
                 setColor(driverDetails.Color || "")
                 setVehicleId(driverDetails.VehicleId || "")
             }

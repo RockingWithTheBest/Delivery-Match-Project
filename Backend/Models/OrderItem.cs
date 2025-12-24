@@ -4,21 +4,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
-    public class Order_Items
+    public class OrderItems
     {
         [Key]
         public int Id { get; set; }
         [Required]
         [StringLength(40)]
-        public string Item_Name {  get; set; }
+        public string ItemName {  get; set; }
         [Required]
         public int Quantity {  get; set; }
         [Required]
         [Column(TypeName ="decimal(8,2)")]
-        public decimal Weight_Per_Item { get; set; }
+        public decimal WeightPerItem { get; set; }
         [Required]
         [StringLength(50)]
-        public string Special_Instructions { get; set; }
+        public string SpecialInstructions { get; set; }
         [Required]
         public int OrderPlacementId { get; set; }
 

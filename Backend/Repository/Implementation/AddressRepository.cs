@@ -73,7 +73,7 @@ namespace Backend.Repository.Implementation
             {
                 Address updatedRecord = databaseContext.Addresses.Where(temp => temp.Id == Id).FirstOrDefault();
                 updatedRecord.Label = record.Label;
-                updatedRecord.Address_Line = record.Address_Line;
+                updatedRecord.AddressLine = record.AddressLine;
                 updatedRecord.City = record.City;
                 databaseContext.SaveChanges();
                 testValue = record.Id;

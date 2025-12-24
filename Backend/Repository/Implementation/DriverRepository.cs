@@ -72,13 +72,13 @@ namespace Backend.Repository.Implementation
             if(driver != null && Id > 0)
             {
                 var record = databaseContext.Drivers.Where(x=>x.Id==Id).FirstOrDefault();
-                record.Drivers_License = driver.Drivers_License;
-                record.License_Expiry = driver.License_Expiry;
-                record.Is_Verified = driver.Is_Verified;
-                record.Is_Available = driver.Is_Available;
+                record.DriversLicense = driver.DriversLicense;
+                record.LicenseExpiry = driver.LicenseExpiry;
+                record.IsVerified = driver.IsVerified;
+                record.IsAvailable = driver.IsAvailable;
                 record.Rating = driver.Rating;
-                record.Completion_Rate = driver.Completion_Rate;
-                record.Total_Earnings = driver.Total_Earnings;
+                record.CompletionRate = driver.CompletionRate;
+                record.TotalEarnings = driver.TotalEarnings;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }

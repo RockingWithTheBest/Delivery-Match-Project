@@ -28,17 +28,15 @@ const NewOrder=()=>{
     const handleSubmit = async()=>{
         try{
             const orderPlacements={
-                Pick_Up_Address:pickupAddress,
-                Delivery_Up_Address:deliveryAddress,
-                Pick_Up_Contact:pickupContact,
-                Delivery_Contact:deliveryContact,
-                // Weight:weight,
-                // Volume:volume,
+                PickUpAddress:pickupAddress,
+                DeliveryUpAddress:deliveryAddress,
+                PickUpContact:pickupContact,
+                DeliveryContact:deliveryContact,
                 Description:desciption,
                 Status:status,
                 Price:price,
-                Created_At:createdAt,
-                Scheduled_At:scheduledForDeliveryOn,
+                CreatedAt:createdAt,
+                ScheduledAt:scheduledForDeliveryOn,
                 CustomerId:ClientId
             }
             const response = await axios.post(`${url}/OrderPlacement/Add-OrderPlacement`,orderPlacements)

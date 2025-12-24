@@ -66,7 +66,7 @@ namespace Backend.Repository.Implementation
         public IEnumerable<OrderPlacement> GetAllOrderPlacement()
         {
             return databaseContext.OrderPlacements
-                .Include(d => d.Order_Items)
+                .Include(d => d.OrderItems)
                     .ThenInclude(i => i.OrderDimension)
             .ToList();
         }
@@ -93,17 +93,17 @@ namespace Backend.Repository.Implementation
             else
             {
                 OrderPlacement updatedRecord = databaseContext.OrderPlacements.Where(temp => temp.Id == Id).FirstOrDefault();
-                updatedRecord.Pick_Up_Contact = record.Pick_Up_Contact;
-                updatedRecord.Delivery_Contact = record.Delivery_Contact;
-                updatedRecord.Delivery_Up_Address = record.Delivery_Up_Address;
+                updatedRecord.PickUpContact = record.PickUpContact;
+                updatedRecord.DeliveryContact = record.DeliveryContact;
+                updatedRecord.DeliveryUpAddress = record.DeliveryUpAddress;
                 //updatedRecord.Weight = record.Weight;
                 //updatedRecord.Volume = record.Volume;
                 updatedRecord.Price = record.Price;
                 updatedRecord.Description = record.Description;
                 //updatedRecord.Distance = record.Distance;
-                updatedRecord.Created_At = record.Created_At;
-                updatedRecord.Scheduled_At = record.Scheduled_At;
-                updatedRecord.Completed_On = record.Completed_On;
+                updatedRecord.CreatedAt = record.CreatedAt;
+                updatedRecord.ScheduledAt = record.ScheduledAt;
+                updatedRecord.CompletedOn = record.CompletedOn;
                 updatedRecord.DriverId = record.DriverId;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
@@ -111,7 +111,7 @@ namespace Backend.Repository.Implementation
             return testValue;
         }
 
-        public string AddBulkOrdersWithItems(List<OrderPlacement> orders, List<Order_Items> orderItems, int ClientId)
+        public string AddBulkOrdersWithItems(List<OrderPlacement> orders, List<OrderItems> orderItems, int ClientId)
         {
             
             {
@@ -141,18 +141,18 @@ namespace Backend.Repository.Implementation
                         
                         var orderPlacement = new OrderPlacement
                         {
-                            Pick_Up_Address = order.Pick_Up_Address,
-                            Delivery_Up_Address = order.Delivery_Up_Address,
-                            Pick_Up_Contact = order.Pick_Up_Contact,
-                            Delivery_Contact = order.Delivery_Contact,
+                            PickUpAddress = order.PickUpAddress,
+                            DeliveryUpAddress = order.DeliveryUpAddress,
+                            PickUpContact = order.PickUpContact,
+                            DeliveryContact = order.DeliveryContact,
                             //Weight = order.Weight,
                             //Volume = order.Volume,
                             Description = order.Description,
                             Status = order.Status,
                             Price = order.Price,
-                            Created_At = DateTime.Now,
-                            Scheduled_At = order.Scheduled_At,
-                            Completed_On = order.Completed_On,
+                            CreatedAt = DateTime.Now,
+                            ScheduledAt = order.ScheduledAt,
+                            CompletedOn = order.CompletedOn,
                             CustomerId = ClientId
                         };
           
@@ -167,12 +167,12 @@ namespace Backend.Repository.Implementation
                     {
                         var order = orders[i];
                         var item = orderItems[i];
-                        var orderitem = new Order_Items
+                        var orderitem = new OrderItems
                         {
-                            Item_Name = item.Item_Name,
+                            ItemName = item.ItemName,
                             Quantity = item.Quantity,
-                            Weight_Per_Item = item.Weight_Per_Item,
-                            Special_Instructions = item.Special_Instructions,
+                            WeightPerItem = item.WeightPerItem,
+                            SpecialInstructions = item.SpecialInstructions,
                             //Dimension = new OrderDimension
                             //{
                             //    Length = item.Dimension.Length,

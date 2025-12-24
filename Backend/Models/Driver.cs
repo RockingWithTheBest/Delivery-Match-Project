@@ -9,19 +9,19 @@ namespace Backend.Models
         public int Id { get; set; }
         [Required]
         [StringLength(30)]
-        public string Drivers_License {  get; set; }
+        public string DriversLicense {  get; set; }
         [Required]
-        public DateOnly License_Expiry { get; set; }
+        public DateOnly LicenseExpiry { get; set; }
         
-        public bool Is_Verified { get; set; }
+        public bool IsVerified { get; set; }
         [Required]
-        public bool Is_Available { get; set; }
+        public bool IsAvailable { get; set; }
         [StringLength(10)]
         public string Rating {  get; set; }
         [StringLength(30)]
-        public string Completion_Rate {  get; set; }
+        public string CompletionRate {  get; set; }
         [Column(TypeName ="decimal(10,2)")]
-        public decimal Total_Earnings { get; set; }
+        public decimal TotalEarnings { get; set; }
         [Required]
         public int UserId {  get; set; }
         public List<OrderPlacement>? OrdersPlaced { get; set; } = new List<OrderPlacement>();

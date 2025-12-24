@@ -71,10 +71,10 @@ namespace Backend.Repository.Implementation
                 Payment updatedRecord = databaseContext.Payments.Where(temp => temp.Id == Id).FirstOrDefault();
                 updatedRecord.Amount = record.Amount;
                 updatedRecord.Status = record.Status;
-                updatedRecord.Transaction_Identification = record.Transaction_Identification;
-                updatedRecord.Processed_At = record.Processed_At;
-                updatedRecord.Platform_Fee = record.Platform_Fee;
-                updatedRecord.Driver_Earnings = record.Driver_Earnings;
+                updatedRecord.TransactionIdentification = record.TransactionIdentification;
+                updatedRecord.ProcessedAt = record.ProcessedAt;
+                updatedRecord.PlatformFee = record.PlatformFee;
+                updatedRecord.DriverEarnings = record.DriverEarnings;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }

@@ -63,14 +63,14 @@ namespace Backend.Repository.Implementation
             else if(document != null && Id > 0)
             {
                 var updateRecord = databaseContext.Documents.Where(x => x.Id == Id).FirstOrDefault();
-                updateRecord.Document_Type = document.Document_Type;
-                updateRecord.File_Url = document.File_Url;
-                updateRecord.Expiry_Date = document.Expiry_Date;
+                updateRecord.DocumentType = document.DocumentType;
+                updateRecord.FileUrl = document.FileUrl;
+                updateRecord.ExpiryDate = document.ExpiryDate;
                 updateRecord.Status = document.Status;
-                updateRecord.Rejection_Reason = document.Rejection_Reason;
-                updateRecord.Uploaded_At = document.Uploaded_At;
-                updateRecord.Reviewed_By = document.Reviewed_By;
-                updateRecord.Reviewed_At = document.Reviewed_At;
+                updateRecord.RejectionReason = document.RejectionReason;
+                updateRecord.UploadedAt = document.UploadedAt;
+                updateRecord.ReviewedBy = document.ReviewedBy;
+                updateRecord.ReviewedAt = document.ReviewedAt;
                 databaseContext.SaveChanges();
                 testValue = document.Id;
             }

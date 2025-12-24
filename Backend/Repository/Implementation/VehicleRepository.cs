@@ -76,11 +76,11 @@ namespace Backend.Repository.Implementation
             {
                 Vehicle updatedRecord = databaseContext.Vehicles.Where(temp => temp.Id == Id).FirstOrDefault();
                 updatedRecord.Brand = record.Brand;
-                updatedRecord.Max_Weight = record.Max_Weight;
+                updatedRecord.MaxWeight = record.MaxWeight;
                 updatedRecord.Model = record.Model;
-                updatedRecord.Make_Year = record.Make_Year;
+                updatedRecord.MakeYear = record.MakeYear;
                 updatedRecord.Color = record.Color;
-                updatedRecord.License_Plate = record.License_Plate;
+                updatedRecord.LicensePlate = record.LicensePlate;
                 //updatedRecord.Max_Volume = record.Max_Volume;
                 databaseContext.SaveChanges();
                 testValue = record.Id;

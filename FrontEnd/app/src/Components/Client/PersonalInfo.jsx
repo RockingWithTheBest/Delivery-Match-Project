@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 
 const PersonalInfo=({customerDetails})=>{
     const {password}=useParams()
-     const {ClientId}=useParams()
+    const {ClientId}=useParams()
     const [disableTrue,setDisableToTrue] = useState(true)
     const [firstName, setFirstName] = useState(customerDetails.Customer_FirstName || "")
     const [lastName, setLastName] = useState(customerDetails.Customer_LastName || "")
@@ -38,20 +38,20 @@ const PersonalInfo=({customerDetails})=>{
                 )
 
                 const customer = {
-                    Business_Name:businessName,
-                    Business_Type:businessTypeName,
-                    Tax_Identification:businessTax,
+                    BusinessName:businessName,
+                    BusinessType:businessTypeName,
+                    TaxIdentification:businessTax,
                     Rating:customerResponse.data.Rating,
-                    Total_Orders:customerResponse.data.Total_Orders,
-                    Total_Spent:customerResponse.data.Total_Spent,
+                    TotalOrders:customerResponse.data.Total_Orders,
+                    TotalSpent:customerResponse.data.Total_Spent,
                     UserId:customerResponse.data.UserId
                 }
 
                 const user = {
                     Email:email,
                     Phone:phone,
-                    First_Name:firstName,
-                    Last_Name:lastName,
+                    FirstName:firstName,
+                    LastName:lastName,
                     Password:password
                 }
 

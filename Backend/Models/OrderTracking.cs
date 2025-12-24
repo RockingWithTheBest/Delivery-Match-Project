@@ -2,7 +2,7 @@
 
 namespace Backend.Models
 {
-    public class Order_Tracking
+    public class OrderTracking
     {
         [Key]
         public int Id { get; set; }

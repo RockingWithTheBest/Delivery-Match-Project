@@ -4,10 +4,10 @@ namespace Backend.Repository.Interface
 {
     public interface IOrderItems
     {
-        IEnumerable<Order_Items> GetAllOrderItems();
-        Order_Items GetSingleRecord(int Id);
-        int AddOrderItemsRecord(Order_Items items);
-        int UpdateOrderItemsRecord(int Id, Order_Items items);
+        IEnumerable<OrderItems> GetAllOrderItems();
+        OrderItems GetSingleRecord(int Id);
+        int AddOrderItemsRecord(OrderItems items);
+        int UpdateOrderItemsRecord(int Id, OrderItems items);
         int DeleteOrderItemRecord(int Id);
     }
 }

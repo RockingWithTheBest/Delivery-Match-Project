@@ -14,10 +14,10 @@ namespace Backend.Models
         public string Phone { get; set; }
         [Required]
         [StringLength(20)]
-        public string First_Name { get; set; }
+        public string FirstName { get; set; }
         [Required]
         [StringLength(20)]
-        public string Last_Name { get; set; }
+        public string LastName { get; set; }
         [Required]
         [StringLength(20)]
         public string Password { get; set; }

@@ -9,7 +9,7 @@ const KnapsackAlgorithm=()=>{
     const [vehicleRecords,setVehicleRecords] = useState([])
     const [orderPlacements, setOrderPlacementRecords]=useState([])
     const [selectedVehicle, setSelectedVehicle] = useState(null)
-    const [selectedOrders, setSelectedOrders] = useState([]);//HERE CLYDE
+    const [selectedOrders, setSelectedOrders] = useState([]);
     const [solution, setSolution] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -36,56 +36,125 @@ const KnapsackAlgorithm=()=>{
         }
         
     }
-        useEffect(() => {
+        
+    useEffect(() => {
             if (vehicleRecords.length > 0 && !selectedVehicle) {
                 setSelectedVehicle(vehicleRecords[0]);
             }
-        }, [vehicleRecords]);
+    }, [vehicleRecords]);
+        // 2D Knapsack algorithm that considers both weight and volume
+        const solve2DKnapsack=(weights, volumes, values, maxWeight, vehicleCapacity)=>{
+                
+            //Scale to integers(assume 2 decimal precision)
+            const PRECISION = 100;
     
-        const solveKnapsack=(densities, values, vehicleCapacity)=>{
+            // ---- Stage 1: Knapsack by VOLUME only ----
+            const intCapacity = Math.round(vehicleCapacity*PRECISION)
+            const intVolumes = volumes.map(v =>Math.round(v*PRECISION))
            
-            const n = densities.length;
-    
+            let me = 0
+            intVolumes.forEach(v=>{
+                me = me + v
+            })
+            console.log("TOTAL ORDERS VOLUME",me)
+            console.log("volumes",intVolumes)
+            console.log("vehicleCapacity",intCapacity)
+           
+            const n = volumes.length;
+
+            // Edge case: if capacity is 0
+            if(intCapacity <=0){
+                return { 
+                    maxValue: 0, 
+                    selectedIndices: [], 
+                    totalWeight: 0 
+                };
+            }
+            
             // Create DP table with n+1 rows and capacity+1 columns
-            const dp = Array.from({length:n+1}, ()=>Array(vehicleCapacity+1).fill(0))
+            const dp1 = Array.from({length:n+1}, 
+                ()=>Array(intCapacity+1).fill(0))
             
             for( let i = 1 ; i <= n ; i++){
-                for(let w = 0 ; w <= vehicleCapacity ; w++){
-    
-                    if(densities[i - 1] <= w){// If current item's weight is less than or equal to current capacity
-    
+                for(let v = 0 ; v <= intCapacity ; v++){
+
+                    if(intVolumes[i - 1] <= v){// If current item's weight is less than or equal to current capacity
+
                         // Choose maximum between including and excluding the item
-                        dp[i][w]= Math.max(
-                            values[i - 1]+dp[i - 1][w - densities[i - 1]] , 
-                            dp[i - 1][w]                    
+                        dp1[i][v]= Math.max(
+                            values[i - 1]+dp1[i - 1][v - intVolumes[i - 1]] , 
+                            dp1[i - 1][v]                    
                         )
                     }
                     else{
-                        dp[i][w]=dp[i - 1][w]// If item can't be included, carry forward the previous value
+                        dp1[i][v]=dp1[i - 1][v]// If item can't be included, carry forward the previous value
+                    }
+                }
+            }
+
+                      
+            // Backtrack to find which items were selected
+            let remainingCapacity = intCapacity;
+            const selectedIndicesVols = [];
+            let totalScaledWeight = 0;
+            let totalValue = 0;
+
+            for(let i = n; i > 0 && remainingCapacity > 0; i--){
+                if(dp1[i][remainingCapacity]!==dp1[i-1][remainingCapacity]){
+                    selectedIndicesVols.push(i - 1);
+                    // totalScaledWeight += intVolumes[i - 1];
+                    // totalValue += values[i - 1];
+                    remainingCapacity -= intVolumes[i - 1];
+                }
+            }
+            
+            // ---- Stage 2: Knapsack by WEIGHT on CANDIDATES only ----
+            const intWeights = weights.map(w =>Math.round(w*PRECISION))
+            const intMaxWeight = Math.round(maxWeight*PRECISION)
+            const candWeights = selectedIndicesVols.map(i=>Math.round(intWeights[i]))
+
+            console.log("candWeights0",candWeights)
+            console.log("intMaxWeight",intMaxWeight)
+            const m = selectedIndicesVols.length
+            if(m===0){
+                return { maxValue: 0, selectedIndices: [], totalWeight: 0, totalVolume: 0 };
+            }
+
+            const dp2 = Array.from({ length: m + 1 }, () => Array(intMaxWeight + 1).fill(0));
+            for(let i = 1; i<=m; i++){
+                for(let z = 0; z<=intMaxWeight; z++){
+                    if(candWeights[i - 1]<=z){
+                        dp2[i][z] = Math.max(
+                        values[i - 1] + dp2[i - 1][z - candWeights[i - 1]],
+                        dp2[i - 1][z]
+                    );
+                    } else {
+                        dp2[i][z] = dp2[i - 1][z];
                     }
                 }
             }
             
-            // Backtrack to find which items were selected
-            let remainingCapacity = vehicleCapacity;
-            const selectedIndices = [];
-            let totalWeight = 0;
-            let totalValue = 0;
-    
-            for(let i = n; i > 0 && remainingCapacity > 0; i--){
-                if(dp[i][remainingCapacity]!==dp[i-1][remainingCapacity]){
-                    selectedIndices.push(i - 1);
-                    totalWeight += densities[i - 1];
-                    totalValue += values[i - 1];
-                    remainingCapacity -= densities[i - 1];
+            let remainingWeightCapacity = intMaxWeight;
+            const finalIndices = [];
+            for(let i = m ; i > 0 && remainingWeightCapacity > 0 ; i--){
+                if(dp2[i][remainingWeightCapacity] !=dp2[i-1][remainingWeightCapacity]){
+                    finalIndices.push(selectedIndicesVols[i - 1]); // map back to original index
+                    remainingWeightCapacity -= candWeights[i - 1];
                 }
-            }
-    
-            return{
-                maxValue: dp[n][vehicleCapacity],
-                selectedIndices: selectedIndices.reverse(),
-                totalWeight: totalWeight
-            }
+            } 
+            
+            finalIndices.reverse();
+
+            const totalWeight = finalIndices.reduce((sum, i) => sum + weights[i], 0);
+            const totalVolume = finalIndices.reduce((sum, i) => sum + volumes[i], 0);
+            const maxValue = dp2[m][intMaxWeight];
+
+            return {
+                maxValue,
+                selectedIndices: finalIndices.reverse(),
+                totalWeight,
+                totalVolume
+            };
         }
     
         const calculateOptimalOrders =()=>{
@@ -102,29 +171,43 @@ const KnapsackAlgorithm=()=>{
             try{
                 setLoading(true)
                 setError('')
-    
-                const orderDensity = orderPlacements.map(order=>Math.round(parseFloat(order.Weight/order.Volume)))
 
-                const values = orderPlacements.map(order=>Math.round(parseFloat(order.Price)))
-                const vehicleCapacity = Math.round(parseFloat(selectedVehicle.Max_Weight/selectedVehicle.Max_Volume))
-                console.log(vehicleCapacity)
-    
-                if (orderDensity.some(isNaN) || values.some(isNaN) || isNaN(vehicleCapacity)) {
-                    throw new Error('Invalid data detected. Please check density, prices, and capacity.');
+                // Calculate weight for each order
+                const orderWeights = orderPlacements.map(order =>{
+                    return order.OrderItems.WeightPerItem*order.OrderItems.Quantity || 0
+                })
+
+                //Calculate volume for each order
+                const orderVolumes =  orderPlacements.map(order =>{
+                    return ((order.OrderItems.OrderDimension.Height*order.OrderItems.OrderDimension.Length*order.OrderItems.OrderDimension.Width)/10000)     || 0
+                })
+                
+                // const values = orderPlacements.map(order=>Math.round(parseFloat(order.Price)))
+                const values = orderPlacements.map(order=>Math.round((order.Price)))
+
+                // Calculate vehicle capacity
+                const vehicleMaxWeight = (selectedVehicle.MaxWeight)
+                const vehicleVolume = ((selectedVehicle.Length * selectedVehicle.Width * selectedVehicle.Height)/10000)// convert to meters                 
+            
+                if (orderWeights.some(isNaN) || orderVolumes.some(isNaN) || values.some(isNaN) || isNaN(vehicleVolume) || isNaN(vehicleMaxWeight)) {
+                    console.log("Invalid data detected. Please check weights, volumes, prices, and capacity")
+                    throw new Error('Invalid data detected. Please check weights, volumes, prices, and capacity.');
                 }
-    
-                const result = solveKnapsack(orderDensity, values, vehicleCapacity);
+                
+                const result = solve2DKnapsack(orderWeights, orderVolumes, values, vehicleMaxWeight, vehicleVolume);
+                
                 const selectedOrderItems = result.selectedIndices.map(index => orderPlacements[index]);
-                // const {DriverId} = useParams()
+                //console.log("selectedOrderItems", selectedOrderItems)
+               
                 setSelectedOrders(selectedOrderItems);
-                console.log("::", selectedOrderItems)
-
-
+                console.log("Selected Orders:", selectedOrderItems)
                   
                 setSolution({
                     maxValue: result.maxValue,
-                    totalDensity: result.totalDensity,
-                    capacity: vehicleCapacity,
+                    totalWeight: result.totalWeight,
+                    totalVolume: result.totalVolume,
+                    weightCapacity: vehicleMaxWeight,
+                    volumeCapacity: vehicleVolume,
                     selectedOrders: selectedOrderItems
                 })
             }
@@ -141,46 +224,45 @@ const KnapsackAlgorithm=()=>{
                 const PlacementIds = selectedOrders.map(order=>order.Id)
                 try{
                     const id = selectedOrders[0].Id;
-            
-                    for(const id of PlacementIds){
-                        // await axios.delete(`https://localhost:7216/api/Route/Delete-A-Route-Record/${id}`)
-                        // await axios.delete(`https://localhost:7216/api/OrderPlacement/Delete-An-OrderPlacment-Record/${parseInt(id)}`) 
-                        await axios.delete(`https://localhost:7216/api/OrderPlacement/Delete-An-OrderPlacment-Record`, {
-                            params: { Id: id }
-                        });                       
-                    }
-                    const ordersData = selectedOrders.map(order => ({
-                        ...order,
-                        // Remove the Id since we're creating new records
-                        Id: 0, // or omit this field entirely to let the database generate new IDs
-                        DriverId: parseInt(DriverId) // Update the DriverId to the current driver
-                    }));
-                    await axios.post(`https://localhost:7216/api/Driver/Collection-Post?DriverId=${DriverId}`, 
-                        ordersData,
-                        {
-                            headers: {
-                                'Content-Type': 'application/json-patch+json'
-                            }
-                    })
+                    console.log("Hey", selectedOrders)
+                    // for(const id of PlacementIds){
+                    //     await axios.delete(`https://localhost:7216/api/OrderPlacement/Delete-An-OrderPlacment-Record`, {
+                    //         params: { Id: id }
+                    //     });                       
+                    // }
+                    // for(const id)
+                    await axios.put();
+                    // const ordersData = selectedOrders.map(order => ({
+                    //     ...order,
+                    //     // Remove the Id since we're creating new records
+                    //     Id: 0, // or omit this field entirely to let the database generate new IDs
+                    //     DriverId: parseInt(DriverId) // Update the DriverId to the current driver
+                    // }));
+
+                    // await axios.post(`https://localhost:7216/api/Driver/Collection-Post?DriverId=${DriverId}`, 
+                    //     ordersData,
+                    //     {
+                    //         headers: {
+                    //             'Content-Type': 'application/json-patch+json'
+                    //         }
+                    // })
                     alert("Успешно заявленные заказы")
                 }
-                 catch(e){
+                catch(e){
                     console.log("ERROR", e.message)
                 }
-            } 
-            
-            
-            
-            
+            }          
         }
         useEffect(()=>{
             getAllDriverRecords()
             getAllOrderPlacementRecords()       
-        }, [])
+        }, [DriverId])
 
+
+        
        return(
 
-            <div className="knapsack-container">
+        <div className="knapsack-container">
             <header className="knapsack-header">
                 <h1>Vehicle Capacity Optimization</h1>
                 <p>Select a vehicle and find the optimal set of orders to maximize value</p>
@@ -207,7 +289,7 @@ const KnapsackAlgorithm=()=>{
                     >
                         {vehicleRecords.map(vehicle => (
                             <option key={vehicle.Id} value={vehicle.Id}>
-                                {vehicle.Name || `Vehicle ${vehicle.Id}`} - Capacity: {vehicle.Max_Weight}kg
+                                {vehicle.Brand} {vehicle.Model} - Capacity: {vehicle.MaxWeight}kg, Volume: {(vehicle.Length * vehicle.Width * vehicle.Height / 10000).toFixed(2)}m³
                             </option>
                         ))}
                     </select>
@@ -217,16 +299,20 @@ const KnapsackAlgorithm=()=>{
                             <h4>Selected Vehicle Details</h4>
                             <div className="vehicle-details">
                                 <div className="vehicle-detail">
+                                    <strong>Brand:</strong> {selectedVehicle.Brand}
+                                </div>
+                                <div className="vehicle-detail">
+                                    <strong>Model:</strong> {selectedVehicle.Model}
+                                </div>
+                                <div className="vehicle-detail">
                                     <strong>Max Weight:</strong> {selectedVehicle.Max_Weight}kg
                                 </div>
                                 <div className="vehicle-detail">
-                                    <strong>Vehicle ID:</strong> {selectedVehicle.Id}
+                                    <strong>Dimensions:</strong> {selectedVehicle.Length}×{selectedVehicle.Width}×{selectedVehicle.Height}cm
                                 </div>
-                                {selectedVehicle.Model && (
-                                    <div className="vehicle-detail">
-                                        <strong>Model:</strong> {selectedVehicle.Model}
-                                    </div>
-                                )}
+                                <div className="vehicle-detail">
+                                    <strong>Volume:</strong> {(selectedVehicle.Length * selectedVehicle.Width * selectedVehicle.Height / 1000000).toFixed(2)}m³
+                                </div>
                             </div>
                             </div>
                     )}
@@ -242,10 +328,10 @@ const KnapsackAlgorithm=()=>{
                 <button className="claim" onClick={()=>ClaimMyOrders()} >Claim Orders</button>
             </section>
 
-            <section className="orders-section">
+
+             <section className="orders-section">
                 <div className="section-header">
                     <h2>Available Orders ({orderPlacements.length})</h2>
-                    <span>Total Orders: {orderPlacements.length}</span>
                 </div>
                 
                 {orderPlacements.length === 0 ? (
@@ -254,30 +340,40 @@ const KnapsackAlgorithm=()=>{
                     </div>
                 ) : (
                     <div className="orders-grid">
-                        {orderPlacements.map((order, index) => (
-                            <div 
-                                key={order.Id} 
-                                className={`order-card ${
-                                    selectedOrders.some(so => so.Id === order.Id) ? 'selected' : ''
-                                }`}
-                            >
-                                <div className="order-header">
-                                    <span className="order-id">Order #{order.Id}</span>
-                                </div>
-                                <div className="order-details">
-                                    <div className="order-detail">
-                                        <label>Weight</label>
-                                        <span>{order.Weight} kg</span>
+                        {orderPlacements.map((order, index) => {
+                            // Calculate order weight and volume
+                            let orderWeight = order.OrderItems.WeightPerItem * order.OrderItems.Quantity || 0
+                            let orderVolume = ((order.OrderItems.OrderDimension.Height * order.OrderItems.OrderDimension.Length  *order.OrderItems.OrderDimension.Width) / 10000) || 0
+                 
+                            return (
+                                <div 
+                                    key={order.Id} 
+                                    className={`order-card ${
+                                        selectedOrders.some(so => so.Id === order.Id) ? 'selected' : ''
+                                    }`}
+                                >
+                                    <div className="order-header">
+                                        <span className="order-id">Order #{order.Id}</span>
                                     </div>
-                                    <div className="order-detail">
-                                        <label>Price</label>
-                                        <span>${order.Price}</span>
+                                    <div className="order-details">
+                                        <div className="order-detail">
+                                            <label>Weight</label>
+                                            <span>{orderWeight.toFixed(2)} kg</span>
+                                        </div>
+                                        <div className="order-detail">
+                                            <label>Volume</label>
+                                            <span>{orderVolume.toFixed(2)} m³</span>
+                                        </div>
+                                        <div className="order-detail">
+                                            <label>Price</label>
+                                            <span>${order.Price}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
-                     )}
+                )}
             </section>
 
             {solution && (
@@ -289,19 +385,35 @@ const KnapsackAlgorithm=()=>{
 
                     <div className="solution-stats">
                         <div className="stat-card">
-                            <h3>Maximum Value</h3>
-                            <p className="value">${solution.maxValue}</p>
+                            <h3>Total Weight</h3>
+                            <p className="value">${solution.totalWeight.toFixed(2)} kg</p>
+                            <p className="sub-value">of {solution.weightCapacity} kg</p>
                         </div>
+
                         <div className="stat-card">
                             <h3>Total Weight</h3>
                             <p className="value">{solution.totalWeight} kg</p>
                         </div>
+
+                         <div className="stat-card">
+                            <h3>Total Volume</h3>
+                            <p className="value">{solution.totalVolume} m³</p>
+                            <p className="sub-value">of {solution.volumeCapacity} m³</p>
+                        </div>
+
                         <div className="stat-card">
-                            <h3>Capacity Used</h3>
+                            <h3>Weight Used</h3>
                             <p className="value">
-                                {((solution.totalWeight / solution.capacity) * 100).toFixed(1)}%
+                                {((solution.totalWeight / solution.weightCapacity) * 100).toFixed(1)}%
                             </p>
-                            </div>
+                        </div>
+
+                        <div className="stat-card">
+                            <h3>Volume Used</h3>
+                            <p className="value">
+                                {((solution.totalVolume / solution.volumeCapacity) * 100).toFixed(1)}%
+                            </p>
+                        </div>
                         <div className="stat-card">
                             <h3>Orders Selected</h3>
                             <p className="value">
@@ -317,21 +429,28 @@ const KnapsackAlgorithm=()=>{
                                     <th>Order ID</th>
                                     <th>Weight (kg)</th>
                                     <th>Price ($)</th>
-                                    <th>Value per kg</th>
+                                    <th>Value/Unit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {solution.selectedOrders.map(order => (
-                                    <tr key={order.Id}>
-                                        <td>{order.Id}</td>
-                                        <td>{order.Weight}</td>
-                                        <td>${order.Price}</td>
-                                        <td>${(order.Price / order.Weight).toFixed(2)}</td>
-                                    </tr>
-                                ))}
+                                {solution.selectedOrders.map(order => {
+                                    let orderWeight = order.OrderItems.WeightPerItem * order.OrderItems.Quantity || 0
+                                    let orderVolume = ((order.OrderItems.OrderDimension.Height * order.OrderItems.OrderDimension.Length  *order.OrderItems.OrderDimension.Width) / 10000) || 0
+                                    
+                                    return (
+                                        <tr key={order.Id}>
+                                            <td>{order.Id}</td>
+                                            <td>{orderWeight.toFixed(2)}</td>
+                                            <td>{orderVolume.toFixed(2)}</td>
+                                            <td>${order.Price}</td>
+                                            <td>${(order.Price / (orderWeight + orderVolume)).toFixed(2)}</td>
+                                        </tr>
+                                    );
+                                })}
                                 <tr style={{backgroundColor: '#f8f9fa', fontWeight: 'bold'}}>
                                     <td>Total</td>
                                     <td>{solution.totalWeight} kg</td>
+                                    <td>{solution.totalVolume} m³</td>
                                     <td>${solution.maxValue}</td>
                                     <td>-</td>
                                 </tr>

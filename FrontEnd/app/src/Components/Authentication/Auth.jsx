@@ -18,7 +18,7 @@ const Registration=()=>{
     const [message, setMessage] = useState("");
     const api_url ="https://localhost:7216/api"
     const navigate = useNavigate()
-// navigate()
+
     const loginUser=(async)=>{
         try{
             
@@ -44,13 +44,13 @@ const Registration=()=>{
                 const Client = {
                     Email:email,
                     Phone:phone_number,
-                    First_Name:first_name,
-                    Last_Name:last_name,
+                    FirstName:first_name,
+                    LastName:last_name,
                     Password:password,
                     Customer:{
-                        Business_Name:businessName,
-                        Business_Type:businessType,
-                        Tax_Identification:tax_dentification,
+                        BusinessName:businessName,
+                        BusinessType:businessType,
+                        TaxIdentification:tax_dentification,
                         Rating:rating,
                     }
                 }
@@ -64,17 +64,17 @@ const Registration=()=>{
                 const Driver = {
                     Email:email,
                     Phone:phone_number,
-                    First_Name:first_name,
-                    Last_Name:last_name,
+                    FirstName:first_name,
+                    LastName:last_name,
                     Password:password,
                     Driver:{
-                        Drivers_License:driverLicense,
-                        License_Expiry:licenseExpiry,
-                        Is_Verified: true,
-                        Is_Available:false,
+                        DriversLicense:driverLicense,
+                        LicenseExpiry:licenseExpiry,
+                        IsVerified: true,
+                        IsAvailable:false,
                         Rating:'3.0',
-                        Completion_Rate:completionRate,
-                        Total_Earnings: parseFloat(0)               
+                        CompletionRate:completionRate,
+                        TotalEarnings: parseFloat(0)               
                     }
                 }
                 

@@ -43,32 +43,32 @@ const Profile=()=>{
        
         const details = {
             VehicleId:vehicle.data.Id || "",
-            FirstName:user.data.First_Name || "",
-            LastName:user.data.Last_Name || "",
+            FirstName:user.data.FirstName || "",
+            LastName:user.data.LastName || "",
             Email:user.data.Email || "",
             Phone:user.data.Phone || "",
-            DrivingLicense:driver.data.Drivers_License || "",
-            LicenseExpiry:driver.data.License_Expiry || "",
-            Is_Verified: driver.data.Is_Verified || "",
+            DrivingLicense:driver.data.DriversLicense || "",
+            LicenseExpiry:driver.data.LicenseExpiry || "",
+            IsVerified: driver.data.IsVerified || "",
             Rating : driver.data.Rating || "",
-            Completion_Rate :driver.data.Completion_Rate || "",
-            Total_Earnings: driver.data.Total_Earnings || "",
-            Is_Available:driver.data.Is_Available || "",
+            CompletionRate :driver.data.CompletionRate || "",
+            TotalEarnings: driver.data.TotalEarnings || "",
+            IsAvailable:driver.data.IsAvailable || "",
             Brand:vehicle.data.Brand || "",
             Model:vehicle.data.Model || "",
-            Make_Year:vehicle.data.Make_Year || "",
+            MakeYear:vehicle.data.MakeYear || "",
             Color:vehicle.data.Color || "",
-            License_Plate:vehicle.data.License_Plate || "",
-            Max_Weight:vehicle.data.Max_Weight || "",
-            Max_Volume:vehicle.data.Max_Volume || "",
+            LicensePlate:vehicle.data.LicensePlate || "",
+            MaxWeight:vehicle.data.MaxWeight || "",
+            MaxVolume:vehicle.data.MaxVolume || "",
             UserId:driver.data.UserId || "",
             DriverId:DriverId || "",
             Password:user.data.Password,
-            Is_Available:driver.data.Is_Available
+            IsAvailable:driver.data.IsAvailable
         }
     
         setDriverDetails(details)
-        setCompletionPercentage(parseInt(details.Completion_Rate))
+        setCompletionPercentage(parseInt(details.CompletionRate))
     }
 
    

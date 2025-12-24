@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20251209103716_Init")]
-    partial class Init
+    [Migration("20251224024328_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,7 +255,7 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address_Line")
+                    b.Property<string>("AddressLine")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -283,7 +283,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Address_Line = "123 Main St",
+                            AddressLine = "123 Main St",
                             City = "Los Angeles",
                             Label = "Home",
                             UserId = 1
@@ -291,7 +291,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 2,
-                            Address_Line = "456 Business Rd",
+                            AddressLine = "456 Business Rd",
                             City = "Los Angeles",
                             Label = "Work",
                             UserId = 2
@@ -299,7 +299,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 3,
-                            Address_Line = "789 Oak St",
+                            AddressLine = "789 Oak St",
                             City = "San Francisco",
                             Label = "Home",
                             UserId = 3
@@ -307,7 +307,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 4,
-                            Address_Line = "321 Pine Ave",
+                            AddressLine = "321 Pine Ave",
                             City = "Lake Tahoe",
                             Label = "Vacation Home",
                             UserId = 4
@@ -315,7 +315,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 5,
-                            Address_Line = "654 Maple Dr",
+                            AddressLine = "654 Maple Dr",
                             City = "Seattle",
                             Label = "Home",
                             UserId = 5
@@ -323,7 +323,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 6,
-                            Address_Line = "987 Birch Blvd",
+                            AddressLine = "987 Birch Blvd",
                             City = "Seattle",
                             Label = "Office",
                             UserId = 6
@@ -331,7 +331,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 7,
-                            Address_Line = "123 Elm St",
+                            AddressLine = "123 Elm St",
                             City = "New York",
                             Label = "Home",
                             UserId = 7
@@ -339,7 +339,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 8,
-                            Address_Line = "456 Fitness Ln",
+                            AddressLine = "456 Fitness Ln",
                             City = "New York",
                             Label = "Gym",
                             UserId = 8
@@ -347,7 +347,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 9,
-                            Address_Line = "321 Cedar Ct",
+                            AddressLine = "321 Cedar Ct",
                             City = "Miami",
                             Label = "Home",
                             UserId = 9
@@ -355,7 +355,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 10,
-                            Address_Line = "654 Academy Blvd",
+                            AddressLine = "654 Academy Blvd",
                             City = "Miami",
                             Label = "School",
                             UserId = 10
@@ -363,7 +363,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 11,
-                            Address_Line = "234 Palm St",
+                            AddressLine = "234 Palm St",
                             City = "Austin",
                             Label = "Home",
                             UserId = 11
@@ -371,7 +371,7 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 12,
-                            Address_Line = "567 Market St",
+                            AddressLine = "567 Market St",
                             City = "Austin",
                             Label = "Market",
                             UserId = 12
@@ -386,12 +386,12 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Business_Name")
+                    b.Property<string>("BusinessName")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Business_Type")
+                    b.Property<string>("BusinessType")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -401,15 +401,15 @@ namespace Backend.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Tax_Identification")
+                    b.Property<string>("TaxIdentification")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int?>("Total_Orders")
+                    b.Property<int?>("TotalOrders")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("Total_Spent")
+                    b.Property<decimal?>("TotalSpent")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("UserId")
@@ -426,67 +426,67 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Business_Name = "Tech Solutions",
-                            Business_Type = "IT Services",
+                            BusinessName = "Tech Solutions",
+                            BusinessType = "IT Services",
                             Rating = "4.5",
-                            Tax_Identification = "TS123456A",
-                            Total_Orders = 4,
-                            Total_Spent = 1500.00m,
+                            TaxIdentification = "TS123456A",
+                            TotalOrders = 4,
+                            TotalSpent = 1500.00m,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Business_Name = "Green Grocers",
-                            Business_Type = "Retail",
+                            BusinessName = "Green Grocers",
+                            BusinessType = "Retail",
                             Rating = "4.8",
-                            Tax_Identification = "GG987654B",
-                            Total_Orders = 4,
-                            Total_Spent = 2200.00m,
+                            TaxIdentification = "GG987654B",
+                            TotalOrders = 4,
+                            TotalSpent = 2200.00m,
                             UserId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Business_Name = "Fast Foodies",
-                            Business_Type = "Food & Beverage",
+                            BusinessName = "Fast Foodies",
+                            BusinessType = "Food & Beverage",
                             Rating = "4.3",
-                            Tax_Identification = "FF456789C",
-                            Total_Orders = 4,
-                            Total_Spent = 800.00m,
+                            TaxIdentification = "FF456789C",
+                            TotalOrders = 4,
+                            TotalSpent = 800.00m,
                             UserId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Business_Name = "Book Haven",
-                            Business_Type = "Retail",
+                            BusinessName = "Book Haven",
+                            BusinessType = "Retail",
                             Rating = "4.7",
-                            Tax_Identification = "BH321654D",
-                            Total_Orders = 4,
-                            Total_Spent = 1200.00m,
+                            TaxIdentification = "BH321654D",
+                            TotalOrders = 4,
+                            TotalSpent = 1200.00m,
                             UserId = 4
                         },
                         new
                         {
                             Id = 5,
-                            Business_Name = "Home Essentials",
-                            Business_Type = "Retail",
+                            BusinessName = "Home Essentials",
+                            BusinessType = "Retail",
                             Rating = "4.6",
-                            Tax_Identification = "HE654123E",
-                            Total_Orders = 4,
-                            Total_Spent = 1600.00m,
+                            TaxIdentification = "HE654123E",
+                            TotalOrders = 4,
+                            TotalSpent = 1600.00m,
                             UserId = 5
                         },
                         new
                         {
                             Id = 6,
-                            Business_Name = "Fitness Hub",
-                            Business_Type = "Health & Fitness",
+                            BusinessName = "Fitness Hub",
+                            BusinessType = "Health & Fitness",
                             Rating = "4.9",
-                            Tax_Identification = "FH159753F",
-                            Total_Orders = 4,
-                            Total_Spent = 3000.00m,
+                            TaxIdentification = "FH159753F",
+                            TotalOrders = 4,
+                            TotalSpent = 3000.00m,
                             UserId = 6
                         });
                 });
@@ -499,7 +499,7 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Document_Type")
+                    b.Property<string>("DocumentType")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
@@ -507,23 +507,23 @@ namespace Backend.Migrations
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("Expiry_Date")
+                    b.Property<DateOnly>("ExpiryDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("File_Url")
+                    b.Property<string>("FileUrl")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<string>("Rejection_Reason")
+                    b.Property<string>("RejectionReason")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("Reviewed_At")
+                    b.Property<DateTime>("ReviewedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Reviewed_By")
+                    b.Property<string>("ReviewedBy")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
@@ -533,7 +533,7 @@ namespace Backend.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("Uploaded_At")
+                    b.Property<DateTime>("UploadedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -546,67 +546,67 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 2,
-                            Document_Type = "Insurance",
+                            DocumentType = "Insurance",
                             DriverId = 1,
-                            Expiry_Date = new DateOnly(2025, 5, 15),
-                            File_Url = "http://example.com/documents/insurance1.pdf",
-                            Rejection_Reason = "Awaiting verification",
-                            Reviewed_At = new DateTime(2023, 9, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            Reviewed_By = "Bob Smith",
+                            ExpiryDate = new DateOnly(2025, 5, 15),
+                            FileUrl = "http://example.com/documents/insurance1.pdf",
+                            RejectionReason = "Awaiting verification",
+                            ReviewedAt = new DateTime(2023, 9, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewedBy = "Bob Smith",
                             Status = "Pending",
-                            Uploaded_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UploadedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            Document_Type = "Registration",
+                            DocumentType = "Registration",
                             DriverId = 2,
-                            Expiry_Date = new DateOnly(2026, 3, 1),
-                            File_Url = "http://example.com/documents/registration1.pdf",
-                            Rejection_Reason = "Expired document",
-                            Reviewed_At = new DateTime(2023, 9, 3, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            Reviewed_By = "Charlie Brown",
+                            ExpiryDate = new DateOnly(2026, 3, 1),
+                            FileUrl = "http://example.com/documents/registration1.pdf",
+                            RejectionReason = "Expired document",
+                            ReviewedAt = new DateTime(2023, 9, 3, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewedBy = "Charlie Brown",
                             Status = "Rejected",
-                            Uploaded_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UploadedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            Document_Type = "Vehicle Inspection",
+                            DocumentType = "Vehicle Inspection",
                             DriverId = 3,
-                            Expiry_Date = new DateOnly(2025, 11, 30),
-                            File_Url = "http://example.com/documents/inspection1.pdf",
-                            Rejection_Reason = "None",
-                            Reviewed_At = new DateTime(2023, 9, 4, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Reviewed_By = "Diana Prince",
+                            ExpiryDate = new DateOnly(2025, 11, 30),
+                            FileUrl = "http://example.com/documents/inspection1.pdf",
+                            RejectionReason = "None",
+                            ReviewedAt = new DateTime(2023, 9, 4, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewedBy = "Diana Prince",
                             Status = "Approved",
-                            Uploaded_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UploadedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            Document_Type = "Driving History",
+                            DocumentType = "Driving History",
                             DriverId = 4,
-                            Expiry_Date = new DateOnly(2025, 8, 20),
-                            File_Url = "http://example.com/documents/history1.pdf",
-                            Rejection_Reason = "Awaiting submission",
-                            Reviewed_At = new DateTime(2023, 9, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
-                            Reviewed_By = "Ethan Hunt",
+                            ExpiryDate = new DateOnly(2025, 8, 20),
+                            FileUrl = "http://example.com/documents/history1.pdf",
+                            RejectionReason = "Awaiting submission",
+                            ReviewedAt = new DateTime(2023, 9, 5, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewedBy = "Ethan Hunt",
                             Status = "Pending",
-                            Uploaded_At = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UploadedAt = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            Document_Type = "Medical Certificate",
+                            DocumentType = "Medical Certificate",
                             DriverId = 6,
-                            Expiry_Date = new DateOnly(2025, 1, 14),
-                            File_Url = "http://example.com/documents/medical1.pdf",
-                            Rejection_Reason = "None",
-                            Reviewed_At = new DateTime(2023, 9, 6, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            Reviewed_By = "Fiona Gallagher",
+                            ExpiryDate = new DateOnly(2025, 1, 14),
+                            FileUrl = "http://example.com/documents/medical1.pdf",
+                            RejectionReason = "None",
+                            ReviewedAt = new DateTime(2023, 9, 6, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewedBy = "Fiona Gallagher",
                             Status = "Approved",
-                            Uploaded_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            UploadedAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -618,23 +618,23 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Completion_Rate")
+                    b.Property<string>("CompletionRate")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("Drivers_License")
+                    b.Property<string>("DriversLicense")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<bool>("Is_Available")
+                    b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Is_Verified")
+                    b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
-                    b.Property<DateOnly>("License_Expiry")
+                    b.Property<DateOnly>("LicenseExpiry")
                         .HasColumnType("date");
 
                     b.Property<string>("Rating")
@@ -642,7 +642,7 @@ namespace Backend.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<decimal>("Total_Earnings")
+                    b.Property<decimal>("TotalEarnings")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("UserId")
@@ -659,73 +659,73 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Completion_Rate = "95%",
-                            Drivers_License = "DL123456789",
-                            Is_Available = true,
-                            Is_Verified = true,
-                            License_Expiry = new DateOnly(2025, 12, 31),
+                            CompletionRate = "95%",
+                            DriversLicense = "DL123456789",
+                            IsAvailable = true,
+                            IsVerified = true,
+                            LicenseExpiry = new DateOnly(2025, 12, 31),
                             Rating = "4.8",
-                            Total_Earnings = 1500.00m,
+                            TotalEarnings = 1500.00m,
                             UserId = 7
                         },
                         new
                         {
                             Id = 2,
-                            Completion_Rate = "90%",
-                            Drivers_License = "DL987654321",
-                            Is_Available = true,
-                            Is_Verified = true,
-                            License_Expiry = new DateOnly(2025, 11, 15),
+                            CompletionRate = "90%",
+                            DriversLicense = "DL987654321",
+                            IsAvailable = true,
+                            IsVerified = true,
+                            LicenseExpiry = new DateOnly(2025, 11, 15),
                             Rating = "4.5",
-                            Total_Earnings = 1200.00m,
+                            TotalEarnings = 1200.00m,
                             UserId = 8
                         },
                         new
                         {
                             Id = 3,
-                            Completion_Rate = "92%",
-                            Drivers_License = "DL456123789",
-                            Is_Available = true,
-                            Is_Verified = true,
-                            License_Expiry = new DateOnly(2026, 5, 1),
+                            CompletionRate = "92%",
+                            DriversLicense = "DL456123789",
+                            IsAvailable = true,
+                            IsVerified = true,
+                            LicenseExpiry = new DateOnly(2026, 5, 1),
                             Rating = "4.6",
-                            Total_Earnings = 1800.00m,
+                            TotalEarnings = 1800.00m,
                             UserId = 9
                         },
                         new
                         {
                             Id = 4,
-                            Completion_Rate = "93%",
-                            Drivers_License = "DL321654987",
-                            Is_Available = true,
-                            Is_Verified = true,
-                            License_Expiry = new DateOnly(2025, 10, 30),
+                            CompletionRate = "93%",
+                            DriversLicense = "DL321654987",
+                            IsAvailable = true,
+                            IsVerified = true,
+                            LicenseExpiry = new DateOnly(2025, 10, 30),
                             Rating = "4.7",
-                            Total_Earnings = 1600.00m,
+                            TotalEarnings = 1600.00m,
                             UserId = 10
                         },
                         new
                         {
                             Id = 5,
-                            Completion_Rate = "97%",
-                            Drivers_License = "DL159753468",
-                            Is_Available = true,
-                            Is_Verified = true,
-                            License_Expiry = new DateOnly(2026, 1, 14),
+                            CompletionRate = "97%",
+                            DriversLicense = "DL159753468",
+                            IsAvailable = true,
+                            IsVerified = true,
+                            LicenseExpiry = new DateOnly(2026, 1, 14),
                             Rating = "4.9",
-                            Total_Earnings = 2000.00m,
+                            TotalEarnings = 2000.00m,
                             UserId = 11
                         },
                         new
                         {
                             Id = 6,
-                            Completion_Rate = "89%",
-                            Drivers_License = "DL753159864",
-                            Is_Available = true,
-                            Is_Verified = true,
-                            License_Expiry = new DateOnly(2025, 8, 20),
+                            CompletionRate = "89%",
+                            DriversLicense = "DL753159864",
+                            IsAvailable = true,
+                            IsVerified = true,
+                            LicenseExpiry = new DateOnly(2025, 8, 20),
                             Rating = "4.4",
-                            Total_Earnings = 1400.00m,
+                            TotalEarnings = 1400.00m,
                             UserId = 12
                         });
                 });
@@ -741,24 +741,24 @@ namespace Backend.Migrations
                     b.Property<int?>("DriverId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("Earned_At")
+                    b.Property<DateOnly>("EarnedAt")
                         .HasColumnType("date");
 
-                    b.Property<decimal>("Gross_Amount")
+                    b.Property<decimal>("GrossAmount")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("Is_Paid_Out")
+                    b.Property<string>("IsPaidOut")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<decimal>("Net_Earnings")
+                    b.Property<decimal>("NetEarnings")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int?>("OrderPlacementId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Platform_Fee")
+                    b.Property<decimal>("PlatformFee")
                         .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
@@ -778,7 +778,7 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("Is_Read")
+                    b.Property<bool?>("IsRead")
                         .HasColumnType("bit");
 
                     b.Property<string>("Message")
@@ -806,6 +806,259 @@ namespace Backend.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("Backend.Models.OrderItems", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<int>("OrderPlacementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpecialInstructions")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("WeightPerItem")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderPlacementId")
+                        .IsUnique();
+
+                    b.ToTable("OrderItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ItemName = "Laptop",
+                            OrderPlacementId = 1,
+                            Quantity = 1,
+                            SpecialInstructions = "Handle with care",
+                            WeightPerItem = 2.50m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ItemName = "Mouse",
+                            OrderPlacementId = 2,
+                            Quantity = 2,
+                            SpecialInstructions = "Wireless",
+                            WeightPerItem = 0.10m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ItemName = "Keyboard",
+                            OrderPlacementId = 3,
+                            Quantity = 1,
+                            SpecialInstructions = "Mechanical",
+                            WeightPerItem = 0.75m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ItemName = "Desk",
+                            OrderPlacementId = 4,
+                            Quantity = 1,
+                            SpecialInstructions = "Assembly required",
+                            WeightPerItem = 15.00m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ItemName = "Chair",
+                            OrderPlacementId = 5,
+                            Quantity = 1,
+                            SpecialInstructions = "Comfortable",
+                            WeightPerItem = 5.00m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ItemName = "Phone",
+                            OrderPlacementId = 6,
+                            Quantity = 1,
+                            SpecialInstructions = "New model",
+                            WeightPerItem = 0.20m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ItemName = "Charger",
+                            OrderPlacementId = 7,
+                            Quantity = 1,
+                            SpecialInstructions = "Fast charging",
+                            WeightPerItem = 0.15m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ItemName = "Couch",
+                            OrderPlacementId = 8,
+                            Quantity = 1,
+                            SpecialInstructions = "Delivery on ground floor only",
+                            WeightPerItem = 30.00m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ItemName = "Coffee Table",
+                            OrderPlacementId = 9,
+                            Quantity = 1,
+                            SpecialInstructions = "Glass top",
+                            WeightPerItem = 10.00m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ItemName = "T-Shirt",
+                            OrderPlacementId = 10,
+                            Quantity = 5,
+                            SpecialInstructions = "Various colors",
+                            WeightPerItem = 0.25m
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ItemName = "Jeans",
+                            OrderPlacementId = 11,
+                            Quantity = 2,
+                            SpecialInstructions = "Brand: XYZ",
+                            WeightPerItem = 0.75m
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ItemName = "Fruits Basket",
+                            OrderPlacementId = 12,
+                            Quantity = 1,
+                            SpecialInstructions = "Seasonal fruits",
+                            WeightPerItem = 3.00m
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ItemName = "Vegetable Basket",
+                            OrderPlacementId = 13,
+                            Quantity = 1,
+                            SpecialInstructions = "Organic",
+                            WeightPerItem = 3.00m
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ItemName = "Cookbook",
+                            OrderPlacementId = 14,
+                            Quantity = 1,
+                            SpecialInstructions = "Best seller",
+                            WeightPerItem = 1.00m
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ItemName = "Spices Set",
+                            OrderPlacementId = 15,
+                            Quantity = 1,
+                            SpecialInstructions = "Variety pack",
+                            WeightPerItem = 0.50m
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ItemName = "Headphones",
+                            OrderPlacementId = 16,
+                            Quantity = 1,
+                            SpecialInstructions = "Noise cancelling",
+                            WeightPerItem = 0.30m
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ItemName = "Bluetooth Speaker",
+                            OrderPlacementId = 17,
+                            Quantity = 1,
+                            SpecialInstructions = "Waterproof",
+                            WeightPerItem = 0.80m
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ItemName = "Backpack",
+                            OrderPlacementId = 18,
+                            Quantity = 1,
+                            SpecialInstructions = "For travel",
+                            WeightPerItem = 0.50m
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ItemName = "Water Bottle",
+                            OrderPlacementId = 19,
+                            Quantity = 1,
+                            SpecialInstructions = "Insulated",
+                            WeightPerItem = 0.20m
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ItemName = "Camera",
+                            OrderPlacementId = 20,
+                            Quantity = 1,
+                            SpecialInstructions = "Includes accessories",
+                            WeightPerItem = 1.50m
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ItemName = "Tripod",
+                            OrderPlacementId = 21,
+                            Quantity = 1,
+                            SpecialInstructions = "Adjustable height",
+                            WeightPerItem = 1.00m
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ItemName = "Blanket",
+                            OrderPlacementId = 22,
+                            Quantity = 1,
+                            SpecialInstructions = "Soft and warm",
+                            WeightPerItem = 1.00m
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ItemName = "Pillow",
+                            OrderPlacementId = 23,
+                            Quantity = 2,
+                            SpecialInstructions = "Memory foam",
+                            WeightPerItem = 0.50m
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ItemName = "Rug",
+                            OrderPlacementId = 24,
+                            Quantity = 1,
+                            SpecialInstructions = "Non-slip",
+                            WeightPerItem = 5.00m
+                        });
+                });
+
             modelBuilder.Entity("Backend.Models.OrderPlacement", b =>
                 {
                     b.Property<int>("Id")
@@ -814,21 +1067,21 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("Completed_On")
+                    b.Property<DateTime?>("CompletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Created_At")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Delivery_Contact")
+                    b.Property<string>("DeliveryContact")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("Delivery_Up_Address")
+                    b.Property<string>("DeliveryUpAddress")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
@@ -841,12 +1094,12 @@ namespace Backend.Migrations
                     b.Property<int?>("DriverId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Pick_Up_Address")
+                    b.Property<string>("PickUpAddress")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("Pick_Up_Contact")
+                    b.Property<string>("PickUpContact")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
@@ -854,7 +1107,7 @@ namespace Backend.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<DateTime>("Scheduled_At")
+                    b.Property<DateTime>("ScheduledAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -874,619 +1127,366 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Completed_On = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
-                            Delivery_Contact = "Jane Smith",
-                            Delivery_Up_Address = "456 Elm St",
+                            DeliveryContact = "Jane Smith",
+                            DeliveryUpAddress = "456 Elm St",
                             Description = "Electronics",
-                            Pick_Up_Address = "123 Main St",
-                            Pick_Up_Contact = "John Doe",
+                            PickUpAddress = "123 Main St",
+                            PickUpContact = "John Doe",
                             Price = 300.00m,
-                            Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Delivered"
                         },
                         new
                         {
                             Id = 2,
-                            Completed_On = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
-                            Delivery_Contact = "Alice Brown",
-                            Delivery_Up_Address = "789 Oak St",
+                            DeliveryContact = "Alice Brown",
+                            DeliveryUpAddress = "789 Oak St",
                             Description = "Computers",
-                            Pick_Up_Address = "123 Main St",
-                            Pick_Up_Contact = "John Doe",
+                            PickUpAddress = "123 Main St",
+                            PickUpContact = "John Doe",
                             Price = 500.00m,
-                            Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "In Transit"
                         },
                         new
                         {
                             Id = 3,
-                            Completed_On = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
-                            Delivery_Contact = "Bob White",
-                            Delivery_Up_Address = "101 Pine St",
+                            DeliveryContact = "Bob White",
+                            DeliveryUpAddress = "101 Pine St",
                             Description = "Accessories",
-                            Pick_Up_Address = "123 Main St",
-                            Pick_Up_Contact = "John Doe",
+                            PickUpAddress = "123 Main St",
+                            PickUpContact = "John Doe",
                             Price = 150.00m,
-                            Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Pending"
                         },
                         new
                         {
                             Id = 4,
-                            Completed_On = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
-                            Delivery_Contact = "Lucy Green",
-                            Delivery_Up_Address = "202 Maple St",
+                            DeliveryContact = "Lucy Green",
+                            DeliveryUpAddress = "202 Maple St",
                             Description = "Furniture",
-                            Pick_Up_Address = "123 Main St",
-                            Pick_Up_Contact = "John Doe",
+                            PickUpAddress = "123 Main St",
+                            PickUpContact = "John Doe",
                             Price = 600.00m,
-                            Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Cancelled"
                         },
                         new
                         {
                             Id = 5,
-                            Completed_On = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
-                            Delivery_Contact = "Tom Brown",
-                            Delivery_Up_Address = "30 Center St",
+                            DeliveryContact = "Tom Brown",
+                            DeliveryUpAddress = "30 Center St",
                             Description = "Fresh Produce",
-                            Pick_Up_Address = "25 Market St",
-                            Pick_Up_Contact = "Alice Green",
+                            PickUpAddress = "25 Market St",
+                            PickUpContact = "Alice Green",
                             Price = 200.00m,
-                            Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Delivered"
                         },
                         new
                         {
                             Id = 6,
-                            Completed_On = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
-                            Delivery_Contact = "Sarah White",
-                            Delivery_Up_Address = "35 Park Ave",
+                            DeliveryContact = "Sarah White",
+                            DeliveryUpAddress = "35 Park Ave",
                             Description = "Dairy Products",
-                            Pick_Up_Address = "25 Market St",
-                            Pick_Up_Contact = "Alice Green",
+                            PickUpAddress = "25 Market St",
+                            PickUpContact = "Alice Green",
                             Price = 300.00m,
-                            Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "In Transit"
                         },
                         new
                         {
                             Id = 7,
-                            Completed_On = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
-                            Delivery_Contact = "Daniel Black",
-                            Delivery_Up_Address = "40 Broadway",
+                            DeliveryContact = "Daniel Black",
+                            DeliveryUpAddress = "40 Broadway",
                             Description = "Packaged Goods",
-                            Pick_Up_Address = "25 Market St",
-                            Pick_Up_Contact = "Alice Green",
+                            PickUpAddress = "25 Market St",
+                            PickUpContact = "Alice Green",
                             Price = 250.00m,
-                            Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Pending"
                         },
                         new
                         {
                             Id = 8,
-                            Completed_On = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
-                            Delivery_Contact = "Emma Red",
-                            Delivery_Up_Address = "45 Fifth St",
+                            DeliveryContact = "Emma Red",
+                            DeliveryUpAddress = "45 Fifth St",
                             Description = "Beverages",
-                            Pick_Up_Address = "25 Market St",
-                            Pick_Up_Contact = "Alice Green",
+                            PickUpAddress = "25 Market St",
+                            PickUpContact = "Alice Green",
                             Price = 400.00m,
-                            Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Cancelled"
                         },
                         new
                         {
                             Id = 9,
-                            Completed_On = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
-                            Delivery_Contact = "Jim Doe",
-                            Delivery_Up_Address = "50 Snack Ave",
+                            DeliveryContact = "Jim Doe",
+                            DeliveryUpAddress = "50 Snack Ave",
                             Description = "Fast Food Order",
-                            Pick_Up_Address = "45 Fast Food Rd",
-                            Pick_Up_Contact = "Alice Johnson",
+                            PickUpAddress = "45 Fast Food Rd",
+                            PickUpContact = "Alice Johnson",
                             Price = 50.00m,
-                            Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Delivered"
                         },
                         new
                         {
                             Id = 10,
-                            Completed_On = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
-                            Delivery_Contact = "Kate Brown",
-                            Delivery_Up_Address = "55 Snack Ave",
+                            DeliveryContact = "Kate Brown",
+                            DeliveryUpAddress = "55 Snack Ave",
                             Description = "Burger Order",
-                            Pick_Up_Address = "45 Fast Food Rd",
-                            Pick_Up_Contact = "Alice Johnson",
+                            PickUpAddress = "45 Fast Food Rd",
+                            PickUpContact = "Alice Johnson",
                             Price = 30.00m,
-                            Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "In Transit"
                         },
                         new
                         {
                             Id = 11,
-                            Completed_On = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
-                            Delivery_Contact = "Ben White",
-                            Delivery_Up_Address = "60 Snack Ave",
+                            DeliveryContact = "Ben White",
+                            DeliveryUpAddress = "60 Snack Ave",
                             Description = "Pizza Order",
-                            Pick_Up_Address = "45 Fast Food Rd",
-                            Pick_Up_Contact = "Alice Johnson",
+                            PickUpAddress = "45 Fast Food Rd",
+                            PickUpContact = "Alice Johnson",
                             Price = 40.00m,
-                            Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Pending"
                         },
                         new
                         {
                             Id = 12,
-                            Completed_On = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
-                            Delivery_Contact = "Beth Green",
-                            Delivery_Up_Address = "65 Snack Ave",
+                            DeliveryContact = "Beth Green",
+                            DeliveryUpAddress = "65 Snack Ave",
                             Description = "Dessert Order",
-                            Pick_Up_Address = "45 Fast Food Rd",
-                            Pick_Up_Contact = "Alice Johnson",
+                            PickUpAddress = "45 Fast Food Rd",
+                            PickUpContact = "Alice Johnson",
                             Price = 20.00m,
-                            Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Cancelled"
                         },
                         new
                         {
                             Id = 13,
-                            Completed_On = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
-                            Delivery_Contact = "Alice Johnson",
-                            Delivery_Up_Address = "110 Library Lane",
+                            DeliveryContact = "Alice Johnson",
+                            DeliveryUpAddress = "110 Library Lane",
                             Description = "Books",
-                            Pick_Up_Address = "100 Book St",
-                            Pick_Up_Contact = "John Smith",
+                            PickUpAddress = "100 Book St",
+                            PickUpContact = "John Smith",
                             Price = 25.00m,
-                            Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Delivered"
                         },
                         new
                         {
                             Id = 14,
-                            Completed_On = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
-                            Delivery_Contact = "Bob White",
-                            Delivery_Up_Address = "120 Library Lane",
+                            DeliveryContact = "Bob White",
+                            DeliveryUpAddress = "120 Library Lane",
                             Description = "Textbooks",
-                            Pick_Up_Address = "100 Book St",
-                            Pick_Up_Contact = "John Smith",
+                            PickUpAddress = "100 Book St",
+                            PickUpContact = "John Smith",
                             Price = 45.00m,
-                            Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "In Transit"
                         },
                         new
                         {
                             Id = 15,
-                            Completed_On = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
-                            Delivery_Contact = "Charlie Black",
-                            Delivery_Up_Address = "130 Library Lane",
+                            DeliveryContact = "Charlie Black",
+                            DeliveryUpAddress = "130 Library Lane",
                             Description = "Novels",
-                            Pick_Up_Address = "100 Book St",
-                            Pick_Up_Contact = "John Smith",
+                            PickUpAddress = "100 Book St",
+                            PickUpContact = "John Smith",
                             Price = 50.00m,
-                            Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Pending"
                         },
                         new
                         {
                             Id = 16,
-                            Completed_On = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
-                            Delivery_Contact = "David Green",
-                            Delivery_Up_Address = "140 Library Lane",
+                            DeliveryContact = "David Green",
+                            DeliveryUpAddress = "140 Library Lane",
                             Description = "Magazines",
-                            Pick_Up_Address = "100 Book St",
-                            Pick_Up_Contact = "John Smith",
+                            PickUpAddress = "100 Book St",
+                            PickUpContact = "John Smith",
                             Price = 30.00m,
-                            Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Cancelled"
                         },
                         new
                         {
                             Id = 17,
-                            Completed_On = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
-                            Delivery_Contact = "James Black",
-                            Delivery_Up_Address = "160 Home Lane",
+                            DeliveryContact = "James Black",
+                            DeliveryUpAddress = "160 Home Lane",
                             Description = "Home Goods",
-                            Pick_Up_Address = "150 Home St",
-                            Pick_Up_Contact = "Emily White",
+                            PickUpAddress = "150 Home St",
+                            PickUpContact = "Emily White",
                             Price = 200.00m,
-                            Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Delivered"
                         },
                         new
                         {
                             Id = 18,
-                            Completed_On = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
-                            Delivery_Contact = "Sarah Green",
-                            Delivery_Up_Address = "170 Home Lane",
+                            DeliveryContact = "Sarah Green",
+                            DeliveryUpAddress = "170 Home Lane",
                             Description = "Furniture",
-                            Pick_Up_Address = "150 Home St",
-                            Pick_Up_Contact = "Emily White",
+                            PickUpAddress = "150 Home St",
+                            PickUpContact = "Emily White",
                             Price = 800.00m,
-                            Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "In Transit"
                         },
                         new
                         {
                             Id = 19,
-                            Completed_On = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
-                            Delivery_Contact = "Paul Red",
-                            Delivery_Up_Address = "180 Home Lane",
+                            DeliveryContact = "Paul Red",
+                            DeliveryUpAddress = "180 Home Lane",
                             Description = "Kitchenware",
-                            Pick_Up_Address = "150 Home St",
-                            Pick_Up_Contact = "Emily White",
+                            PickUpAddress = "150 Home St",
+                            PickUpContact = "Emily White",
                             Price = 150.00m,
-                            Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Pending"
                         },
                         new
                         {
                             Id = 20,
-                            Completed_On = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
-                            Delivery_Contact = "Jessica Blue",
-                            Delivery_Up_Address = "190 Home Lane",
+                            DeliveryContact = "Jessica Blue",
+                            DeliveryUpAddress = "190 Home Lane",
                             Description = "Decorations",
-                            Pick_Up_Address = "150 Home St",
-                            Pick_Up_Contact = "Emily White",
+                            PickUpAddress = "150 Home St",
+                            PickUpContact = "Emily White",
                             Price = 100.00m,
-                            Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Cancelled"
                         },
                         new
                         {
                             Id = 21,
-                            Completed_On = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
-                            Delivery_Contact = "Anna Green",
-                            Delivery_Up_Address = "210 Gym Lane",
+                            DeliveryContact = "Anna Green",
+                            DeliveryUpAddress = "210 Gym Lane",
                             Description = "Gym Equipment",
-                            Pick_Up_Address = "200 Fitness St",
-                            Pick_Up_Contact = "Mike Brown",
+                            PickUpAddress = "200 Fitness St",
+                            PickUpContact = "Mike Brown",
                             Price = 500.00m,
-                            Scheduled_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Delivered"
                         },
                         new
                         {
                             Id = 22,
-                            Completed_On = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
-                            Delivery_Contact = "Laura Black",
-                            Delivery_Up_Address = "220 Gym Lane",
+                            DeliveryContact = "Laura Black",
+                            DeliveryUpAddress = "220 Gym Lane",
                             Description = "Fitness Apparel",
-                            Pick_Up_Address = "200 Fitness St",
-                            Pick_Up_Contact = "Mike Brown",
+                            PickUpAddress = "200 Fitness St",
+                            PickUpContact = "Mike Brown",
                             Price = 150.00m,
-                            Scheduled_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "In Transit"
                         },
                         new
                         {
                             Id = 23,
-                            Completed_On = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
-                            Delivery_Contact = "Cathy White",
-                            Delivery_Up_Address = "230 Gym Lane",
+                            DeliveryContact = "Cathy White",
+                            DeliveryUpAddress = "230 Gym Lane",
                             Description = "Health Supplements",
-                            Pick_Up_Address = "200 Fitness St",
-                            Pick_Up_Contact = "Mike Brown",
+                            PickUpAddress = "200 Fitness St",
+                            PickUpContact = "Mike Brown",
                             Price = 300.00m,
-                            Scheduled_At = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Pending"
                         },
                         new
                         {
                             Id = 24,
-                            Completed_On = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created_At = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CompletedOn = new DateTime(2023, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
-                            Delivery_Contact = "Sarah Blue",
-                            Delivery_Up_Address = "240 Gym Lane",
+                            DeliveryContact = "Sarah Blue",
+                            DeliveryUpAddress = "240 Gym Lane",
                             Description = "Yoga Mats",
-                            Pick_Up_Address = "200 Fitness St",
-                            Pick_Up_Contact = "Mike Brown",
+                            PickUpAddress = "200 Fitness St",
+                            PickUpContact = "Mike Brown",
                             Price = 100.00m,
-                            Scheduled_At = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Cancelled"
                         });
                 });
 
-            modelBuilder.Entity("Backend.Models.Order_Items", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Item_Name")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<int>("OrderPlacementId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Special_Instructions")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("Weight_Per_Item")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderPlacementId")
-                        .IsUnique();
-
-                    b.ToTable("OrderItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Item_Name = "Laptop",
-                            OrderPlacementId = 1,
-                            Quantity = 1,
-                            Special_Instructions = "Handle with care",
-                            Weight_Per_Item = 2.50m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Item_Name = "Mouse",
-                            OrderPlacementId = 2,
-                            Quantity = 2,
-                            Special_Instructions = "Wireless",
-                            Weight_Per_Item = 0.10m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Item_Name = "Keyboard",
-                            OrderPlacementId = 3,
-                            Quantity = 1,
-                            Special_Instructions = "Mechanical",
-                            Weight_Per_Item = 0.75m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Item_Name = "Desk",
-                            OrderPlacementId = 4,
-                            Quantity = 1,
-                            Special_Instructions = "Assembly required",
-                            Weight_Per_Item = 15.00m
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Item_Name = "Chair",
-                            OrderPlacementId = 5,
-                            Quantity = 1,
-                            Special_Instructions = "Comfortable",
-                            Weight_Per_Item = 5.00m
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Item_Name = "Phone",
-                            OrderPlacementId = 6,
-                            Quantity = 1,
-                            Special_Instructions = "New model",
-                            Weight_Per_Item = 0.20m
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Item_Name = "Charger",
-                            OrderPlacementId = 7,
-                            Quantity = 1,
-                            Special_Instructions = "Fast charging",
-                            Weight_Per_Item = 0.15m
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Item_Name = "Couch",
-                            OrderPlacementId = 8,
-                            Quantity = 1,
-                            Special_Instructions = "Delivery on ground floor only",
-                            Weight_Per_Item = 30.00m
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Item_Name = "Coffee Table",
-                            OrderPlacementId = 9,
-                            Quantity = 1,
-                            Special_Instructions = "Glass top",
-                            Weight_Per_Item = 10.00m
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Item_Name = "T-Shirt",
-                            OrderPlacementId = 10,
-                            Quantity = 5,
-                            Special_Instructions = "Various colors",
-                            Weight_Per_Item = 0.25m
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Item_Name = "Jeans",
-                            OrderPlacementId = 11,
-                            Quantity = 2,
-                            Special_Instructions = "Brand: XYZ",
-                            Weight_Per_Item = 0.75m
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Item_Name = "Fruits Basket",
-                            OrderPlacementId = 12,
-                            Quantity = 1,
-                            Special_Instructions = "Seasonal fruits",
-                            Weight_Per_Item = 3.00m
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Item_Name = "Vegetable Basket",
-                            OrderPlacementId = 13,
-                            Quantity = 1,
-                            Special_Instructions = "Organic",
-                            Weight_Per_Item = 3.00m
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Item_Name = "Cookbook",
-                            OrderPlacementId = 14,
-                            Quantity = 1,
-                            Special_Instructions = "Best seller",
-                            Weight_Per_Item = 1.00m
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Item_Name = "Spices Set",
-                            OrderPlacementId = 15,
-                            Quantity = 1,
-                            Special_Instructions = "Variety pack",
-                            Weight_Per_Item = 0.50m
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Item_Name = "Headphones",
-                            OrderPlacementId = 16,
-                            Quantity = 1,
-                            Special_Instructions = "Noise cancelling",
-                            Weight_Per_Item = 0.30m
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Item_Name = "Bluetooth Speaker",
-                            OrderPlacementId = 17,
-                            Quantity = 1,
-                            Special_Instructions = "Waterproof",
-                            Weight_Per_Item = 0.80m
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Item_Name = "Backpack",
-                            OrderPlacementId = 18,
-                            Quantity = 1,
-                            Special_Instructions = "For travel",
-                            Weight_Per_Item = 0.50m
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Item_Name = "Water Bottle",
-                            OrderPlacementId = 19,
-                            Quantity = 1,
-                            Special_Instructions = "Insulated",
-                            Weight_Per_Item = 0.20m
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Item_Name = "Camera",
-                            OrderPlacementId = 20,
-                            Quantity = 1,
-                            Special_Instructions = "Includes accessories",
-                            Weight_Per_Item = 1.50m
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Item_Name = "Tripod",
-                            OrderPlacementId = 21,
-                            Quantity = 1,
-                            Special_Instructions = "Adjustable height",
-                            Weight_Per_Item = 1.00m
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Item_Name = "Blanket",
-                            OrderPlacementId = 22,
-                            Quantity = 1,
-                            Special_Instructions = "Soft and warm",
-                            Weight_Per_Item = 1.00m
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Item_Name = "Pillow",
-                            OrderPlacementId = 23,
-                            Quantity = 2,
-                            Special_Instructions = "Memory foam",
-                            Weight_Per_Item = 0.50m
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Item_Name = "Rug",
-                            OrderPlacementId = 24,
-                            Quantity = 1,
-                            Special_Instructions = "Non-slip",
-                            Weight_Per_Item = 5.00m
-                        });
-                });
-
-            modelBuilder.Entity("Backend.Models.Order_Tracking", b =>
+            modelBuilder.Entity("Backend.Models.OrderTracking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1780,21 +1780,21 @@ namespace Backend.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<decimal?>("Driver_Earnings")
+                    b.Property<decimal?>("DriverEarnings")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("OrderPlacementId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Payment_Method")
+                    b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<decimal?>("Platform_Fee")
+                    b.Property<decimal?>("PlatformFee")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<DateTime?>("Processed_At")
+                    b.Property<DateTime?>("ProcessedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -1802,7 +1802,7 @@ namespace Backend.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("Transaction_Identification")
+                    b.Property<string>("TransactionIdentification")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
@@ -1818,285 +1818,285 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Amount = 300.00m,
-                            Driver_Earnings = 290.00m,
+                            DriverEarnings = 290.00m,
                             OrderPlacementId = 1,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 10.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 10.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN001"
+                            TransactionIdentification = "TXN001"
                         },
                         new
                         {
                             Id = 2,
                             Amount = 500.00m,
-                            Driver_Earnings = 485.00m,
+                            DriverEarnings = 485.00m,
                             OrderPlacementId = 2,
-                            Payment_Method = "PayPal",
-                            Platform_Fee = 15.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "PayPal",
+                            PlatformFee = 15.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN002"
+                            TransactionIdentification = "TXN002"
                         },
                         new
                         {
                             Id = 3,
                             Amount = 150.00m,
-                            Driver_Earnings = 145.00m,
+                            DriverEarnings = 145.00m,
                             OrderPlacementId = 3,
-                            Payment_Method = "Debit Card",
-                            Platform_Fee = 5.00m,
+                            PaymentMethod = "Debit Card",
+                            PlatformFee = 5.00m,
                             Status = "Pending",
-                            Transaction_Identification = "TXN003"
+                            TransactionIdentification = "TXN003"
                         },
                         new
                         {
                             Id = 4,
                             Amount = 600.00m,
-                            Driver_Earnings = 580.00m,
+                            DriverEarnings = 580.00m,
                             OrderPlacementId = 4,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 20.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 20.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN004"
+                            TransactionIdentification = "TXN004"
                         },
                         new
                         {
                             Id = 5,
                             Amount = 200.00m,
-                            Driver_Earnings = 192.00m,
+                            DriverEarnings = 192.00m,
                             OrderPlacementId = 5,
-                            Payment_Method = "Bank Transfer",
-                            Platform_Fee = 8.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Bank Transfer",
+                            PlatformFee = 8.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN005"
+                            TransactionIdentification = "TXN005"
                         },
                         new
                         {
                             Id = 6,
                             Amount = 80.00m,
-                            Driver_Earnings = 80.00m,
+                            DriverEarnings = 80.00m,
                             OrderPlacementId = 6,
-                            Payment_Method = "Cash",
-                            Platform_Fee = 0.00m,
-                            Processed_At = new DateTime(2023, 12, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Cash",
+                            PlatformFee = 0.00m,
+                            ProcessedAt = new DateTime(2023, 12, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN006"
+                            TransactionIdentification = "TXN006"
                         },
                         new
                         {
                             Id = 7,
                             Amount = 300.00m,
-                            Driver_Earnings = 290.00m,
+                            DriverEarnings = 290.00m,
                             OrderPlacementId = 7,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 10.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 10.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 17, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN007"
+                            TransactionIdentification = "TXN007"
                         },
                         new
                         {
                             Id = 8,
                             Amount = 450.00m,
-                            Driver_Earnings = 435.00m,
+                            DriverEarnings = 435.00m,
                             OrderPlacementId = 8,
-                            Payment_Method = "PayPal",
-                            Platform_Fee = 15.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "PayPal",
+                            PlatformFee = 15.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN008"
+                            TransactionIdentification = "TXN008"
                         },
                         new
                         {
                             Id = 9,
                             Amount = 150.00m,
-                            Driver_Earnings = 145.00m,
+                            DriverEarnings = 145.00m,
                             OrderPlacementId = 9,
-                            Payment_Method = "Debit Card",
-                            Platform_Fee = 5.00m,
+                            PaymentMethod = "Debit Card",
+                            PlatformFee = 5.00m,
                             Status = "Pending",
-                            Transaction_Identification = "TXN009"
+                            TransactionIdentification = "TXN009"
                         },
                         new
                         {
                             Id = 10,
                             Amount = 700.00m,
-                            Driver_Earnings = 675.00m,
+                            DriverEarnings = 675.00m,
                             OrderPlacementId = 10,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 25.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 25.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN010"
+                            TransactionIdentification = "TXN010"
                         },
                         new
                         {
                             Id = 11,
                             Amount = 250.00m,
-                            Driver_Earnings = 240.00m,
+                            DriverEarnings = 240.00m,
                             OrderPlacementId = 11,
-                            Payment_Method = "Bank Transfer",
-                            Platform_Fee = 10.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Bank Transfer",
+                            PlatformFee = 10.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN011"
+                            TransactionIdentification = "TXN011"
                         },
                         new
                         {
                             Id = 12,
                             Amount = 90.00m,
-                            Driver_Earnings = 90.00m,
+                            DriverEarnings = 90.00m,
                             OrderPlacementId = 12,
-                            Payment_Method = "Cash",
-                            Platform_Fee = 0.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Cash",
+                            PlatformFee = 0.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN012"
+                            TransactionIdentification = "TXN012"
                         },
                         new
                         {
                             Id = 13,
                             Amount = 350.00m,
-                            Driver_Earnings = 338.00m,
+                            DriverEarnings = 338.00m,
                             OrderPlacementId = 13,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 12.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 12.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN013"
+                            TransactionIdentification = "TXN013"
                         },
                         new
                         {
                             Id = 14,
                             Amount = 500.00m,
-                            Driver_Earnings = 485.00m,
+                            DriverEarnings = 485.00m,
                             OrderPlacementId = 14,
-                            Payment_Method = "PayPal",
-                            Platform_Fee = 15.00m,
-                            Processed_At = new DateTime(2023, 9, 15, 23, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "PayPal",
+                            PlatformFee = 15.00m,
+                            ProcessedAt = new DateTime(2023, 9, 15, 23, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN014"
+                            TransactionIdentification = "TXN014"
                         },
                         new
                         {
                             Id = 15,
                             Amount = 180.00m,
-                            Driver_Earnings = 174.00m,
+                            DriverEarnings = 174.00m,
                             OrderPlacementId = 15,
-                            Payment_Method = "Debit Card",
-                            Platform_Fee = 6.00m,
+                            PaymentMethod = "Debit Card",
+                            PlatformFee = 6.00m,
                             Status = "Pending",
-                            Transaction_Identification = "TXN015"
+                            TransactionIdentification = "TXN015"
                         },
                         new
                         {
                             Id = 16,
                             Amount = 650.00m,
-                            Driver_Earnings = 628.00m,
+                            DriverEarnings = 628.00m,
                             OrderPlacementId = 16,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 22.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 22.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN016"
+                            TransactionIdentification = "TXN016"
                         },
                         new
                         {
                             Id = 17,
                             Amount = 220.00m,
-                            Driver_Earnings = 212.00m,
+                            DriverEarnings = 212.00m,
                             OrderPlacementId = 17,
-                            Payment_Method = "Bank Transfer",
-                            Platform_Fee = 8.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Bank Transfer",
+                            PlatformFee = 8.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN017"
+                            TransactionIdentification = "TXN017"
                         },
                         new
                         {
                             Id = 18,
                             Amount = 75.00m,
-                            Driver_Earnings = 75.00m,
+                            DriverEarnings = 75.00m,
                             OrderPlacementId = 18,
-                            Payment_Method = "Cash",
-                            Platform_Fee = 0.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Cash",
+                            PlatformFee = 0.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN018"
+                            TransactionIdentification = "TXN018"
                         },
                         new
                         {
                             Id = 19,
                             Amount = 400.00m,
-                            Driver_Earnings = 386.00m,
+                            DriverEarnings = 386.00m,
                             OrderPlacementId = 19,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 14.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 14.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN019"
+                            TransactionIdentification = "TXN019"
                         },
                         new
                         {
                             Id = 20,
                             Amount = 600.00m,
-                            Driver_Earnings = 580.00m,
+                            DriverEarnings = 580.00m,
                             OrderPlacementId = 20,
-                            Payment_Method = "PayPal",
-                            Platform_Fee = 20.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "PayPal",
+                            PlatformFee = 20.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN020"
+                            TransactionIdentification = "TXN020"
                         },
                         new
                         {
                             Id = 21,
                             Amount = 150.00m,
-                            Driver_Earnings = 145.00m,
+                            DriverEarnings = 145.00m,
                             OrderPlacementId = 21,
-                            Payment_Method = "Debit Card",
-                            Platform_Fee = 5.00m,
+                            PaymentMethod = "Debit Card",
+                            PlatformFee = 5.00m,
                             Status = "Pending",
-                            Transaction_Identification = "TXN021"
+                            TransactionIdentification = "TXN021"
                         },
                         new
                         {
                             Id = 22,
                             Amount = 300.00m,
-                            Driver_Earnings = 290.00m,
+                            DriverEarnings = 290.00m,
                             OrderPlacementId = 22,
-                            Payment_Method = "Credit Card",
-                            Platform_Fee = 10.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Credit Card",
+                            PlatformFee = 10.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN022"
+                            TransactionIdentification = "TXN022"
                         },
                         new
                         {
                             Id = 23,
                             Amount = 200.00m,
-                            Driver_Earnings = 192.00m,
+                            DriverEarnings = 192.00m,
                             OrderPlacementId = 23,
-                            Payment_Method = "Bank Transfer",
-                            Platform_Fee = 8.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Bank Transfer",
+                            PlatformFee = 8.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN023"
+                            TransactionIdentification = "TXN023"
                         },
                         new
                         {
                             Id = 24,
                             Amount = 80.00m,
-                            Driver_Earnings = 80.00m,
+                            DriverEarnings = 80.00m,
                             OrderPlacementId = 24,
-                            Payment_Method = "Cash",
-                            Platform_Fee = 0.00m,
-                            Processed_At = new DateTime(2023, 9, 16, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            PaymentMethod = "Cash",
+                            PlatformFee = 0.00m,
+                            ProcessedAt = new DateTime(2023, 9, 16, 17, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Completed",
-                            Transaction_Identification = "TXN024"
+                            TransactionIdentification = "TXN024"
                         });
                 });
 
@@ -2111,18 +2111,18 @@ namespace Backend.Migrations
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Estimated_Duration")
+                    b.Property<DateTime?>("EstimatedDuration")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("OrderPlacementId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Route_Data")
+                    b.Property<string>("RouteData")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Total_Distance")
+                    b.Property<string>("TotalDistance")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -2140,217 +2140,217 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             DriverId = 1,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 1,
-                            Route_Data = "Route 1 Data",
-                            Total_Distance = "15.2 km"
+                            RouteData = "Route 1 Data",
+                            TotalDistance = "15.2 km"
                         },
                         new
                         {
                             Id = 2,
                             DriverId = 2,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 2,
-                            Route_Data = "Route 2 Data",
-                            Total_Distance = "22.8 km"
+                            RouteData = "Route 2 Data",
+                            TotalDistance = "22.8 km"
                         },
                         new
                         {
                             Id = 3,
                             DriverId = 3,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 45, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 45, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 3,
-                            Route_Data = "Route 3 Data",
-                            Total_Distance = "18.5 km"
+                            RouteData = "Route 3 Data",
+                            TotalDistance = "18.5 km"
                         },
                         new
                         {
                             Id = 4,
                             DriverId = 4,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 30, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 4,
-                            Route_Data = "Route 4 Data",
-                            Total_Distance = "27.3 km"
+                            RouteData = "Route 4 Data",
+                            TotalDistance = "27.3 km"
                         },
                         new
                         {
                             Id = 5,
                             DriverId = 5,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 1, 50, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 1, 50, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 5,
-                            Route_Data = "Route 5 Data",
-                            Total_Distance = "12.1 km"
+                            RouteData = "Route 5 Data",
+                            TotalDistance = "12.1 km"
                         },
                         new
                         {
                             Id = 6,
                             DriverId = 6,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 6,
-                            Route_Data = "Route 6 Data",
-                            Total_Distance = "19.7 km"
+                            RouteData = "Route 6 Data",
+                            TotalDistance = "19.7 km"
                         },
                         new
                         {
                             Id = 7,
                             DriverId = 1,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 20, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 20, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 7,
-                            Route_Data = "Route 7 Data",
-                            Total_Distance = "24.9 km"
+                            RouteData = "Route 7 Data",
+                            TotalDistance = "24.9 km"
                         },
                         new
                         {
                             Id = 8,
                             DriverId = 2,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 25, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 25, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 8,
-                            Route_Data = "Route 8 Data",
-                            Total_Distance = "16.4 km"
+                            RouteData = "Route 8 Data",
+                            TotalDistance = "16.4 km"
                         },
                         new
                         {
                             Id = 9,
                             DriverId = 3,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 5, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 5, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 9,
-                            Route_Data = "Route 9 Data",
-                            Total_Distance = "21.2 km"
+                            RouteData = "Route 9 Data",
+                            TotalDistance = "21.2 km"
                         },
                         new
                         {
                             Id = 10,
                             DriverId = 4,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 15, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 15, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 10,
-                            Route_Data = "Route 10 Data",
-                            Total_Distance = "14.8 km"
+                            RouteData = "Route 10 Data",
+                            TotalDistance = "14.8 km"
                         },
                         new
                         {
                             Id = 11,
                             DriverId = 5,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 40, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 40, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 11,
-                            Route_Data = "Route 11 Data",
-                            Total_Distance = "23.6 km"
+                            RouteData = "Route 11 Data",
+                            TotalDistance = "23.6 km"
                         },
                         new
                         {
                             Id = 12,
                             DriverId = 6,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 40, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 40, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 12,
-                            Route_Data = "Route 12 Data",
-                            Total_Distance = "17.9 km"
+                            RouteData = "Route 12 Data",
+                            TotalDistance = "17.9 km"
                         },
                         new
                         {
                             Id = 13,
                             DriverId = 1,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 35, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 35, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 13,
-                            Route_Data = "Route 13 Data",
-                            Total_Distance = "26.1 km"
+                            RouteData = "Route 13 Data",
+                            TotalDistance = "26.1 km"
                         },
                         new
                         {
                             Id = 14,
                             DriverId = 2,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 10, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 10, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 14,
-                            Route_Data = "Route 14 Data",
-                            Total_Distance = "13.5 km"
+                            RouteData = "Route 14 Data",
+                            TotalDistance = "13.5 km"
                         },
                         new
                         {
                             Id = 15,
                             DriverId = 3,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 15,
-                            Route_Data = "Route 15 Data",
-                            Total_Distance = "20.3 km"
+                            RouteData = "Route 15 Data",
+                            TotalDistance = "20.3 km"
                         },
                         new
                         {
                             Id = 16,
                             DriverId = 4,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 45, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 45, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 16,
-                            Route_Data = "Route 16 Data",
-                            Total_Distance = "25.7 km"
+                            RouteData = "Route 16 Data",
+                            TotalDistance = "25.7 km"
                         },
                         new
                         {
                             Id = 17,
                             DriverId = 5,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 35, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 35, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 17,
-                            Route_Data = "Route 17 Data",
-                            Total_Distance = "15.9 km"
+                            RouteData = "Route 17 Data",
+                            TotalDistance = "15.9 km"
                         },
                         new
                         {
                             Id = 18,
                             DriverId = 6,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 25, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 25, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 18,
-                            Route_Data = "Route 18 Data",
-                            Total_Distance = "22.4 km"
+                            RouteData = "Route 18 Data",
+                            TotalDistance = "22.4 km"
                         },
                         new
                         {
                             Id = 19,
                             DriverId = 1,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 50, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 50, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 19,
-                            Route_Data = "Route 19 Data",
-                            Total_Distance = "18.2 km"
+                            RouteData = "Route 19 Data",
+                            TotalDistance = "18.2 km"
                         },
                         new
                         {
                             Id = 20,
                             DriverId = 2,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 30, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 20,
-                            Route_Data = "Route 20 Data",
-                            Total_Distance = "24.3 km"
+                            RouteData = "Route 20 Data",
+                            TotalDistance = "24.3 km"
                         },
                         new
                         {
                             Id = 21,
                             DriverId = 3,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 21,
-                            Route_Data = "Route 21 Data",
-                            Total_Distance = "16.7 km"
+                            RouteData = "Route 21 Data",
+                            TotalDistance = "16.7 km"
                         },
                         new
                         {
                             Id = 22,
                             DriverId = 4,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 22,
-                            Route_Data = "Route 22 Data",
-                            Total_Distance = "21.9 km"
+                            RouteData = "Route 22 Data",
+                            TotalDistance = "21.9 km"
                         },
                         new
                         {
                             Id = 23,
                             DriverId = 5,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 20, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 20, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 23,
-                            Route_Data = "Route 23 Data",
-                            Total_Distance = "14.3 km"
+                            RouteData = "Route 23 Data",
+                            TotalDistance = "14.3 km"
                         },
                         new
                         {
                             Id = 24,
                             DriverId = 6,
-                            Estimated_Duration = new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified),
                             OrderPlacementId = 24,
-                            Route_Data = "Route 24 Data",
-                            Total_Distance = "19.8 km"
+                            RouteData = "Route 24 Data",
+                            TotalDistance = "19.8 km"
                         });
                 });
 
@@ -2367,12 +2367,12 @@ namespace Backend.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("First_Name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Last_Name")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -2396,8 +2396,8 @@ namespace Backend.Migrations
                         {
                             Id = 1,
                             Email = "johndoe@example.com",
-                            First_Name = "John",
-                            Last_Name = "Doe",
+                            FirstName = "John",
+                            LastName = "Doe",
                             Password = "P@ss0rd1",
                             Phone = "1234567890"
                         },
@@ -2405,8 +2405,8 @@ namespace Backend.Migrations
                         {
                             Id = 2,
                             Email = "janesmith@example.com",
-                            First_Name = "Jane",
-                            Last_Name = "Smith",
+                            FirstName = "Jane",
+                            LastName = "Smith",
                             Password = "S3cr3P@s",
                             Phone = "2345678901"
                         },
@@ -2414,8 +2414,8 @@ namespace Backend.Migrations
                         {
                             Id = 3,
                             Email = "alciejohnson@example.com",
-                            First_Name = "Alice",
-                            Last_Name = "Johnson",
+                            FirstName = "Alice",
+                            LastName = "Johnson",
                             Password = "A1i3#Pas",
                             Phone = "3456789012"
                         },
@@ -2423,8 +2423,8 @@ namespace Backend.Migrations
                         {
                             Id = 4,
                             Email = "bobbrown@example.com",
-                            First_Name = "Bob",
-                            Last_Name = "Brown",
+                            FirstName = "Bob",
+                            LastName = "Brown",
                             Password = "B0b$T0ub",
                             Phone = "4567890123"
                         },
@@ -2432,8 +2432,8 @@ namespace Backend.Migrations
                         {
                             Id = 5,
                             Email = "charliedavis@example.com",
-                            First_Name = "Charlie",
-                            Last_Name = "Davis",
+                            FirstName = "Charlie",
+                            LastName = "Davis",
                             Password = "Ch@rie1$",
                             Phone = "5678901234"
                         },
@@ -2441,8 +2441,8 @@ namespace Backend.Migrations
                         {
                             Id = 6,
                             Email = "dianamiller@example.com",
-                            First_Name = "Diana",
-                            Last_Name = "Miller",
+                            FirstName = "Diana",
+                            LastName = "Miller",
                             Password = "D1na!Cmp",
                             Phone = "6789012345"
                         },
@@ -2450,8 +2450,8 @@ namespace Backend.Migrations
                         {
                             Id = 7,
                             Email = "ethanwilson@example.com",
-                            First_Name = "Ethan",
-                            Last_Name = "Wilson",
+                            FirstName = "Ethan",
+                            LastName = "Wilson",
                             Password = "Ethn1234",
                             Phone = "7890123456"
                         },
@@ -2459,8 +2459,8 @@ namespace Backend.Migrations
                         {
                             Id = 8,
                             Email = "fionamoore@example.com",
-                            First_Name = "Foina",
-                            Last_Name = "Moore",
+                            FirstName = "Foina",
+                            LastName = "Moore",
                             Password = "F!0nC0d3",
                             Phone = "8901234567"
                         },
@@ -2468,8 +2468,8 @@ namespace Backend.Migrations
                         {
                             Id = 9,
                             Email = "georgetaylor@example.com",
-                            First_Name = "George",
-                            Last_Name = "Taylor",
+                            FirstName = "George",
+                            LastName = "Taylor",
                             Password = "G3rge@20",
                             Phone = "9012345678"
                         },
@@ -2477,8 +2477,8 @@ namespace Backend.Migrations
                         {
                             Id = 10,
                             Email = "hannahanderson@example.com",
-                            First_Name = "Hannah",
-                            Last_Name = "Anderson",
+                            FirstName = "Hannah",
+                            LastName = "Anderson",
                             Password = "H@nah202",
                             Phone = "0123456789"
                         },
@@ -2486,8 +2486,8 @@ namespace Backend.Migrations
                         {
                             Id = 11,
                             Email = "brunofernandes@example.com",
-                            First_Name = "Bruno",
-                            Last_Name = "Fernandes",
+                            FirstName = "Bruno",
+                            LastName = "Fernandes",
                             Password = "F@brno20",
                             Phone = "0129756789"
                         },
@@ -2495,8 +2495,8 @@ namespace Backend.Migrations
                         {
                             Id = 12,
                             Email = "cristianojuan@example.com",
-                            First_Name = "Cristiano",
-                            Last_Name = "Juan",
+                            FirstName = "Cristiano",
+                            LastName = "Juan",
                             Password = "C@juan02",
                             Phone = "4208656789"
                         });
@@ -2529,15 +2529,15 @@ namespace Backend.Migrations
                     b.Property<decimal>("Length")
                         .HasColumnType("decimal(8,2)");
 
-                    b.Property<string>("License_Plate")
+                    b.Property<string>("LicensePlate")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateOnly>("Make_Year")
+                    b.Property<DateOnly>("MakeYear")
                         .HasColumnType("date");
 
-                    b.Property<decimal>("Max_Weight")
+                    b.Property<decimal>("MaxWeight")
                         .HasColumnType("decimal(8,2)");
 
                     b.Property<string>("Model")
@@ -2563,9 +2563,9 @@ namespace Backend.Migrations
                             DriverId = 1,
                             Height = 250m,
                             Length = 620m,
-                            License_Plate = "LU1 VAN",
-                            Make_Year = new DateOnly(2021, 1, 1),
-                            Max_Weight = 1500.00m,
+                            LicensePlate = "LU1 VAN",
+                            MakeYear = new DateOnly(2021, 1, 1),
+                            MaxWeight = 1500.00m,
                             Model = "Transit Luton",
                             Width = 230m
                         },
@@ -2577,9 +2577,9 @@ namespace Backend.Migrations
                             DriverId = 2,
                             Height = 260m,
                             Length = 650m,
-                            License_Plate = "LU2 VAN",
-                            Make_Year = new DateOnly(2020, 1, 1),
-                            Max_Weight = 1700.00m,
+                            LicensePlate = "LU2 VAN",
+                            MakeYear = new DateOnly(2020, 1, 1),
+                            MaxWeight = 1700.00m,
                             Model = "Sprinter Luton",
                             Width = 240m
                         },
@@ -2591,9 +2591,9 @@ namespace Backend.Migrations
                             DriverId = 3,
                             Height = 270m,
                             Length = 680m,
-                            License_Plate = "LU3 VAN",
-                            Make_Year = new DateOnly(2022, 1, 1),
-                            Max_Weight = 2000.00m,
+                            LicensePlate = "LU3 VAN",
+                            MakeYear = new DateOnly(2022, 1, 1),
+                            MaxWeight = 2000.00m,
                             Model = "Daily Luton",
                             Width = 240m
                         },
@@ -2605,9 +2605,9 @@ namespace Backend.Migrations
                             DriverId = 4,
                             Height = 265m,
                             Length = 660m,
-                            License_Plate = "LU4 VAN",
-                            Make_Year = new DateOnly(2021, 1, 1),
-                            Max_Weight = 1800.00m,
+                            LicensePlate = "LU4 VAN",
+                            MakeYear = new DateOnly(2021, 1, 1),
+                            MaxWeight = 1800.00m,
                             Model = "Crafter Luton",
                             Width = 235m
                         },
@@ -2619,9 +2619,9 @@ namespace Backend.Migrations
                             DriverId = 5,
                             Height = 255m,
                             Length = 630m,
-                            License_Plate = "LU5 VAN",
-                            Make_Year = new DateOnly(2023, 1, 1),
-                            Max_Weight = 1600.00m,
+                            LicensePlate = "LU5 VAN",
+                            MakeYear = new DateOnly(2023, 1, 1),
+                            MaxWeight = 1600.00m,
                             Model = "Master Luton",
                             Width = 230m
                         },
@@ -2633,9 +2633,9 @@ namespace Backend.Migrations
                             DriverId = 6,
                             Height = 270m,
                             Length = 670m,
-                            License_Plate = "LU6 VAN",
-                            Make_Year = new DateOnly(2022, 1, 1),
-                            Max_Weight = 1900.00m,
+                            LicensePlate = "LU6 VAN",
+                            MakeYear = new DateOnly(2022, 1, 1),
+                            MaxWeight = 1900.00m,
                             Model = "Boxer Luton",
                             Width = 240m
                         });
@@ -2643,13 +2643,13 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.AdditionalClasses.OrderDimension", b =>
                 {
-                    b.HasOne("Backend.Models.Order_Items", "Order_Items")
+                    b.HasOne("Backend.Models.OrderItems", "OrderItems")
                         .WithOne("OrderDimension")
                         .HasForeignKey("Backend.AdditionalClasses.OrderDimension", "OrderItemsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Order_Items");
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("Backend.Models.Address", b =>
@@ -2720,6 +2720,17 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Backend.Models.OrderItems", b =>
+                {
+                    b.HasOne("Backend.Models.OrderPlacement", "OrderPlacemnt")
+                        .WithOne("OrderItems")
+                        .HasForeignKey("Backend.Models.OrderItems", "OrderPlacementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderPlacemnt");
+                });
+
             modelBuilder.Entity("Backend.Models.OrderPlacement", b =>
                 {
                     b.HasOne("Backend.Models.Customer", "Customer")
@@ -2737,18 +2748,7 @@ namespace Backend.Migrations
                     b.Navigation("Driver");
                 });
 
-            modelBuilder.Entity("Backend.Models.Order_Items", b =>
-                {
-                    b.HasOne("Backend.Models.OrderPlacement", "OrderPlacemnt")
-                        .WithOne("Order_Items")
-                        .HasForeignKey("Backend.Models.Order_Items", "OrderPlacementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OrderPlacemnt");
-                });
-
-            modelBuilder.Entity("Backend.Models.Order_Tracking", b =>
+            modelBuilder.Entity("Backend.Models.OrderTracking", b =>
                 {
                     b.HasOne("Backend.Models.OrderPlacement", "OrderPlacement")
                         .WithMany()
@@ -2808,14 +2808,14 @@ namespace Backend.Migrations
                     b.Navigation("OrdersPlaced");
                 });
 
-            modelBuilder.Entity("Backend.Models.OrderPlacement", b =>
-                {
-                    b.Navigation("Order_Items");
-                });
-
-            modelBuilder.Entity("Backend.Models.Order_Items", b =>
+            modelBuilder.Entity("Backend.Models.OrderItems", b =>
                 {
                     b.Navigation("OrderDimension");
+                });
+
+            modelBuilder.Entity("Backend.Models.OrderPlacement", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("Backend.Models.User", b =>

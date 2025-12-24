@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,8 +21,8 @@ namespace Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    First_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Last_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -37,7 +37,7 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Label = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Address_Line = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    AddressLine = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -58,12 +58,12 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Business_Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Business_Type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Tax_Identification = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    BusinessName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    BusinessType = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TaxIdentification = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Rating = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Total_Orders = table.Column<int>(type: "int", nullable: true),
-                    Total_Spent = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
+                    TotalOrders = table.Column<int>(type: "int", nullable: true),
+                    TotalSpent = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -83,13 +83,13 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Drivers_License = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    License_Expiry = table.Column<DateOnly>(type: "date", nullable: false),
-                    Is_Verified = table.Column<bool>(type: "bit", nullable: false),
-                    Is_Available = table.Column<bool>(type: "bit", nullable: false),
+                    DriversLicense = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    LicenseExpiry = table.Column<DateOnly>(type: "date", nullable: false),
+                    IsVerified = table.Column<bool>(type: "bit", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
                     Rating = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Completion_Rate = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Total_Earnings = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    CompletionRate = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    TotalEarnings = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -112,7 +112,7 @@ namespace Backend.Migrations
                     Type = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Is_Read = table.Column<bool>(type: "bit", nullable: true),
+                    IsRead = table.Column<bool>(type: "bit", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -131,14 +131,14 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Document_Type = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    File_Url = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Expiry_Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    DocumentType = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    FileUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    ExpiryDate = table.Column<DateOnly>(type: "date", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Rejection_Reason = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Uploaded_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Reviewed_By = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Reviewed_At = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RejectionReason = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UploadedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReviewedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    ReviewedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -158,16 +158,16 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Pick_Up_Address = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Delivery_Up_Address = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Pick_Up_Contact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Delivery_Contact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    PickUpAddress = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    DeliveryUpAddress = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    PickUpContact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    DeliveryContact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Scheduled_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Completed_On = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ScheduledAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CompletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -195,10 +195,10 @@ namespace Backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Brand = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Make_Year = table.Column<DateOnly>(type: "date", nullable: false),
+                    MakeYear = table.Column<DateOnly>(type: "date", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    License_Plate = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Max_Weight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    LicensePlate = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    MaxWeight = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Length = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Width = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Height = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
@@ -221,11 +221,11 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Gross_Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Platform_Fee = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Net_Earnings = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Is_Paid_Out = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Earned_At = table.Column<DateOnly>(type: "date", nullable: false),
+                    GrossAmount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    PlatformFee = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    NetEarnings = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    IsPaidOut = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    EarnedAt = table.Column<DateOnly>(type: "date", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: true),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -250,10 +250,10 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Item_Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    ItemName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Weight_Per_Item = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    Special_Instructions = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    WeightPerItem = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    SpecialInstructions = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -298,12 +298,12 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Payment_Method = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Transaction_Identification = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Processed_At = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Platform_Fee = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
-                    Driver_Earnings = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
+                    TransactionIdentification = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    ProcessedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PlatformFee = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
+                    DriverEarnings = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -323,9 +323,9 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Route_Data = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Total_Distance = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Estimated_Duration = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RouteData = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TotalDistance = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    EstimatedDuration = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DriverId = table.Column<int>(type: "int", nullable: false),
                     OrderPlacementId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -369,7 +369,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "First_Name", "Last_Name", "Password", "Phone" },
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Password", "Phone" },
                 values: new object[,]
                 {
                     { 1, "johndoe@example.com", "John", "Doe", "P@ss0rd1", "1234567890" },
@@ -388,7 +388,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Addresses",
-                columns: new[] { "Id", "Address_Line", "City", "Label", "UserId" },
+                columns: new[] { "Id", "AddressLine", "City", "Label", "UserId" },
                 values: new object[,]
                 {
                     { 1, "123 Main St", "Los Angeles", "Home", 1 },
@@ -407,7 +407,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "Id", "Business_Name", "Business_Type", "Rating", "Tax_Identification", "Total_Orders", "Total_Spent", "UserId" },
+                columns: new[] { "Id", "BusinessName", "BusinessType", "Rating", "TaxIdentification", "TotalOrders", "TotalSpent", "UserId" },
                 values: new object[,]
                 {
                     { 1, "Tech Solutions", "IT Services", "4.5", "TS123456A", 4, 1500.00m, 1 },
@@ -420,7 +420,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Drivers",
-                columns: new[] { "Id", "Completion_Rate", "Drivers_License", "Is_Available", "Is_Verified", "License_Expiry", "Rating", "Total_Earnings", "UserId" },
+                columns: new[] { "Id", "CompletionRate", "DriversLicense", "IsAvailable", "IsVerified", "LicenseExpiry", "Rating", "TotalEarnings", "UserId" },
                 values: new object[,]
                 {
                     { 1, "95%", "DL123456789", true, true, new DateOnly(2025, 12, 31), "4.8", 1500.00m, 7 },
@@ -433,7 +433,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Documents",
-                columns: new[] { "Id", "Document_Type", "DriverId", "Expiry_Date", "File_Url", "Rejection_Reason", "Reviewed_At", "Reviewed_By", "Status", "Uploaded_At" },
+                columns: new[] { "Id", "DocumentType", "DriverId", "ExpiryDate", "FileUrl", "RejectionReason", "ReviewedAt", "ReviewedBy", "Status", "UploadedAt" },
                 values: new object[,]
                 {
                     { 2, "Insurance", 1, new DateOnly(2025, 5, 15), "http://example.com/documents/insurance1.pdf", "Awaiting verification", new DateTime(2023, 9, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), "Bob Smith", "Pending", new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified) },
@@ -445,7 +445,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "OrderPlacements",
-                columns: new[] { "Id", "Completed_On", "Created_At", "CustomerId", "Delivery_Contact", "Delivery_Up_Address", "Description", "DriverId", "Pick_Up_Address", "Pick_Up_Contact", "Price", "Scheduled_At", "Status" },
+                columns: new[] { "Id", "CompletedOn", "CreatedAt", "CustomerId", "DeliveryContact", "DeliveryUpAddress", "Description", "DriverId", "PickUpAddress", "PickUpContact", "Price", "ScheduledAt", "Status" },
                 values: new object[,]
                 {
                     { 1, new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Jane Smith", "456 Elm St", "Electronics", null, "123 Main St", "John Doe", 300.00m, new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Delivered" },
@@ -476,7 +476,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vehicles",
-                columns: new[] { "Id", "Brand", "Color", "DriverId", "Height", "Length", "License_Plate", "Make_Year", "Max_Weight", "Model", "Width" },
+                columns: new[] { "Id", "Brand", "Color", "DriverId", "Height", "Length", "LicensePlate", "MakeYear", "MaxWeight", "Model", "Width" },
                 values: new object[,]
                 {
                     { 1, "Ford", "White", 1, 250m, 620m, "LU1 VAN", new DateOnly(2021, 1, 1), 1500.00m, "Transit Luton", 230m },
@@ -489,7 +489,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "OrderItems",
-                columns: new[] { "Id", "Item_Name", "OrderPlacementId", "Quantity", "Special_Instructions", "Weight_Per_Item" },
+                columns: new[] { "Id", "ItemName", "OrderPlacementId", "Quantity", "SpecialInstructions", "WeightPerItem" },
                 values: new object[,]
                 {
                     { 1, "Laptop", 1, 1, "Handle with care", 2.50m },
@@ -551,7 +551,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Payments",
-                columns: new[] { "Id", "Amount", "Driver_Earnings", "OrderPlacementId", "Payment_Method", "Platform_Fee", "Processed_At", "Status", "Transaction_Identification" },
+                columns: new[] { "Id", "Amount", "DriverEarnings", "OrderPlacementId", "PaymentMethod", "PlatformFee", "ProcessedAt", "Status", "TransactionIdentification" },
                 values: new object[,]
                 {
                     { 1, 300.00m, 290.00m, 1, "Credit Card", 10.00m, new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified), "Completed", "TXN001" },
@@ -582,7 +582,7 @@ namespace Backend.Migrations
 
             migrationBuilder.InsertData(
                 table: "Routes",
-                columns: new[] { "Id", "DriverId", "Estimated_Duration", "OrderPlacementId", "Route_Data", "Total_Distance" },
+                columns: new[] { "Id", "DriverId", "EstimatedDuration", "OrderPlacementId", "RouteData", "TotalDistance" },
                 values: new object[,]
                 {
                     { 1, 1, new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified), 1, "Route 1 Data", "15.2 km" },

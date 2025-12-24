@@ -43,13 +43,13 @@ const Dashboard = () => {
             })
 
             const driver = {
-                Drivers_License:response.data.Drivers_License,
-                License_Expiry:response.data.License_Expiry,
-                Is_Verified:response.data.Is_Verified,
+                Drivers_License:response.data.DriversLicense,
+                License_Expiry:response.data.LicenseExpiry,
+                Is_Verified:response.data.IsVerified,
                 Is_Available:avail_parameter,
                 Rating:response.data.Rating,
-                Completion_Rate:response.data.Completion_Rate,
-                Total_Earnings:response.data.Total_Earnings,
+                Completion_Rate:response.data.CompletionRate,
+                Total_Earnings:response.data.TotalEarnings,
                 UserId:response.data.UserId,
             }
             setDriverRecord(driver)
@@ -148,7 +148,7 @@ const Dashboard = () => {
 
     useEffect(()=>{
         handleDriverRecord()
-    })
+    },[DriverId])
     return (
         <div className='dashboard-component'>
             <div className="dashboard-status">

@@ -9,17 +9,17 @@ namespace Backend.Models
         public int Id { get; set; }
         [Required]
         [StringLength(20)]
-        public string Business_Name { get; set; }
+        public string BusinessName { get; set; }
         [Required]
         [StringLength(20)]
-        public string Business_Type { get; set; }
+        public string BusinessType { get; set; }
         [StringLength(20)]
-        public string Tax_Identification { get; set; }
+        public string TaxIdentification { get; set; }
         [StringLength(20)]
         public string Rating { get;set; }
-        public int? Total_Orders { get; set; }
+        public int? TotalOrders { get; set; }
         [Column(TypeName ="decimal(10,2)")]
-        public decimal? Total_Spent { get; set; }
+        public decimal? TotalSpent { get; set; }
         [Required]
         public int UserId {  get; set; }
         public List<OrderPlacement>? OrdersPlaced { get; set; } = new List<OrderPlacement>();

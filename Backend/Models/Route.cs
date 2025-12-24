@@ -8,11 +8,11 @@ namespace Backend.Models
         public int Id { get; set; }
         [Required]
         [StringLength(50)]
-        public string Route_Data { get; set; }
+        public string RouteData { get; set; }
         [Required]
         [StringLength(20)]
-        public string Total_Distance { get; set; }
-        public DateTime? Estimated_Duration { get; set; }
+        public string TotalDistance { get; set; }
+        public DateTime? EstimatedDuration { get; set; }
         public int DriverId {  get; set; }
         public int? OrderPlacementId {  get; set; }
 

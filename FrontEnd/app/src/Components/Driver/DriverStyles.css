@@ -1,3 +1,11 @@
+.driver-main-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: aliceblue;
+    height: 100vh;
+}
+
 .myword-icon, .mytruck-icon{
     width: 24px;
   height: 24px;
@@ -16,15 +24,16 @@ p.driver-tag {
     height: 100vh;
 }
 
-.header-nav {
+.header-nav-driver {
     padding: 4px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border-bottom: 1px solid #e9e9e9;
     border-top: 0;
     border-left: 0;
     border-right: 0;
+    gap: 744px;
 }
 
 .title-descript {
@@ -50,6 +59,7 @@ p.driver-tag {
     border-radius: 26px;
     align-items: center;
     gap: 193px;
+    width: 85%;
 }
 
 .nav-item.active {
@@ -64,16 +74,17 @@ p.driver-tag {
 
 .sack-toggle-btn {
     display: flex;
-    gap: 594px;
+    gap: 30px;
     background: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 13px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s ease;
-        justify-content: flex-end;
+    justify-content: center;
+    width: 133%;
 }
 
 .sack-toggle-btn:hover {
@@ -88,8 +99,8 @@ p.driver-tag {
 .knapsack-container.open {
     opacity: 1;
     transform: translateY(0);
-    border: solid #f9f9f9;
     border-top: hidden;
+    width: 132%;
 }
 
 .knapsack-container.closed {
@@ -122,8 +133,12 @@ p.driver-tag {
 .active-order-sack {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    align-items: center;
     margin: 31px;
+    width: 64%;
+    background: aliceblue;
+    padding-right: 250px;
+    padding-left: 250px;
 }
 
 /* Orders Container */

@@ -15,7 +15,7 @@ namespace Backend.Models
         [Required]
         [StringLength(50)]
         public string Message { get; set; }
-        public bool? Is_Read { get; set; }
+        public bool? IsRead { get; set; }
         public int? UserId {  get; set; }
 
         public virtual User? User { get; set; }

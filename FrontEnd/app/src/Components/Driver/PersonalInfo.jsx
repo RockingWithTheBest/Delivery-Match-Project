@@ -44,8 +44,8 @@ const PersonalInfo =({driverDetails})=>{
         try{
             const user = {
                 UserId:driverDetails.UserId,
-                First_Name:firstName,
-                Last_Name:lastName,
+                FirstName:firstName,
+                LastName:lastName,
                 Phone:phone,
                 Email:email,
                 Password:driverDetails.Password
@@ -58,13 +58,13 @@ const PersonalInfo =({driverDetails})=>{
             })
           
             const driver = {
-                Drivers_License:driverLicense,
-                License_Expiry:licenseExpiry,
-                Is_Verified:isVerified,
-                Is_Available:driverDetails.Is_Available,
+                DriversLicense:driverLicense,
+                LicenseExpiry:licenseExpiry,
+                IsVerified:isVerified,
+                IsAvailable:driverDetails.IsAvailable,
                 Rating:rating,
-                Completion_Rate:completionRate,
-                Total_Earnings:parseFloat(totalEarnings),
+                CompletionRate:completionRate,
+                TotalEarnings:parseFloat(totalEarnings),
                 UserId:parseInt(user.UserId)
             }
             
@@ -90,12 +90,12 @@ const PersonalInfo =({driverDetails})=>{
                 id:parseInt(responseDriver.data.UserId)
             }
         })
-        setFirstName(responseUser.data.First_Name)
-        setLastName(responseUser.data.Last_Name)
+        setFirstName(responseUser.data.FirstName)
+        setLastName(responseUser.data.LastName)
         setEmail(responseUser.data.Email)
         setPhone(responseUser.data.Phone)
-        setDriverLicense(responseDriver.data.Drivers_License)
-        setLicenseExpiry(responseDriver.data.License_Expiry)
+        setDriverLicense(responseDriver.data.DriversLicense)
+        setLicenseExpiry(responseDriver.data.LicenseExpiry)
     }
 
     useEffect(()=>{
@@ -108,17 +108,17 @@ const PersonalInfo =({driverDetails})=>{
             setPhone(driverDetails.Phone || "")
             setFirstName(driverDetails.FirstName || "")
             setLastName(driverDetails.LastName || "")
-            setCompletionRate(driverDetails.Completion_Rate || "")
+            setCompletionRate(driverDetails.CompletionRate || "")
             setRating(driverDetails.Rating || "")
-            setIsVerified(driverDetails.Is_Verified || "")
+            setIsVerified(driverDetails.IsVerified || "")
             setLicenseExpiry(driverDetails.LicenseExpiry || "")
             setDriverLicense(driverDetails.DrivingLicense || "")
-            setTotalEarning(driverDetails.Total_Earnings || "")
+            setTotalEarning(driverDetails.TotalEarnings || "")
             setBrand(driverDetails.Brand || "")
             setModel(driverDetails.Model || "")
-            setMakeYear(driverDetails.Make_Year || "")
-            setMaxWieght(driverDetails.Max_Weight || "")
-            setMaxVolume(driverDetails.Max_Volume || "")
+            setMakeYear(driverDetails.MakeYear || "")
+            setMaxWieght(driverDetails.MaxWeight || "")
+            setMaxVolume(driverDetails.MaxVolume || "")
             setColor(driverDetails.Color || "")
         }
     },[driverDetails])

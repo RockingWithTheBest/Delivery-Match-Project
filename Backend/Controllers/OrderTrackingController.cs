@@ -38,7 +38,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Add-Order-Tracking")]
-        public IActionResult AddOrderTracking(Order_Tracking trackinRecord)
+        public IActionResult AddOrderTracking(OrderTracking trackinRecord)
         {
             if (trackinRecord == null)
             {
@@ -53,7 +53,7 @@ namespace Backend.Controllers
 
         [HttpPut]
         [Route("Editing-Order-Tracking")]
-        public IActionResult UpdateOrderTracking(int Id, Order_Tracking trackinRecord)
+        public IActionResult UpdateOrderTracking(int Id, OrderTracking trackinRecord)
         {
             if (Id <= 0)
             {

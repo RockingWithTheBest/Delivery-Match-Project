@@ -70,9 +70,9 @@ namespace Backend.Repository.Implementation
             else
             {
                 Models.Route updatedRecord = databaseContext.Routes.Where(temp => temp.Id == Id).FirstOrDefault();
-                updatedRecord.Route_Data = record.Route_Data;
-                updatedRecord.Total_Distance = record.Total_Distance;
-                updatedRecord.Estimated_Duration = record.Estimated_Duration;
+                updatedRecord.RouteData = record.RouteData;
+                updatedRecord.TotalDistance = record.TotalDistance;
+                updatedRecord.EstimatedDuration = record.EstimatedDuration;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }

@@ -13,7 +13,7 @@ namespace Backend.Repository.Implementation
         {
             this.databaseContext = databaseContext;
         }
-        public int AddOrderItemsRecord(Order_Items item)
+        public int AddOrderItemsRecord(OrderItems item)
         {
             int textVariable = -1;
             if (item == null)
@@ -50,17 +50,17 @@ namespace Backend.Repository.Implementation
             return testValue;
         }
 
-        public IEnumerable<Order_Items> GetAllOrderItems()
+        public IEnumerable<OrderItems> GetAllOrderItems()
         {
             return databaseContext.OrderItems.Include(d => d.OrderDimension).ToList();
         }
 
-        public Order_Items GetSingleRecord(int Id)
+        public OrderItems GetSingleRecord(int Id)
         {
             return databaseContext.OrderItems.Where(temp => temp.Id == Id).FirstOrDefault();
         }
 
-        public int UpdateOrderItemsRecord(int Id, Order_Items record)
+        public int UpdateOrderItemsRecord(int Id, OrderItems record)
         {
             int testValue = -1;
             if (Id <= 0 || record == null)
@@ -69,11 +69,11 @@ namespace Backend.Repository.Implementation
             }
             else
             {
-                Order_Items updatedRecord = databaseContext.OrderItems.Where(temp => temp.Id == Id).FirstOrDefault();
-                updatedRecord.Item_Name = record.Item_Name;
+                OrderItems updatedRecord = databaseContext.OrderItems.Where(temp => temp.Id == Id).FirstOrDefault();
+                updatedRecord.ItemName = record.ItemName;
                 updatedRecord.Quantity = record.Quantity;
-                updatedRecord.Weight_Per_Item = record.Weight_Per_Item;
-                updatedRecord.Special_Instructions = record.Special_Instructions;
+                updatedRecord.WeightPerItem = record.WeightPerItem;
+                updatedRecord.SpecialInstructions = record.SpecialInstructions;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }

@@ -14,8 +14,8 @@ namespace Backend.DatabasContext
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Earnings> Earnings { get; set; }
         public DbSet<Notification> Notifications { get; set; }  
-        public DbSet<Order_Items> OrderItems { get; set; }
-        public DbSet<Order_Tracking>OrderTrackings { get; set; }
+        public DbSet<OrderItems> OrderItems { get; set; }
+        public DbSet<OrderTracking>OrderTrackings { get; set; }
         public DbSet<OrderPlacement> OrderPlacements { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Models.Route> Routes { get; set; }
@@ -38,9 +38,9 @@ namespace Backend.DatabasContext
                 .ValueGeneratedOnAdd();
 
             // Configure one - to - one relationship with Order_Items as principal
-            modelBuilder.Entity<Order_Items>()
+            modelBuilder.Entity<OrderItems>()
                 .HasOne(o=>o.OrderDimension)
-                .WithOne(d=>d.Order_Items)
+                .WithOne(d=>d.OrderItems)
                 .HasForeignKey<OrderDimension>(z => z.OrderItemsId)
                 .OnDelete(DeleteBehavior.Cascade);
 

@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Optimization & Tracking System</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4a6fdc;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --dark-color: #343a40;
+            --light-bg: #f5f7fa;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            overflow: hidden;
+            color: #333;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), #3a5fc9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            padding: 0.75rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem !important;
+            border-radius: 4px;
+            margin: 0 0.25rem;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .main-container {
+            display: flex;
+            height: calc(100vh - 76px);
+            position: relative;
+        }
+        
+        .sidebar {
+            width: 380px;
+            background: white;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+            overflow-y: auto;
+            z-index: 1001;
+            transition: transform 0.3s ease;
+            border-right: 1px solid #e9ecef;
+        }
+        
+        .map-container {
+            flex: 1;
+            position: relative;
+            background: #e9ecef;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--secondary-color), #e9ecef);
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 600;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 1rem 1.25rem;
+        }
+        
+        .card-body {
+            padding: 1.25rem;
+        }
+        
+        .btn {
+            border-radius: 6px;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #3a5fc9);
+            box-shadow: 0 4px 8px rgba(74, 111, 220, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(74, 111, 220, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #218838);
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--accent-color), #e74c3c);
+            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.2);
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(74, 111, 220, 0.15);
+            background-color: white;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+        
+        .order-item, .route-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+        
+        .order-item:hover, .route-item:hover {
+            background-color: rgba(74, 111, 220, 0.05);
+            transform: translateX(5px);
+            border-left-color: var(--primary-color);
+        }
+        
+        .driver-marker {
+            background: linear-gradient(135deg, var(--primary-color), #3a5fc9);
+            color: white;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .pickup-marker {
+            background: linear-gradient(135deg, var(--success-color), #218838);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            cursor: move;
+            transition: transform 0.2s;
+        }
+        
+        .pickup-marker:hover {
+            transform: scale(1.1);
+        }
+        
+        .delivery-marker {
+            background: linear-gradient(135deg, var(--warning-color), #e0a800);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            cursor: move;
+            transition: transform 0.2s;
+        }
+        
+        .delivery-marker:hover {
+            transform: scale(1.1);
+        }
+        
+        .car-icon {
+            background: url('https://img.icons8.com/color/48/000000/car.png') no-repeat center;
+            background-size: 35px 35px;
+            width: 35px;
+            height: 35px;
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .pin-placement-mode {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .pin-placement-mode.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        .pin-placement-mode h6 {
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .pin-placement-mode .cancel-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .location-input-group {
+            position: relative;
+        }
+        
+        .location-input-group .clear-btn {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            display: none;
+        }
+        
+        .location-input-group.has-location .clear-btn {
+            display: block;
+        }
+        
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-in-progress {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #777;
+            border-bottom: 2px solid transparent;
+            border-radius: 0;
+            transition: all 0.3s;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            background-color: transparent;
+            font-weight: 600;
+        }
+        
+        .notification {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1003;
+            max-width: 350px;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .route-info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            min-width: 250px;
+        }
+        
+        .vehicle-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            min-width: 280px;
+        }
+        
+        .vehicle-status {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        .vehicle-status.active {
+            background-color: var(--success-color);
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #e9ecef;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), #3a5fc9);
+        }
+        
+        .route-legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 4px;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        
+        .sidebar-toggle {
+            display: none;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1004;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .pin-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1001;
+            white-space: nowrap;
+        }
+        
+        .simulation-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .simulation-controls.active {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .speed-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .speed-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+        
+        .speed-dot.active {
+            background-color: var(--primary-color);
+        }
+        
+        .delivery-point-container {
+            margin-bottom: 15px;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        .delivery-point-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .delivery-point-number {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .remove-delivery-point {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .remove-delivery-point:hover {
+            color: #e74c3c;
+        }
+        
+        .leaflet-routing-container {
+            display: none;
+        }
+        
+        .route-number {
+            position: absolute;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+            color: var(--primary-color);
+            z-index: 1000;
+        }
+        
+        /* Route directions panel */
+        .route-directions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            width: 350px;
+            max-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        
+        .route-directions.collapsed {
+            height: 60px;
+            overflow: hidden;
+        }
+        
+        .route-directions-header {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .route-directions-header h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .route-directions-body {
+            padding: 1rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        .route-summary {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .route-summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .route-summary-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .direction-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+        }
+        
+        .direction-item:hover {
+            background-color: rgba(74, 111, 220, 0.05);
+        }
+        
+        .direction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .direction-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            margin-right: 0.75rem;
+            font-size: 14px;
+        }
+        
+        .direction-text {
+            flex: 1;
+        }
+        
+        .direction-distance {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+        
+        .direction-major {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 111, 220, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(74, 111, 220, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 111, 220, 0);
+            }
+        }
+        
+        @keyframes moveCar {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+        
+        .car-icon.moving {
+            animation: moveCar 1s ease-in-out infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                transform: translateX(-100%);
+                height: 100%;
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .vehicle-info, .route-info, .route-legend, .route-directions {
+                max-width: 200px;
+                font-size: 0.85rem;
+            }
+            
+            .route-directions {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-route me-2"></i>RouteOptimize Pro
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active text-white" href="#" data-view="customer">
+                    <i class="fas fa-user me-1"></i>Customer
+                </a>
+                <a class="nav-link text-white" href="#" data-view="driver">
+                    <i class="fas fa-truck me-1"></i>Driver
+                </a>
+                <a class="nav-link text-white" href="#" data-view="admin">
+                    <i class="fas fa-cog me-1"></i>Admin
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Toggle Button -->
+        <button class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Customer View -->
+            <div id="customer-view" class="view-content p-3">
+                <ul class="nav nav-tabs" id="customerTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="new-order-tab" data-bs-toggle="tab" data-bs-target="#new-order" type="button" role="tab">New Order</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="my-orders-tab" data-bs-toggle="tab" data-bs-target="#my-orders" type="button" role="tab">My Orders</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="customerTabsContent">
+                    <!-- New Order Tab -->
+                    <div class="tab-pane fade show active" id="new-order" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Create New Order</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="new-order-form">
+                                    <div class="mb-3">
+                                        <label for="order-type" class="form-label">Order Type</label>
+                                        <select class="form-select" id="order-type">
+                                            <option value="pickup-delivery">Pickup & Delivery</option>
+                                            <option value="home-pickup">Home Pickup</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="item-name" class="form-label">Item Name</label>
+                                        <input type="text" class="form-control" id="item-name" placeholder="What are you sending?">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="item-weight" class="form-label">Weight (kg)</label>
+                                        <input type="number" class="form-control" id="item-weight" step="0.1" min="0.1" placeholder="0.0">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="pickup-location" class="form-label">Pickup Location</label>
+                                        <div class="location-input-group">
+                                            <input type="text" class="form-control" id="pickup-location" placeholder="Click on map to place pin" readonly>
+                                            <button type="button" class="btn btn-outline-secondary" id="pickup-pin-btn">
+                                                <i class="fas fa-map-pin"></i> Place Pin
+                                            </button>
+                                            <button type="button" class="clear-btn" id="clear-pickup-btn">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <small class="text-muted">Click "Place Pin" then click on map to set pickup location</small>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <label class="form-label mb-0">Delivery Locations</label>
+                                            <button type="button" class="btn btn-sm btn-success" id="add-delivery-btn">
+                                                <i class="fas fa-plus"></i> Add Delivery Point
+                                            </button>
+                                        </div>
+                                        
+                                        <div id="delivery-points-container">
+                                            <!-- Delivery points will be dynamically added here -->
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-paper-plane me-2"></i>Place Order
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- My Orders Tab -->
+                    <div class="tab-pane fade" id="my-orders" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="fas fa-list me-2"></i>My Orders</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="orders-list">
+                                    <!-- Orders will be dynamically added here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Driver View -->
+            <div id="driver-view" class="view-content p-3 d-none">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-route me-2"></i>Active Routes</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="routes-list">
+                            <!-- Routes will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-play-circle me-2"></i>Simulation Control</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="vehicle-speed" class="form-label">Simulation Speed</label>
+                            <select class="form-select" id="vehicle-speed">
+                                <option value="slow">Slow</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="fast">Fast</option>
+                            </select>
+                        </div>
+                        <button id="start-simulation-btn" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-play me-2"></i>Start Simulation
+                        </button>
+                        <button id="stop-simulation-btn" class="btn btn-danger w-100" disabled>
+                            <i class="fas fa-stop me-2"></i>Stop Simulation
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-car me-2"></i>Vehicle Management</h5>
+                    </div>
+                    <div class="card-body">
+                        <button id="add-vehicle-btn" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-plus me-2"></i>Add Vehicle
+                        </button>
+                        <button id="clear-vehicles-btn" class="btn btn-outline-danger w-100">
+                            <i class="fas fa-trash me-2"></i>Clear All Vehicles
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin View -->
+            <div id="admin-view" class="view-content p-3 d-none">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>System Dashboard</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h3 class="text-primary">24</h3>
+                                        <p class="mb-0">Active Drivers</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h3 class="text-success">142</h3>
+                                        <p class="mb-0">Orders Today</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Map Container -->
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <!-- Pin Placement Mode Indicator -->
+            <div class="pin-placement-mode" id="pin-placement-mode">
+                <button class="cancel-btn" onclick="cancelPinPlacement()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h6 id="pin-mode-text">Click on map to place pickup pin</h6>
+            </div>
+            
+            <!-- Simulation Controls -->
+            <div class="simulation-controls" id="simulation-controls">
+                <button class="btn btn-sm btn-outline-secondary" id="speed-down-btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <div class="speed-indicator">
+                    <div class="speed-dot" data-speed="1"></div>
+                    <div class="speed-dot active" data-speed="2"></div>
+                    <div class="speed-dot" data-speed="3"></div>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" id="speed-up-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="btn btn-sm btn-danger ms-3" id="pause-btn">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="btn btn-sm btn-success ms-2" id="resume-btn" style="display: none;">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+            
+            <!-- Vehicle Info Panel -->
+            <div class="vehicle-info" id="vehicle-info" style="display: none;">
+                <div class="vehicle-info-header d-flex align-items-center mb-3">
+                    <span class="vehicle-status active"></span>
+                    <h6 class="mb-0 ms-2">Vehicle #V001</h6>
+                </div>
+                <div class="vehicle-info-item mb-2">
+                    <small class="text-muted">Driver:</small>
+                    <div class="fw-bold">John Doe</div>
+                </div>
+                <div class="vehicle-info-item mb-2">
+                    <small class="text-muted">Speed:</small>
+                    <div class="fw-bold" id="vehicle-speed-value">45 km/h</div>
+                </div>
+                <div class="vehicle-info-item mb-2">
+                    <small class="text-muted">Next Stop:</small>
+                    <div class="fw-bold" id="next-stop">Customer A</div>
+                </div>
+                <div class="vehicle-info-item mb-2">
+                    <small class="text-muted">ETA:</small>
+                    <div class="fw-bold" id="eta-value">5 min</div>
+                </div>
+                <div class="mt-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small class="text-muted">Route Progress</small>
+                        <small class="text-muted" id="progress-percent">0%</small>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 0%" id="route-progress"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Route Info -->
+            <div class="route-info" id="route-info" style="display: none;">
+                <div class="route-info-header mb-3">
+                    <h6 class="mb-0"><i class="fas fa-route me-2"></i>Route Information</h6>
+                </div>
+                <div class="route-info-item mb-2">
+                    <small class="text-muted">Distance:</small>
+                    <div class="fw-bold" id="route-distance">0 km</div>
+                </div>
+                <div class="route-info-item mb-2">
+                    <small class="text-muted">Duration:</small>
+                    <div class="fw-bold" id="route-duration">0 min</div>
+                </div>
+                <div class="route-info-item mb-2">
+                    <small class="text-muted">Stops:</small>
+                    <div class="fw-bold" id="route-stops">0</div>
+                </div>
+                <div class="route-info-item">
+                    <small class="text-muted">ETA:</small>
+                    <div class="fw-bold" id="route-eta">--:--</div>
+                </div>
+            </div>
+            
+            <!-- Route Directions Panel -->
+            <div class="route-directions" id="route-directions">
+                <div class="route-directions-header" onclick="toggleRouteDirections()">
+                    <h5><i class="fas fa-directions me-2"></i>Turn-by-Turn Directions</h5>
+                    <i class="fas fa-chevron-down" id="route-directions-toggle"></i>
+                </div>
+                <div class="route-directions-body">
+                    <div class="route-summary">
+                        <div class="route-summary-item">
+                            <span>Total Distance:</span>
+                            <span class="fw-bold" id="directions-total-distance">0 km</span>
+                        </div>
+                        <div class="route-summary-item">
+                            <span>Estimated Time:</span>
+                            <span class="fw-bold" id="directions-total-time">0 min</span>
+                        </div>
+                        <div class="route-summary-item">
+                            <span>Route:</span>
+                            <span class="fw-bold" id="directions-route-name">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="direction-list" id="direction-list">
+                        <!-- Directions will be dynamically added here -->
+                        <div class="text-center text-muted py-3">
+                            <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                            <p>Place pickup and delivery points to see turn-by-turn directions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Route Legend -->
+            <div class="route-legend">
+                <h6 class="mb-3"><i class="fas fa-map me-2"></i>Map Legend</h6>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #28a745;"></div>
+                    <span>Pickup Points</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ffc107;"></div>
+                    <span>Delivery Points</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #4a6fdc;"></div>
+                    <span>Planned Route</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                    <span>Completed Route</span>
+                </div>
+            </div>
+            
+            <!-- Notification -->
+            <div class="notification" id="notification">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h6 class="mb-0">System Notification</h6>
+                    <button class="btn-close btn-sm" onclick="hideNotification()"></button>
+                </div>
+                <div class="notification-body">
+                    New order assigned to driver #DRV001
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize map
+            const map = L.map('map').setView([40.7128, -74.0060], 13);
+            
+            // Add tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Global variables
+            let currentView = 'customer';
+            let markers = [];
+            let pickupMarker = null;
+            let deliveryMarkers = []; // Changed from single deliveryMarker to an array
+            let routeControl = null;
+            let routeLine = null; // New variable to store the route line
+            let vehicleMarkers = [];
+            let routePaths = [];
+            let completedPaths = [];
+            let simulationInterval = null;
+            let simulationSpeed = 1000;
+            let vehicles = [];
+            let activeRoutes = [];
+            let pinPlacementMode = null;
+            let pinTooltip = null;
+            let isPaused = false;
+            let currentSpeedLevel = 2;
+            let deliveryPointCount = 0; // Counter for delivery points
+            let routeNumbers = []; // Array to store route number markers
+            let currentRoute = null; // Store current route data
+            
+            // Mock data
+            const mockRoutes = [
+                { 
+                    id: 1, 
+                    driverName: 'John Doe',
+                    stops: [
+                        { name: 'Warehouse', type: 'pickup', lat: 40.7128, lng: -74.0060, completed: true },
+                        { name: 'Customer A', type: 'delivery', lat: 40.7228, lng: -74.0160, completed: false },
+                        { name: 'Customer B', type: 'delivery', lat: 40.7328, lng: -74.0260, completed: false },
+                        { name: 'Customer C', type: 'delivery', lat: 40.7428, lng: -74.0360, completed: false }
+                    ], 
+                    status: 'active' 
+                },
+                { 
+                    id: 2, 
+                    driverName: 'Jane Smith',
+                    stops: [
+                        { name: 'Distribution Center', type: 'pickup', lat: 40.7028, lng: -73.9960, completed: false },
+                        { name: 'Customer D', type: 'delivery', lat: 40.7128, lng: -74.0060, completed: false },
+                        { name: 'Customer E', type: 'delivery', lat: 40.7228, lng: -74.0160, completed: false }
+                    ], 
+                    status: 'pending' 
+                }
+            ];
+            
+            const mockOrders = [
+                { id: 1, customer: 'Acme Corp', status: 'pending', driver: null, date: '2023-06-15' },
+                { id: 2, customer: 'Beta Inc', status: 'in-progress', driver: 'John Doe', date: '2023-06-15' },
+                { id: 3, customer: 'Gamma LLC', status: 'completed', driver: 'Jane Smith', date: '2023-06-14' }
+            ];
+            
+            /**
+             * Initialize the application by setting up event listeners and loading initial data
+             */
+            function init() {
+                setupEventListeners();
+                loadOrders();
+                loadRoutes();
+                
+                // Add one delivery point by default
+                addDeliveryPoint();
+            }
+            
+            /**
+             * Set up all event listeners for the application
+             */
+            function setupEventListeners() {
+                // Navigation
+                document.querySelectorAll('.nav-link[data-view]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const view = this.getAttribute('data-view');
+                        switchView(view);
+                    });
+                });
+                
+                // Sidebar toggle
+                document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+                    document.querySelector('.sidebar').classList.toggle('show');
+                });
+                
+                // Order form
+                document.getElementById('new-order-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    createOrder();
+                });
+                
+                // Pin placement buttons
+                document.getElementById('pickup-pin-btn').addEventListener('click', function() {
+                    startPinPlacement('pickup');
+                });
+                
+                // Add delivery point button
+                document.getElementById('add-delivery-btn').addEventListener('click', function() {
+                    addDeliveryPoint();
+                });
+                
+                // Clear buttons
+                document.getElementById('clear-pickup-btn').addEventListener('click', function() {
+                    clearPickupPin();
+                });
+                
+                // Map click handler
+                map.on('click', function(e) {
+                    if (pinPlacementMode) {
+                        placePin(e.latlng);
+                    }
+                });
+                
+                // Map move handler for tooltip
+                map.on('mousemove', function(e) {
+                    if (pinPlacementMode) {
+                        updatePinTooltip(e.containerPoint);
+                    }
+                });
+                
+                // Simulation controls
+                document.getElementById('start-simulation-btn').addEventListener('click', startSimulation);
+                document.getElementById('stop-simulation-btn').addEventListener('click', stopSimulation);
+                
+                // Speed control
+                document.getElementById('vehicle-speed').addEventListener('change', function() {
+                    switch(this.value) {
+                        case 'slow': 
+                            simulationSpeed = 2000;
+                            currentSpeedLevel = 1;
+                            updateSpeedIndicator();
+                            break;
+                        case 'normal': 
+                            simulationSpeed = 1000;
+                            currentSpeedLevel = 2;
+                            updateSpeedIndicator();
+                            break;
+                        case 'fast': 
+                            simulationSpeed = 500;
+                            currentSpeedLevel = 3;
+                            updateSpeedIndicator();
+                            break;
+                    }
+                });
+                
+                // Vehicle management
+                document.getElementById('add-vehicle-btn').addEventListener('click', addRandomVehicle);
+                document.getElementById('clear-vehicles-btn').addEventListener('click', clearAllVehicles);
+                
+                // Simulation control buttons
+                document.getElementById('speed-up-btn').addEventListener('click', function() {
+                    if (currentSpeedLevel < 3) {
+                        currentSpeedLevel++;
+                        updateSimulationSpeed();
+                    }
+                });
+                
+                document.getElementById('speed-down-btn').addEventListener('click', function() {
+                    if (currentSpeedLevel > 1) {
+                        currentSpeedLevel--;
+                        updateSimulationSpeed();
+                    }
+                });
+                
+                document.getElementById('pause-btn').addEventListener('click', pauseSimulation);
+                document.getElementById('resume-btn').addEventListener('click', resumeSimulation);
+            }
+            
+            /**
+             * Update the speed indicator dots based on current speed level
+             */
+            function updateSpeedIndicator() {
+                document.querySelectorAll('.speed-dot').forEach(dot => {
+                    const speed = parseInt(dot.getAttribute('data-speed'));
+                    if (speed === currentSpeedLevel) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            /**
+             * Update the simulation speed based on current speed level
+             */
+            function updateSimulationSpeed() {
+                switch(currentSpeedLevel) {
+                    case 1: 
+                        simulationSpeed = 2000;
+                        document.getElementById('vehicle-speed').value = 'slow';
+                        break;
+                    case 2: 
+                        simulationSpeed = 1000;
+                        document.getElementById('vehicle-speed').value = 'normal';
+                        break;
+                    case 3: 
+                        simulationSpeed = 500;
+                        document.getElementById('vehicle-speed').value = 'fast';
+                        break;
+                }
+                updateSpeedIndicator();
+            }
+            
+            /**
+             * Pause the vehicle simulation
+             */
+            function pauseSimulation() {
+                isPaused = true;
+                document.getElementById('pause-btn').style.display = 'none';
+                document.getElementById('resume-btn').style.display = 'inline-block';
+                
+                vehicles.forEach(vehicle => {
+                    if (vehicle.marker.getElement()) {
+                        vehicle.marker.getElement().classList.remove('moving');
+                    }
+                });
+            }
+            
+            /**
+             * Resume the vehicle simulation
+             */
+            function resumeSimulation() {
+                isPaused = false;
+                document.getElementById('pause-btn').style.display = 'inline-block';
+                document.getElementById('resume-btn').style.display = 'none';
+                
+                vehicles.forEach(vehicle => {
+                    if (vehicle.marker.getElement() && !vehicle.completed) {
+                        vehicle.marker.getElement().classList.add('moving');
+                        if (!vehicle.animating) {
+                            animateVehicle(vehicle);
+                        }
+                    }
+                });
+            }
+            
+            /**
+             * Add a random vehicle to the map with a random route
+             */
+            function addRandomVehicle() {
+                // Generate random route
+                const route = {
+                    id: vehicles.length + 1,
+                    driverName: `Driver ${vehicles.length + 1}`,
+                    stops: [
+                        { 
+                            name: `Start Point ${vehicles.length + 1}`, 
+                            type: 'pickup', 
+                            lat: 40.7128 + (Math.random() - 0.5) * 0.1, 
+                            lng: -74.0060 + (Math.random() - 0.5) * 0.1, 
+                            completed: true 
+                        },
+                        { 
+                            name: `Stop 1`, 
+                            type: 'delivery', 
+                            lat: 40.7228 + (Math.random() - 0.5) * 0.1, 
+                            lng: -74.0160 + (Math.random() - 0.5) * 0.1, 
+                            completed: false 
+                        },
+                        { 
+                            name: `Stop 2`, 
+                            type: 'delivery', 
+                            lat: 40.7328 + (Math.random() - 0.5) * 0.1, 
+                            lng: -74.0260 + (Math.random() - 0.5) * 0.1, 
+                            completed: false 
+                        },
+                        { 
+                            name: `End Point`, 
+                            type: 'delivery', 
+                            lat: 40.7428 + (Math.random() - 0.5) * 0.1, 
+                            lng: -74.0360 + (Math.random() - 0.5) * 0.1, 
+                            completed: false 
+                        }
+                    ], 
+                    status: 'active' 
+                };
+                
+                // Create vehicle
+                const vehicleIcon = L.divIcon({
+                    className: 'car-icon',
+                    iconSize: [35, 35],
+                    iconAnchor: [17, 17]
+                });
+                
+                const vehicle = L.marker([route.stops[0].lat, route.stops[0].lng], { icon: vehicleIcon }).addTo(map);
+                
+                // Create route path
+                const latlngs = route.stops.map(stop => [stop.lat, stop.lng]);
+                const routePath = L.polyline(latlngs, {
+                    color: '#4a6fdc',
+                    weight: 4,
+                    opacity: 0.7,
+                    dashArray: '10, 5'
+                }).addTo(map);
+                
+                // Add stop markers
+                route.stops.forEach(stop => {
+                    const iconClass = stop.type === 'pickup' ? 'pickup-marker' : 'delivery-marker';
+                    const icon = L.divIcon({
+                        className: iconClass,
+                        html: `<i class="fas fa-${stop.type === 'pickup' ? 'box' : 'home'}"></i>`,
+                        iconSize: [40, 40],
+                        iconAnchor: [20, 20]
+                    });
+                    
+                    L.marker([stop.lat, stop.lng], { icon }).addTo(map);
+                });
+                
+                // Add to vehicles array
+                const vehicleObj = {
+                    id: route.id,
+                    marker: vehicle,
+                    route: route,
+                    routePath: routePath,
+                    currentStopIndex: 0,
+                    progress: 0,
+                    completed: false,
+                    animating: false
+                };
+                
+                vehicles.push(vehicleObj);
+                
+                // Start animation if simulation is running
+                if (simulationInterval) {
+                    vehicle.marker.getElement().classList.add('moving');
+                    animateVehicle(vehicleObj);
+                }
+                
+                showNotification(`Vehicle #V${route.id} added to the map`, 'success');
+            }
+            
+            /**
+             * Clear all vehicles from the map
+             */
+            function clearAllVehicles() {
+                vehicles.forEach(vehicle => {
+                    map.removeLayer(vehicle.marker);
+                    map.removeLayer(vehicle.routePath);
+                });
+                
+                vehicles = [];
+                showNotification('All vehicles cleared from the map', 'info');
+            }
+            
+            /**
+             * Start pin placement mode for either pickup or delivery
+             * @param {string} type - Type of pin to place ('pickup' or 'delivery')
+             */
+            function startPinPlacement(type) {
+                pinPlacementMode = type;
+                const modeIndicator = document.getElementById('pin-placement-mode');
+                const modeText = document.getElementById('pin-mode-text');
+                
+                modeText.textContent = type === 'pickup' ? 
+                    'Click on map to place pickup pin' : 
+                    'Click on map to place delivery pin';
+                
+                modeIndicator.classList.add('active');
+                
+                // Change map cursor
+                map.getContainer().style.cursor = 'crosshair';
+                
+                // Create tooltip
+                createPinTooltip(type);
+                
+                showNotification(`Pin placement mode activated - ${type} location`, 'info');
+            }
+            
+            /**
+             * Cancel pin placement mode
+             */
+            function cancelPinPlacement() {
+                pinPlacementMode = null;
+                document.getElementById('pin-placement-mode').classList.remove('active');
+                map.getContainer().style.cursor = '';
+                
+                if (pinTooltip) {
+                    map.removeLayer(pinTooltip);
+                    pinTooltip = null;
+                }
+            }
+            
+            /**
+             * Create a tooltip for pin placement
+             * @param {string} type - Type of pin ('pickup' or 'delivery')
+             */
+            function createPinTooltip(type) {
+                if (pinTooltip) {
+                    map.removeLayer(pinTooltip);
+                }
+                
+                pinTooltip = L.tooltip({
+                    permanent: true,
+                    direction: 'top',
+                    offset: [0, -20],
+                    className: 'pin-tooltip'
+                }).setContent(type === 'pickup' ? '📍 Place Pickup Pin' : '📍 Place Delivery Pin');
+            }
+            
+            /**
+             * Update the position of the pin tooltip
+             * @param {Object} point - Container point coordinates
+             */
+            function updatePinTooltip(point) {
+                if (pinTooltip) {
+                    // Update tooltip position manually
+                    const tooltipElement = document.querySelector('.pin-tooltip');
+                    if (tooltipElement) {
+                        tooltipElement.style.left = point.x + 'px';
+                        tooltipElement.style.top = (point.y - 30) + 'px';
+                    }
+                }
+            }
+            
+            /**
+             * Place a pin on the map at the specified location
+             * @param {Object} latlng - Latitude and longitude coordinates
+             */
+            function placePin(latlng) {
+                if (pinPlacementMode === 'pickup') {
+                    if (pickupMarker) {
+                        map.removeLayer(pickupMarker);
+                    }
+                    
+                    const icon = L.divIcon({
+                        className: 'pickup-marker',
+                        html: '<i class="fas fa-box"></i>',
+                        iconSize: [40, 40],
+                        iconAnchor: [20, 20]
+                    });
+                    
+                    pickupMarker = L.marker(latlng, { 
+                        icon: icon,
+                        draggable: true
+                    }).addTo(map);
+                    
+                    // Add drag event listener
+                    pickupMarker.on('dragend', function(e) {
+                        const position = e.target.getLatLng();
+                        document.getElementById('pickup-location').value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
+                        updateRoute();
+                    });
+                    
+                    document.getElementById('pickup-location').value = `${latlng.lat.toFixed(6)}, ${latlng.lng.toFixed(6)}`;
+                    document.querySelector('#pickup-location').parentElement.classList.add('has-location');
+                    
+                } else if (pinPlacementMode.startsWith('delivery-')) {
+                    // Extract the delivery point index from the mode
+                    const deliveryIndex = parseInt(pinPlacementMode.split('-')[1]);
+                    
+                    // Remove existing marker if it exists
+                    if (deliveryMarkers[deliveryIndex]) {
+                        map.removeLayer(deliveryMarkers[deliveryIndex]);
+                    }
+                    
+                    const icon = L.divIcon({
+                        className: 'delivery-marker',
+                        html: '<i class="fas fa-home"></i>',
+                        iconSize: [40, 40],
+                        iconAnchor: [20, 20]
+                    });
+                    
+                    deliveryMarkers[deliveryIndex] = L.marker(latlng, { 
+                        icon: icon,
+                        draggable: true
+                    }).addTo(map);
+                    
+                    // Add drag event listener
+                    deliveryMarkers[deliveryIndex].on('dragend', function(e) {
+                        const position = e.target.getLatLng();
+                        const inputId = `delivery-location-${deliveryIndex}`;
+                        document.getElementById(inputId).value = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
+                        updateRoute();
+                    });
+                    
+                    // Update the corresponding input field
+                    const inputId = `delivery-location-${deliveryIndex}`;
+                    document.getElementById(inputId).value = `${latlng.lat.toFixed(6)}, ${latlng.lng.toFixed(6)}`;
+                    document.querySelector(`#${inputId}`).parentElement.classList.add('has-location');
+                }
+                
+                // Update route if pickup and at least one delivery pin are placed
+                if (pickupMarker && deliveryMarkers.some(marker => marker !== null)) {
+                    updateRoute();
+                }
+                
+                // Cancel pin placement mode
+                cancelPinPlacement();
+            }
+            
+            /**
+             * Clear the pickup pin from the map
+             */
+            function clearPickupPin() {
+                if (pickupMarker) {
+                    map.removeLayer(pickupMarker);
+                    pickupMarker = null;
+                }
+                document.getElementById('pickup-location').value = '';
+                document.querySelector('#pickup-location').parentElement.classList.remove('has-location');
+                clearRoute();
+            }
+            
+            /**
+             * Clear a specific delivery pin from the map
+             * @param {number} index - Index of the delivery point to clear
+             */
+            function clearDeliveryPin(index) {
+                if (deliveryMarkers[index]) {
+                    map.removeLayer(deliveryMarkers[index]);
+                    deliveryMarkers[index] = null;
+                }
+                const inputId = `delivery-location-${index}`;
+                document.getElementById(inputId).value = '';
+                document.querySelector(`#${inputId}`).parentElement.classList.remove('has-location');
+                updateRoute();
+            }
+            
+            /**
+             * Add a new delivery point to the form
+             */
+            function addDeliveryPoint() {
+                const index = deliveryPointCount++;
+                const container = document.getElementById('delivery-points-container');
+                
+                const deliveryPointDiv = document.createElement('div');
+                deliveryPointDiv.className = 'delivery-point-container';
+                deliveryPointDiv.id = `delivery-point-${index}`;
+                
+                deliveryPointDiv.innerHTML = `
+                    <div class="delivery-point-header">
+                        <span class="delivery-point-number">Delivery Point ${index + 1}</span>
+                        <button type="button" class="remove-delivery-point" onclick="removeDeliveryPoint(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="location-input-group">
+                        <input type="text" class="form-control" id="delivery-location-${index}" placeholder="Click on map to place pin" readonly>
+                        <button type="button" class="btn btn-outline-secondary delivery-pin-btn" data-index="${index}">
+                            <i class="fas fa-map-pin"></i> Place Pin
+                        </button>
+                        <button type="button" class="clear-btn" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <small class="text-muted">Click "Place Pin" then click on map to set delivery location</small>
+                `;
+                
+                container.appendChild(deliveryPointDiv);
+                
+                // Add event listeners for the new delivery point
+                document.querySelector(`.delivery-pin-btn[data-index="${index}"]`).addEventListener('click', function() {
+                    startPinPlacement(`delivery-${index}`);
+                });
+                
+                document.querySelector(`.clear-btn[data-index="${index}"]`).addEventListener('click', function() {
+                    clearDeliveryPin(index);
+                });
+                
+                // Initialize the deliveryMarkers array if needed
+                if (!deliveryMarkers[index]) {
+                    deliveryMarkers[index] = null;
+                }
+            }
+            
+            /**
+             * Remove a delivery point from the form
+             * @param {number} index - Index of the delivery point to remove
+             */
+            function removeDeliveryPoint(index) {
+                // Clear the marker from the map
+                if (deliveryMarkers[index]) {
+                    map.removeLayer(deliveryMarkers[index]);
+                    deliveryMarkers[index] = null;
+                }
+                
+                // Remove the delivery point from the DOM
+                const deliveryPointDiv = document.getElementById(`delivery-point-${index}`);
+                if (deliveryPointDiv) {
+                    deliveryPointDiv.remove();
+                }
+                
+                // Update the route
+                updateRoute();
+            }
+            
+            /**
+             * Update the route between pickup and all delivery points
+             */
+            function updateRoute() {
+                if (!pickupMarker || !deliveryMarkers.some(marker => marker !== null)) return;
+                
+                // Clear existing route
+                clearRoute();
+                
+                // Create waypoints array starting with pickup point
+                const waypoints = [L.latLng(pickupMarker.getLatLng())];
+                
+                // Add all delivery points that have markers
+                deliveryMarkers.forEach(marker => {
+                    if (marker) {
+                        waypoints.push(L.latLng(marker.getLatLng()));
+                    }
+                });
+                
+                // Use the routing machine to get the route
+                routeControl = L.Routing.control({
+                    waypoints: waypoints,
+                    routeWhileDragging: false,
+                    addWaypoints: false,
+                    createMarker: function() { return null; },
+                    lineOptions: {
+                        styles: [{ color: '#4a6fdc', weight: 4, opacity: 0.7 }]
+                    }
+                }).on('routesfound', function(e) {
+                    const routes = e.routes;
+                    const summary = routes[0].summary;
+                    
+                    // Store the current route data
+                    currentRoute = routes[0];
+                    
+                    // Get the coordinates of the route
+                    const routeCoordinates = routes[0].coordinates;
+                    
+                    // Create a polyline with the route coordinates
+                    routeLine = L.polyline(routeCoordinates, {
+                        color: '#4a6fdc',
+                        weight: 4,
+                        opacity: 0.7
+                    }).addTo(map);
+                    
+                    // Add route numbers
+                    addRouteNumbers(waypoints);
+                    
+                    // Update route info
+                    document.getElementById('route-distance').textContent = (summary.totalDistance / 1000).toFixed(2) + ' km';
+                    document.getElementById('route-duration').textContent = Math.round(summary.totalTime / 60) + ' min';
+                    document.getElementById('route-stops').textContent = waypoints.length;
+                    
+                    const now = new Date();
+                    const eta = new Date(now.getTime() + summary.totalTime * 1000);
+                    document.getElementById('route-eta').textContent = eta.toLocaleTimeString();
+                    
+                    document.getElementById('route-info').style.display = 'block';
+                    
+                    // Update turn-by-turn directions
+                    updateTurnByTurnDirections(routes[0]);
+                }).addTo(map);
+                
+                // Hide the routing control UI
+                const container = document.querySelector('.leaflet-routing-container');
+                if (container) {
+                    container.style.display = 'none';
+                }
+            }
+            
+            /**
+             * Update the turn-by-turn directions based on the route
+             * @param {Object} route - The route object from the routing machine
+             */
+            function updateTurnByTurnDirections(route) {
+                const directionList = document.getElementById('direction-list');
+                const totalDistance = document.getElementById('directions-total-distance');
+                const totalTime = document.getElementById('directions-total-time');
+                const routeName = document.getElementById('directions-route-name');
+                
+                // Update summary
+                totalDistance.textContent = (route.summary.totalDistance / 1000).toFixed(2) + ' km';
+                totalTime.textContent = Math.round(route.summary.totalTime / 60) + ' min';
+                
+                // Determine main highways from the route
+                const mainHighways = extractMainHighways(route);
+                routeName.textContent = mainHighways.join(' → ');
+                
+                // Clear existing directions
+                directionList.innerHTML = '';
+                
+                // Generate turn-by-turn directions from the route
+                const instructions = route.instructions;
+                if (instructions && instructions.length > 0) {
+                    instructions.forEach((instruction, index) => {
+                        const directionItem = document.createElement('div');
+                        directionItem.className = 'direction-item';
+                        
+                        // Get the appropriate icon for the direction
+                        const icon = getDirectionIcon(instruction);
+                        
+                        // Format the distance
+                        const distance = instruction.distance ? formatDistance(instruction.distance) : '';
+                        
+                        directionItem.innerHTML = `
+                            <div class="d-flex align-items-center">
+                                <div class="direction-icon">
+                                    <i class="fas ${icon}"></i>
+                                </div>
+                                <div class="direction-text">
+                                    ${instruction.text}
+                                </div>
+                                <div class="direction-distance">${distance}</div>
+                            </div>
+                        `;
+                        
+                        directionList.appendChild(directionItem);
+                    });
+                } else {
+                    // Fallback directions if no instructions available
+                    const fallbackDirections = generateFallbackDirections(route);
+                    fallbackDirections.forEach(dir => {
+                        const directionItem = document.createElement('div');
+                        directionItem.className = 'direction-item';
+                        directionItem.innerHTML = `
+                            <div class="d-flex align-items-center">
+                                <div class="direction-icon">
+                                    <i class="fas ${dir.icon}"></i>
+                                </div>
+                                <div class="direction-text">
+                                    ${dir.text}
+                                </div>
+                                <div class="direction-distance">${dir.distance}</div>
+                            </div>
+                        `;
+                        directionList.appendChild(directionItem);
+                    });
+                }
+            }
+            
+            /**
+             * Extract main highways from the route
+             * @param {Object} route - The route object
+             * @returns {Array} Array of highway names
+             */
+            function extractMainHighways(route) {
+                const highways = new Set();
+                
+                // Extract from instructions
+                if (route.instructions) {
+                    route.instructions.forEach(instruction => {
+                        const highwayMatch = instruction.text.match(/\b([A-Z]\d+|[A-Z]{2,}\s*\d+)\b/g);
+                        if (highwayMatch) {
+                            highwayMatch.forEach(hwy => highways.add(hwy));
+                        }
+                    });
+                }
+                
+                // If no highways found, return default
+                if (highways.size === 0) {
+                    return ['Local Roads'];
+                }
+                
+                return Array.from(highways).slice(0, 3); // Limit to first 3 highways
+            }
+            
+            /**
+             * Get the appropriate icon for a direction instruction
+             * @param {Object} instruction - The direction instruction
+             * @returns {string} Font Awesome icon class
+             */
+            function getDirectionIcon(instruction) {
+                const text = instruction.text.toLowerCase();
+                
+                if (text.includes('head') || text.includes('continue')) {
+                    return 'fa-arrow-up';
+                } else if (text.includes('turn right')) {
+                    return 'fa-arrow-right';
+                } else if (text.includes('turn left')) {
+                    return 'fa-arrow-left';
+                } else if (text.includes('slight right')) {
+                    return 'fa-arrow-right';
+                } else if (text.includes('slight left')) {
+                    return 'fa-arrow-left';
+                } else if (text.includes('sharp right')) {
+                    return 'fa-level-up-alt fa-rotate-90';
+                } else if (text.includes('sharp left')) {
+                    return 'fa-level-up-alt fa-rotate--90';
+                } else if (text.includes('u-turn')) {
+                    return 'fa-undo';
+                } else if (text.includes('ramp') || text.includes('exit')) {
+                    return 'fa-level-up-alt';
+                } else if (text.includes('merge')) {
+                    return 'fa-arrows-alt-h';
+                } else if (text.includes('traffic circle') || text.includes('roundabout')) {
+                    return 'fa-circle-notch';
+                } else if (text.includes('keep')) {
+                    return 'fa-arrow-up';
+                } else if (text.includes('arrived')) {
+                    return 'fa-flag-checkered';
+                } else {
+                    return 'fa-arrow-up';
+                }
+            }
+            
+            /**
+             * Format distance for display
+             * @param {number} distance - Distance in meters
+             * @returns {string} Formatted distance string
+             */
+            function formatDistance(distance) {
+                if (distance < 1000) {
+                    return Math.round(distance) + ' m';
+                } else {
+                    return (distance / 1000).toFixed(1) + ' km';
+                }
+            }
+            
+            /**
+             * Generate fallback directions when route instructions are not available
+             * @param {Object} route - The route object
+             * @returns {Array} Array of direction objects
+             */
+            function generateFallbackDirections(route) {
+                const directions = [];
+                const waypoints = route.waypoints;
+                
+                // Add initial direction
+                directions.push({
+                    icon: 'fa-arrow-up',
+                    text: 'Start from pickup location',
+                    distance: ''
+                });
+                
+                // Add directions between waypoints
+                for (let i = 1; i < waypoints.length; i++) {
+                    const prev = waypoints[i - 1];
+                    const curr = waypoints[i];
+                    const bearing = calculateBearing(prev.latLng, curr.latLng);
+                    
+                    let icon, text;
+                    if (bearing >= 337.5 || bearing < 22.5) {
+                        icon = 'fa-arrow-up';
+                        text = `Head north to waypoint ${i}`;
+                    } else if (bearing >= 22.5 && bearing < 67.5) {
+                        icon = 'fa-arrow-right';
+                        text = `Head northeast to waypoint ${i}`;
+                    } else if (bearing >= 67.5 && bearing < 112.5) {
+                        icon = 'fa-arrow-right';
+                        text = `Head east to waypoint ${i}`;
+                    } else if (bearing >= 112.5 && bearing < 157.5) {
+                        icon = 'fa-arrow-right';
+                        text = `Head southeast to waypoint ${i}`;
+                    } else if (bearing >= 157.5 && bearing < 202.5) {
+                        icon = 'fa-arrow-down';
+                        text = `Head south to waypoint ${i}`;
+                    } else if (bearing >= 202.5 && bearing < 247.5) {
+                        icon = 'fa-arrow-left';
+                        text = `Head southwest to waypoint ${i}`;
+                    } else if (bearing >= 247.5 && bearing < 292.5) {
+                        icon = 'fa-arrow-left';
+                        text = `Head west to waypoint ${i}`;
+                    } else if (bearing >= 292.5 && bearing < 337.5) {
+                        icon = 'fa-arrow-left';
+                        text = `Head northwest to waypoint ${i}`;
+                    }
+                    
+                    const distance = prev.latLng.distanceTo(curr.latLng);
+                    directions.push({
+                        icon: icon,
+                        text: text,
+                        distance: formatDistance(distance)
+                    });
+                }
+                
+                // Add final destination
+                directions.push({
+                    icon: 'fa-flag-checkered',
+                    text: 'Arrive at final destination',
+                    distance: ''
+                });
+                
+                return directions;
+            }
+            
+            /**
+             * Calculate bearing between two points
+             * @param {Object} start - Starting point
+             * @param {Object} end - Ending point
+             * @returns {number} Bearing in degrees
+             */
+            function calculateBearing(start, end) {
+                const startLat = start.lat * Math.PI / 180;
+                const startLng = start.lng * Math.PI / 180;
+                const endLat = end.lat * Math.PI / 180;
+                const endLng = end.lng * Math.PI / 180;
+                
+                const dLng = endLng - startLng;
+                const dPhi = Math.log(Math.tan(endLat / 2 + Math.PI / 4) / Math.tan(startLat / 2 + Math.PI / 4));
+                
+                if (Math.abs(dLng) > Math.PI) {
+                    if (dLng > 0) {
+                        return (dLng * 180 / Math.PI - 360 + 360) % 360;
+                    } else {
+                        return (dLng * 180 / Math.PI + 360) % 360;
+                    }
+                } else {
+                    return (dLng * 180 / Math.PI + 360) % 360;
+                }
+            }
+            
+            /**
+             * Add numbered markers to show the sequence of the route
+             * @param {Array} waypoints - Array of waypoints for the route
+             */
+            function addRouteNumbers(waypoints) {
+                // Clear existing route numbers
+                routeNumbers.forEach(number => map.removeLayer(number));
+                routeNumbers = [];
+                
+                // Add numbered markers for each waypoint
+                waypoints.forEach((waypoint, index) => {
+                    const routeNumber = L.divIcon({
+                        className: 'route-number',
+                        html: index === 0 ? 'P' : index.toString(), // 'P' for pickup, numbers for delivery points
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 12]
+                    });
+                    
+                    const numberMarker = L.marker(waypoint, { icon: routeNumber }).addTo(map);
+                    routeNumbers.push(numberMarker);
+                });
+            }
+            
+            /**
+             * Clear the route from the map
+             */
+            function clearRoute() {
+                if (routeControl) {
+                    map.removeControl(routeControl);
+                    routeControl = null;
+                }
+                
+                if (routeLine) {
+                    map.removeLayer(routeLine);
+                    routeLine = null;
+                }
+                
+                // Clear route numbers
+                routeNumbers.forEach(number => map.removeLayer(number));
+                routeNumbers = [];
+                
+                document.getElementById('route-info').style.display = 'none';
+                
+                // Clear turn-by-turn directions
+                const directionList = document.getElementById('direction-list');
+                directionList.innerHTML = `
+                    <div class="text-center text-muted py-3">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                        <p>Place pickup and delivery points to see turn-by-turn directions</p>
+                    </div>
+                `;
+            }
+            
+            /**
+             * Switch between different views (customer, driver, admin)
+             * @param {string} view - The view to switch to
+             */
+            function switchView(view) {
+                // Update navigation
+                document.querySelectorAll('.nav-link[data-view]').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.nav-link[data-view="${view}"]`).classList.add('active');
+                
+                // Update content
+                document.querySelectorAll('.view-content').forEach(content => {
+                    content.classList.add('d-none');
+                });
+                document.getElementById(`${view}-view`).classList.remove('d-none');
+                
+                currentView = view;
+                
+                // Cancel pin placement if switching views
+                if (pinPlacementMode) {
+                    cancelPinPlacement();
+                }
+                
+                // View-specific actions
+                if (view === 'driver') {
+                    showActiveRoutes();
+                } else {
+                    clearMap();
+                }
+            }
+            
+            /**
+             * Show active routes with vehicles on the map
+             */
+            function showActiveRoutes() {
+                clearMap();
+                vehicles = [];
+                
+                mockRoutes.forEach(route => {
+                    if (route.status === 'active') {
+                        // Create vehicle
+                        const vehicleIcon = L.divIcon({
+                            className: 'car-icon',
+                            iconSize: [35, 35],
+                            iconAnchor: [17, 17]
+                        });
+                        
+                        const vehicle = L.marker([route.stops[0].lat, route.stops[0].lng], { icon: vehicleIcon }).addTo(map);
+                        
+                        // Create route path
+                        const latlngs = route.stops.map(stop => [stop.lat, stop.lng]);
+                        const routePath = L.polyline(latlngs, {
+                            color: '#4a6fdc',
+                            weight: 4,
+                            opacity: 0.7,
+                            dashArray: '10, 5'
+                        }).addTo(map);
+                        
+                        // Add stop markers
+                        route.stops.forEach(stop => {
+                            const iconClass = stop.type === 'pickup' ? 'pickup-marker' : 'delivery-marker';
+                            const icon = L.divIcon({
+                                className: iconClass,
+                                html: `<i class="fas fa-${stop.type === 'pickup' ? 'box' : 'home'}"></i>`,
+                                iconSize: [40, 40],
+                                iconAnchor: [20, 20]
+                            });
+                            
+                            L.marker([stop.lat, stop.lng], { icon }).addTo(map);
+                        });
+                        
+                        // Add to vehicles array
+                        vehicles.push({
+                            id: route.id,
+                            marker: vehicle,
+                            route: route,
+                            routePath: routePath,
+                            currentStopIndex: 0,
+                            progress: 0,
+                            completed: false,
+                            animating: false
+                        });
+                    }
+                });
+            }
+            
+            /**
+             * Start the vehicle simulation
+             */
+            function startSimulation() {
+                if (vehicles.length === 0) {
+                    showNotification('No active vehicles to simulate. Please add vehicles first.', 'warning');
+                    return;
+                }
+                
+                document.getElementById('vehicle-info').style.display = 'block';
+                document.getElementById('start-simulation-btn').disabled = true;
+                document.getElementById('stop-simulation-btn').disabled = false;
+                document.getElementById('simulation-controls').classList.add('active');
+                
+                vehicles.forEach(vehicle => {
+                    if (!vehicle.completed && vehicle.marker.getElement()) {
+                        vehicle.marker.getElement().classList.add('moving');
+                        animateVehicle(vehicle);
+                    }
+                });
+                
+                showNotification('Vehicle simulation started', 'success');
+            }
+            
+            /**
+             * Stop the vehicle simulation
+             */
+            function stopSimulation() {
+                vehicles.forEach(vehicle => {
+                    if (vehicle.marker.getElement()) {
+                        vehicle.marker.getElement().classList.remove('moving');
+                    }
+                    vehicle.animating = false;
+                });
+                
+                document.getElementById('start-simulation-btn').disabled = false;
+                document.getElementById('stop-simulation-btn').disabled = true;
+                document.getElementById('simulation-controls').classList.remove('active');
+                
+                isPaused = false;
+                document.getElementById('pause-btn').style.display = 'inline-block';
+                document.getElementById('resume-btn').style.display = 'none';
+                
+                showNotification('Vehicle simulation stopped', 'info');
+            }
+            
+            /**
+             * Animate vehicle movement along its route
+             * @param {Object} vehicle - The vehicle object to animate
+             */
+            function animateVehicle(vehicle) {
+                if (vehicle.completed || isPaused) {
+                    vehicle.animating = false;
+                    return;
+                }
+                
+                vehicle.animating = true;
+                const route = vehicle.route;
+                const stops = route.stops;
+                
+                if (vehicle.currentStopIndex >= stops.length - 1) {
+                    vehicle.completed = true;
+                    vehicle.animating = false;
+                    showNotification(`Vehicle #V${vehicle.id} completed its route!`, 'success');
+                    return;
+                }
+                
+                const currentStop = stops[vehicle.currentStopIndex];
+                const nextStop = stops[vehicle.currentStopIndex + 1];
+                
+                const steps = 30;
+                let step = 0;
+                
+                const moveInterval = setInterval(() => {
+                    if (isPaused) {
+                        clearInterval(moveInterval);
+                        vehicle.animating = false;
+                        return;
+                    }
+                    
+                    step++;
+                    
+                    if (step > steps) {
+                        clearInterval(moveInterval);
+                        currentStop.completed = true;
+                        vehicle.currentStopIndex++;
+                        vehicle.progress = (vehicle.currentStopIndex / (stops.length - 1)) * 100;
+                        
+                        updateCompletedPath(vehicle);
+                        updateVehicleInfo(vehicle);
+                        
+                        if (vehicle.currentStopIndex < stops.length - 1) {
+                            setTimeout(() => animateVehicle(vehicle), 1000);
+                        } else {
+                            vehicle.completed = true;
+                            vehicle.animating = false;
+                            if (vehicle.marker.getElement()) {
+                                vehicle.marker.getElement().classList.remove('moving');
+                            }
+                        }
+                        return;
+                    }
+                    
+                    const lat = currentStop.lat + (nextStop.lat - currentStop.lat) * (step / steps);
+                    const lng = currentStop.lng + (nextStop.lng - currentStop.lng) * (step / steps);
+                    
+                    vehicle.marker.setLatLng([lat, lng]);
+                    updateVehicleInfo(vehicle);
+                }, simulationSpeed);
+            }
+            
+            /**
+             * Update the vehicle information panel
+             * @param {Object} vehicle - The vehicle object to update info for
+             */
+            function updateVehicleInfo(vehicle) {
+                const route = vehicle.route;
+                const stops = route.stops;
+                const nextStopIndex = vehicle.currentStopIndex + 1;
+                
+                if (nextStopIndex < stops.length) {
+                    document.getElementById('next-stop').textContent = stops[nextStopIndex].name;
+                    const remainingStops = stops.length - nextStopIndex;
+                    document.getElementById('eta-value').textContent = `${remainingStops * 5} min`;
+                }
+                
+                document.getElementById('progress-percent').textContent = `${Math.round(vehicle.progress)}%`;
+                document.getElementById('route-progress').style.width = `${vehicle.progress}%`;
+            }
+            
+            /**
+             * Update the completed path for a vehicle
+             * @param {Object} vehicle - The vehicle object to update path for
+             */
+            function updateCompletedPath(vehicle) {
+                const route = vehicle.route;
+                const completedStops = route.stops.filter(stop => stop.completed);
+                
+                if (completedStops.length > 1) {
+                    const completedLatLngs = completedStops.map(stop => [stop.lat, stop.lng]);
+                    const completedPath = L.polyline(completedLatLngs, {
+                        color: '#ff6b6b',
+                        weight: 4,
+                        opacity: 0.7
+                    }).addTo(map);
+                    
+                    completedPaths.push(completedPath);
+                }
+            }
+            
+            /**
+             * Clear all markers and routes from the map
+             */
+            function clearMap() {
+                markers.forEach(marker => map.removeLayer(marker));
+                markers = [];
+                
+                if (pickupMarker) {
+                    map.removeLayer(pickupMarker);
+                    pickupMarker = null;
+                }
+                
+                deliveryMarkers.forEach(marker => {
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                });
+                deliveryMarkers = [];
+                
+                if (routeControl) {
+                    map.removeControl(routeControl);
+                    routeControl = null;
+                }
+                
+                if (routeLine) {
+                    map.removeLayer(routeLine);
+                    routeLine = null;
+                }
+                
+                // Clear route numbers
+                routeNumbers.forEach(number => map.removeLayer(number));
+                routeNumbers = [];
+                
+                routePaths.forEach(path => map.removeLayer(path));
+                routePaths = [];
+                
+                completedPaths.forEach(path => map.removeLayer(path));
+                completedPaths = [];
+                
+                vehicles.forEach(vehicle => {
+                    map.removeLayer(vehicle.marker);
+                });
+                vehicles = [];
+                
+                document.getElementById('route-info').style.display = 'none';
+                document.getElementById('vehicle-info').style.display = 'none';
+                
+                // Clear turn-by-turn directions
+                const directionList = document.getElementById('direction-list');
+                directionList.innerHTML = `
+                    <div class="text-center text-muted py-3">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                        <p>Place pickup and delivery points to see turn-by-turn directions</p>
+                    </div>
+                `;
+            }
+            
+            /**
+             * Create a new order based on form input
+             */
+            function createOrder() {
+                const itemName = document.getElementById('item-name').value;
+                const itemWeight = document.getElementById('item-weight').value;
+                const pickupLocation = document.getElementById('pickup-location').value;
+                
+                // Check if at least one delivery point is set
+                const hasDeliveryPoint = deliveryMarkers.some(marker => marker !== null);
+                
+                if (!itemName || !itemWeight || !pickupLocation || !hasDeliveryPoint) {
+                    showNotification('Please fill all fields and place at least one delivery pin on map', 'error');
+                    return;
+                }
+                
+                const order = {
+                    id: mockOrders.length + 1,
+                    customer: 'Current User',
+                    status: 'pending',
+                    driver: null,
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                mockOrders.push(order);
+                
+                // Reset form
+                document.getElementById('new-order-form').reset();
+                clearMap();
+                
+                // Clear location inputs
+                document.getElementById('pickup-location').value = '';
+                document.querySelector('#pickup-location').parentElement.classList.remove('has-location');
+                
+                // Clear all delivery points
+                document.getElementById('delivery-points-container').innerHTML = '';
+                deliveryPointCount = 0;
+                
+                // Add one delivery point by default
+                addDeliveryPoint();
+                
+                showNotification('Order created successfully!', 'success');
+                loadOrders();
+            }
+            
+            /**
+             * Load and display orders in the orders list
+             */
+            function loadOrders() {
+                const ordersList = document.getElementById('orders-list');
+                ordersList.innerHTML = '';
+                
+                mockOrders.forEach(order => {
+                    const statusClass = order.status === 'pending' ? 'status-pending' : 
+                                       order.status === 'in-progress' ? 'status-in-progress' : 'status-completed';
+                    
+                    const orderItem = document.createElement('div');
+                    orderItem.className = 'order-item';
+                    orderItem.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="mb-0">Order #${order.id}</h6>
+                            <span class="status-badge ${statusClass}">${order.status}</span>
+                        </div>
+                        <p class="mb-1"><strong>Customer:</strong> ${order.customer}</p>
+                        <p class="mb-1"><strong>Date:</strong> ${order.date}</p>
+                        ${order.driver ? `<p class="mb-1"><strong>Driver:</strong> ${order.driver}</p>` : ''}
+                    `;
+                    ordersList.appendChild(orderItem);
+                });
+            }
+            
+            /**
+             * Load and display routes in the routes list
+             */
+            function loadRoutes() {
+                const routesList = document.getElementById('routes-list');
+                routesList.innerHTML = '';
+                
+                mockRoutes.forEach(route => {
+                    const statusClass = route.status === 'active' ? 'status-in-progress' : 'status-pending';
+                    
+                    const routeItem = document.createElement('div');
+                    routeItem.className = 'route-item';
+                    routeItem.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h6 class="mb-0">Route #${route.id}</h6>
+                            <span class="status-badge ${statusClass}">${route.status}</span>
+                        </div>
+                        <p class="mb-1"><strong>Driver:</strong> ${route.driverName}</p>
+                        <p class="mb-1"><strong>Stops:</strong> ${route.stops.length}</p>
+                    `;
+                    routesList.appendChild(routeItem);
+                });
+            }
+            
+            /**
+             * Show a notification message
+             * @param {string} message - The message to display
+             * @param {string} type - The type of notification (info, success, warning, error)
+             */
+            function showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                const notificationBody = notification.querySelector('.notification-body');
+                const notificationTitle = notification.querySelector('h6');
+                
+                notificationBody.textContent = message;
+                
+                if (type === 'error') {
+                    notificationTitle.textContent = 'Error';
+                    notificationTitle.style.color = '#dc3545';
+                } else if (type === 'success') {
+                    notificationTitle.textContent = 'Success';
+                    notificationTitle.style.color = '#28a745';
+                } else if (type === 'warning') {
+                    notificationTitle.textContent = 'Warning';
+                    notificationTitle.style.color = '#ffc107';
+                } else {
+                    notificationTitle.textContent = 'Information';
+                    notificationTitle.style.color = '#4a6fdc';
+                }
+                
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    hideNotification();
+                }, 5000);
+            }
+            
+            /**
+             * Hide the notification message
+             */
+            function hideNotification() {
+                document.getElementById('notification').classList.remove('show');
+            }
+            
+            /**
+             * Toggle the route directions panel
+             */
+            function toggleRouteDirections() {
+                const directionsPanel = document.getElementById('route-directions');
+                const toggleIcon = document.getElementById('route-directions-toggle');
+                
+                directionsPanel.classList.toggle('collapsed');
+                
+                if (directionsPanel.classList.contains('collapsed')) {
+                    toggleIcon.classList.remove('fa-chevron-down');
+                    toggleIcon.classList.add('fa-chevron-up');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-up');
+                    toggleIcon.classList.add('fa-chevron-down');
+                }
+            }
+            
+            // Initialize the application
+            init();
+        });
+    </script>
+</body>
+</html>

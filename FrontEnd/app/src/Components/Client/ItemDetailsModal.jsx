@@ -38,11 +38,11 @@ const ItemDetailsModal = ({ isOpen, onClose,Order_PlacementId }) => {
                 .join(', ');
 
             const itemOrder = {
-                Item_Name:itemName,
+                ItemName:itemName,
                 Quantity:parseInt(itemQuantity),
-                Weight_Per_Item:parseFloat(itemWeight),
-                Special_Instructions:instructions,
-                Dimension:{
+                WeightPerItem:parseFloat(itemWeight),
+                SpecialInstructions:instructions,
+                orderDimension:{
                     Length:parseFloat(itemLength),
                     Height:parseFloat(itemHeight),
                     Width:parseFloat(itemWidth)

@@ -8,14 +8,14 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
         [Column(TypeName ="decimal(10,2)")]
-        public decimal Gross_Amount {  get; set; }
+        public decimal GrossAmount {  get; set; }
         [Column(TypeName = "decimal(10,2)")]
-        public decimal Platform_Fee { get; set; }
+        public decimal PlatformFee { get; set; }
         [Column(TypeName = "decimal(10,2)")]
-        public decimal Net_Earnings { get;  set; }
+        public decimal NetEarnings { get;  set; }
         [StringLength(30)]
-        public string Is_Paid_Out {  get; set; }
-        public DateOnly Earned_At {  get; set; }
+        public string IsPaidOut {  get; set; }
+        public DateOnly EarnedAt {  get; set; }
         public int? DriverId {  get; set; }
         public int? OrderPlacementId { get; set; }
 

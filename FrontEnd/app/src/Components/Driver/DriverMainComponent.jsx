@@ -59,7 +59,7 @@ const DriverMainComponent=()=>{
     }
     return(
         <div className='driver-component'>
-            <div className="header-nav">
+            <div className="header-nav-driver">
                 <div className='title-descript'>
                     <img  className='mytruck-icon'  src={TruckIcon} />
                     <h2>DeliveryMatch</h2>
@@ -68,7 +68,7 @@ const DriverMainComponent=()=>{
                 
                 <div className='language-dropdown'>
                     <div>
-                        <img className='myword-icon' src={WorldIcon}/>
+                        {/* <img className='myword-icon' src={WorldIcon}/> */}
                         <select id="language">
                             <option selected>us English</option>
                             <option>ru Russian</option>
@@ -78,28 +78,32 @@ const DriverMainComponent=()=>{
                 </div>
                 
             </div>
-            <div className='sub-nav'>
-                <nav onClick={()=>handleDashboardActivation()}>Dashboard</nav>
-                <nav onClick={()=>handleActivateOrderActivation()}>Active Orders</nav>
-                <nav onClick={()=>handleEarningActivation()}>Earnings</nav>
-                <nav onClick={()=>handleNotificationActivation()}>Notifications</nav>
-                <nav onClick={()=>handleProfileActivation()}>Profile</nav>
+            <div className='driver-main-component'>
+                <div className='sub-nav'>
+                    <nav onClick={()=>handleDashboardActivation()}>Dashboard</nav>
+                    <nav onClick={()=>handleActivateOrderActivation()}>Active Orders</nav>
+                    <nav onClick={()=>handleEarningActivation()}>Earnings</nav>
+                    <nav onClick={()=>handleNotificationActivation()}>Notifications</nav>
+                    <nav onClick={()=>handleProfileActivation()}>Profile</nav>
+                </div>
+            
+                {activateDashboard && (
+                    <Dashboard/>
+                )}
+                {activateActiveOrders && (
+                    <ActiveOrder/>
+                )}
+                {activateEarnings && (
+                    <Earnings/>
+                )}
+                {activateNotifications && (
+                    <Notifications/>
+                )}
+                {activateProfile && (
+                    <Profile/>
+                )}
             </div>
-            {activateDashboard && (
-                <Dashboard/>
-            )}
-            {activateActiveOrders && (
-                <ActiveOrder/>
-            )}
-            {activateEarnings && (
-                <Earnings/>
-            )}
-            {activateNotifications && (
-                <Notifications/>
-            )}
-            {activateProfile && (
-                <Profile/>
-            )}
+          
             {/* <div className="dashboard"></div> 
             <div className="active-order"></div>  
             <div className="earnings"></div> 

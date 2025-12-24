@@ -36,13 +36,6 @@ const Address =({customerDetails})=>{
         setAddresses(responseAddress.data.list)
     }
     
-    // const notAddressesProvided =()=>{
-    //     return(
-    //         <div>
-    //             <p>Not addresses to Display</p>
-    //         </div>
-    //     )
-    // }
     useEffect(()=>{
         getAllAddressesByUserId()
     },[ClientId])

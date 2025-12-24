@@ -39,7 +39,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Add-OrderItems")]
-        public IActionResult AddOrderItems(Order_Items orderItemRecord)
+        public IActionResult AddOrderItems(OrderItems orderItemRecord)
         {
             if (orderItemRecord == null)
             {
@@ -54,7 +54,7 @@ namespace Backend.Controllers
 
         [HttpPut]
         [Route("Editing-OrderItems")]
-        public IActionResult UpdateOrderItems(int Id, Order_Items orderItemRecord)
+        public IActionResult UpdateOrderItems(int Id, OrderItems orderItemRecord)
         {
             if (Id <= 0)
             {

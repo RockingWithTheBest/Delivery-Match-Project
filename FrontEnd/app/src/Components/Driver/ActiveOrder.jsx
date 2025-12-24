@@ -12,7 +12,7 @@ const ActiveOrders=()=>{
     return(
         <div className='active-order-sack'>
             <button onClick={()=>openSack()} className='sack-toggle-btn'>
-                    {sack ? 'Close Order Sack' : 'Get my active order'}
+                    {sack ? 'Close Order Sack' : 'Activate Orders'}
                     <span className={`arrow ${sack ? 'down' : 'up'}`}>
                     {sack ? '▼' : '▲'}
                     </span>

@@ -118,22 +118,22 @@ const BulkOrders =()=>{
         const validatedOrders = data.map((row, index) => {
             // Add validation logic here
             return {
-                Pick_Up_Address: row.Pick_Up_Address || '',
-                Delivery_Up_Address: row.Delivery_Up_Address || '',
-                Pick_Up_Contact: row.Pick_Up_Contact || '',
-                Delivery_Contact: row.Delivery_Contact || '',
+                PickUpAddress: row.Pick_Up_Address || '',
+                DeliveryUpAddress: row.Delivery_Up_Address || '',
+                PickUpContact: row.Pick_Up_Contact || '',
+                DeliveryContact: row.Delivery_Contact || '',
                 Description: row.Description || '',
                 Status: row.Status || 'Pending',
                 Price: parseFloat(row.Price) || 0,
-                Created_At: new Date(row.Created_At) || new Date(),
-                Scheduled_At: new Date(row.Scheduled_At) || new Date(),
-                Completed_On: row.Completed_On ? new Date(row.Completed_On) : null,
+                CreatedAt: new Date(row.Created_At) || new Date(),
+                ScheduledAt: new Date(row.Scheduled_At) || new Date(),
+                CompletedOn: row.Completed_On ? new Date(row.Completed_On) : null,
                 CustomerId: parseInt(row.CustomerId) || 1,
-                Order_Items:{
-                    Item_Name:row.Item_Name || '',
+                OrderItems:{
+                    ItemName:row.Item_Name || '',
                     Quantity:parseInt(row.Quantity) || 1,
-                    Weight_Per_Item:parseFloat(row.Weight_Per_Item) || '',
-                    Special_Instructions:row.Special_Instructions,
+                    WeightPerItem:parseFloat(row.Weight_Per_Item) || '',
+                    SpecialInstructions:row.Special_Instructions,
                     orderDimension:{
                         Length:parseFloat(row.DimensionLength),
                         Height:parseFloat(row.DimensionHeight),

@@ -36,8 +36,8 @@ namespace Backend.Repository.Implementation
         {
             User record = new User
             {
-                First_Name = "",
-                Last_Name = "",
+                FirstName = "",
+                LastName = "",
                 Password = "",
                 Phone = "",
                 Driver = null,
@@ -60,8 +60,8 @@ namespace Backend.Repository.Implementation
         {
             User record = new User
             {
-                First_Name = "",
-                Last_Name = "",
+                FirstName = "",
+                LastName = "",
                 Password = "",
                 Phone = "",
                 Driver = null,
@@ -131,8 +131,8 @@ namespace Backend.Repository.Implementation
                 User updatedRecord = databaseContext.Users.Where(temp => temp.Id == Id).FirstOrDefault();
                 updatedRecord.Email = record.Email;
                 updatedRecord.Phone = record.Phone;
-                updatedRecord.First_Name = record.First_Name;
-                updatedRecord.Last_Name = record.Last_Name;
+                updatedRecord.FirstName = record.FirstName;
+                updatedRecord.LastName = record.LastName;
                 updatedRecord.Password = record.Password;
                 databaseContext.SaveChanges();
                 testValue = record.Id;

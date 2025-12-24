@@ -38,15 +38,15 @@ const Profile=()=>{
             })
   
             const details = {
-                Customer_FirstName:user.data.First_Name || "",
-                Customer_LastName:user.data.Last_Name || "",
-                Customer_Tax_Identification:customer.data.Tax_Identification || "",
-                Customer_Total_Orders:customer.data.Total_Orders || "",
-                Customer_Total_Spent:customer.data.Total_Spent || "",
+                Customer_FirstName:user.data.FirstName || "",
+                Customer_LastName:user.data.LastName || "",
+                Customer_Tax_Identification:customer.data.TaxIdentification || "",
+                Customer_Total_Orders:customer.data.TotalOrders || "",
+                Customer_Total_Spent:customer.data.TotalSpent || "",
                 Customer_Email:user.data.Email || "",
                 Customer_Phone:user.data.Phone || "",
-                Customer_Business_Name:customer.data.Business_Name || "",
-                Customer_Business_Type:customer.data.Business_Type || "",
+                Customer_Business_Name:customer.data.BusinessName || "",
+                Customer_Business_Type:customer.data.BusinessType || "",
                 Customer_Rating:customer.data.Rating || ""
             }
             setCustomerDetails(details)

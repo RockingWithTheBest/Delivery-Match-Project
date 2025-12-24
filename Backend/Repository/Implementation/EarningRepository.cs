@@ -69,11 +69,11 @@ namespace Backend.Repository.Implementation
             else
             {
                 Earnings updatedRecord = databaseContext.Earnings.Where(temp => temp.Id == Id).FirstOrDefault();
-                updatedRecord.Gross_Amount = record.Gross_Amount;
-                updatedRecord.Platform_Fee = record.Platform_Fee;
-                updatedRecord.Net_Earnings = record.Net_Earnings;
-                updatedRecord.Is_Paid_Out = record.Is_Paid_Out;
-                updatedRecord.Earned_At = record.Earned_At;
+                updatedRecord.GrossAmount = record.GrossAmount;
+                updatedRecord.PlatformFee = record.PlatformFee;
+                updatedRecord.NetEarnings = record.NetEarnings;
+                updatedRecord.IsPaidOut = record.IsPaidOut;
+                updatedRecord.EarnedAt = record.EarnedAt;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }

@@ -9,16 +9,16 @@ namespace Backend.Models
         public int Id { get; set; }
         [Required]
         [StringLength(40)]
-        public string Pick_Up_Address { get; set; }
+        public string PickUpAddress { get; set; }
         [Required]
         [StringLength(40)]
-        public string Delivery_Up_Address { get; set; }
+        public string DeliveryUpAddress { get; set; }
         [Required]
         [StringLength(40)]
-        public string Pick_Up_Contact {  get; set; }
+        public string PickUpContact {  get; set; }
         [Required]
         [StringLength(40)]
-        public string Delivery_Contact {  get; set; }
+        public string DeliveryContact {  get; set; }
         [Required]
         [StringLength(60)]
         public string Description { get; set; }
@@ -29,15 +29,15 @@ namespace Backend.Models
         [Column(TypeName = "decimal(10,2)")]
         public decimal Price {  get; set; }
         [Required]
-        public DateTime Created_At {  get; set; }
+        public DateTime CreatedAt {  get; set; }
         [Required]
-        public DateTime Scheduled_At { get; set; }
-        public DateTime? Completed_On { get; set; }
+        public DateTime ScheduledAt { get; set; }
+        public DateTime? CompletedOn { get; set; }
         [Required]
         public int CustomerId {  get; set; }
         public int? DriverId {  get; set; }
         public virtual Customer? Customer { get; set; }
         public virtual Driver? Driver { get; set; }
-        public virtual Order_Items? Order_Items { get; set; }
+        public virtual OrderItems? OrderItems { get; set; }
     }
 }

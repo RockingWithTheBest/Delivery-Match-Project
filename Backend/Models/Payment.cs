@@ -12,18 +12,18 @@ namespace Backend.Models
         public decimal Amount {  get; set; }
         [Required]
         [StringLength(20)]
-        public string Payment_Method { get; set; }
+        public string PaymentMethod { get; set; }
         [Required]
         [StringLength(30)]
         public string Status {  get; set; }
         [Required]
         [StringLength(30)]
-        public string Transaction_Identification { get; set; }
-        public DateTime? Processed_At { get; set; }
+        public string TransactionIdentification { get; set; }
+        public DateTime? ProcessedAt { get; set; }
         [Column(TypeName = "decimal(10,2)")]
-        public decimal? Platform_Fee { get; set; }
+        public decimal? PlatformFee { get; set; }
         [Column(TypeName = "decimal(10,2)")]
-        public decimal? Driver_Earnings { get; set; }
+        public decimal? DriverEarnings { get; set; }
         [Required]
         public int OrderPlacementId {  get; set; }
 

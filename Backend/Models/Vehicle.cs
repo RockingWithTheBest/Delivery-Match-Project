@@ -14,19 +14,16 @@ namespace Backend.Models
         [StringLength(50)]
         public string Model { get; set; }
         [Required]
-        public DateOnly Make_Year { get; set; }
+        public DateOnly MakeYear { get; set; }
         [Required]
         [StringLength(50)]
         public string Color {  get; set; }
         [Required]
         [StringLength(10)]
-        public string License_Plate { get; set; }
+        public string LicensePlate { get; set; }
         [Required]
         [Column(TypeName ="decimal(8,2)")]
-        public decimal Max_Weight {  get; set; }
-        //[Required]
-        //[Column(TypeName = "decimal(8,2)")]
-        //public decimal Max_Volume { get; set; }
+        public decimal MaxWeight {  get; set; }
         [Required]
         [Column(TypeName = "decimal(8,2)")]
         public decimal Length { get; set; }
