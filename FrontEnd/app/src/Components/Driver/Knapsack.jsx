@@ -225,12 +225,7 @@ const KnapsackAlgorithm=()=>{
                 const PlacementIds = selectedOrders.map(order=>order.Id)
                 try{
                     const id = selectedOrders[0].Id;
-                    
-                    // for(const id of PlacementIds){
-                    //     await axios.delete(`https://localhost:7216/api/OrderPlacement/Delete-An-OrderPlacment-Record`, {
-                    //         params: { Id: id }
-                    //     });                       
-                    // }
+        
                     for(const item of selectedOrders){
                         console.log("Hey", item)
                         const updateItem={
@@ -254,20 +249,6 @@ const KnapsackAlgorithm=()=>{
                         });
                     }
                     
-                    // const ordersData = selectedOrders.map(order => ({
-                    //     ...order,
-                    //     // Remove the Id since we're creating new records
-                    //     Id: 0, // or omit this field entirely to let the database generate new IDs
-                    //     DriverId: parseInt(DriverId) // Update the DriverId to the current driver
-                    // }));
-
-                    // await axios.post(`https://localhost:7216/api/Driver/Collection-Post?DriverId=${DriverId}`, 
-                    //     ordersData,
-                    //     {
-                    //         headers: {
-                    //             'Content-Type': 'application/json-patch+json'
-                    //         }
-                    // })
                     alert("Успешно заявленные заказы")
                 }
                 catch(e){
