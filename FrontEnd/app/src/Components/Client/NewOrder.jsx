@@ -27,11 +27,7 @@ const NewOrder=()=>{
     const [itemHeight, setItemHeight] = useState("");
     const [itemWeight, setItemWeight] = useState("");
     const [itemQuantity, setItemQuantity] = useState("");
-    const [specialInstructions, setSpecialInstructions] = useState({
-        fragile: false,
-        refrigerated: false,
-        oversized: false
-    });
+    const [specialInstructions, setSpecialInstructions] = useState("");
     const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
     const url = "https://localhost:7216/api"
 
@@ -55,19 +51,6 @@ const NewOrder=()=>{
 
     const handleSubmit = async()=>{
         try{
-
-            const instructions = Object.entries(specialInstructions)
-                .filter(([_, value]) => value)
-                .map(([key]) => {
-                    switch(key) {
-                        case 'fragile': return 'Fragile Items';
-                        case 'refrigerated': return 'Refrigerated Transport';
-                        case 'oversized': return 'Oversized Item';
-                        default: return key;
-                    }
-                })
-                .join(', ');
-
             const orderPlacements={
                 PickUpAddress:pickupAddress,
                 DeliveryUpAddress:deliveryAddress,
@@ -82,8 +65,8 @@ const NewOrder=()=>{
                 OrderItems:{
                     ItemName:itemName,
                     Quantity:parseInt(itemQuantity),
-                    WeightPerItem:parseFloat(itemWeight),
-                    SpecialInstructions:instructions,
+                    // WeightPerItem:parseFloat(itemWeight),
+                    SpecialInstructions:specialInstructions,
                     orderDimension:{
                         Length:parseFloat(itemLength),
                         Height:parseFloat(itemHeight),
@@ -135,8 +118,7 @@ const NewOrder=()=>{
 
     useEffect(() => {
         window.hideNotification = () => setNotification({ ...notification, show: false });
-    }, [notification]);
-    
+    }, [notification]);   
 
 
     return(
@@ -154,104 +136,104 @@ const NewOrder=()=>{
             </div>
             
             <form onSubmit={handleSubmit}className="order-details-grid">
-                <div className="input-group">
-                    <label htmlFor="">Pickup Address</label>
-                    <input 
-                        id="pickup-address"
-                        type="text"
-                        value={pickupAddress}
-                        placeholder="Enter pick up address"
-                        onChange={(e)=>setPickUpAddress(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="">Delivery Address</label>
-                    <input 
-                        id="delivery-address"
-                        type="text" 
-                        value={deliveryAddress}
-                        placeholder="Enter delivery address"
-                        onChange={(e)=>setDeliverAddress(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="">Pickup Contact</label>
-                    <input
-                        id="pickup-contact" 
-                        type="number" 
-                        value={pickupContact}
-                        placeholder="Enter pick up contact"
-                        onChange={(e)=>setPickUpContact(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="">Delivery Contact</label>
-                    <input 
-                        type="number" 
-                        id="delivery-contact"
-                        value={deliveryContact}
-                        placeholder="Enter delivery contact"
-                        onChange={(e)=>setDeliveryContact(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div className="input-group">
-                    <label htmlFor="">Description</label>
-                    <input 
-                        type="text"
-                        id="description" 
-                        placeholder="Enter iem description"
-                        value={desciption}
-                        onChange={(e)=>setDescription(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="">Price ($)</label>
-                    <input 
-                        type="text"
-                        id="price" 
-                        value={price}
-                        placeholder="Enter price to pay driver"
-                        onChange={(e)=>setPrice(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="">Order Place At</label>
-                    <input 
-                        type="datetime-local" 
-                        id="order-placed"
-                        value={createdAt}
-                        placeholder="Enter time order will be place"
-                        onChange={(e)=>setCreatedAt(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="">Scheduled To Be Delivered On</label>
-                    <input 
-                        type="datetime-local"
-                        id="scheduled-delivery"
-                        value={scheduledForDeliveryOn} 
-                        placeholder="Enter time you think order might be delivered"
-                        onChange={(e)=>setScheduledForDeliveryOn(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div className="input-group">
-                        <label>Item Name</label>
-                        <input
+                    <div className="input-group">
+                        <label htmlFor="">Pickup Address</label>
+                        <input 
+                            id="pickup-address"
                             type="text"
-                            placeholder="Enter item name"
-                            value={itemName}
-                            onChange={(e) => setItemName(e.target.value)}
+                            value={pickupAddress}
+                            placeholder="Enter pick up address"
+                            onChange={(e)=>setPickUpAddress(e.target.value)}
+                            required
                         />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="">Delivery Address</label>
+                        <input 
+                            id="delivery-address"
+                            type="text" 
+                            value={deliveryAddress}
+                            placeholder="Enter delivery address"
+                            onChange={(e)=>setDeliverAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="">Pickup Contact</label>
+                        <input
+                            id="pickup-contact" 
+                            type="number" 
+                            value={pickupContact}
+                            placeholder="Enter pick up contact"
+                            onChange={(e)=>setPickUpContact(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="">Delivery Contact</label>
+                        <input 
+                            type="number" 
+                            id="delivery-contact"
+                            value={deliveryContact}
+                            placeholder="Enter delivery contact"
+                            onChange={(e)=>setDeliveryContact(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="">Description</label>
+                        <input 
+                            type="text"
+                            id="description" 
+                            placeholder="Enter iem description"
+                            value={desciption}
+                            onChange={(e)=>setDescription(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="">Price ($)</label>
+                        <input 
+                            type="text"
+                            id="price" 
+                            value={price}
+                            placeholder="Enter price to pay driver"
+                            onChange={(e)=>setPrice(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="">Order Place At</label>
+                        <input 
+                            type="datetime-local" 
+                            id="order-placed"
+                            value={createdAt}
+                            placeholder="Enter time order will be place"
+                            onChange={(e)=>setCreatedAt(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="">Scheduled To Be Delivered On</label>
+                        <input 
+                            type="datetime-local"
+                            id="scheduled-delivery"
+                            value={scheduledForDeliveryOn} 
+                            placeholder="Enter time you think order might be delivered"
+                            onChange={(e)=>setScheduledForDeliveryOn(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="input-group">
+                            <label>Item Name</label>
+                            <input
+                                type="text"
+                                placeholder="Enter item name"
+                                value={itemName}
+                                onChange={(e) => setItemName(e.target.value)}
+                            />
                     </div>
                     <div className="input-group">
                         <label>Length (cm)</label>
@@ -281,15 +263,6 @@ const NewOrder=()=>{
                         />
                     </div>
                     <div className="input-group">
-                        <label>Weight per Item(kg)</label>
-                        <input
-                            type="number"
-                            placeholder="Enter weight"
-                            value={itemWeight}
-                            onChange={(e) => setItemWeight(e.target.value)}
-                        />
-                    </div>
-                    <div className="input-group">
                         <label>Quantity</label>
                         <input
                             type="number"
@@ -303,7 +276,8 @@ const NewOrder=()=>{
                         <select 
                             name="" 
                             id=""
-                            onChange={(e)=>handleCheckboxChange(e)}>
+                            onChange={(e)=>setSpecialInstructions(e.target.value)}
+                        >
                             <option value="">Special Instructions</option>
                             <option value="Fragile Items">Fragile Items</option>
                             <option value="Refrigirated transport">Refrigirated transport</option>

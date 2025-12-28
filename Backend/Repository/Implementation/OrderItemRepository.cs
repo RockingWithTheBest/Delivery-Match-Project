@@ -72,7 +72,7 @@ namespace Backend.Repository.Implementation
                 OrderItems updatedRecord = databaseContext.OrderItems.Where(temp => temp.Id == Id).FirstOrDefault();
                 updatedRecord.ItemName = record.ItemName;
                 updatedRecord.Quantity = record.Quantity;
-                updatedRecord.WeightPerItem = record.WeightPerItem;
+                //updatedRecord.WeightPerItem = record.WeightPerItem;
                 updatedRecord.SpecialInstructions = record.SpecialInstructions;
                 databaseContext.SaveChanges();
                 testValue = record.Id;

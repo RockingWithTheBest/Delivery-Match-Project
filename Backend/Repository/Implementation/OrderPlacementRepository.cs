@@ -170,7 +170,7 @@ namespace Backend.Repository.Implementation
                         {
                             ItemName = item.ItemName,
                             Quantity = item.Quantity,
-                            WeightPerItem = item.WeightPerItem,
+                            //WeightPerItem = item.WeightPerItem,
                             SpecialInstructions = item.SpecialInstructions,
                             //Dimension = new OrderDimension
                             //{
