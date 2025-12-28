@@ -69,8 +69,8 @@ namespace Backend.Repository.Implementation
             else
             {
                 OrderTracking updatedRecord = databaseContext.OrderTrackings.Where(temp => temp.Id == Id).FirstOrDefault();
-                updatedRecord.Longitude = tracking.Longitude;
-                updatedRecord.Latitude = tracking.Latitude;
+                updatedRecord.DeliveryLocation = tracking.DeliveryLocation;
+                updatedRecord.PickUpLocation = tracking.PickUpLocation;
                 updatedRecord.Status = tracking.Status;
                 updatedRecord.Notes = tracking.Notes;
                 updatedRecord.TimeStamps = tracking.TimeStamps;

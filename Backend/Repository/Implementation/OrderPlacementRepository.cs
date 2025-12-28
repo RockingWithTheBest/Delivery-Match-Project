@@ -96,11 +96,10 @@ namespace Backend.Repository.Implementation
                 updatedRecord.PickUpContact = record.PickUpContact;
                 updatedRecord.DeliveryContact = record.DeliveryContact;
                 updatedRecord.DeliveryUpAddress = record.DeliveryUpAddress;
-                //updatedRecord.Weight = record.Weight;
-                //updatedRecord.Volume = record.Volume;
+
                 updatedRecord.Price = record.Price;
                 updatedRecord.Description = record.Description;
-                //updatedRecord.Distance = record.Distance;
+
                 updatedRecord.CreatedAt = record.CreatedAt;
                 updatedRecord.ScheduledAt = record.ScheduledAt;
                 updatedRecord.CompletedOn = record.CompletedOn;
