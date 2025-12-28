@@ -8,10 +8,10 @@ namespace Backend.Models
         public int Id { get; set; }
         [Required]
         [StringLength(40)]
-        public string Latitude { get; set; }
+        public string PickUpLocation { get; set; }
         [Required]
         [StringLength(40)]
-        public string Longitude { get; set; }
+        public string DeliveryLocation { get; set; }
         [Required]
         [StringLength(30)]
         public string Status { get; set; }

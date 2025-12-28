@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './NewOrder.css'
 import { useParams } from "react-router-dom";
 import ItemDetailsModal from './ItemDetailsModal'
+import OrdersMap from "./OrdersMap";
 import axios from "axios";
 
 const NewOrder=()=>{
@@ -13,11 +14,12 @@ const NewOrder=()=>{
     const [weight, setWeight]=useState(null)
     const [volume, setVolume]=useState(null)
     const [desciption, setDescription]=useState(null)
-    const [status, setStatus]=useState("Confirmed")
+    const [status, setStatus]=useState("")
     const [createdAt, setCreatedAt]=useState(null)
     const [scheduledForDeliveryOn, setScheduledForDeliveryOn]=useState(null)
     const [price, setPrice]=useState(null)
     const [showItemModal, setShowItemModal] = useState(false);
+    const [showOptimizationMap, setOptimizationMap] = useState(false);
     const [Order_PlacementId, setOrder_PlacementId] = useState(null)
     const url = "https://localhost:7216/api"
 
@@ -65,6 +67,9 @@ const NewOrder=()=>{
         }
     }
 
+    const callOptionizationPathMap=()=>{
+        setOptimizationMap(true);
+    }
     return(
         <div className="new-order">
             <div className="new-order-header">
@@ -123,28 +128,7 @@ const NewOrder=()=>{
                         required
                     />
                 </div>
-                {/* <div className="input-group">
-                    <label htmlFor="">Total Weight (kg)</label>
-                    <input 
-                        type="text"
-                        id="weight" 
-                        placeholder="Enter weight"
-                        value={weight}
-                        onChange={(e)=>setWeight(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="">Volume (m³)</label>
-                    <input 
-                        type="text"
-                        id="volume" 
-                        placeholder="Enter volume"
-                        value={volume}
-                        onChange={(e)=>setVolume(e.target.value)}
-                        required
-                    />
-                </div> */}
+
                 <div className="input-group">
                     <label htmlFor="">Description</label>
                     <input 
@@ -166,6 +150,7 @@ const NewOrder=()=>{
                         onChange={(e)=>setStatus(e.target.value)}
                         required
                     >
+                        <option value="">Select Status</option>
                         <option value="Pending">Pending</option>
                         <option value="Confirmed">Confirmed</option>
                         <option value="In Progress">In Progress</option>
@@ -211,15 +196,21 @@ const NewOrder=()=>{
                 <button type='button' onClick ={()=>enterDetails()} className="enter-item-details">
                     Enter Item Details
                 </button>
-                <button type='button' className="find-driver">
-                    Find Driver
+                <button type='button' onClick={()=>callOptionizationPathMap()} className="find-driver">
+                    Place order Pickup & Delivery locations
                 </button>                
             </div>
+            {/* <div className="map-display"></div> */}
             <ItemDetailsModal
                 isOpen={showItemModal}
                 onClose={()=>setShowItemModal(false)}
                 Order_PlacementId={Order_PlacementId}/>
-            
+
+                <OrdersMap 
+                    isOpenMap={showOptimizationMap}
+                    onCloseMap={()=>setOptimizationMap(false)}
+                    Order_PlacementId={Order_PlacementId}
+                />           
         </div>
         
     )

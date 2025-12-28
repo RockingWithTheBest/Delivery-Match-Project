@@ -23,10 +23,6 @@
       "RelativeMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|solutionrelative:additionalclasses\\orderdimension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|e:\\desktop\\delivery-match-project\\backend\\models\\order_item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|solutionrelative:models\\order_item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|e:\\desktop\\delivery-match-project\\backend\\repository\\implementation\\orderplacementrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|solutionrelative:repository\\implementation\\orderplacementrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -61,10 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|e:\\desktop\\delivery-match-project\\backend\\models\\route.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|solutionrelative:models\\route.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|e:\\desktop\\delivery-match-project\\backend\\models\\order_tracking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|solutionrelative:models\\order_tracking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|e:\\desktop\\delivery-match-project\\backend\\models\\driver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -303,8 +295,16 @@
       "RelativeMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|solutionrelative:backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|e:\\desktop\\delivery-match-project\\backend\\migrations\\20251209103716_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{64336CA8-CAEB-4E9B-B504-39E28D9E2743}|Backend.csproj|solutionrelative:migrations\\20251209103716_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251209103716_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251209103716_Init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Order_Item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Order_Item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Order_Tracking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\Order_Tracking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -314,11 +314,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 72,
               "Title": "Backend.csproj",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Backend.csproj",
               "RelativeDocumentMoniker": "Backend.csproj",
@@ -331,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "OrderPlacementData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\OrderPlacementData.cs",
               "RelativeDocumentMoniker": "TrainingData\\OrderPlacementData.cs",
@@ -344,7 +344,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 41,
               "Title": "PaymentData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\PaymentData.cs",
               "RelativeDocumentMoniker": "TrainingData\\PaymentData.cs",
@@ -357,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 57,
               "Title": "RouteData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\RouteData.cs",
               "RelativeDocumentMoniker": "TrainingData\\RouteData.cs",
@@ -370,7 +370,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 19,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -383,7 +383,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 32,
               "Title": "CustomerController.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Controllers\\CustomerController.cs",
               "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
@@ -395,12 +395,8 @@
               "IsPinned": true
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 73,
               "Title": "20251209103716_Init.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251209103716_Init.cs",
               "RelativeDocumentMoniker": "Migrations\\20251209103716_Init.cs",
@@ -412,7 +408,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "20251209103619_Init.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251209103619_Init.cs",
               "RelativeDocumentMoniker": "Migrations\\20251209103619_Init.cs",
@@ -423,7 +419,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 20,
               "Title": "20251202172800_Initial.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251202172800_Initial.cs",
               "RelativeDocumentMoniker": "Migrations\\20251202172800_Initial.cs",
@@ -435,7 +431,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 17,
               "Title": "OrderDimensionsData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\OrderDimensionsData.cs",
               "RelativeDocumentMoniker": "TrainingData\\OrderDimensionsData.cs",
@@ -447,7 +443,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 21,
               "Title": "20251202170515_Initial.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251202170515_Initial.cs",
               "RelativeDocumentMoniker": "Migrations\\20251202170515_Initial.cs",
@@ -459,7 +455,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 27,
               "Title": "DocumentController.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Controllers\\DocumentController.cs",
               "RelativeDocumentMoniker": "Controllers\\DocumentController.cs",
@@ -471,7 +467,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 37,
               "Title": "20251126043537_2.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251126043537_2.cs",
               "RelativeDocumentMoniker": "Migrations\\20251126043537_2.cs",
@@ -483,7 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 38,
               "Title": "20251126034734_Initial.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251126034734_Initial.cs",
               "RelativeDocumentMoniker": "Migrations\\20251126034734_Initial.cs",
@@ -495,7 +491,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 40,
               "Title": "20251126032536_Initial.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251126032536_Initial.cs",
               "RelativeDocumentMoniker": "Migrations\\20251126032536_Initial.cs",
@@ -507,7 +503,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 30,
               "Title": "IDocuments.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IDocuments.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IDocuments.cs",
@@ -525,14 +521,14 @@
               "RelativeDocumentMoniker": "Controllers\\AddressController.cs",
               "ToolTip": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Controllers\\AddressController.cs",
               "RelativeToolTip": "Controllers\\AddressController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwAsAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwCsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-16T21:53:57.307Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 51,
               "Title": "20251116202205_Initial2.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251116202205_Initial2.cs",
               "RelativeDocumentMoniker": "Migrations\\20251116202205_Initial2.cs",
@@ -543,7 +539,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 53,
               "Title": "BulkOrderDto.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\DTOs\\BulkOrderDto.cs",
               "RelativeDocumentMoniker": "DTOs\\BulkOrderDto.cs",
@@ -555,7 +551,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 56,
               "Title": "UserData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\UserData.cs",
               "RelativeDocumentMoniker": "TrainingData\\UserData.cs",
@@ -567,7 +563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 58,
               "Title": "NotificationData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\NotificationData.cs",
               "RelativeDocumentMoniker": "TrainingData\\NotificationData.cs",
@@ -579,7 +575,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 29,
               "Title": "DocumentData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\DocumentData.cs",
               "RelativeDocumentMoniker": "TrainingData\\DocumentData.cs",
@@ -591,7 +587,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 59,
               "Title": "CustomerData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\CustomerData.cs",
               "RelativeDocumentMoniker": "TrainingData\\CustomerData.cs",
@@ -603,7 +599,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 60,
               "Title": "AddressData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\AddressData.cs",
               "RelativeDocumentMoniker": "TrainingData\\AddressData.cs",
@@ -615,7 +611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 61,
               "Title": "IRoute.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IRoute.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IRoute.cs",
@@ -627,7 +623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 47,
               "Title": "IPayment.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IPayment.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IPayment.cs",
@@ -639,7 +635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 62,
               "Title": "IOrderTracking.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IOrderTracking.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IOrderTracking.cs",
@@ -651,7 +647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 52,
               "Title": "IOrderPlacement.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IOrderPlacement.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IOrderPlacement.cs",
@@ -663,7 +659,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 63,
               "Title": "IOrderItems.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IOrderItems.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IOrderItems.cs",
@@ -675,7 +671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 64,
               "Title": "INotifications.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\INotifications.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\INotifications.cs",
@@ -687,7 +683,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 65,
               "Title": "IEarnings.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IEarnings.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IEarnings.cs",
@@ -699,7 +695,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 50,
               "Title": "IAddress.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IAddress.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IAddress.cs",
@@ -711,7 +707,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 66,
               "Title": "RouteRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\RouteRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\RouteRepository.cs",
@@ -723,7 +719,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 48,
               "Title": "PaymentRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\PaymentRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\PaymentRepository.cs",
@@ -735,7 +731,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "OrderItemRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\OrderItemRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\OrderItemRepository.cs",
@@ -747,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 67,
               "Title": "NotificationRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\NotificationRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\NotificationRepository.cs",
@@ -759,7 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 44,
               "Title": "Notification.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Notification.cs",
               "RelativeDocumentMoniker": "Models\\Notification.cs",
@@ -771,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 69,
               "Title": "20251116094303_Initial2.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251116094303_Initial2.cs",
               "RelativeDocumentMoniker": "Migrations\\20251116094303_Initial2.cs",
@@ -783,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 55,
               "Title": "OrderTrackingRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\OrderTrackingRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\OrderTrackingRepository.cs",
@@ -795,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 26,
               "Title": "Documents.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Documents.cs",
               "RelativeDocumentMoniker": "Models\\Documents.cs",
@@ -807,7 +803,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 18,
               "Title": "OrderItemsData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\OrderItemsData.cs",
               "RelativeDocumentMoniker": "TrainingData\\OrderItemsData.cs",
@@ -819,7 +815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 46,
               "Title": "OrderTrackingData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\OrderTrackingData.cs",
               "RelativeDocumentMoniker": "TrainingData\\OrderTrackingData.cs",
@@ -831,7 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 70,
               "Title": "20251115152941_Initial.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Migrations\\20251115152941_Initial.cs",
               "RelativeDocumentMoniker": "Migrations\\20251115152941_Initial.cs",
@@ -843,7 +839,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 42,
               "Title": "Earnings.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Earnings.cs",
               "RelativeDocumentMoniker": "Models\\Earnings.cs",
@@ -855,7 +851,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 28,
               "Title": "DocumentRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\DocumentRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\DocumentRepository.cs",
@@ -879,7 +875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "ApplicationDatabaseContext.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\DatabasContext\\ApplicationDatabaseContext.cs",
               "RelativeDocumentMoniker": "DatabasContext\\ApplicationDatabaseContext.cs",
@@ -903,7 +899,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 25,
               "Title": "VehicleController.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Controllers\\VehicleController.cs",
               "RelativeDocumentMoniker": "Controllers\\VehicleController.cs",
@@ -915,7 +911,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 22,
               "Title": "VehicleRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\VehicleRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\VehicleRepository.cs",
@@ -927,7 +923,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 24,
               "Title": "IVehicle.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IVehicle.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IVehicle.cs",
@@ -939,7 +935,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 49,
               "Title": "IUser.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IUser.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IUser.cs",
@@ -951,7 +947,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 16,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\UserRepository.cs",
@@ -963,7 +959,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 35,
               "Title": "CustomerRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\CustomerRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\CustomerRepository.cs",
@@ -975,7 +971,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 31,
               "Title": "ICustomer.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\ICustomer.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\ICustomer.cs",
@@ -987,7 +983,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 43,
               "Title": "EarningsData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\EarningsData.cs",
               "RelativeDocumentMoniker": "TrainingData\\EarningsData.cs",
@@ -999,7 +995,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 54,
               "Title": "OrderPlacementController.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Controllers\\OrderPlacementController.cs",
               "RelativeDocumentMoniker": "Controllers\\OrderPlacementController.cs",
@@ -1011,7 +1007,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 36,
               "Title": "UserController.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -1023,7 +1019,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 68,
               "Title": "EarningRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\EarningRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\EarningRepository.cs",
@@ -1035,7 +1031,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "OrderPlacementRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\OrderPlacementRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\OrderPlacementRepository.cs",
@@ -1047,7 +1043,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 39,
               "Title": "DriversData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\DriversData.cs",
               "RelativeDocumentMoniker": "TrainingData\\DriversData.cs",
@@ -1059,7 +1055,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 33,
               "Title": "DriverController.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Controllers\\DriverController.cs",
               "RelativeDocumentMoniker": "Controllers\\DriverController.cs",
@@ -1071,7 +1067,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 34,
               "Title": "IDriver.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Interface\\IDriver.cs",
               "RelativeDocumentMoniker": "Repository\\Interface\\IDriver.cs",
@@ -1083,7 +1079,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "DriverRepository.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Repository\\Implementation\\DriverRepository.cs",
               "RelativeDocumentMoniker": "Repository\\Implementation\\DriverRepository.cs",
@@ -1095,7 +1091,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 71,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -1107,7 +1103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "Driver.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Driver.cs",
               "RelativeDocumentMoniker": "Models\\Driver.cs",
@@ -1119,7 +1115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 15,
               "Title": "Customer.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Customer.cs",
               "RelativeDocumentMoniker": "Models\\Customer.cs",
@@ -1131,7 +1127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -1143,7 +1139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "Vehicle.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Vehicle.cs",
               "RelativeDocumentMoniker": "Models\\Vehicle.cs",
@@ -1155,7 +1151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 74,
               "Title": "Order_Item.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Order_Item.cs",
               "RelativeDocumentMoniker": "Models\\Order_Item.cs",
@@ -1179,7 +1175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "Route.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Route.cs",
               "RelativeDocumentMoniker": "Models\\Route.cs",
@@ -1191,7 +1187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 75,
               "Title": "Order_Tracking.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Order_Tracking.cs",
               "RelativeDocumentMoniker": "Models\\Order_Tracking.cs",
@@ -1203,7 +1199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 45,
               "Title": "Payment.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\Models\\Payment.cs",
               "RelativeDocumentMoniker": "Models\\Payment.cs",
@@ -1215,7 +1211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 23,
               "Title": "VehicleData.cs",
               "DocumentMoniker": "E:\\Desktop\\Delivery-Match-Project\\Backend\\TrainingData\\VehicleData.cs",
               "RelativeDocumentMoniker": "TrainingData\\VehicleData.cs",
