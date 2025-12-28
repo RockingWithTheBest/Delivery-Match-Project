@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './NewOrder.css'
 import { useParams } from "react-router-dom";
-import ItemDetailsModal from './ItemDetailsModal'
+// import ItemDetailsModal from './ItemDetailsModal'
 import OrdersMap from "./OrdersMap";
 import axios from "axios";
 
@@ -21,14 +21,53 @@ const NewOrder=()=>{
     const [showItemModal, setShowItemModal] = useState(false);
     const [showOptimizationMap, setOptimizationMap] = useState(false);
     const [Order_PlacementId, setOrder_PlacementId] = useState(null)
+    const [itemName, setItemName] = useState("");
+    const [itemLength, setItemLength] = useState("");
+    const [itemWidth, setItemWidth] = useState("");
+    const [itemHeight, setItemHeight] = useState("");
+    const [itemWeight, setItemWeight] = useState("");
+    const [itemQuantity, setItemQuantity] = useState("");
+    const [specialInstructions, setSpecialInstructions] = useState({
+        fragile: false,
+        refrigerated: false,
+        oversized: false
+    });
+    const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
     const url = "https://localhost:7216/api"
 
     const enterDetails = () => {
         setShowItemModal(true)
     };
     
+     const handleCheckboxChange = (instruction) => {
+        setSpecialInstructions(prev => ({
+            ...prev,
+            [instruction]: !prev[instruction]
+        }));
+    };
+
+    const showNotification = (message, type = 'info') => {
+        setNotification({ show: true, message, type });
+        setTimeout(() => {
+          setNotification(prev=>({ ...prev, show: false }));
+        }, 5000);
+      };
+
     const handleSubmit = async()=>{
         try{
+
+            const instructions = Object.entries(specialInstructions)
+                .filter(([_, value]) => value)
+                .map(([key]) => {
+                    switch(key) {
+                        case 'fragile': return 'Fragile Items';
+                        case 'refrigerated': return 'Refrigerated Transport';
+                        case 'oversized': return 'Oversized Item';
+                        default: return key;
+                    }
+                })
+                .join(', ');
+
             const orderPlacements={
                 PickUpAddress:pickupAddress,
                 DeliveryUpAddress:deliveryAddress,
@@ -39,12 +78,23 @@ const NewOrder=()=>{
                 Price:price,
                 CreatedAt:createdAt,
                 ScheduledAt:scheduledForDeliveryOn,
-                CustomerId:ClientId
+                CustomerId:ClientId,
+                OrderItems:{
+                    ItemName:itemName,
+                    Quantity:parseInt(itemQuantity),
+                    WeightPerItem:parseFloat(itemWeight),
+                    SpecialInstructions:instructions,
+                    orderDimension:{
+                        Length:parseFloat(itemLength),
+                        Height:parseFloat(itemHeight),
+                        Width:parseFloat(itemWidth)
+                    }
+                }
             }
             const response = await axios.post(`${url}/OrderPlacement/Add-OrderPlacement`,orderPlacements)
             console.log("VALUES",response)
             setOrder_PlacementId(parseInt(response.data))
-            alert("Successfully Added")
+            showNotification("Successfully added order!", 'success')
             if(response){
                 setCreatedAt("")
                 setDeliverAddress("")
@@ -57,21 +107,41 @@ const NewOrder=()=>{
                 setStatus("")
                 setVolume("")
                 setWeight("")
-            }
-            
+                setItemHeight("")
+                setItemLength("")
+                setItemName("")
+                setItemQuantity("")
+                setItemWeight("")
+                setSpecialInstructions("")
+                setStatus("")
+                setItemWidth("")
+            }          
 
        }
         catch(e){
-            alert("Enter correct details please")
+            showNotification('Enter correct details please.', 'error');           
             console.log("Error", e.message)
         }
     }
 
     const callOptionizationPathMap=()=>{
-        setOptimizationMap(true);
+        if(Order_PlacementId === null){
+            showNotification('You can only place order after you add new order.', 'error'); 
+        }
+        else{
+            setOptimizationMap(true);
+        }    
     }
+
+    useEffect(() => {
+        window.hideNotification = () => setNotification({ ...notification, show: false });
+    }, [notification]);
+    
+
+
     return(
         <div className="new-order">
+            
             <div className="new-order-header">
                 <div>
                     <h2>New Delivery Booking</h2>
@@ -141,24 +211,6 @@ const NewOrder=()=>{
                     />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="">Status</label>
-                    <select 
-                        type="text"
-                        id="status" 
-                        placeholder="Enter status"
-                        value={status}
-                        onChange={(e)=>setStatus(e.target.value)}
-                        required
-                    >
-                        <option value="">Select Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Confirmed">Confirmed</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
-                    </select>
-                </div>
-                <div className="input-group">
                     <label htmlFor="">Price ($)</label>
                     <input 
                         type="text"
@@ -191,26 +243,127 @@ const NewOrder=()=>{
                         required
                     />
                 </div>
+
+                <div className="input-group">
+                        <label>Item Name</label>
+                        <input
+                            type="text"
+                            placeholder="Enter item name"
+                            value={itemName}
+                            onChange={(e) => setItemName(e.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Length (cm)</label>
+                        <input
+                            type="number"
+                            placeholder="Enter length"
+                            value={itemLength}
+                            onChange={(e) => setItemLength(e.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Width (cm)</label>
+                        <input
+                            type="number"
+                            placeholder="Enter width"
+                            value={itemWidth}
+                            onChange={(e) => setItemWidth(e.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Height (cm)</label>
+                        <input
+                            type="number"
+                            placeholder="Enter height"
+                            value={itemHeight}
+                            onChange={(e) => setItemHeight(e.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Weight per Item(kg)</label>
+                        <input
+                            type="number"
+                            placeholder="Enter weight"
+                            value={itemWeight}
+                            onChange={(e) => setItemWeight(e.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Quantity</label>
+                        <input
+                            type="number"
+                            placeholder="Enter quantity"
+                            value={itemQuantity}
+                            onChange={(e) => setItemQuantity(e.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="">Choose Special Instructions</label>
+                        <select 
+                            name="" 
+                            id=""
+                            onChange={(e)=>handleCheckboxChange(e)}>
+                            <option value="">Special Instructions</option>
+                            <option value="Fragile Items">Fragile Items</option>
+                            <option value="Refrigirated transport">Refrigirated transport</option>
+                            <option value="Oversized item">Oversized item</option>
+                        </select>
+                    </div>
+                    <div className="input-group">
+                    <label htmlFor="">Choose Status</label>
+                    <select 
+                        type="text"
+                        id="status" 
+                        placeholder="Enter status"
+                        value={status}
+                        onChange={(e)=>setStatus(e.target.value)}
+                        required
+                    >
+                        <option value="">Select Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
             </form>
+
             <div  className="action-buttons">
-                <button type='button' onClick ={()=>enterDetails()} className="enter-item-details">
-                    Enter Item Details
-                </button>
-                <button type='button' onClick={()=>callOptionizationPathMap()} className="find-driver">
+                <button 
+                    type='button' 
+                    onClick={()=>callOptionizationPathMap()} 
+                    // disabled={!Order_PlacementId}
+                    className="find-driver">
                     Place order Pickup & Delivery locations
                 </button>                
             </div>
-            {/* <div className="map-display"></div> */}
-            <ItemDetailsModal
-                isOpen={showItemModal}
-                onClose={()=>setShowItemModal(false)}
-                Order_PlacementId={Order_PlacementId}/>
-
                 <OrdersMap 
                     isOpenMap={showOptimizationMap}
                     onCloseMap={()=>setOptimizationMap(false)}
                     Order_PlacementId={Order_PlacementId}
-                />           
+                />  
+
+                {/* Notification */}
+                <div className={`notification ${notification.show ? 'show' : ''}`} id="notification">
+                      <div className="d-flex justify-content-between align-items-start mb-2">
+                        <h6 className="mb-0" style={{ color: 
+                          notification.type === 'error' ? '#dc3545' : 
+                          notification.type === 'success' ? '#28a745' : 
+                          notification.type === 'warning' ? '#ffc107' : '#4a6fdc'
+                        }}>
+                          {notification.type === 'error' ? 'Error' : 
+                          notification.type === 'success' ? 'Success' : 
+                          notification.type === 'warning' ? 'Warning' : 'Information'}
+                        </h6>
+                        <button className="btn-close btn-sm" onClick={() => setNotification({ ...notification, show: false })}></button>
+                      </div>
+                      <div className="notification-body">
+                        {notification.message}
+                      </div>
+                </div>         
         </div>
         
     )
