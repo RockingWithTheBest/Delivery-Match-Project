@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class OrderTrackingController:ControllerBase
     {
         private readonly IOrderTracking orderTracking;
@@ -38,7 +39,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Add-Order-Tracking")]
-        public IActionResult AddOrderTracking(OrderTracking trackinRecord)
+        public IActionResult AddOrderTracking([FromBody] OrderTracking trackinRecord)
         {
             if (trackinRecord == null)
             {
