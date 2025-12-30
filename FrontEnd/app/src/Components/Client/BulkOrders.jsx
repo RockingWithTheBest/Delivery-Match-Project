@@ -3,53 +3,68 @@ import UploadIcon from "../Icons/upload-minimalistic-svgrepo-com.svg"
 import DownFacingUploadIcon from "../Icons/upload-svgrepo-com.svg"
 import ExcelUploadIcon from "../Icons/upload-excel-svgrepo-com.svg"
 import * as XLSX from 'xlsx';
+import { useState, useEffect } from "react";
 import { saveAs } from 'file-saver';
 import './BulkOrders.css'
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import CoordinatesVideo from './CoordinatesMedia/coord.mp4'
 
 const BulkOrders =()=>{
+    //url api
     const url = "https://localhost:7216/api/"
     const {ClientId} = useParams()
 
-     const downloadTemplate = () => {
+    //state variables
+    const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
+
+    const showNotification = (message, type = 'info') => {
+        setNotification({ show: true, message, type });
+        setTimeout(() => {
+          setNotification(prev=>({ ...prev, show: false }));
+        }, 5000);
+    };
+    
+    const downloadTemplate = () => {
         // Create worksheet data with headers
         const worksheetData = [
             {
-                'Pick_Up_Address': '123 Main St, City',
-                'Delivery_Up_Address': '456 Oak Ave, City', 
+                'Pick_Up_Address': 'Kremlin, Moscow',
+                'Pick_Up_Location_Coordinates_latitude_longitude':'55.75100000000001,37.61760000000001',
+                'Delivery_Up_Address': 'Samson Fountain, Saint Petersburg', 
+                'Delivery_Location_Coordinates_latitude_longitude':'59.88520000000001,29.90910000000001',
+                'Status':'Confirmed',
+                'Notes':'Awaiting pickup',
                 'Pick_Up_Contact': '+1234567890',
                 'Delivery_Contact': '+0987654321',
                 'Description': 'Office documents',
-                'Status': 'Pending',
                 'Price': '25.00',
                 'Created_At': '2024-01-15 10:00:00',
                 'Scheduled_At': '2024-01-16 14:30:00',
-                'Completed_On': '',
                 'CustomerId': '1',
                 'Item_Name':'CASIO Print',
                 'Quantity':'1',
-                'Weight_Per_Item':'15.50',
                 'Special_Instructions':'Fragile Items',
                 'DimensionLength':'100cm',
                 'DimensionHeight':'50cm',
                 'DimensionWidth':'20cm'
             },
             {
-                'Pick_Up_Address': '789 Pine Rd, City',
-                'Delivery_Up_Address': '321 Elm St, City',
+                'Pick_Up_Address': 'Temple of all Religions, Kazan',
+                'Pick_Up_Location_Coordinates_latitude_longitude':'55.80060000000001,48.97470000000001',
+                'Delivery_Up_Address': 'Ice Palace, Moscow', 
+                'Delivery_Location_Coordinates_latitude_longitude':'55.76670000000001,37.43520000000001',
+                'Status':'Confirmed',
+                'Notes':'Awaiting pickup',
                 'Pick_Up_Contact': '+1122334455', 
                 'Delivery_Contact': '+5566778899',
                 'Description': 'Electronics equipment',
-                'Status': 'Pending',
                 'Price': '345.50',
                 'Created_At': '2024-01-15 11:30:00',
                 'Scheduled_At': '2024-01-17 09:00:00',
-                'Completed_On': '',
                 'CustomerId': '1',
                 'Item_Name':'Iphone',
                 'Quantity':'2',
-                'Weight_Per_Item':'5.50',
                 'Special_Instructions':'Fragile Items',
                 'DimensionLength':'15cm',
                 'DimensionHeight':'2cm',
@@ -123,38 +138,46 @@ const BulkOrders =()=>{
                 PickUpContact: row.Pick_Up_Contact || '',
                 DeliveryContact: row.Delivery_Contact || '',
                 Description: row.Description || '',
-                Status: row.Status || 'Pending',
+                Status: row.Status || 'Confirmed',
                 Price: parseFloat(row.Price) || 0,
-                CreatedAt: new Date(row.Created_At) || new Date(),
-                ScheduledAt: new Date(row.Scheduled_At) || new Date(),
-                CompletedOn: row.Completed_On ? new Date(row.Completed_On) : null,
+                CreatedAt: new Date(row.Created_At) || new Date().toISOString(),
+                ScheduledAt: new Date(row.Scheduled_At) || new Date().toISOString(),
+                CompletedOn:  null,
                 CustomerId: parseInt(row.CustomerId) || 1,
                 OrderItems:{
                     ItemName:row.Item_Name || '',
                     Quantity:parseInt(row.Quantity) || 1,
-                    WeightPerItem:parseFloat(row.Weight_Per_Item) || '',
-                    SpecialInstructions:row.Special_Instructions,
+                    SpecialInstructions:row.Special_Instructions || '',
                     orderDimension:{
                         Length:parseFloat(row.DimensionLength),
                         Height:parseFloat(row.DimensionHeight),
                         Width:parseFloat(row.DimensionWidth)
                     }
                 },
+                OrderTrackings:{
+                    PickUpLocation: row.Pick_Up_Location_Coordinates_latitude_longitude || "",
+                    DeliveryLocation:row.Delivery_Location_Coordinates_latitude_longitude || "",
+                    Status: row.Status || 'Confirmed',
+                    Notes:row.Notes,
+                    TimeStamps: new Date(row.Created_At) || new Date()
+                }
             };
         });
 
         if(ClientId){
-             try{
+            try{
                 await axios.post(`${url}OrderPlacement/Add-Bulk-OrderPlacement`,validatedOrders,{
                     params:{
                         ClientId:parseInt(ClientId)
                     }
                 })
+                showNotification("Successfully added bulk orders.", 'success')              
             }
             catch(e){
                 console.log("ERROR",e)
+                showNotification("Error occured while adding bulk orders.", 'error')              
             }
-            alert("Successfully added bulk orders.")
+            
         }
         else{
             alert("You are not correctly logged in.")
@@ -162,6 +185,10 @@ const BulkOrders =()=>{
         console.log('Processed orders:', validatedOrders);
     };
 
+    useEffect(() => {
+        
+        window.hideNotification = () => setNotification({ ...notification, show: false });
+    }, [notification]);   
     return(
         <div className="bulk-order-sections">
             <div className="bulk-part-1">
@@ -198,10 +225,27 @@ const BulkOrders =()=>{
                 </div>
                 <p className="file-info">No file chosen</p>
             </div>
+            <div className="bulk-part-6 dotted-border">
+                <p>Watch the video below to collect coordinates</p>
+                <video  controls  width="100%" style={{'display':'none'}}>
+                    <source src="/videos/coordinates.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                <video className="video-info" controls>
+                    <source src={CoordinatesVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                <button 
+                    className="link-to-coordinates-video" 
+                    onClick={()=>window.open("https://www.gps-coordinates.net/", '_blank')}>
+                    Click to link to get coordinates
+                </button>
+            </div>
 
-            <h3>Required Excel Format:</h3>
+            
             <div className="bulk-part-4">
-                <div>
+                <h3>Some simple guidelines:</h3>
+                {/* <div>
                     <h4>Required Columns:</h4>
                     <ul>
                         <li>Pickup Address</li>
@@ -211,16 +255,13 @@ const BulkOrders =()=>{
                         <li>Category</li>
                         <li>Urgency (standard/urgent)</li>
                     </ul>
-                </div>
+                </div> */}
                 <div>
-                    <h4>Supported Categories:</h4>
+                    <h4>Choices of Special Instructions for items: </h4>
                     <ul>
-                        <li>Documents</li>
-                        <li>Furniture</li>
-                        <li>Construction</li>
-                        <li>Electronics</li>
-                        <li>Food & Beverages</li>
-                        <li>Other</li>
+                        <li>Fragile Items</li>
+                        <li>Refrigirated transport</li>
+                        <li>Oversized items</li>
                     </ul>
                 </div>
             </div>
@@ -236,6 +277,25 @@ const BulkOrders =()=>{
                     </ul>
                 </div>
             </div>
+
+            {/* Notification */}
+            <div className={`notificationNew ${notification.show ? 'show' : ''}`} id="notification">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                    <h6 className="mb-0" style={{ color: 
+                      notification.type === 'error' ? '#dc3545' : 
+                      notification.type === 'success' ? '#28a745' : 
+                      notification.type === 'warning' ? '#ffc107' : '#4a6fdc'
+                    }}>
+                        {notification.type === 'error' ? 'Error' : 
+                        notification.type === 'success' ? 'Success' : 
+                        notification.type === 'warning' ? 'Warning' : 'Information'}
+                    </h6>
+                    <button className="btn-close btn-sm" onClick={() => setNotification({ ...notification, show: false })}></button>
+                    </div>
+                    <div className="notification-body">
+                       {notification.message}
+                    </div>
+            </div> 
         </div>
         
     )

@@ -7,10 +7,33 @@
     border-radius: 12px;
     width: 69%;
     background: white;
+    margin-bottom: 40px;
+}
+
+.notificationNew {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1003;
+    max-width: 350px;
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.notificationNew.show {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 img.doc-upload {
     width: 20px;
+    position: relative;
+    top: -7px;
 }
 
 img.down-facing-upload-icon {
@@ -37,9 +60,10 @@ p.multiple-orders-upload {
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-bottom: 12px;
 }
 
-button.bulk-upload-btn {
+button.bulk-upload-btn, button.link-to-coordinates-video {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -48,7 +72,7 @@ button.bulk-upload-btn {
     color: black;
 }
 
-.bulk-part-2 {
+.bulk-part-2, .bulk-part-6 {
     border: 2px dotted #6b95c9;
     border-radius: 8px;
     padding: 20px;
@@ -74,8 +98,15 @@ button.bulk-upload-btn {
     margin-top: -11px;
 }
 
-.bulk-part-4 h3 {
-    font-weight: 500;
+.bulk-part-4 h3, .bulk-part-5 h3  {
+    font-weight: 300;
+    margin-top: 24px;
+    font-size: 21px;
+    margin-bottom: 16px;
+}
+
+.bulk-part-4 h4 {
+    font-size: 17px;
 }
 
 .dotted-border:hover {
@@ -89,7 +120,7 @@ button.bulk-upload-btn {
     margin-bottom: 15px;
 }
 
-.bulk-upload-btn, .upload-btn {
+.bulk-upload-btn, .upload-btn, .link-to-coordinates-video {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -103,10 +134,18 @@ button.bulk-upload-btn {
     transition: background-color 0.3s ease;
 }
 
-.bulk-upload-btn:hover, .upload-btn:hover {
+.bulk-upload-btn:hover, .upload-btn:hover, .link-to-coordinates-video:hover {
     background-color: #0056b3;
 }
 
+video.video-info {
+    width: 85%;
+    border-radius: 9px;
+}
+
+.link-to-coordinates-video{
+    margin-top: 16px;
+}
 .down-facing-upload-icon {
     width: 16px;
     height: 16px;
