@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Inital : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -158,8 +158,8 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PickUpAddress = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    DeliveryUpAddress = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    PickUpAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DeliveryUpAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PickUpContact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     DeliveryContact = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
@@ -272,8 +272,8 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PickUpLocation = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    DeliveryLocation = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    PickUpLocation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DeliveryLocation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     TimeStamps = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -703,7 +703,8 @@ namespace Backend.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OrderTrackings_OrderPlacementId",
                 table: "OrderTrackings",
-                column: "OrderPlacementId");
+                column: "OrderPlacementId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_OrderPlacementId",

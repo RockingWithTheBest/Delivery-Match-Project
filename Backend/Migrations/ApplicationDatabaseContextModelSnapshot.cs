@@ -827,9 +827,6 @@ namespace Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("WeightPerItem")
-                        .HasColumnType("decimal(8,2)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderPlacementId")
@@ -844,8 +841,7 @@ namespace Backend.Migrations
                             ItemName = "Laptop",
                             OrderPlacementId = 1,
                             Quantity = 1,
-                            SpecialInstructions = "Handle with care",
-                            WeightPerItem = 2.50m
+                            SpecialInstructions = "Handle with care"
                         },
                         new
                         {
@@ -853,8 +849,7 @@ namespace Backend.Migrations
                             ItemName = "Mouse",
                             OrderPlacementId = 2,
                             Quantity = 2,
-                            SpecialInstructions = "Wireless",
-                            WeightPerItem = 0.10m
+                            SpecialInstructions = "Wireless"
                         },
                         new
                         {
@@ -862,8 +857,7 @@ namespace Backend.Migrations
                             ItemName = "Keyboard",
                             OrderPlacementId = 3,
                             Quantity = 1,
-                            SpecialInstructions = "Mechanical",
-                            WeightPerItem = 0.75m
+                            SpecialInstructions = "Mechanical"
                         },
                         new
                         {
@@ -871,8 +865,7 @@ namespace Backend.Migrations
                             ItemName = "Desk",
                             OrderPlacementId = 4,
                             Quantity = 1,
-                            SpecialInstructions = "Assembly required",
-                            WeightPerItem = 15.00m
+                            SpecialInstructions = "Assembly required"
                         },
                         new
                         {
@@ -880,8 +873,7 @@ namespace Backend.Migrations
                             ItemName = "Chair",
                             OrderPlacementId = 5,
                             Quantity = 1,
-                            SpecialInstructions = "Comfortable",
-                            WeightPerItem = 5.00m
+                            SpecialInstructions = "Comfortable"
                         },
                         new
                         {
@@ -889,8 +881,7 @@ namespace Backend.Migrations
                             ItemName = "Phone",
                             OrderPlacementId = 6,
                             Quantity = 1,
-                            SpecialInstructions = "New model",
-                            WeightPerItem = 0.20m
+                            SpecialInstructions = "New model"
                         },
                         new
                         {
@@ -898,8 +889,7 @@ namespace Backend.Migrations
                             ItemName = "Charger",
                             OrderPlacementId = 7,
                             Quantity = 1,
-                            SpecialInstructions = "Fast charging",
-                            WeightPerItem = 0.15m
+                            SpecialInstructions = "Fast charging"
                         },
                         new
                         {
@@ -907,8 +897,7 @@ namespace Backend.Migrations
                             ItemName = "Couch",
                             OrderPlacementId = 8,
                             Quantity = 1,
-                            SpecialInstructions = "Delivery on ground floor only",
-                            WeightPerItem = 30.00m
+                            SpecialInstructions = "Delivery on ground floor only"
                         },
                         new
                         {
@@ -916,8 +905,7 @@ namespace Backend.Migrations
                             ItemName = "Coffee Table",
                             OrderPlacementId = 9,
                             Quantity = 1,
-                            SpecialInstructions = "Glass top",
-                            WeightPerItem = 10.00m
+                            SpecialInstructions = "Glass top"
                         },
                         new
                         {
@@ -925,8 +913,7 @@ namespace Backend.Migrations
                             ItemName = "T-Shirt",
                             OrderPlacementId = 10,
                             Quantity = 5,
-                            SpecialInstructions = "Various colors",
-                            WeightPerItem = 0.25m
+                            SpecialInstructions = "Various colors"
                         },
                         new
                         {
@@ -934,8 +921,7 @@ namespace Backend.Migrations
                             ItemName = "Jeans",
                             OrderPlacementId = 11,
                             Quantity = 2,
-                            SpecialInstructions = "Brand: XYZ",
-                            WeightPerItem = 0.75m
+                            SpecialInstructions = "Brand: XYZ"
                         },
                         new
                         {
@@ -943,8 +929,7 @@ namespace Backend.Migrations
                             ItemName = "Fruits Basket",
                             OrderPlacementId = 12,
                             Quantity = 1,
-                            SpecialInstructions = "Seasonal fruits",
-                            WeightPerItem = 3.00m
+                            SpecialInstructions = "Seasonal fruits"
                         },
                         new
                         {
@@ -952,8 +937,7 @@ namespace Backend.Migrations
                             ItemName = "Vegetable Basket",
                             OrderPlacementId = 13,
                             Quantity = 1,
-                            SpecialInstructions = "Organic",
-                            WeightPerItem = 3.00m
+                            SpecialInstructions = "Organic"
                         },
                         new
                         {
@@ -961,8 +945,7 @@ namespace Backend.Migrations
                             ItemName = "Cookbook",
                             OrderPlacementId = 14,
                             Quantity = 1,
-                            SpecialInstructions = "Best seller",
-                            WeightPerItem = 1.00m
+                            SpecialInstructions = "Best seller"
                         },
                         new
                         {
@@ -970,8 +953,7 @@ namespace Backend.Migrations
                             ItemName = "Spices Set",
                             OrderPlacementId = 15,
                             Quantity = 1,
-                            SpecialInstructions = "Variety pack",
-                            WeightPerItem = 0.50m
+                            SpecialInstructions = "Variety pack"
                         },
                         new
                         {
@@ -979,8 +961,7 @@ namespace Backend.Migrations
                             ItemName = "Headphones",
                             OrderPlacementId = 16,
                             Quantity = 1,
-                            SpecialInstructions = "Noise cancelling",
-                            WeightPerItem = 0.30m
+                            SpecialInstructions = "Noise cancelling"
                         },
                         new
                         {
@@ -988,8 +969,7 @@ namespace Backend.Migrations
                             ItemName = "Bluetooth Speaker",
                             OrderPlacementId = 17,
                             Quantity = 1,
-                            SpecialInstructions = "Waterproof",
-                            WeightPerItem = 0.80m
+                            SpecialInstructions = "Waterproof"
                         },
                         new
                         {
@@ -997,8 +977,7 @@ namespace Backend.Migrations
                             ItemName = "Backpack",
                             OrderPlacementId = 18,
                             Quantity = 1,
-                            SpecialInstructions = "For travel",
-                            WeightPerItem = 0.50m
+                            SpecialInstructions = "For travel"
                         },
                         new
                         {
@@ -1006,8 +985,7 @@ namespace Backend.Migrations
                             ItemName = "Water Bottle",
                             OrderPlacementId = 19,
                             Quantity = 1,
-                            SpecialInstructions = "Insulated",
-                            WeightPerItem = 0.20m
+                            SpecialInstructions = "Insulated"
                         },
                         new
                         {
@@ -1015,8 +993,7 @@ namespace Backend.Migrations
                             ItemName = "Camera",
                             OrderPlacementId = 20,
                             Quantity = 1,
-                            SpecialInstructions = "Includes accessories",
-                            WeightPerItem = 1.50m
+                            SpecialInstructions = "Includes accessories"
                         },
                         new
                         {
@@ -1024,8 +1001,7 @@ namespace Backend.Migrations
                             ItemName = "Tripod",
                             OrderPlacementId = 21,
                             Quantity = 1,
-                            SpecialInstructions = "Adjustable height",
-                            WeightPerItem = 1.00m
+                            SpecialInstructions = "Adjustable height"
                         },
                         new
                         {
@@ -1033,8 +1009,7 @@ namespace Backend.Migrations
                             ItemName = "Blanket",
                             OrderPlacementId = 22,
                             Quantity = 1,
-                            SpecialInstructions = "Soft and warm",
-                            WeightPerItem = 1.00m
+                            SpecialInstructions = "Soft and warm"
                         },
                         new
                         {
@@ -1042,8 +1017,7 @@ namespace Backend.Migrations
                             ItemName = "Pillow",
                             OrderPlacementId = 23,
                             Quantity = 2,
-                            SpecialInstructions = "Memory foam",
-                            WeightPerItem = 0.50m
+                            SpecialInstructions = "Memory foam"
                         },
                         new
                         {
@@ -1051,8 +1025,7 @@ namespace Backend.Migrations
                             ItemName = "Rug",
                             OrderPlacementId = 24,
                             Quantity = 1,
-                            SpecialInstructions = "Non-slip",
-                            WeightPerItem = 5.00m
+                            SpecialInstructions = "Non-slip"
                         });
                 });
 
@@ -1080,8 +1053,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("DeliveryUpAddress")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -1093,8 +1066,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("PickUpAddress")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PickUpContact")
                         .IsRequired()
@@ -1491,15 +1464,10 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Latitude")
+                    b.Property<string>("DeliveryLocation")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("Longitude")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Notes")
                         .IsRequired()
@@ -1508,6 +1476,11 @@ namespace Backend.Migrations
 
                     b.Property<int>("OrderPlacementId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PickUpLocation")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -1519,7 +1492,8 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderPlacementId");
+                    b.HasIndex("OrderPlacementId")
+                        .IsUnique();
 
                     b.ToTable("OrderTrackings");
 
@@ -1527,240 +1501,240 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Picked up from warehouse",
                             OrderPlacementId = 1,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Delivered to customer",
                             OrderPlacementId = 2,
+                            PickUpLocation = "34.0522",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "On the way",
                             OrderPlacementId = 3,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Received by customer",
                             OrderPlacementId = 4,
+                            PickUpLocation = "34.0522",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Awaiting pickup",
                             OrderPlacementId = 5,
+                            PickUpLocation = "34.0522",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Picked up",
                             OrderPlacementId = 6,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "On the way to destination",
                             OrderPlacementId = 7,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Delivered successfully",
                             OrderPlacementId = 8,
+                            PickUpLocation = "34.0522",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Waiting for dispatch",
                             OrderPlacementId = 9,
+                            PickUpLocation = "34.0522",
                             Status = "In Warehouse",
                             TimeStamps = new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "On route to delivery",
                             OrderPlacementId = 10,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 11,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Awaiting confirmation",
                             OrderPlacementId = 11,
+                            PickUpLocation = "34.0522",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 12,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Picked up",
                             OrderPlacementId = 12,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 13,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "On the way",
                             OrderPlacementId = 13,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 14,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Delivered to customer",
                             OrderPlacementId = 14,
+                            PickUpLocation = "34.0522",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 15,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "On the way",
                             OrderPlacementId = 15,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 11, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 16,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Received by customer",
                             OrderPlacementId = 16,
+                            PickUpLocation = "34.0522",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 17,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Awaiting pickup",
                             OrderPlacementId = 17,
+                            PickUpLocation = "34.0522",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 18,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Picked up",
                             OrderPlacementId = 18,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 19,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "On the way to destination",
                             OrderPlacementId = 19,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 20,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Delivered successfully",
                             OrderPlacementId = 20,
+                            PickUpLocation = "34.0522",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 21,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Waiting for dispatch",
                             OrderPlacementId = 21,
+                            PickUpLocation = "34.0522",
                             Status = "In Warehouse",
                             TimeStamps = new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 22,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "On route to delivery",
                             OrderPlacementId = 22,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 23,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Awaiting confirmation",
                             OrderPlacementId = 23,
+                            PickUpLocation = "34.0522",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 24,
-                            Latitude = "34.0522",
-                            Longitude = "-118.2437",
+                            DeliveryLocation = "-118.2437",
                             Notes = "Picked up",
                             OrderPlacementId = 24,
+                            PickUpLocation = "34.0522",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -2748,8 +2722,8 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.OrderTracking", b =>
                 {
                     b.HasOne("Backend.Models.OrderPlacement", "OrderPlacement")
-                        .WithMany()
-                        .HasForeignKey("OrderPlacementId")
+                        .WithOne("OrderTrackings")
+                        .HasForeignKey("Backend.Models.OrderTracking", "OrderPlacementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -2813,6 +2787,8 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.OrderPlacement", b =>
                 {
                     b.Navigation("OrderItems");
+
+                    b.Navigation("OrderTrackings");
                 });
 
             modelBuilder.Entity("Backend.Models.User", b =>
