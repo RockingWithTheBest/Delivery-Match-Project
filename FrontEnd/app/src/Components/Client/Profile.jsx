@@ -14,7 +14,7 @@ const Profile=()=>{
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [activeNav, setActiveNav] = useState('Profile');
-    const [personal, setPersonal] = useState(false)
+    const [personal, setPersonal] = useState(true)
     const [address, setAddress] = useState(false)
     const [payment, setPayement] = useState(false)
     const [preferences, setPreferences] = useState(false)
@@ -100,7 +100,7 @@ const Profile=()=>{
         setAddress(false)
     }
     const handleAddress = () =>{
-        setActiveNav('New Booking');
+        setActiveNav('Address');
         setAddress(true)
         setPersonal(false)
     } 
@@ -135,10 +135,10 @@ const Profile=()=>{
                         Personal
                     </nav>
                     <nav 
-                        className={activeNav === 'New Booking' ? 'active' : ''} 
+                        className={activeNav === 'Address' ? 'active' : ''} 
                         onClick={()=>handleAddress()}
                     >
-                        {activeNav === 'New Booking' && <span className="nav-indicator"></span>}
+                        {activeNav === 'Address' && <span className="nav-indicator"></span>}
                         Address
                     </nav>
                     <nav 

@@ -90,7 +90,7 @@ const PersonalInfo=({customerDetails})=>{
         setBusinessTaxIdentification(customerDetails.Customer_Tax_Identification || "")
     },[customerDetails])
     return(
-        <div>                                         
+        <div className="personal-component">                                         
             <form onSubmit={(e)=>e.preventDefault()} action="">
                            
                 <div className="info-btn">

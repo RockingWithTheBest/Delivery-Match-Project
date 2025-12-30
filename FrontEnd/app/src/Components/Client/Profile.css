@@ -9,6 +9,12 @@
     justify-content: space-between;
 }
 
+.personal-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .client-profile {
     width: 96%;
     display: flex;
@@ -104,6 +110,8 @@
 .two-two-display {
     display: flex;
     gap: 138px;
+    margin-bottom: 19px;
+    margin-top: 11px;
 }
 
 .two-two-display input {
@@ -119,6 +127,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 19px;
 }
 
 .input-personal label {
@@ -157,7 +166,7 @@
 }
 
 .seperation-zone form {
-    width: 100%;
+    width: 108%;
     border: 2px solid #8080805c;
     border-radius: 10px;
     padding: 25px;
@@ -170,6 +179,8 @@
 }
 img.personal-info , img.business-info {
     width: 20px;
+    position: relative;
+    top: -10px;
 }
 
 /* Responsive design */
