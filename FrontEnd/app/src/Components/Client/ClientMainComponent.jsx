@@ -7,7 +7,7 @@ import Profile from './Profile'
 import NewOrder from './NewOrder'
 import Notifications from './Notification'
 import TrackOrders from './TrackOrder'
-import FindDriver from './FindDrivers'
+import OrderViewOnMap from './OrderViewOnMap'
 import BulkOrders from './BulkOrders'
 
 
@@ -15,11 +15,12 @@ const ClientMainComponent=()=>{
     const navigate = useNavigate()
     const [activateActiveOrders, setActiveOrders] = useState(false);
     const [trackOrder, setTrackOrder] = useState(false);
-     const [findDriver, setFindDriver] = useState(false);
+    const [findDriver, setFindDriver] = useState(false);
     const [notifications, setNotifications] = useState(false);
-    const [profile, setProfile] = useState(false);
+    const [profile, setProfile] = useState(true);
     const [neworder, setNewOrder] = useState(false);
     const [bulkorders, setBulkOrders] = useState(false);
+    const [activeNav, setActiveNav] = useState('Profile');
 
 
     const LogOut=()=>{
@@ -27,6 +28,7 @@ const ClientMainComponent=()=>{
     }
 
     const handleProfile=()=>{
+        setActiveNav('Profile');
         setProfile(true)
         setTrackOrder(false)
         setFindDriver(false)
@@ -35,6 +37,7 @@ const ClientMainComponent=()=>{
         setBulkOrders(false)  
     }
     const handleNewOrder=()=>{
+        setActiveNav('New Booking');
         setNewOrder(true)
         setProfile(false)
         setTrackOrder(false)
@@ -43,6 +46,7 @@ const ClientMainComponent=()=>{
         setBulkOrders(false)       
     }
     const handleTrackOrders=()=>{
+        setActiveNav('Track Orders');
         setTrackOrder(true)
         setNewOrder(false)
         setProfile(false)        
@@ -50,7 +54,8 @@ const ClientMainComponent=()=>{
         setNotifications(false)  
         setBulkOrders(false)  
     }
-    const handleFindDrivers=()=>{
+    const handleOrderMapView=()=>{
+        setActiveNav('Order Map View');
         setFindDriver(true)
         setTrackOrder(false)
         setNewOrder(false)
@@ -59,6 +64,7 @@ const ClientMainComponent=()=>{
         setBulkOrders(false)   
     }
     const handleNotification=()=>{
+        setActiveNav('Notification');
         setNotifications(true) 
         setFindDriver(false)
         setTrackOrder(false)
@@ -67,6 +73,7 @@ const ClientMainComponent=()=>{
         setBulkOrders(false)            
     }
     const handleBulkOrders=()=>{
+        setActiveNav('Bulk Upload');
         setBulkOrders(true)
         setNotifications(false) 
         setFindDriver(false)
@@ -96,13 +103,47 @@ const ClientMainComponent=()=>{
                 
             </div>
             <div className='sub-nav'>
-                <nav onClick={()=>handleProfile()}>Profile</nav>
-                <nav onClick={()=>handleNewOrder()}>New Booking</nav>
-                   <nav onClick={()=>handleBulkOrders()}>Bulk Upload</nav>
-                <nav onClick={()=>handleTrackOrders()}>Track Orders</nav>
-                <nav onClick={()=>handleFindDrivers()}>Find Drivers</nav>
-                {/* <nav onClick={()=>handleNotification()}>Notification</nav> */}
+                <nav 
+                    className={activeNav === 'Profile' ? 'active' : ''} 
+                    onClick={()=>handleProfile()}
+                >
+                    {activeNav === 'Profile' && <span className="nav-indicator"></span>}
+                    Profile
+                </nav>
+
+                <nav 
+                    className={activeNav === 'New Booking' ? 'active' : ''} 
+                    onClick={()=>handleNewOrder()}
+                >
+                    {activeNav === 'New Booking' && <span className="nav-indicator"></span>}
+                    New Booking
+                </nav>
+
+                <nav 
+                    className={activeNav === 'Bulk Upload' ? 'active' : ''} 
+                    onClick={()=>handleBulkOrders()}
+                >
+                    {activeNav === 'Bulk Upload' && <span className="nav-indicator"></span>}
+                    Bulk Upload
+                </nav>
+
+                <nav 
+                    className={activeNav === 'Track Orders' ? 'active' : ''}
+                    onClick={()=>handleTrackOrders()}
+                >
+                    {activeNav === 'Track Orders' && <span className="nav-indicator"></span>}
+                    Track Orders
+                </nav>
+
+                <nav 
+                    className={activeNav === 'Order Map View' ? 'active' : ''}
+                    onClick={()=>handleOrderMapView()}
+                >
+                    {activeNav === 'Order Map View' && <span className="nav-indicator"></span>}
+                    Order Map View
+                </nav>
             </div>
+            
             {neworder && (
                 <NewOrder/>
             )}
@@ -116,7 +157,7 @@ const ClientMainComponent=()=>{
                 <TrackOrders/>
             )}
             {findDriver&&(
-                <FindDriver/>
+                <OrderViewOnMap/>
             )}
              {bulkorders&&(
                 <BulkOrders/>
