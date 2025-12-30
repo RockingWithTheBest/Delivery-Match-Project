@@ -72,12 +72,12 @@ namespace Backend.Repository.Implementation
         }
         public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByCustomerId(int CustomerId)
         {
-            return databaseContext.OrderPlacements.Where(x=>x.Id==CustomerId).ToList();
+            return databaseContext.OrderPlacements.Where(x=>x.CustomerId==CustomerId).ToList();
         }
 
         public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByDriverId(int DriverId)
         {
-            return databaseContext.OrderPlacements.Where(x => x.Id == DriverId).ToList();
+            return databaseContext.OrderPlacements.Where(x => x.DriverId == DriverId).ToList();
         }
         public OrderPlacement GetSingleRecord(int Id)
         {
