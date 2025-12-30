@@ -8,10 +8,10 @@ namespace Backend.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [StringLength(40)]
+        [StringLength(100)]
         public string PickUpAddress { get; set; }
         [Required]
-        [StringLength(40)]
+        [StringLength(100)]
         public string DeliveryUpAddress { get; set; }
         [Required]
         [StringLength(40)]
@@ -39,5 +39,6 @@ namespace Backend.Models
         public virtual Customer? Customer { get; set; }
         public virtual Driver? Driver { get; set; }
         public virtual OrderItems? OrderItems { get; set; }
+        public virtual OrderTracking? OrderTrackings { get; set; }
     }
 }
