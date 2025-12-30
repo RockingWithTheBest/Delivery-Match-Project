@@ -329,10 +329,6 @@
           "SelectedChildIndex": 63,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 78,
               "Title": "Backend.csproj",
@@ -424,6 +420,10 @@
               "IsPinned": true
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "20251229094416_Initial.cs",
@@ -433,8 +433,7 @@
               "RelativeToolTip": "Migrations\\20251229094416_Initial.cs",
               "ViewState": "AgIAAJUAAAAAAAAAAAAAAJsAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T09:44:16.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-29T09:44:16.531Z"
             },
             {
               "$type": "Document",
@@ -719,8 +718,7 @@
               "RelativeToolTip": "Repository\\Interface\\IOrderPlacement.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T09:47:18.293Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-16T09:47:18.293Z"
             },
             {
               "$type": "Document",

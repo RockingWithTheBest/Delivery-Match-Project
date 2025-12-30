@@ -11,7 +11,6 @@ const NewOrder=()=>{
     const [deliveryAddress, setDeliverAddress]=useState(null)
     const [pickupContact, setPickUpContact]=useState(null)
     const [deliveryContact, setDeliveryContact]=useState(null)
-    const [weight, setWeight]=useState(null)
     const [volume, setVolume]=useState(null)
     const [desciption, setDescription]=useState(null)
     const [status, setStatus]=useState("")
@@ -65,7 +64,6 @@ const NewOrder=()=>{
                 OrderItems:{
                     ItemName:itemName,
                     Quantity:parseInt(itemQuantity),
-                    // WeightPerItem:parseFloat(itemWeight),
                     SpecialInstructions:specialInstructions,
                     orderDimension:{
                         Length:parseFloat(itemLength),
@@ -89,7 +87,6 @@ const NewOrder=()=>{
                 setScheduledForDeliveryOn("")
                 setStatus("")
                 setVolume("")
-                setWeight("")
                 setItemHeight("")
                 setItemLength("")
                 setItemName("")
@@ -321,7 +318,7 @@ const NewOrder=()=>{
                 />  
 
                 {/* Notification */}
-                <div className={`notification ${notification.show ? 'show' : ''}`} id="notification">
+                <div className={`notificationNew ${notification.show ? 'show' : ''}`} id="notification">
                       <div className="d-flex justify-content-between align-items-start mb-2">
                         <h6 className="mb-0" style={{ color: 
                           notification.type === 'error' ? '#dc3545' : 
