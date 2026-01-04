@@ -34,15 +34,12 @@ const Vehicle =({driverDetails})=>{
         if(disableTrue==true){
             setDisableToTrue(false)
             setBtnName("Save Profile")
-            //putVehicle()
-            
         }
         else if(disableTrue == false){
             setDisableToTrue(true)
             setBtnName("Edit Profile")
             putVehicle()
         }
-        // console.log("VEH",driverDetails)
     }
     
     const putVehicle=async()=>{

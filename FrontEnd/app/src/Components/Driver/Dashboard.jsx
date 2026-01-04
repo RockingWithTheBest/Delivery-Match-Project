@@ -158,6 +158,7 @@ const Dashboard = () => {
                         DriverId:parseInt(DriverId)
                     }
             })
+            console.log("response", response.data)
             setVehicle(response.data)
         }
         catch(e){
@@ -297,7 +298,11 @@ const Dashboard = () => {
                             <div className="vehicle-info-grid">
                                 <div className="info-item">
                                     <span className="label">License Plate:</span>
-                                    <span className="value">{vehicle.License_Plate}</span>
+                                    <span className="value">{vehicle.LicensePlate}</span>
+                                </div>
+                                <div className="info-item">
+                                    <span className="label">Brand:</span>
+                                    <span className="value">{vehicle.Brand}</span>
                                 </div>
                                 <div className="info-item">
                                     <span className="label">Color:</span>
@@ -305,15 +310,15 @@ const Dashboard = () => {
                                 </div>
                                 <div className="info-item">
                                     <span className="label">Max Weight:</span>
-                                    <span className="value">{vehicle.Max_Weight} kg</span>
+                                    <span className="value">{vehicle.MaxWeight} kg</span>
                                 </div>
                                 <div className="info-item">
                                     <span className="label">Max Volume:</span>
-                                    <span className="value">{vehicle.Max_Volume} m³</span>
+                                    <span className="value">{(vehicle.Height * vehicle.Length * vehicle.Width)/1000000} m³</span>
                                 </div>
                                 <div className="info-item">
                                     <span className="label">Year:</span>
-                                    <span className="value">{new Date(vehicle.Make_Year).getFullYear()}</span>
+                                    <span className="value">{new Date(vehicle.MakeYear).getFullYear()}</span>
                                 </div>
                             </div>
                         </div>
