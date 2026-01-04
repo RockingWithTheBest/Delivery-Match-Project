@@ -8,7 +8,7 @@ import { saveAs } from 'file-saver';
 import './BulkOrders.css'
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import CoordinatesVideo from './CoordinatesMedia/coord.mp4'
+import CoordinatesVideo from './CoordinatesMedia/actual.mp4'
 
 const BulkOrders =()=>{
     //url api
@@ -41,7 +41,7 @@ const BulkOrders =()=>{
                 'Price': '25.00',
                 'Created_At': '2024-01-15 10:00:00',
                 'Scheduled_At': '2024-01-16 14:30:00',
-                'CustomerId': '1',
+                'CustomerId': ClientId,
                 'Item_Name':'CASIO Print',
                 'Quantity':'1',
                 'Special_Instructions':'Fragile Items',
@@ -62,7 +62,7 @@ const BulkOrders =()=>{
                 'Price': '345.50',
                 'Created_At': '2024-01-15 11:30:00',
                 'Scheduled_At': '2024-01-17 09:00:00',
-                'CustomerId': '1',
+                'CustomerId': ClientId,
                 'Item_Name':'Iphone',
                 'Quantity':'2',
                 'Special_Instructions':'Fragile Items',
