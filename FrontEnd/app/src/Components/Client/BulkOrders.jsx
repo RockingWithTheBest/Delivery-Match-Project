@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { saveAs } from 'file-saver';
 import './BulkOrders.css'
 import axios from "axios";
+import { format } from "date-fns";
 import { useParams } from "react-router-dom";
 import CoordinatesVideo from './CoordinatesMedia/actual.mp4'
 
@@ -39,9 +40,8 @@ const BulkOrders =()=>{
                 'Delivery_Contact': '+0987654321',
                 'Description': 'Office documents',
                 'Price': '25.00',
-                'Created_At': '2024-01-15 10:00:00',
                 'Scheduled_At': '2024-01-16 14:30:00',
-                'CustomerId': ClientId,
+                'Weight_Per_Item' : '60.00m',
                 'Item_Name':'CASIO Print',
                 'Quantity':'1',
                 'Special_Instructions':'Fragile Items',
@@ -60,9 +60,8 @@ const BulkOrders =()=>{
                 'Delivery_Contact': '+5566778899',
                 'Description': 'Electronics equipment',
                 'Price': '345.50',
-                'Created_At': '2024-01-15 11:30:00',
                 'Scheduled_At': '2024-01-17 09:00:00',
-                'CustomerId': ClientId,
+                'Weight_Per_Item' : '60.00m',
                 'Item_Name':'Iphone',
                 'Quantity':'2',
                 'Special_Instructions':'Fragile Items',
@@ -129,6 +128,9 @@ const BulkOrders =()=>{
     };
 
     const processUploadedData = async (data) => {
+        const currentDateTime = new Date();
+        const formattedDateTime = format(currentDateTime, 'yyyy-MM-dd HH:mm:ss')
+        
         // Validate and process each row
         const validatedOrders = data.map((row, index) => {
             // Add validation logic here
@@ -140,14 +142,15 @@ const BulkOrders =()=>{
                 Description: row.Description || '',
                 Status: row.Status || 'Confirmed',
                 Price: parseFloat(row.Price) || 0,
-                CreatedAt: new Date(row.Created_At) || new Date().toISOString(),
+                CreatedAt: `${formattedDateTime}.0000000`,
                 ScheduledAt: new Date(row.Scheduled_At) || new Date().toISOString(),
                 CompletedOn:  null,
-                CustomerId: parseInt(row.CustomerId) || 1,
+                CustomerId: parseInt(ClientId) || 1,
                 OrderItems:{
                     ItemName:row.Item_Name || '',
                     Quantity:parseInt(row.Quantity) || 1,
                     SpecialInstructions:row.Special_Instructions || '',
+                    WeightPerItem : parseFloat(row.Weight_Per_Item) || '',
                     orderDimension:{
                         Length:parseFloat(row.DimensionLength),
                         Height:parseFloat(row.DimensionHeight),
@@ -159,18 +162,20 @@ const BulkOrders =()=>{
                     DeliveryLocation:row.Delivery_Location_Coordinates_latitude_longitude || "",
                     Status: row.Status || 'Confirmed',
                     Notes:row.Notes,
-                    TimeStamps: new Date(row.Created_At) || new Date()
+                    TimeStamps: `${formattedDateTime}.0000000`
                 }
             };
         });
 
         if(ClientId){
             try{
+                console.log("validatedOrders",validatedOrders)
                 await axios.post(`${url}OrderPlacement/Add-Bulk-OrderPlacement`,validatedOrders,{
                     params:{
                         ClientId:parseInt(ClientId)
                     }
                 })
+                
                 showNotification("Successfully added bulk orders.", 'success')              
             }
             catch(e){

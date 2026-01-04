@@ -1851,6 +1851,11 @@
         "IsRequired": false
       },
       {
+        "Name": "OrderPlacement.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
         "Name": "OrderPlacement.OrderItems.SpecialInstructions",
         "Type": "System.String",
         "IsRequired": false
@@ -1898,6 +1903,11 @@
       {
         "Name": "OrderPlacement.OrderItems.OrderDimension.OrderItems.Quantity",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
         "IsRequired": false
       },
       {
@@ -5041,6 +5051,11 @@
         "IsRequired": false
       },
       {
+        "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
         "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.SpecialInstructions",
         "Type": "System.String",
         "IsRequired": false
@@ -5088,6 +5103,11 @@
       {
         "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.OrderDimension.OrderItems.Quantity",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
         "IsRequired": false
       },
       {
@@ -7263,6 +7283,11 @@
         "IsRequired": false
       },
       {
+        "Name": "OrderPlacement.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
         "Name": "OrderPlacement.OrderItems.SpecialInstructions",
         "Type": "System.String",
         "IsRequired": false
@@ -7310,6 +7335,11 @@
       {
         "Name": "OrderPlacement.OrderItems.OrderDimension.OrderItems.Quantity",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
         "IsRequired": false
       },
       {
@@ -10453,6 +10483,11 @@
         "IsRequired": false
       },
       {
+        "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
         "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.SpecialInstructions",
         "Type": "System.String",
         "IsRequired": false
@@ -10500,6 +10535,11 @@
       {
         "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.OrderDimension.OrderItems.Quantity",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+        "Type": "System.Decimal",
         "IsRequired": false
       },
       {

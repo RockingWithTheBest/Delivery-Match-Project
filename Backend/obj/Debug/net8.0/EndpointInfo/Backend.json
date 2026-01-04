@@ -3322,6 +3322,15 @@
             }
           },
           {
+            "name": "OrderPlacement.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
             "name": "OrderPlacement.OrderItems.SpecialInstructions",
             "in": "query",
             "required": true,
@@ -3409,6 +3418,15 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
             }
           },
           {
@@ -9032,6 +9050,15 @@
             }
           },
           {
+            "name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
             "name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.SpecialInstructions",
             "in": "query",
             "required": true,
@@ -9119,6 +9146,15 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
             }
           },
           {
@@ -12961,6 +12997,15 @@
             }
           },
           {
+            "name": "OrderPlacement.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
             "name": "OrderPlacement.OrderItems.SpecialInstructions",
             "in": "query",
             "required": true,
@@ -13048,6 +13093,15 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
             }
           },
           {
@@ -18671,6 +18725,15 @@
             }
           },
           {
+            "name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
             "name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.SpecialInstructions",
             "in": "query",
             "required": true,
@@ -18758,6 +18821,15 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "OrderPlacement.OrderTrackings.OrderPlacement.OrderItems.OrderDimension.OrderItems.WeightPerItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
             }
           },
           {
@@ -21732,7 +21804,8 @@
           "itemName",
           "orderPlacementId",
           "quantity",
-          "specialInstructions"
+          "specialInstructions",
+          "weightPerItem"
         ],
         "type": "object",
         "properties": {
@@ -21748,6 +21821,10 @@
           "quantity": {
             "type": "integer",
             "format": "int32"
+          },
+          "weightPerItem": {
+            "type": "number",
+            "format": "double"
           },
           "specialInstructions": {
             "maxLength": 50,

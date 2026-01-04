@@ -3,6 +3,7 @@ import './NewOrder.css'
 import { useParams } from "react-router-dom";
 // import ItemDetailsModal from './ItemDetailsModal'
 import OrdersMap from "./OrdersMap";
+import { format } from "date-fns";
 import axios from "axios";
 
 const NewOrder=()=>{
@@ -49,6 +50,9 @@ const NewOrder=()=>{
       };
 
     const handleSubmit = async()=>{
+        const currentDateTime = new Date();
+        const formattedDateTime = format(currentDateTime, 'yyyy-MM-dd HH:mm:ss')
+
         try{
             const orderPlacements={
                 PickUpAddress:pickupAddress,
@@ -58,13 +62,14 @@ const NewOrder=()=>{
                 Description:desciption,
                 Status:status,
                 Price:price,
-                CreatedAt:createdAt,
+                CreatedAt:`${formattedDateTime}.0000000`,
                 ScheduledAt:scheduledForDeliveryOn,
                 CustomerId:ClientId,
                 OrderItems:{
                     ItemName:itemName,
                     Quantity:parseInt(itemQuantity),
                     SpecialInstructions:specialInstructions,
+                    WeightPerItem:itemWeight,
                     orderDimension:{
                         Length:parseFloat(itemLength),
                         Height:parseFloat(itemHeight),
@@ -200,7 +205,7 @@ const NewOrder=()=>{
                             required
                         />
                     </div>
-                    <div className="input-group">
+                    {/* <div className="input-group">
                         <label htmlFor="">Order Place At</label>
                         <input 
                             type="datetime-local" 
@@ -210,7 +215,7 @@ const NewOrder=()=>{
                             onChange={(e)=>setCreatedAt(e.target.value)}
                             required
                         />
-                    </div>
+                    </div> */}
                     <div className="input-group">
                         <label htmlFor="">Scheduled To Be Delivered On</label>
                         <input 
@@ -266,6 +271,15 @@ const NewOrder=()=>{
                             placeholder="Enter quantity"
                             value={itemQuantity}
                             onChange={(e) => setItemQuantity(e.target.value)}
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Weight</label>
+                        <input
+                            type="number"
+                            placeholder="Enter weight"
+                            value={itemWeight}
+                            onChange={(e) => setItemWeight(e.target.value)}
                         />
                     </div>
                     <div className="input-group">

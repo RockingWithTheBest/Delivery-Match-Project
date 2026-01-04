@@ -14,6 +14,9 @@ namespace Backend.Models
         [Required]
         public int Quantity {  get; set; }
         [Required]
+        [Column(TypeName = "decimal(8,2)")]
+        public decimal WeightPerItem { get; set; }
+        [Required]
         [StringLength(50)]
         public string SpecialInstructions { get; set; }
         [Required]
