@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     width: 88vw;
+    margin-bottom: 232px;
 }
 
 .dashboard-status h2 {

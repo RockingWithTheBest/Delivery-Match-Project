@@ -13,13 +13,19 @@ const Dashboard = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [driverRecord, setDriverRecord] = useState('')
     const url = "https://localhost:7216/api"
+    const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
+    const showNotification = (message, type = 'info') => {
+        setNotification({ show: true, message, type });
+        setTimeout(() => {
+          setNotification(prev=>({ ...prev, show: false }));
+        }, 5000);
+    };
 
     const handleToggle = () => {
         setIsActive(!isActive);
-        // Here you can also make an API call to update the driver status in your backend
-        console.log(`Driver status changed to: ${!isActive ? 'Active' : 'Inactive'}`);
         setAvailableBool(!isActive)
     };
+
     const handleDriverRecord=async()=>{
         try{
             const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
@@ -34,6 +40,21 @@ const Dashboard = () => {
        
         }
     }
+    
+    const setOrderStatus = async()=>{
+        try{
+            const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
+                params:{
+                    Id:parseInt(DriverId)
+                }
+            })
+            setIsActive(response.data.IsAvailable)
+        }
+        catch(error){
+            console.error('Error updating:', error.message);
+        }
+    }
+    
     const setAvailableBool=async(avail_parameter)=>{
         try{
             const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
@@ -43,13 +64,13 @@ const Dashboard = () => {
             })
 
             const driver = {
-                Drivers_License:response.data.DriversLicense,
-                License_Expiry:response.data.LicenseExpiry,
-                Is_Verified:response.data.IsVerified,
-                Is_Available:avail_parameter,
+                DriversLicense:response.data.DriversLicense,
+                LicenseExpiry:response.data.LicenseExpiry,
+                IsVerified:response.data.IsVerified,
+                IsAvailable:avail_parameter,
                 Rating:response.data.Rating,
-                Completion_Rate:response.data.CompletionRate,
-                Total_Earnings:response.data.TotalEarnings,
+                CompletionRate:response.data.CompletionRate,
+                TotalEarnings:response.data.TotalEarnings,
                 UserId:response.data.UserId,
             }
             setDriverRecord(driver)
@@ -58,10 +79,16 @@ const Dashboard = () => {
                     Id:parseInt(DriverId)
                 }
             })
+            if(avail_parameter){
+                showNotification("Driver changed work status to Active", 'success') 
+            }
+            else{
+                showNotification("Driver changed work status to Inactive", 'success') 
+            }
+                                  
         }
         catch (error) {
-            console.error('Upload failed:', error);
-            alert('Failed to upload image');
+            console.error('Error updating:', error.message);    
         }
     }
 
@@ -148,7 +175,13 @@ const Dashboard = () => {
 
     useEffect(()=>{
         handleDriverRecord()
+        setOrderStatus()
     },[DriverId])
+
+    useEffect(() => {    
+        window.hideNotification = () => setNotification({ ...notification, show: false });
+    }, [notification]);   
+
     return (
         <div className='dashboard-component'>
             <div className="dashboard-status">
@@ -189,7 +222,7 @@ const Dashboard = () => {
                 </div>
                  <div className="driver-license">
                     {driverRecord?(
-                        <p><i className="icon-license">🪪</i> License Id - {driverRecord.Drivers_License}</p>
+                        <p><i className="icon-license">🪪</i> License Id - {driverRecord.DriversLicense}</p>
                     ):
                         <p>The driver does have a License</p>}                    
                 </div>
@@ -293,7 +326,25 @@ const Dashboard = () => {
                             </button>
                         </div>
                     )}
-                </div>
+            </div>
+            {/* Notification */}
+            <div className={`notificationNew ${notification.show ? 'show' : ''}`} id="notification">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                    <h6 className="mb-0" style={{ color: 
+                      notification.type === 'error' ? '#dc3545' : 
+                      notification.type === 'success' ? '#28a745' : 
+                      notification.type === 'warning' ? '#ffc107' : '#4a6fdc'
+                    }}>
+                        {notification.type === 'error' ? 'Error' : 
+                        notification.type === 'success' ? 'Success' : 
+                        notification.type === 'warning' ? 'Warning' : 'Information'}
+                    </h6>
+                    <button className="btn-close btn-sm" onClick={() => setNotification({ ...notification, show: false })}></button>
+                    </div>
+                    <div className="notification-body">
+                       {notification.message}
+                    </div>
+            </div> 
             </div>
         );
 };
