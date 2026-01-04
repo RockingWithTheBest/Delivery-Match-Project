@@ -158,7 +158,6 @@ const Dashboard = () => {
                         DriverId:parseInt(DriverId)
                     }
             })
-            console.log("response", response.data)
             setVehicle(response.data)
         }
         catch(e){
