@@ -9,13 +9,13 @@ namespace Backend.AdditionalClasses
         [Key]
         public int Id { get; set; }
         [Required]
-        [Column(TypeName = "decimal(5,2)")]
+        [Column(TypeName = "decimal(8,2)")]
         public decimal Length { get; set; }
         [Required]
-        [Column(TypeName = "decimal(5,2)")]
+        [Column(TypeName = "decimal(8,2)")]
         public decimal Height { get; set; }
         [Required]
-        [Column(TypeName = "decimal(5,2)")]
+        [Column(TypeName = "decimal(8,2)")]
         public decimal Width { get; set; }
 
         [Required]

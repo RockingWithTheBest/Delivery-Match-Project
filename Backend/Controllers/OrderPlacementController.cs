@@ -140,7 +140,7 @@ namespace Backend.Controllers
             }
             else if (orderPlacementRecord == null)
             {
-                return BadRequest("Some of the new record values you provided are of an invalid formatyour provided");
+                return BadRequest("Some of the new record values you provided are of an invalid format");
             }
             else
             {
