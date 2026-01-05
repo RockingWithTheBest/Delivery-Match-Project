@@ -10,20 +10,23 @@ const ActiveOrders=()=>{
     }
 
     return(
-        <div className='active-order-sack'>
-            <button onClick={()=>openSack()} className='sack-toggle-btn'>
-                    {sack ? 'Close Order Sack' : 'Activate Orders'}
-                    <span className={`arrow ${sack ? 'down' : 'up'}`}>
-                    {sack ? '▼' : '▲'}
-                    </span>
-            </button>
-            <div className={`knapsack-container ${sack ? 'open':'closed'}`}>
-                <Knapsack/>
+        <div className='active-order-comp'>
+            <div className='active-order-sack'>
+                <button onClick={()=>openSack()} className='sack-toggle-btn'>
+                        {sack ? 'Close Order Sack' : 'Activate Orders'}
+                        <span className={`arrow ${sack ? 'down' : 'up'}`}>
+                        {sack ? '▼' : '▲'}
+                        </span>
+                </button>
+                <div className={`knapsack-container ${sack ? 'open':'closed'}`}>
+                    <Knapsack/>
+                </div>
             </div>
             <div className="view-order-timeline">
                 <OrderTimeLineView/>                
             </div>
         </div>
+
     )
 }
 export default ActiveOrders

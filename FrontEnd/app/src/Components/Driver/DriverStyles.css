@@ -216,29 +216,6 @@ p.driver-tag {
     font-weight: bold;
 }
 
-/* Order Content */
-.order-content {
-    top: -26px;
-    text-align: center;
-    position: relative;
-}
-
-.order-content p {
-    margin: 5px 0;
-}
-
-.customer-name {
-    font-weight: 600;
-    color: #333;
-}
-
-.order-status {
-    font-style: italic;
-}
-
-.order-address {
-    font-size: 0.9em;
-}
 
 /* Selected order specific styles */
 .order-item.selected .order-header h3 {

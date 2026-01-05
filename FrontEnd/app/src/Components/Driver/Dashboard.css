@@ -58,8 +58,10 @@
 /* Toggle Switch Styles */
 .toggle-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 .toggle-label {
@@ -67,6 +69,7 @@
     display: inline-block;
     width: 60px;
     height: 30px;
+    margin-left: 10px;
 }
 
 .toggle-input {
@@ -177,11 +180,7 @@
     line-height: 1.4;
 }
 
-/* Toggle Switch Styles */
-.toggle-container {
-    display: flex;
-    align-items: center;
-}
+
 
 .toggle-label {
     position: relative;

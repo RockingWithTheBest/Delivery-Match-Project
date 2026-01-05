@@ -1,0 +1,42 @@
+span.ordser-status {
+    border: 2px solid green;
+    background-color: #cae9ca;
+    color: #6d757d;
+    font-size: 13px;
+    border-radius: 12px;
+    padding-right: 9px;
+    padding-left: 9px;
+}
+
+p.order-price {
+    font-size: 20px;
+    color: #008000d6;
+    font-style: italic;
+}
+
+/* Order Content */
+
+.order-content p {
+    margin: 5px 0;
+}
+
+.customer-namee {
+    font-weight: 600;
+    color: #333;
+    font-size: 12px;
+}
+
+.order-status {
+    font-style: italic;
+}
+
+.order-address {
+    font-size: 0.9em;
+}
+
+.order-content {
+    top: -26px;
+    text-align: center;
+    position: relative;
+    left: -115px;
+}

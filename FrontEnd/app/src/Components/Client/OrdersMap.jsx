@@ -742,12 +742,12 @@
                                           className="form-control" 
                                           id="pickup-location" 
                                           placeholder="Click on map to place pin" 
-                                          disabled = {disableTextBoxes}
+                                          // disabled = {disableTextBoxes}
                                           onChange={(e)=>setPickUpLocation(e.target.value)}
                                           readOnly />
                                       <button 
                                         type="button" 
-                                        disabled = {disableTextBoxes}
+                                        // disabled = {disableTextBoxes}
                                         className="btn btn-outline-secondary" 
                                         onClick={() => startPinPlacement('pickup')}
                                       >

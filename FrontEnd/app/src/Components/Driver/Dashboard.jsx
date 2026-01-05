@@ -167,13 +167,9 @@ const Dashboard = () => {
             setLoading(false);
         }
     }
-    useEffect(()=>{
-        if(DriverId){
-            fetchVehicle()
-        }
-    },[DriverId])
 
     useEffect(()=>{
+        fetchVehicle()
         handleDriverRecord()
         setOrderStatus()
     },[DriverId])

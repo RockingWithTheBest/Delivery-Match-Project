@@ -3,14 +3,144 @@ import TruckIcon from "../Icons/2truck-svgrepo-com.svg"
 import PickUpIcon from "../Icons/pickup-location-pin-svgrepo-com.svg"
 import DeliveryIcon from "../Icons/delivery-location-marker-svgrepo-com.svg"
 import axios from "axios"
+import { format } from 'date-fns';
 import './ViewParticularOrder.css'
 
 
 const ViewParticularOrder=({orderPlacementId})=>{
+    
     const [order, setOrder] = useState(null)
+    const [isActiveConfirmed, setIsActiveConfirmed] = useState(false); // Default: inactive
+    const [isActivePending, setIsActivePending] = useState(false);
+    const [isActiveInTransit, setIsActiveInTransit] = useState(false);
+    const [isActiveDelivered, setIsActiveDelivered] = useState(false);
+    const [isActiveCancelled, setIsActiveCancelled] = useState(false);
+
     const urlGetOrdePlacement = "https://localhost:7216/api/OrderPlacement/Get-Order-Single-Record-Placements-By-Id"
     const urlGetCustomer = "https://localhost:7216/api/Customer/Get-GetCustomerDetails-By-Id"
     const urlGetUser = "https://localhost:7216/api/User/Get-Users-By-Id"
+    const url = "https://localhost:7216/api"
+
+
+    const handleConfirmedToggle=()=>{
+            setIsActiveConfirmed(true)
+            setIsActivePending(false)
+            setIsActiveInTransit(false)
+            setIsActiveDelivered(false)
+            setIsActiveCancelled(false)
+                        // Here you can also make an API call to update the driver status in your backend
+            //console.log(`Driver status changed to: ${!isActiveConfirmed ? 'Active' : 'Inactive'}`);
+            updatingStatus('Confirmed')
+    }
+    
+    const handlePendingToggle=()=>{
+             setIsActiveConfirmed(false)
+            setIsActivePending(true)
+            setIsActiveInTransit(false)
+            setIsActiveDelivered(false)
+            setIsActiveCancelled(false)
+                        // Here you can also make an API call to update the driver status in your backend
+            //console.log(`Driver status changed to: ${!isActiveConfirmed ? 'Active' : 'Inactive'}`);
+            updatingStatus('Pending')
+    }
+ 
+    const handleInTransitToggle=()=>{
+            setIsActiveConfirmed(false)
+            setIsActivePending(false)
+            setIsActiveInTransit(true)
+            setIsActiveDelivered(false)
+            setIsActiveCancelled(false)
+                        // Here you can also make an API call to update the driver status in your backend
+            //console.log(`Driver status changed to: ${!isActiveConfirmed ? 'Active' : 'Inactive'}`);
+            updatingStatus('InTransit')
+    }
+    
+    const handleDeliveredToggle=()=>{
+            setIsActiveConfirmed(false)
+            setIsActivePending(false)
+            setIsActiveInTransit(false)
+            setIsActiveDelivered(true)
+            setIsActiveCancelled(false)
+                        // Here you can also make an API call to update the driver status in your backend
+            //console.log(`Driver status changed to: ${!isActiveConfirmed ? 'Active' : 'Inactive'}`);
+            updatingStatus('Delivered')
+    }
+    
+    const handleCancelledToggle=()=>{
+            setIsActiveConfirmed(false)
+            setIsActivePending(false)
+            setIsActiveInTransit(false)
+            setIsActiveDelivered(false)
+            setIsActiveCancelled(true)
+
+            // Here you can also make an API call to update the driver status in your backend
+            //console.log(`Driver status changed to: ${!isActiveConfirmed ? 'Active' : 'Inactive'}`);
+            updatingStatus('Cancelled')
+    }
+
+    const updatingStatus=async(avail_parameter)=>{
+        try{
+            const getResponse = await axios.get(`${url}/OrderPlacement/Get-Order-Single-Record-Placements-By-Id`,{
+                params:{
+                    id:parseInt(orderPlacementId)
+                }
+            })
+            
+            if(avail_parameter === 'Delivered'){
+                const currentDateTime = new Date();
+                const formattedDateTime = format(currentDateTime, 'yyyy-MM-dd HH:mm:ss')
+                
+                const orderPlacement = {
+                    CompletedOn:`${formattedDateTime}.0000000`,
+                    CreatedAt:getResponse.data.CreatedAt,
+                    CustomerId:getResponse.data.CustomerId,
+                    DeliveryContact:getResponse.data.DeliveryContact,
+                    DeliveryUpAddress:getResponse.data.DeliveryUpAddress,
+                    Description:getResponse.data.Description,
+                    DriverId:getResponse.data.DriverId,
+                    PickUpAddress:getResponse.data.PickUpAddress,
+                    PickUpContact:getResponse.data.PickUpContact,
+                    Price:getResponse.data.Price,
+                    ScheduledAt:getResponse.data.ScheduledAt,
+                    Status:avail_parameter
+                }
+                
+                const response = await axios.put(`${url}/OrderPlacement/Editing-Order-PlacementAddresses`,orderPlacement,{
+                    params:{
+                        Id:parseInt(orderPlacementId)
+                    }
+                })
+            }
+            else{
+                const currentDateTime = new Date();
+                const formattedDateTime = format(currentDateTime, 'yyyy-MM-dd HH:mm:ss')
+                const orderPlacement = {
+                    CompletedOn:getResponse.data.CompletedOn,
+                    CreatedAt:getResponse.data.CreatedAt,
+                    CustomerId:getResponse.data.CustomerId,
+                    DeliveryContact:getResponse.data.DeliveryContact,
+                    DeliveryUpAddress:getResponse.data.DeliveryUpAddress,
+                    Description:getResponse.data.Description,
+                    DriverId:getResponse.data.DriverId,
+                    PickUpAddress:getResponse.data.PickUpAddress,
+                    PickUpContact:getResponse.data.PickUpContact,
+                    Price:getResponse.data.Price,
+                    ScheduledAt:`${formattedDateTime}.0000000`,
+                    Status:avail_parameter
+                }
+
+                const response = await axios.put(`${url}/OrderPlacement/Editing-Order-PlacementAddresses`,orderPlacement,{
+                    params:{
+                        Id:parseInt(orderPlacementId)
+                    }
+                })
+            }
+ 
+        }
+        catch (error) {
+            console.error('Upload failed:', error);
+        }
+    }
 
     const getOrderPlacements=async()=>{
         try{          
@@ -34,26 +164,29 @@ const ViewParticularOrder=({orderPlacementId})=>{
                     }
                 })
                 
+                const items =  await axios.get(`${url}/OrderItems/Get-All-OrderItems`)
+                const orderItems = items.data.filter(o=>o.OrderPlacementId == orderPlacementId)
+
                 const userInformation = {
                     Order:response.data,
                     Customer:customer.data,
-                    User:user.data
+                    User:user.data,
+                    item: orderItems[0]
                 }
-                setOrder(userInformation)   
-                console.log("USER", userInformation)        
+                setOrder(userInformation)         
             }           
         }
         catch(e){
-            console.log("ERROR MESSAGE", e.Message)
+            console.log("ERROR MESSAGE", e.message)
         }
-
     }
 
      const getProgressInfo = (status) => {
         const progressMap = {
-            'Pending': { percentage: 25, steps: ['Pending', 'InTransit', 'Delivered'], currentStep: 0 },
-            'In Transit': { percentage: 66, steps: ['Pending', 'InTransit', 'Delivered'], currentStep: 1 },
-            'Delivered': { percentage: 100, steps: ['Pending', 'InTransit', 'Delivered'], currentStep: 2 },
+            'Confirmed': { percentage: 10, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 0 },
+            'Pending': { percentage: 25, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 1 },
+            'In Transit': { percentage: 66, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 2 },
+            'Delivered': { percentage: 100, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 3 },
             'Cancelled': { percentage: 0, steps: ['Cancelled'], currentStep: 0 }
         };
         return progressMap[status] || { percentage: 0, steps: [], currentStep: 0 };
@@ -96,10 +229,51 @@ const ViewParticularOrder=({orderPlacementId})=>{
         return timelineSteps;
     }
 
+    const updateEachOrderStatus=async()=>{
+        try{
+            const response = await axios.get(`${url}/OrderPlacement/Get-Order-Single-Record-Placements-By-Id`,{
+                params:{
+                    id:parseInt(orderPlacementId)
+                }
+            })
+
+            if((response.data.Status).toLowerCase() === 'confirmed'){
+                handleConfirmedToggle()
+            }
+
+            if((response.data.Status).toLowerCase() === 'pending'){
+                handlePendingToggle()
+            }
+             if((response.data.Status).toLowerCase() === 'intransit'){
+                handleInTransitToggle()
+            }
+
+            if((response.data.Status).toLowerCase() === 'cancelled'){
+                handleCancelledToggle()
+            }
+            
+            if((response.data.Status).toLowerCase() === 'delivered'){
+                handleDeliveredToggle()
+            }
+        }
+        catch(error){
+            console.log("ERROR", error.message)
+        }
+    }
 
     useEffect(()=>{
-        getOrderPlacements()         
+        getOrderPlacements() 
+        // Set up interval to refresh every 2 seconds
+        const intervalId = setInterval(() => {
+            getOrderPlacements() 
+            updateEachOrderStatus()
+        }, 1000); // 2000ms = 2 seconds
+
+        
+        // Clean up interval on component unmount
+        return () => clearInterval(intervalId);       
     },[orderPlacementId])
+
     return(
         <div className="each-order-line">    
             {order ? (
@@ -107,7 +281,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
                     <div className="order-header">
                         <div>
                             <img src={TruckIcon} className="truck2-icon" alt="" />
-                            <p>Order ORD-{orderPlacementId}</p>
+                            <p>Order ORD - {orderPlacementId}</p>
                         </div>                      
 
                         <span className={`status-badge status-${order.Order.Status.toLowerCase()}`}>
@@ -118,15 +292,15 @@ const ViewParticularOrder=({orderPlacementId})=>{
                     <div className="customer-info">
                         <div className="customer-header">
                             <div className="customer-avatar">
-                                {order.User.First_Name?.charAt(0).toUpperCase()}
-                                {order.User.Last_Name?.charAt(0).toUpperCase()}
+                                {order.User.FirstName?.charAt(0).toUpperCase()}
+                                {order.User.LastName?.charAt(0).toUpperCase()}
                             </div>
                             <div className="customer-details">
                                 <p className="customer-name">
-                                    {order.User.First_Name} {order.User.Last_Name}
+                                    {order.User.FirstName} {order.User.LastName}
                                 </p>
                                 <p className="business-name">
-                                    <strong>Business:</strong> {order.Customer.Business_Name}
+                                    <strong>Business:</strong> {order.Customer.BusinessName}
                                 </p>
                                 {order.Customer.Rating && (
                                     <div className="customer-rating">
@@ -154,9 +328,9 @@ const ViewParticularOrder=({orderPlacementId})=>{
                         >
                             <div className="progress-fill"></div>
                         </div>
-                        <div className="progress-percentage">
+                        {/* <div className="progress-percentage">
                             {getProgressInfo(order.Order.Status).percentage}%
-                        </div>
+                        </div> */}
                     </div>
 
                     {order.Order.Status === 'Cancelled' && (
@@ -166,12 +340,12 @@ const ViewParticularOrder=({orderPlacementId})=>{
                             </div>
                     )}
                     <div className="border-line"></div>
-                    <div className="order-meta">
+                    <div className="order-meta-data">
                         <div>
-                            <img src={PickUpIcon} alt="" /><strong>Pickup Address:</strong><p>{order.Order.Pick_Up_Address}</p>
+                            <img src={PickUpIcon} alt="" /><span>Pickup Address:</span><p className="pick-up-address">{order.Order.PickUpAddress}</p>
                         </div>
                         <div>
-                            <img src={DeliveryIcon} alt="" /><strong>Delivery Address:</strong> <p>{order.Order.Delivery_Up_Address}</p>
+                            <img src={DeliveryIcon} alt="" /><span>Delivery Address:</span> <p className="delivery-up-address">{order.Order.DeliveryUpAddress}</p>
                         </div>                        
                     </div>
                     
@@ -179,53 +353,138 @@ const ViewParticularOrder=({orderPlacementId})=>{
                     <div className="item-details">
                         <div>
                             <p>Weight</p>
-                            <strong>{order.Order.Weight} kg</strong>
+                            <span>{order.item.WeightPerItem} kg</span>
                         </div>
                         <div>
                             <p>Volume</p>
-                            <strong>{order.Order.Weight} m³</strong>
+                            <span>{parseFloat(((order.item.OrderDimension.Height * order.item.OrderDimension.Length * order.item.OrderDimension.Width)/1000000).toFixed(4)) } m³</span>
                         </div>
                         <div>
                             <p>Cost</p>
-                            <strong className="cost">${order.Order.Price}</strong>
+                            <span className="cost">${order.Order.Price}</span>
                         </div>
                         <div>
                             <p>Status</p>
-                            <strong>{order.Order.Status}</strong>
+                            <span>{order.Order.Status}</span>
                         </div>
                     </div> 
                     <div className="border-line"></div>
               
-                    <div className="actual-timeline">
-                        <h3>Order Timeline</h3>
-                        <div className="timeline-container">
-                            {getTimelineStatus(order).map((step, index) => (
-                                <div key={step.label} className="timeline-step">
-                                    <div className="timeline-content">
-                                        <div className={`timeline-indicator ${step.completed ? 'completed' : 'pending'}`}>
-                                            {step.completed ? (
-                                                <div className="checkmark">✓</div>
-                                            ) : (
-                                                <div className="step-number">{index + 1}</div>
-                                            )}
+                    <div className="showing-timeline">
+                        <div className="actual-timeline">
+                            <h3>Order Timeline</h3>
+                            <div className="timeline-container">
+                                {getTimelineStatus(order).map((step, index) => (
+                                    <div key={step.label} className="timeline-step">
+                                        <div className="timeline-content">
+                                            <div className={`timeline-indicator ${step.completed ? 'completed' : 'pending'}`}>
+                                                {step.completed ? (
+                                                    <div className="checkmark">✓</div>
+                                                ) : (
+                                                    <div className="step-number">{index + 1}</div>
+                                                )}
+                                            </div>
+                                            <div className="timeline-info">
+                                                <p className="timeline-label">{step.label}</p>
+                                                {step.date && (
+                                                    <p className="timeline-date">
+                                                        {new Date(step.date).toLocaleDateString()}
+                                                    </p>
+                                                )}
+                                                <p className="timeline-description">{step.description}</p>
+                                            </div>
                                         </div>
-                                        <div className="timeline-info">
-                                            <p className="timeline-label">{step.label}</p>
-                                            {step.date && (
-                                                <p className="timeline-date">
-                                                    {new Date(step.date).toLocaleDateString()}
-                                                </p>
-                                            )}
-                                            <p className="timeline-description">{step.description}</p>
-                                        </div>
+                                        {index < getTimelineStatus(order).length - 1 && (
+                                            <div className={`timeline-connector ${step.completed ? 'completed' : ''}`}></div>
+                                        )}
                                     </div>
-                                    {index < getTimelineStatus(order).length - 1 && (
-                                        <div className={`timeline-connector ${step.completed ? 'completed' : ''}`}></div>
-                                    )}
+                                ))}
+                            </div>                   
+                        </div>  
+                        <div className="driver-timeline-controller">
+                            <h2>Driver timeline controller</h2>
+                            <div className="toggle-container">
+                            
+                                <div>
+                                <span>Confirmed</span>
+                                <label className="toggle-label">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={isActiveConfirmed}
+                                            onChange={()=>handleConfirmedToggle()}
+                                            className="toggle-input"
+                                        />
+                                        <span className="toggle-slider">
+                                            <span className="toggle-knob"></span>
+                                        </span>
+                                    </label>
                                 </div>
-                            ))}
-                        </div>                   
-                    </div>                
+                                
+                                <div>
+                                <span>Pending</span>
+                                <label className="toggle-label">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={isActivePending}
+                                            onChange={()=>handlePendingToggle()}
+                                            className="toggle-input"
+                                        />
+                                        <span className="toggle-slider">
+                                            <span className="toggle-knob"></span>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                <span>In Transit</span>
+                                <label className="toggle-label">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={isActiveInTransit}
+                                            onChange={()=>handleInTransitToggle()}
+                                            className="toggle-input"
+                                        />
+                                        <span className="toggle-slider">
+                                            <span className="toggle-knob"></span>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                <span>Delivered</span>
+                                <label className="toggle-label">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={isActiveDelivered}
+                                            onChange={()=>handleDeliveredToggle()}
+                                            className="toggle-input"
+                                        />
+                                        <span className="toggle-slider">
+                                            <span className="toggle-knob"></span>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                <span>Cancelled</span>
+                                <label className="toggle-label">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={isActiveCancelled}
+                                            onChange={()=>handleCancelledToggle()}
+                                            className="toggle-input"
+                                        />
+                                        <span className="toggle-slider">
+                                            <span className="toggle-knob"></span>
+                                        </span>
+                                    </label>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>              
                 </div>                          
                           
                 ):(
@@ -233,6 +492,5 @@ const ViewParticularOrder=({orderPlacementId})=>{
                 )}
         </div>
     )
-
 }
 export default ViewParticularOrder;
