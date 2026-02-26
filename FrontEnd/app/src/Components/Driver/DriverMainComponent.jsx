@@ -7,13 +7,13 @@ import Dashboard from './Dashboard'
 import ActiveOrder from './ActiveOrder'
 import Notifications from './Notification'
 import Profile from './Profile'
-import Earnings from './Earning'
+import Routes from './Routes'
 
 const DriverMainComponent=()=>{
     const navigate = useNavigate()
     const [activateDashboard, setDashboard] = useState(true);
     const [activateActiveOrders, setActiveOrders] = useState(false);
-    const [activateEarnings, setEarnings] = useState(false);
+    const [activateRoutes, setRoutes] = useState(false);
     const [activateNotifications, setNotifications] = useState(false);
     const [activateProfile, setProfile] = useState(false);
 
@@ -25,35 +25,35 @@ const DriverMainComponent=()=>{
     const handleDashboardActivation=()=>{
         setDashboard(true)
         setActiveOrders(false)
-        setEarnings(false)
+        setRoutes(false)
         setNotifications(false)
         setProfile(false)
     }
     const handleActivateOrderActivation=()=>{
         setDashboard(false)
         setActiveOrders(true)
-        setEarnings(false)
+        setRoutes(false)
         setNotifications(false)
         setProfile(false)
     }
-    const handleEarningActivation=()=>{
+    const handleRoutesActivation=()=>{
         setDashboard(false)
         setActiveOrders(false)
-        setEarnings(true)
+        setRoutes(true)
         setNotifications(false)
         setProfile(false)
     }
     const handleNotificationActivation=()=>{
         setDashboard(false)
         setActiveOrders(false)
-        setEarnings(false)
+        setRoutes(false)
         setNotifications(true)
         setProfile(false)
     }
     const handleProfileActivation=()=>{
         setDashboard(false)
         setActiveOrders(false)
-        setEarnings(false)
+        setRoutes(false)
         setNotifications(false)
         setProfile(true)
     }
@@ -62,7 +62,7 @@ const DriverMainComponent=()=>{
             <div className="header-nav-driver">
                 <div className='title-descript'>
                     <img  className='mytruck-icon'  src={TruckIcon} />
-                    <h2>DeliveryMatch</h2>
+                    <h2>ClydeDelivery</h2>
                     <p className='driver-tag'>Driver</p>
                 </div>
                 
@@ -82,7 +82,7 @@ const DriverMainComponent=()=>{
                 <div className='sub-nav'>
                     <nav onClick={()=>handleDashboardActivation()}>Dashboard</nav>
                     <nav onClick={()=>handleActivateOrderActivation()}>Active Orders</nav>
-                    <nav onClick={()=>handleEarningActivation()}>Earnings</nav>
+                    <nav onClick={()=>handleRoutesActivation()}>Routes</nav>
                     <nav onClick={()=>handleNotificationActivation()}>Notifications</nav>
                     <nav onClick={()=>handleProfileActivation()}>Profile</nav>
                 </div>
@@ -93,8 +93,8 @@ const DriverMainComponent=()=>{
                 {activateActiveOrders && (
                     <ActiveOrder/>
                 )}
-                {activateEarnings && (
-                    <Earnings/>
+                {activateRoutes && (
+                    <Routes/>
                 )}
                 {activateNotifications && (
                     <Notifications/>
