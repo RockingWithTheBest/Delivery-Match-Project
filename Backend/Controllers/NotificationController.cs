@@ -37,6 +37,36 @@ namespace Backend.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("Get-Notification-Placed-ByCustomer")]
+        public IActionResult GetNotificationByCustomer(int CustomerId)
+        {
+            var response = notifications.GetAllNotificationsPlacedByCustomer(CustomerId);
+            if(response == null)
+            {
+                return NotFound("Not notifications where placed by this Customer");
+            }
+            else
+            {
+                return Ok(response);
+            }
+        }
+
+        [HttpGet]
+        [Route("Get-Notification-Placed-ByDriver")]
+        public IActionResult GetNotificationByDriver(int DriverId)
+        {
+            var response = notifications.GetAllNotificationsPlacedByDriver(DriverId);
+            if (response == null)
+            {
+                return NotFound("Not notifications where placed by this Customer");
+            }
+            else
+            {
+                return Ok(response);
+            }
+        }
+
         [HttpPost]
         [Route("Add-Notification")]
         public IActionResult AddNotification(Notification notificationRecord)
@@ -86,5 +116,18 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Get-Customers-With-CustomerIds")]
+        public IActionResult GetCustomersWithCustomerIds(List<int> CustomerIds)
+        {
+            if(CustomerIds.Count == 0)
+            {
+                return NotFound("Their no notifications");
+            }
+            else
+            {
+                return Ok(notifications.GetCustomersWithIds(CustomerIds));
+            }
+        }
     }
 }
