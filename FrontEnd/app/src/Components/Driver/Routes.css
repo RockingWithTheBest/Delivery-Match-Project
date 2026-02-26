@@ -1,0 +1,616 @@
+
+/* Header Styles */
+.route-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: black;
+    border-radius: 1rem;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.driver-address {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
+    gap: 53px;
+}
+.route-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.generate-btn {
+    background: white;
+    color: #667eea;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.generate-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.generate-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* Spinner Animation */
+.spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 50%;
+    border-top-color: #667eea;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Section Styles */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 2rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-icon {
+    font-size: 1.8rem;
+}
+
+/* Driver Cards Grid */
+.driver-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.driver-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    height: 79px;
+}
+
+.driver-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    font-size: 2rem;
+    background: #f8f9fa;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.8rem;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 0.2rem;
+}
+
+.status-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status-badge.available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-badge.unavailable {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Driver Section */
+.driver-section {
+    width: 61%;
+}
+
+/* Address Card */
+.address-section {
+    margin-bottom: 2rem;
+}
+
+.address-card {
+    width: 117%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    border-left: 4px solid #667eea;
+}
+
+.address-icon {
+    font-size: 2.5rem;
+}
+
+.address-details {
+    flex: 1;
+}
+
+.address-label {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.address-line {
+    color: #666;
+    margin-bottom: 0.2rem;
+}
+
+.address-coords {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Route Summary */
+.route-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-item {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.summary-icon {
+    font-size: 2rem;
+}
+
+.summary-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.summary-value {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-left: 12px;
+}
+
+/* Route Timeline */
+.route-timeline {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-marker {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.marker-dot {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #667eea;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.marker-line {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, #667eea, #764ba2);
+    position: absolute;
+    top: 1.5rem;
+    left: 0.7rem;
+}
+
+.timeline-content {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateX(5px);
+    background: #f1f3f5;
+}
+
+/* .stop-number {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+} */
+
+.stop-badge {
+    background: #667eea;
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* .order-badge {
+    background: #764ba2;
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+} */
+
+.stop-address {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.stop-start, .stop-end {
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    border-radius: 1rem;
+}
+
+.stop-start {
+    background: #d4edda;
+    color: #155724;
+}
+
+.stop-end {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.route-container {
+  width: 85%;
+  /* max-width: 800px; */
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+.route-title {
+  color: white;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.route-list {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.route-stop {
+  display: flex;
+  margin-bottom: 1.5rem;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.route-stop:hover {
+  transform: translateX(10px);
+}
+
+.stop-indicator {
+  position: relative;
+  margin-right: 1.5rem;
+}
+
+.stop-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  position: relative;
+}
+
+.connector-line {
+  position: absolute;
+  top: 40px;
+  left: 19px;
+  width: 2px;
+  height: calc(100% + 1.5rem);
+  background: linear-gradient(to bottom, #667eea, #764ba2);
+  opacity: 0.3;
+}
+
+.stop-content {
+  flex: 1;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #667eea;
+}
+
+.stop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.order-badge {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.stop-distance {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.location-details {
+  color: #333;
+}
+
+.location-address {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.location-city {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.route-summary {
+  margin-top: 2rem;
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.route-summary p {
+  margin: 0;
+}
+
+.route-summary strong {
+  font-size: 1.4rem;
+  margin-left: 0.5rem;
+}
+
+/* Loading State */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animation for route stops */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.route-stop {
+  animation: slideIn 0.3s ease forwards;
+  animation-delay: calc(var(--stop-index) * 0.1s);
+}
+
+/* Responsive design */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .route-container {
+        padding: 0 1rem;
+    }
+
+    .route-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .route-title {
+        font-size: 1.5rem;
+    }
+
+    .driver-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .route-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .timeline-marker {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .marker-line {
+        width: 100%;
+        height: 2px;
+        top: 0.7rem;
+        left: 1.5rem;
+    }
+
+    .address-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .address-coords {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+  .route-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .route-title {
+    font-size: 1.8rem;
+  }
+
+  .route-list {
+    padding: 1rem;
+  }
+
+  .stop-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+  }
+
+  .connector-line {
+    left: 14px;
+  }
+
+  .location-address {
+    font-size: 0.95rem;
+  }
+}
+
