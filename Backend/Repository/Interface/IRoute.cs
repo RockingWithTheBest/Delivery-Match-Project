@@ -9,5 +9,6 @@ namespace Backend.Repository.Interface
         int AddRoutesRecord(Models.Route route);
         int UpdateRoutesRecord(int Id, Models.Route record);
         int DeleteRoutesRecord(int Id);
+        Models.Route GetSingleRecordByDriverId(int DriverId);
     }
 }
