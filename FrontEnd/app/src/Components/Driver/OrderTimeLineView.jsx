@@ -13,7 +13,7 @@ const OrderTimeLineView=()=>{
     const [orders, setOrders] = useState([])
    
     const [orderPlacementId,setOrderPlacementId]=useState(null)
-    const urlDriverById = "https://localhost:7216/api/Driver/Get-All-Orders-Placed-By-Driver-ID"
+    const urlDriverById = "https://localhost:7216/api/Driver/Get-All-Orders-Claimed-By-Driver-ID"
     const urlGetAllCustomers = "https://localhost:7216/api/Customer/Get-All-Customers"
     const urlGetAllUsers = "https://localhost:7216/api/User/Get-All-Users"
     const urlOrders = "https://localhost:7216/api/Customer/Get-AllOrderPlacedByCustomer-By-Id"
@@ -78,6 +78,18 @@ const OrderTimeLineView=()=>{
             console.log("Order clicked:", orderId);
         }
     }
+
+        const getStatusIcon = (status) => {
+        const icons = {
+            'pending': '⏳',
+            'confirmed': '✅',
+            'intransit': '🚚',
+            'delivered': '📦',
+            'cancelled': '❌'
+        };
+        return icons[status?.toLowerCase()] || '📋';
+    };
+    
     useEffect(()=>{
         specificDriverOrders()
         getCustomers();
@@ -111,7 +123,9 @@ const OrderTimeLineView=()=>{
 
                             <div className="order-header">
                                 <h3>ORD-{order.Id}</h3>
-                                <span className="ordser-status">{order.Status}</span>
+                                <span className={`status-badge status-${order.Order?.Status?.toLowerCase()}`}>
+                                    {getStatusIcon(order.Order?.Status)} {order.Status}
+                                </span>
                             </div>
                             <div  className="order-content">
                               
