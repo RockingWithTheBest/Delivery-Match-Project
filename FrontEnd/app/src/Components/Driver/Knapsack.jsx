@@ -4,15 +4,16 @@ import axios from 'axios'
 import './knapsack.css'
 import './DriverStyles.css'
 import { useParams } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const KnapsackAlgorithm=()=>{
-    const [vehicleRecords,setVehicleRecords] = useState([])
     const [orderPlacements, setOrderPlacementRecords]=useState([])
-    const [selectedVehicle, setSelectedVehicle] = useState(null)
+    const [selectedVehicle, setSelectedVehicle] = useState("")
     const [selectedOrders, setSelectedOrders] = useState([]);
     const [solution, setSolution] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [openTable, setOpenTable]=useState(false)
     const {DriverId}=useParams()
     const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
 
@@ -27,8 +28,13 @@ const KnapsackAlgorithm=()=>{
 
     const getAllDriverRecords=async()=>{
         try{
-            const api_response = await axios.get("https://localhost:7216/api/Vehicle/Get-All-Vehcile")
-            setVehicleRecords(api_response.data)
+            const response = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
+                params:{
+                    DriverId:parseInt(DriverId)
+                }
+            })
+            setSelectedVehicle(response.data)
+
         }
         catch(err){
             console.log("Error Message",err)
@@ -37,9 +43,10 @@ const KnapsackAlgorithm=()=>{
 
     const getAllOrderPlacementRecords=async()=>{
         try{
-            const api_response = await axios.get("https://localhost:7216/api/OrderPlacement/Get-All-OrderPlacements")
+            const api_response = await axios.get(`${url}/OrderPlacement/Get-All-OrderPlacements`)
             const availableOrders  = api_response.data.filter(order=>order.DriverId===null)
             setOrderPlacementRecords(availableOrders)
+            console.log("availableOrders",availableOrders)
         }
         catch(err){
             console.log("Error Message",err)
@@ -47,11 +54,7 @@ const KnapsackAlgorithm=()=>{
         
     }
         
-    useEffect(() => {
-            if (vehicleRecords.length > 0 && !selectedVehicle) {
-                setSelectedVehicle(vehicleRecords[0]);
-            }
-    }, [vehicleRecords]);
+
         // 2D Knapsack algorithm that considers both weight and volume
         const solve2DKnapsack=(weights, volumes, values, maxWeight, vehicleCapacity)=>{
                 
@@ -237,7 +240,7 @@ const KnapsackAlgorithm=()=>{
                     const id = selectedOrders[0].Id;
         
                     for(const item of selectedOrders){
-                        console.log("Hey", item)
+
                         const updateItem={
                             CompletedOn:item.CompletedOn,
                             CreatedAt:item.CreatedAt,
@@ -257,15 +260,33 @@ const KnapsackAlgorithm=()=>{
                                 Id:parseInt(item.Id)
                             }
                         });
+
+
+                        const notification = {
+                            Type:"Push Notification",
+                            Message: "Order Confirmed",
+                            DriverCommentry: "Order Claimed and Confirmed",
+                            CreatedAt: format(new Date(), 'yyyy-MM-dd HH:mm'),
+                            IsRead:false,
+                            CustomerId:parseInt(item.CustomerId),
+                            DriverId:parseInt(DriverId),
+                            OrderPlacementId:parseInt(item.Id)
+                        }
+                        //NOTIFICATION MUST BE PERFORMED HERE
+                        await axios.post(`${url}/Notification/Add-Notification`,notification)
                     }
-                    showNotification("Successfully claimed orders.", 'success')              
+                    showNotification("Successfully claimed orders. Go to the notifications tab", 'success')              
 
                 }
                 catch(e){
-                    console.log("ERROR", e.message)
+                    console.log("ERROR", e)
                     showNotification("Error claiming orders.", 'error') 
                 }
             }          
+        }
+
+        const openViewTable =()=>{
+            setOpenTable(true)
         }
         useEffect(()=>{
             getAllDriverRecords()
@@ -292,27 +313,9 @@ const KnapsackAlgorithm=()=>{
             )}
 
             <section className="controls-section">
-                <div className="vehicle-selection">
-                    <label htmlFor="vehicle-select">Select Vehicle:</label>
-                    <select 
-                        id="vehicle-select"
-                        value={selectedVehicle?.Id || ''}
-                        onChange={(e) => {
-                            const vehicle = vehicleRecords.find(v => v.Id === Number(e.target.value));
-                            console.log("vehicleRecords",vehicleRecords.find(v => v.Id === Number(e.target.value)) )
-                            setSelectedVehicle(vehicle);
-                        }}
-                        disabled={loading}
-                    >
-                        {vehicleRecords.map(vehicle => (
-                            <option key={vehicle.Id} value={vehicle.Id}>
-                                {vehicle.Brand} {vehicle.Model} - Capacity: {vehicle.MaxWeight}kg, Volume: {(vehicle.Length * vehicle.Width * vehicle.Height / 10000).toFixed(2)}m³
-                            </option>
-                        ))}
-                    </select>
-                    
+                <div className="vehicle-selection">                  
                     {selectedVehicle && (
-                        <div className="vehicle-info">
+                        <div className="vehicle-information">
                             <h4>Selected Vehicle Details</h4>
                             <div className="vehicle-details">
                                 <div className="vehicle-detail">
@@ -322,7 +325,7 @@ const KnapsackAlgorithm=()=>{
                                     <strong>Model:</strong> {selectedVehicle.Model}
                                 </div>
                                 <div className="vehicle-detail">
-                                    <strong>Max Weight:</strong> {selectedVehicle.Max_Weight}kg
+                                    <strong>Max Weight:</strong> {selectedVehicle.MaxWeight}kg
                                 </div>
                                 <div className="vehicle-detail">
                                     <strong>Dimensions:</strong> {selectedVehicle.Length}×{selectedVehicle.Width}×{selectedVehicle.Height}cm
@@ -331,18 +334,18 @@ const KnapsackAlgorithm=()=>{
                                     <strong>Volume:</strong> {(selectedVehicle.Length * selectedVehicle.Width * selectedVehicle.Height / 1000000).toFixed(2)}m³
                                 </div>
                             </div>
-                            </div>
+                            <button 
+                                className="calculate-button"
+                                onClick={calculateOptimalOrders}
+                                disabled={loading || !selectedVehicle || orderPlacements.length === 0}
+                            >
+                                {loading ? 'Calculating...' : 'Calculate Optimal Orders'}
+                            </button>
+                            <button className="claim calculate-button" onClick={()=>ClaimMyOrders()} >Claim Orders</button>
+                            <button className="calculate-button" onClick={()=>setOpenTable(true)}>View Optimal Solution</button>
+                        </div>                        
                     )}
-                </div>
-
-                <button 
-                    className="calculate-button"
-                    onClick={calculateOptimalOrders}
-                    disabled={loading || !selectedVehicle || orderPlacements.length === 0}
-                >
-                    {loading ? 'Calculating...' : 'Calculate Optimal Orders'}
-                </button>
-                <button className="claim" onClick={()=>ClaimMyOrders()} >Claim Orders</button>
+                </div>                
             </section>
 
 
@@ -361,7 +364,7 @@ const KnapsackAlgorithm=()=>{
                             // Calculate order weight and volume
                             let orderWeight = order.OrderItems.WeightPerItem * order.OrderItems.Quantity || 0
                             let orderVolume = ((order.OrderItems.OrderDimension.Height * order.OrderItems.OrderDimension.Length  *order.OrderItems.OrderDimension.Width) / 10000) || 0
-                 
+                            
                             return (
                                 <div 
                                     key={order.Id} 
@@ -393,8 +396,8 @@ const KnapsackAlgorithm=()=>{
                 )}
             </section>
 
-            {solution && (
-                <section className="solution-section">
+            {solution && openTable &&(
+                <section className="solution-section" onClick={()=>setOpenTable(false)}>
                     <div className="section-header">
                         <h2>Optimal Solution</h2>
                         <span>Selected Orders: {solution.selectedOrders.length}</span>
@@ -404,18 +407,18 @@ const KnapsackAlgorithm=()=>{
                         <div className="stat-card">
                             <h3>Total Weight</h3>
                             <p className="value">${solution.totalWeight.toFixed(2)} kg</p>
-                            <p className="sub-value">of {solution.weightCapacity} kg</p>
+                            <p className="sub-value">of {(solution.weightCapacity).toFixed(2)} kg</p>
                         </div>
 
                         <div className="stat-card">
                             <h3>Total Weight</h3>
-                            <p className="value">{solution.totalWeight} kg</p>
+                            <p className="value">{(solution.totalWeight).toFixed(2)} kg</p>
                         </div>
 
                          <div className="stat-card">
                             <h3>Total Volume</h3>
-                            <p className="value">{solution.totalVolume} m³</p>
-                            <p className="sub-value">of {solution.volumeCapacity} m³</p>
+                            <p className="value">{(solution.totalVolume).toFixed(2)} m³</p>
+                            <p className="sub-value">of {(solution.volumeCapacity).toFixed(2)} m³</p>
                         </div>
 
                         <div className="stat-card">
@@ -460,16 +463,14 @@ const KnapsackAlgorithm=()=>{
                                             <td>{orderWeight.toFixed(2)}</td>
                                             <td>{orderVolume.toFixed(2)}</td>
                                             <td>${order.Price}</td>
-                                            <td>${(order.Price / (orderWeight + orderVolume)).toFixed(2)}</td>
                                         </tr>
                                     );
                                 })}
                                 <tr style={{backgroundColor: '#f8f9fa', fontWeight: 'bold'}}>
                                     <td>Total</td>
                                     <td>{solution.totalWeight} kg</td>
-                                    <td>{solution.totalVolume} m³</td>
+                                    <td>{solution.totalVolume.toFixed(2)} m³</td>
                                     <td>${solution.maxValue}</td>
-                                    <td>-</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -486,7 +487,7 @@ const KnapsackAlgorithm=()=>{
                 </div>
             )}
             {/* Notifications */}
-            <div className={`notification ${notification.show ? 'show' : ''}`} id="notification">
+            <div className={`notificationNew ${notification.show ? 'show' : ''}`} id="notification">
                 <div className="d-flex justify-content-between align-items-start mb-2">
                     <h6 className="mb-0" style={{ color: 
                         notification.type === 'error' ? '#dc3545' : 
