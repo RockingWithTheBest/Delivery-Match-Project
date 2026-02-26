@@ -15,6 +15,31 @@ const ViewParticularOrder=({orderPlacementId})=>{
     const [isActiveInTransit, setIsActiveInTransit] = useState(false);
     const [isActiveDelivered, setIsActiveDelivered] = useState(false);
     const [isActiveCancelled, setIsActiveCancelled] = useState(false);
+        const [statuses, setStatuses] = useState({
+        confirmed: false,
+        pending: false,
+        inTransit: false,
+        delivered: false,
+        cancelled: false
+    });
+
+        const getStatusIcon = (status) => {
+        const icons = {
+            'pending': '⏳',
+            'confirmed': '✅',
+            'intransit': '🚚',
+            'delivered': '📦',
+            'cancelled': '❌'
+        };
+        return icons[status?.toLowerCase()] || '📋';
+    };
+
+    const handleToggle = (status) => {
+        setStatuses(prev => ({
+            ...prev,
+            [status]: !prev[status]
+        }));
+    };
 
     const urlGetOrdePlacement = "https://localhost:7216/api/OrderPlacement/Get-Order-Single-Record-Placements-By-Id"
     const urlGetCustomer = "https://localhost:7216/api/Customer/Get-GetCustomerDetails-By-Id"
@@ -208,13 +233,13 @@ const ViewParticularOrder=({orderPlacementId})=>{
             },
             { 
                 label: "Order Picked Up", 
-                completed: order?.Order?.Status === "In Transit" || order?.Order?.Status === "Delivered",
+                completed: order?.Order?.Status === "Pending" || order?.Order?.Status === "InTransit" || order?.Order?.Status === "Delivered",
                 date: order?.Order?.Scheduled_At,
                 description: "Driver picked up the package"
             },
             { 
                 label: "In Transit", 
-                completed: order?.Order?.Status === "In Transit" || order?.Order?.Status === "Delivered",
+                completed: order?.Order?.Status === "InTransit" || order?.Order?.Status === "Delivered",
                 date: order?.Order?.Scheduled_At,
                 description: "Package is on the way"
             },
@@ -261,6 +286,14 @@ const ViewParticularOrder=({orderPlacementId})=>{
         }
     }
 
+    const toggleItems = [
+        { key: 'confirmed', label: 'Confirmed', icon: '' },
+        { key: 'pending', label: 'Pending', icon: '⏳' },
+        { key: 'inTransit', label: 'In Transit', icon: '🚚' },
+        { key: 'delivered', label: 'Delivered', icon: '📦' },
+        { key: 'cancelled', label: 'Cancelled', icon: '❌' }
+    ];
+
     useEffect(()=>{
         getOrderPlacements() 
         // Set up interval to refresh every 2 seconds
@@ -279,15 +312,16 @@ const ViewParticularOrder=({orderPlacementId})=>{
             {order ? (
                 <div className="order-details-container">
                     <div className="order-header">
-                        <div>
-                            <img src={TruckIcon} className="truck2-icon" alt="" />
-                            <p>Order ORD - {orderPlacementId}</p>
-                        </div>                      
+                            <div>
+                                <img src={TruckIcon} className="truck2-icon" alt="" />
+                                <p>Order ORD - {orderPlacementId}</p>
+                            </div>                      
 
-                        <span className={`status-badge status-${order.Order.Status.toLowerCase()}`}>
-                                {order.Order.Status}
-                        </span>
+                            <span className={`status-badge status-${order.Order.Status.toLowerCase()}`}>
+                                    {order.Order.Status}
+                            </span>
                     </div>
+
 
                     <div className="customer-info">
                         <div className="customer-header">
@@ -328,9 +362,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
                         >
                             <div className="progress-fill"></div>
                         </div>
-                        {/* <div className="progress-percentage">
-                            {getProgressInfo(order.Order.Status).percentage}%
-                        </div> */}
+
                     </div>
 
                     {order.Order.Status === 'Cancelled' && (
@@ -402,17 +434,21 @@ const ViewParticularOrder=({orderPlacementId})=>{
                             </div>                   
                         </div>  
                         <div className="driver-timeline-controller">
-                            <h2>Driver timeline controller</h2>
+                            <h2>
+                                <span className="title-icon">⚡</span>
+                                Driver timeline controller
+                            </h2>
                             <div className="toggle-container">
                             
                                 <div>
-                                <span>Confirmed</span>
+                                <span>Confirmed </span>
                                 <label className="toggle-label">
                                         <input 
                                             type="checkbox" 
                                             checked={isActiveConfirmed}
                                             onChange={()=>handleConfirmedToggle()}
                                             className="toggle-input"
+                                            aria-label={`Toggle ✅ status`}
                                         />
                                         <span className="toggle-slider">
                                             <span className="toggle-knob"></span>
@@ -428,6 +464,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
                                             checked={isActivePending}
                                             onChange={()=>handlePendingToggle()}
                                             className="toggle-input"
+                                            aria-label={`Toggle ⏳ status`}
                                         />
                                         <span className="toggle-slider">
                                             <span className="toggle-knob"></span>
@@ -443,6 +480,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
                                             checked={isActiveInTransit}
                                             onChange={()=>handleInTransitToggle()}
                                             className="toggle-input"
+                                            aria-label={`Toggle 🚚 status`}
                                         />
                                         <span className="toggle-slider">
                                             <span className="toggle-knob"></span>
@@ -458,6 +496,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
                                             checked={isActiveDelivered}
                                             onChange={()=>handleDeliveredToggle()}
                                             className="toggle-input"
+                                            aria-label={`Toggle 📦 status`}
                                         />
                                         <span className="toggle-slider">
                                             <span className="toggle-knob"></span>
@@ -473,17 +512,24 @@ const ViewParticularOrder=({orderPlacementId})=>{
                                             checked={isActiveCancelled}
                                             onChange={()=>handleCancelledToggle()}
                                             className="toggle-input"
+                                            aria-label={`Toggle ❌ status`}
                                         />
                                         <span className="toggle-slider">
                                             <span className="toggle-knob"></span>
                                         </span>
                                     </label>
                                 </div>
-
-
-
                             </div>
                         </div>
+                    <div className="active-statuses">
+                        {Object.entries(statuses)
+                            .filter(([_, value]) => value)
+                            .map(([key]) => (
+                                <span key={key} className={`status-badge ${key}`}>
+                                    {toggleItems.find(item => item.key === key)?.icon} {key}
+                                </span>
+                            ))}
+                    </div>
                     </div>              
                 </div>                          
                           
