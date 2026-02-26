@@ -8,13 +8,14 @@ const Bar=()=>{
     const navigate = useNavigate()
 
     const navigateToAuthenticationPage=()=>{
+        alert("BRO")
         navigate("/authpage")
     }
     return(
         <div className='header-container'>
             <div className='logo-container'>
                 <img src={Truck} alt="" className="delivery-shipping-truck" />
-                <p className="text-xl text-gray-900">DeliveryMatch</p>
+                <p className="text-xl text-gray-900">ClydeDelivery</p>
             </div>
             
            <div className="get-startedbtn">
