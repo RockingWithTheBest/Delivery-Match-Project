@@ -68,6 +68,7 @@ namespace Backend.Repository.Implementation
             return databaseContext.OrderPlacements
                 .Include(d => d.OrderItems)
                     .ThenInclude(i => i.OrderDimension)
+                .Include(i=>i.OrderTrackings)
             .ToList();
         }
         public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByCustomerId(int CustomerId)
