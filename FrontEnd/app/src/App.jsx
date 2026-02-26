@@ -15,8 +15,8 @@ function App() {
         <Route path='/' element={<MainPage/>}/>
         <Route path='/mainpage' element={<MainPage/>}/>
         <Route path='/authpage' element={<AuthPage/>}/>
-        <Route path='/driver/:email/:password/:DriverId' element={<Driver/>}/>
-        <Route path='/client/:email/:password/:ClientId' element={<Client/>}/>
+        <Route path='/driver/:email/:DriverId' element={<Driver/>}/>
+        <Route path='/client/:email/:ClientId' element={<Client/>}/>
       </Routes>
     </BrowserRouter>
     
