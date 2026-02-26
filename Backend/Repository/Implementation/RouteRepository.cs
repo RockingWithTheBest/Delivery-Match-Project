@@ -60,6 +60,11 @@ namespace Backend.Repository.Implementation
             return databaseContext.Routes.Where(temp => temp.Id == Id).FirstOrDefault();
         }
 
+        public Models.Route GetSingleRecordByDriverId(int DriverId)
+        {
+            return databaseContext.Routes.Where(temp => temp.DriverId == DriverId).FirstOrDefault();
+        }
+
         public int UpdateRoutesRecord(int Id, Models.Route record)
         {
             int testValue = -1;
