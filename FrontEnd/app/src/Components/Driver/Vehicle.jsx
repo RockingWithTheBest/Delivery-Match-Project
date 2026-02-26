@@ -18,6 +18,11 @@ const Vehicle =({driverDetails})=>{
     const [licenseExpiry, setLicenseExpiry] = useState("")
     const [driverLicense, setDriverLicense] = useState("")
     const [totalEarnings, setTotalEarning] = useState("")
+
+    //Notifications
+    const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
+
+    //VehicleRecords
     const [brand, setBrand] = useState("")
     const [model, setModel] = useState("")
     const [makeYear, setMakeYear] = useState("")
@@ -26,6 +31,17 @@ const Vehicle =({driverDetails})=>{
     const [color, setColor] = useState("")
     const [licensePlate, setLicensePlate] = useState("")
     const [vehicleId, setVehicleId]=useState("")
+    const [length, setLength]=useState("")
+    const [height, setHeight]=useState("")
+    const [width, setWidth]=useState("")
+    const [fileName, setFileName]=useState("")
+    const [contentType, setContentType]=useState("")
+    const [imageData, setImageData]=useState("")
+    const [fileSize, setFileSize]=useState("")
+    const [uploadedDate, setUploadedDate]=useState("")
+    const [description, setDescription]=useState("")                                       
+
+    //btns
     const [btnName, setBtnName] =  useState("Edit Profile")
 
     const url ="https://localhost:7216/api"
@@ -51,37 +67,68 @@ const Vehicle =({driverDetails})=>{
                 Color:color,
                 LicensePlate:licensePlate,
                 MaxWeight:parseFloat(maxWeight),
-                MaxVolume:parseFloat(maxVolume),
-                DriverId:parseInt(DriverId)
+                DriverId:parseInt(DriverId),
+                Length : length,
+                Height : height,
+                Width : width,
+                FileName : fileName,
+                ContentType : contentType,
+                ImageData : imageData,
+                FileSize : fileSize,
+                UploadedDate : uploadedDate,
+                Description : description,
             }
+
+            console.log("vehicleInfo",vehicleInfo)
             
-            await axios.put(`${url}/Vehicle/Edit-Vehcile`,vehicleInfo,{
+            await axios.put(`${url}/Driver/Edit-Vehcile`,vehicleInfo,{
                 params:{
                     Id:parseInt(vehicleId)
                 }
             })            
-            //console.log("Update successful",vehicleInfo )
+            showNotification("Successfully edited the  details","success")
         }
         catch(e){
+            showNotification("Error editing the details","error")
             console.log("ERROR",e)
         }
     }
     
+    const showNotification = (message, type = 'info') => {
+        setNotification({ show: true, message, type });
+        setTimeout(() => {
+          setNotification(prev=>({ ...prev, show: false }));
+        }, 5000);
+    };
+
     const handleReloads=async()=>{
-        const response = await axios.get(`${url}/Vehicle/Get-Vehicle-By-DriverId`,{
+        const response = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
                 params:{
                     DriverId:parseInt(DriverId)
                 }
             })
-            
+
             setBrand(response.data.Brand)
             setModel(response.data.Model)
             setMakeYear(response.data.MakeYear)
             setColor(response.data.Color)
             setLicensePlate(response.data.LicensePlate)
-            setMaxVolume(response.data.MaxVolume)
             setMaxWieght(response.data.MaxWeight)
+            setLength(response.data.Length)
+            setWidth(response.data.Width)
+            setHeight(response.data.Height)
+            setFileName(response.data.FileName)
+            setContentType(response.data.ContentType)
+            setImageData(response.data.ImageData)
+            setFileSize(response.data.FileSize)
+            setUploadedDate(response.data.UploadedDate)
+            setDescription(response.data.Description)
     }
+
+    useEffect(() => {    
+            window.hideNotification = () => setNotification({ ...notification, show: false });
+        }, [notification]); 
+
     useEffect(()=>{
         handleReloads()
     },[DriverId])
@@ -112,7 +159,6 @@ const Vehicle =({driverDetails})=>{
 
     return(
         <div className="vehicle-info-component">
-            {/* <div className="photo-to-upload"></div> */}
             <div className="vehicle-info-edit">
                 <div className="vehicle-edit-info">
                     <div>
@@ -143,7 +189,7 @@ const Vehicle =({driverDetails})=>{
                     </div>
                     
                     <div className="input-group-info">
-                        <label htmlFor="">Make_Year</label>
+                        <label htmlFor="">Make Year</label>
                         <input 
                             type="text"
                             value={makeYear}
@@ -163,7 +209,7 @@ const Vehicle =({driverDetails})=>{
                     </div>
                     
                     <div className="input-group-info">
-                        <label htmlFor="">Max_Weight</label>
+                        <label htmlFor="">Max Weight</label>
                         <input 
                             type="text"
                             value={maxWeight}
@@ -173,17 +219,65 @@ const Vehicle =({driverDetails})=>{
                     </div>
                     
                     <div className="input-group-info">
-                        <label htmlFor="">Max_Volume</label>
+                        <label htmlFor="">Length</label>
                         <input 
                             type="text"
-                            value={maxVolume}
-                            onChange={(e)=>setMaxVolume(e.target.value)} 
+                            value={length}
+                            onChange={(e)=>setLength(e.target.value)} 
                             disabled={disableTrue}
                         />
-                    </div>                  
+                    </div>  
 
+                    <div className="input-group-info">
+                        <label htmlFor="">Height</label>
+                        <input 
+                            type="text"
+                            value={height}
+                            onChange={(e)=>setHeight(e.target.value)} 
+                            disabled={disableTrue}
+                        />
+                    </div> 
+
+                    <div className="input-group-info">
+                        <label htmlFor="">Width</label>
+                        <input 
+                            type="text"
+                            value={width}
+                            onChange={(e)=>setWidth(e.target.value)} 
+                            disabled={disableTrue}
+                        />
+                    </div> 
+
+                    <div className="input-group-info">
+                        <label htmlFor="">Description</label>
+                        <input 
+                            type="text"
+                            value={description}
+                            onChange={(e)=>setDescription(e.target.value)} 
+                            disabled={disableTrue}
+                        />
+                    </div>  
                 </form>
             </div>
+            
+            {/* Notification */}
+            <div className={`notificationNew ${notification.show ? 'show' : ''}`} id="notification">
+                <div className="d-flex justify-content-between align-items-start mb-2">
+                <h6 className="mb-0" style={{ color: 
+                    notification.type === 'error' ? '#dc3545' : 
+                    notification.type === 'success' ? '#28a745' : 
+                    notification.type === 'warning' ? '#ffc107' : '#4a6fdc'
+                }}>
+                    {notification.type === 'error' ? 'Error' : 
+                        notification.type === 'success' ? 'Success' : 
+                        notification.type === 'warning' ? 'Warning' : 'Information'}
+                </h6>
+                <button className="btn-close btn-sm" onClick={() => setNotification({ ...notification, show: false })}></button>
+                </div>
+                <div className="notification-body">
+                    {notification.message}
+                </div>
+            </div> 
         </div>
     )
 }
