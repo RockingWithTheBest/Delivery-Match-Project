@@ -8,9 +8,13 @@ namespace Backend.Repository.Implementation
     public class DriverRepository : IDriver
     {
         private ApplicationDatabaseContext databaseContext;
-        public DriverRepository(ApplicationDatabaseContext databaseContext)
+        private readonly IWebHostEnvironment _environment;
+        private readonly IConfiguration _configuration;
+        public DriverRepository(ApplicationDatabaseContext databaseContext, IWebHostEnvironment environment, IConfiguration configuration)
         {
             this.databaseContext = databaseContext;
+            _environment = environment;
+            _configuration = configuration;
         }
         public int CreateDriverRecord(Driver driver)
         {
@@ -56,7 +60,12 @@ namespace Backend.Repository.Implementation
 
         public Driver GetDriverDetails(int Id)
         {
-            return databaseContext.Drivers.Where(x => x.Id == Id).FirstOrDefault();
+            return databaseContext.
+                Drivers.
+                Where(x => x.Id == Id)
+                .Include(i=>i.User)
+                .Include(z=>z.NotificationsPlaced)
+                .FirstOrDefault();
         }
         public int UpdateDriverRecord(int Id, Driver driver)
         {
@@ -84,7 +93,7 @@ namespace Backend.Repository.Implementation
             }
             return testValue;
         }
-        public IEnumerable<OrderPlacement> GetAllOrdersPlacedByDriverID(int DriverId)
+        public IEnumerable<OrderPlacement> GetAllOrdersClaimedByDriverID(int DriverId)
         {
             return databaseContext.OrderPlacements.Where(x=>x.DriverId == DriverId).ToList();
         }
