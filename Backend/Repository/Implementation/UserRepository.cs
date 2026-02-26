@@ -2,6 +2,7 @@
 using Backend.Models;
 using Backend.Repository.Implementation;
 using Backend.Repository.Interface;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementation
@@ -9,9 +10,11 @@ namespace Backend.Repository.Implementation
     public class UserRepository : IUser
     {
         private ApplicationDatabaseContext databaseContext;
-        public UserRepository(ApplicationDatabaseContext databaseContext)
+        private readonly IPasswordHasher<User> passwordHasher;
+        public UserRepository(ApplicationDatabaseContext databaseContext, IPasswordHasher<User> passwordHasher)
         {
             this.databaseContext = databaseContext;
+            this.passwordHasher = passwordHasher;
         }
         public int AddUserRecord(User user)
         {
@@ -109,8 +112,33 @@ namespace Backend.Repository.Implementation
                 .ToList();
         }
 
-        
+        public User RegisterUser(User user)
+        {
+            var existingUser = databaseContext.Users.Where(i=>i.Email == user.Email).FirstOrDefault();
+            if(existingUser != null)
+            {
+                throw new Exception("User with this email already exists");
+            }
 
+            //Create new user
+            var userRecord = new User
+            {
+                Email = user.Email,
+                Phone = user.Phone,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Password = user.Password,
+                Driver = user.Driver,
+                Customer = user.Customer,
+            };
+
+            userRecord.Password = passwordHasher.HashPassword(userRecord, user.Password);
+            databaseContext.Users.Add(userRecord);
+            databaseContext.SaveChanges();
+
+            return userRecord;
+        }
+            
         public User GetSingleRecord(int Id)
         {
             return databaseContext.Users
