@@ -36,6 +36,18 @@ namespace Backend.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("Get-Route-By-DriverId")]
+        public IActionResult GetByDriverId(int id)
+        {
+            var result = route.GetSingleRecordByDriverId(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("Add-Route")]
         public IActionResult AddRoute(Models.Route routeRecord)
