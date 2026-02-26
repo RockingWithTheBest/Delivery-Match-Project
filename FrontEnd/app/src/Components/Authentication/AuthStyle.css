@@ -161,3 +161,107 @@ button.choice_user_selector div {
 button.choice_user_selector input {
     width: 0.7rem;
 }
+
+.form-group input.error {
+    border-color: #e74c3c !important;
+    border-width: 2px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.success-message {
+    color: #2ecc71;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.input-hint {
+    color: #666;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+.strength-bar {
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    margin-bottom: 0.25rem;
+    transition: width 0.3s, background 0.3s;
+}
+
+.strength-bar.empty {
+    background: #ddd;
+}
+
+.strength-bar.weak {
+    background: #e74c3c;
+}
+
+.strength-bar.fair {
+    background: #f39c12;
+}
+
+.strength-bar.good {
+    background: #3498db;
+}
+
+.strength-bar.strong {
+    background: #2ecc71;
+}
+
+.checkbox-group {
+    margin: 1.5rem 0;
+}
+
+.checkbox-label input[type="checkbox"].error {
+    outline: 2px solid #e74c3c;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.signup-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-status {
+    padding: 0.5rem;
+    margin: 1rem 0;
+    background: #f8f9fa;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+}
+
+.form-status p {
+    margin: 0;
+}

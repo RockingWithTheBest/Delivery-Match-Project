@@ -2,7 +2,7 @@ import './ClientStyles.css'
 import WorldIcon from "../Icons/world-alt-svgrepo-com.svg"
 import TruckIcon from "../Icons/truck-svgrepo-com.svg"
 import { useNavigate } from 'react-router-dom'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Profile from './Profile'
 import NewOrder from './NewOrder'
 import Notifications from './Notification'
@@ -81,6 +81,9 @@ const ClientMainComponent=()=>{
         setNewOrder(false)
         setProfile(false)            
     }
+    useEffect(()=>{
+        console.log("BOY")
+    })
     return(
         <div className='client-component'>
             <div className="header-nav">
