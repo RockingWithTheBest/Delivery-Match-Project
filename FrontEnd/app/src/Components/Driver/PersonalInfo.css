@@ -20,6 +20,7 @@
     background: black;
     height: 47px;
     color: white;
+    border-radius: 8px;
 }
 
 .person-edit-info img, .vehicle-edit-info img{

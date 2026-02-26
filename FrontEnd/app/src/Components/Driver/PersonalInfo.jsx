@@ -8,6 +8,7 @@ const PersonalInfo =({driverDetails})=>{
     const {password}=useParams()
     const {DriverId}=useParams()
     const [disableTrue,setDisableToTrue] = useState(true)
+    const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -50,7 +51,8 @@ const PersonalInfo =({driverDetails})=>{
                 Email:email,
                 Password:driverDetails.Password
             }
-  
+            
+            
             await axios.put(`${url}/User/Editing-User`,user,{
                 params:{
                     Id:parseInt(user.UserId)
@@ -72,12 +74,24 @@ const PersonalInfo =({driverDetails})=>{
                 params:{
                     Id:parseInt(DriverId)
                 }
-            })        
+            }) 
+            console.log("driverDetails",driverDetails)
+            showNotification("Successfully Edited the car details", "success")
         }
         catch(e){
+            showNotification("Error editing car details","error")
             console.log("ERROR", e)
         }
     }
+
+    const showNotification = (message, type = 'info') => {
+        setNotification({ show: true, message, type });
+        setTimeout(() => {
+          setNotification(prev=>({ ...prev, show: false }));
+        }, 5000);
+    };
+
+
     const handleReloadz=async()=>{        
         const responseDriver = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
             params:{
@@ -102,6 +116,10 @@ const PersonalInfo =({driverDetails})=>{
         handleReloadz()
     },[DriverId])
 
+    useEffect(() => {    
+        window.hideNotification = () => setNotification({ ...notification, show: false });
+    }, [notification]);   
+
     useEffect(()=>{
         if(driverDetails){
             setEmail(driverDetails.Email || "")
@@ -113,7 +131,7 @@ const PersonalInfo =({driverDetails})=>{
             setIsVerified(driverDetails.IsVerified || "")
             setLicenseExpiry(driverDetails.LicenseExpiry || "")
             setDriverLicense(driverDetails.DrivingLicense || "")
-            setTotalEarning(driverDetails.TotalEarnings || "")
+            setTotalEarning(driverDetails.TotalEarnings || 0.00)
             setBrand(driverDetails.Brand || "")
             setModel(driverDetails.Model || "")
             setMakeYear(driverDetails.MakeYear || "")
@@ -194,6 +212,25 @@ const PersonalInfo =({driverDetails})=>{
                         />
                 </div>
             </form>
+
+            {/* Notification */}
+            <div className={`notificationNew ${notification.show ? 'show' : ''}`} id="notification">
+                <div className="d-flex justify-content-between align-items-start mb-2">
+                <h6 className="mb-0" style={{ color: 
+                    notification.type === 'error' ? '#dc3545' : 
+                    notification.type === 'success' ? '#28a745' : 
+                    notification.type === 'warning' ? '#ffc107' : '#4a6fdc'
+                }}>
+                    {notification.type === 'error' ? 'Error' : 
+                        notification.type === 'success' ? 'Success' : 
+                        notification.type === 'warning' ? 'Warning' : 'Information'}
+                </h6>
+                <button className="btn-close btn-sm" onClick={() => setNotification({ ...notification, show: false })}></button>
+                </div>
+                <div className="notification-body">
+                    {notification.message}
+                </div>
+            </div> 
         </div>
     )
 }

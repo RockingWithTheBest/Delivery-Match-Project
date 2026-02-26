@@ -35,7 +35,7 @@ const Profile=()=>{
                 }
         })
         
-        const vehicle = await axios.get(`${url}/Vehicle/Get-Vehicle-By-DriverId`,{
+        const vehicle = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
             params:{
                 DriverId:parseInt(DriverId)
             }
@@ -52,7 +52,7 @@ const Profile=()=>{
             IsVerified: driver.data.IsVerified || "",
             Rating : driver.data.Rating || "",
             CompletionRate :driver.data.CompletionRate || "",
-            TotalEarnings: driver.data.TotalEarnings || "",
+            TotalEarnings: driver.data.TotalEarnings || 0.00,
             IsAvailable:driver.data.IsAvailable || "",
             Brand:vehicle.data.Brand || "",
             Model:vehicle.data.Model || "",
