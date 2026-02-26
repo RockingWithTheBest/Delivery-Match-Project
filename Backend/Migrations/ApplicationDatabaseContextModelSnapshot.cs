@@ -31,16 +31,16 @@ namespace Backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Height")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(8,2)");
 
                     b.Property<decimal>("Length")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(8,2)");
 
                     b.Property<int>("OrderItemsId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Width")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(8,2)");
 
                     b.HasKey("Id");
 
@@ -48,200 +48,6 @@ namespace Backend.Migrations
                         .IsUnique();
 
                     b.ToTable("OrderDimension");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Height = 2.50m,
-                            Length = 35.00m,
-                            OrderItemsId = 1,
-                            Width = 25.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Height = 3.50m,
-                            Length = 10.00m,
-                            OrderItemsId = 2,
-                            Width = 6.00m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Height = 4.00m,
-                            Length = 45.00m,
-                            OrderItemsId = 3,
-                            Width = 15.00m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Height = 75.00m,
-                            Length = 120.00m,
-                            OrderItemsId = 4,
-                            Width = 60.00m
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Height = 90.00m,
-                            Length = 65.00m,
-                            OrderItemsId = 5,
-                            Width = 65.00m
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Height = 85.00m,
-                            Length = 200.00m,
-                            OrderItemsId = 8,
-                            Width = 90.00m
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Height = 45.00m,
-                            Length = 120.00m,
-                            OrderItemsId = 9,
-                            Width = 60.00m
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Height = 0.50m,
-                            Length = 200.00m,
-                            OrderItemsId = 22,
-                            Width = 150.00m
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Height = 15.00m,
-                            Length = 50.00m,
-                            OrderItemsId = 23,
-                            Width = 50.00m
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Height = 0.50m,
-                            Length = 240.00m,
-                            OrderItemsId = 24,
-                            Width = 160.00m
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Height = 0.80m,
-                            Length = 15.00m,
-                            OrderItemsId = 6,
-                            Width = 7.50m
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Height = 2.50m,
-                            Length = 10.00m,
-                            OrderItemsId = 7,
-                            Width = 5.00m
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Height = 8.00m,
-                            Length = 20.00m,
-                            OrderItemsId = 16,
-                            Width = 18.00m
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Height = 8.00m,
-                            Length = 20.00m,
-                            OrderItemsId = 17,
-                            Width = 8.00m
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Height = 8.00m,
-                            Length = 12.00m,
-                            OrderItemsId = 20,
-                            Width = 9.00m
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Height = 150.00m,
-                            Length = 35.00m,
-                            OrderItemsId = 21,
-                            Width = 35.00m
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Height = 2.00m,
-                            Length = 30.00m,
-                            OrderItemsId = 10,
-                            Width = 25.00m
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Height = 5.00m,
-                            Length = 40.00m,
-                            OrderItemsId = 11,
-                            Width = 20.00m
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Height = 25.00m,
-                            Length = 30.00m,
-                            OrderItemsId = 12,
-                            Width = 30.00m
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Height = 25.00m,
-                            Length = 30.00m,
-                            OrderItemsId = 13,
-                            Width = 30.00m
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Height = 4.00m,
-                            Length = 25.00m,
-                            OrderItemsId = 14,
-                            Width = 20.00m
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Height = 8.00m,
-                            Length = 15.00m,
-                            OrderItemsId = 15,
-                            Width = 10.00m
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Height = 15.00m,
-                            Length = 45.00m,
-                            OrderItemsId = 18,
-                            Width = 30.00m
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Height = 7.50m,
-                            Length = 25.00m,
-                            OrderItemsId = 19,
-                            Width = 7.50m
-                        });
                 });
 
             modelBuilder.Entity("Backend.Models.Address", b =>
@@ -266,6 +72,18 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Latitude")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Longitude")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -331,6 +149,9 @@ namespace Backend.Migrations
                             AddressLine = "123 Elm St",
                             City = "New York",
                             Label = "Home",
+                            Latitude = "55.75100000000001",
+                            Location = "Kremlin, Moscow",
+                            Longitude = "37.61760000000001",
                             UserId = 7
                         },
                         new
@@ -339,6 +160,9 @@ namespace Backend.Migrations
                             AddressLine = "456 Fitness Ln",
                             City = "New York",
                             Label = "Gym",
+                            Latitude = "59.88520000000001",
+                            Location = "Samson Fountain, Saint Petersburg",
+                            Longitude = "29.90910000000001",
                             UserId = 8
                         },
                         new
@@ -347,6 +171,9 @@ namespace Backend.Migrations
                             AddressLine = "321 Cedar Ct",
                             City = "Miami",
                             Label = "Home",
+                            Latitude = "55.80060000000001",
+                            Location = "Temple of all Religions, Kazan",
+                            Longitude = "48.97470000000001",
                             UserId = 9
                         },
                         new
@@ -355,6 +182,9 @@ namespace Backend.Migrations
                             AddressLine = "654 Academy Blvd",
                             City = "Miami",
                             Label = "School",
+                            Latitude = "55.76670000000001",
+                            Location = "Ice Palace, Moscow",
+                            Longitude = "37.43520000000001",
                             UserId = 10
                         },
                         new
@@ -514,8 +344,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("RejectionReason")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<DateTime>("ReviewedAt")
                         .HasColumnType("datetime2");
@@ -775,7 +605,21 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool?>("IsRead")
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DriverCommentry")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
                     b.Property<string>("Message")
@@ -783,22 +627,21 @@ namespace Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    b.Property<int>("OrderPlacementId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("OrderPlacementId");
 
                     b.ToTable("Notifications");
                 });
@@ -827,6 +670,9 @@ namespace Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<decimal>("WeightPerItem")
+                        .HasColumnType("decimal(8,2)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderPlacementId")
@@ -841,7 +687,8 @@ namespace Backend.Migrations
                             ItemName = "Laptop",
                             OrderPlacementId = 1,
                             Quantity = 1,
-                            SpecialInstructions = "Handle with care"
+                            SpecialInstructions = "Handle with care",
+                            WeightPerItem = 50.00m
                         },
                         new
                         {
@@ -849,7 +696,8 @@ namespace Backend.Migrations
                             ItemName = "Mouse",
                             OrderPlacementId = 2,
                             Quantity = 2,
-                            SpecialInstructions = "Wireless"
+                            SpecialInstructions = "Wireless",
+                            WeightPerItem = 50.00m
                         },
                         new
                         {
@@ -857,7 +705,8 @@ namespace Backend.Migrations
                             ItemName = "Keyboard",
                             OrderPlacementId = 3,
                             Quantity = 1,
-                            SpecialInstructions = "Mechanical"
+                            SpecialInstructions = "Mechanical",
+                            WeightPerItem = 50.00m
                         },
                         new
                         {
@@ -865,7 +714,8 @@ namespace Backend.Migrations
                             ItemName = "Desk",
                             OrderPlacementId = 4,
                             Quantity = 1,
-                            SpecialInstructions = "Assembly required"
+                            SpecialInstructions = "Assembly required",
+                            WeightPerItem = 50.00m
                         },
                         new
                         {
@@ -873,7 +723,8 @@ namespace Backend.Migrations
                             ItemName = "Chair",
                             OrderPlacementId = 5,
                             Quantity = 1,
-                            SpecialInstructions = "Comfortable"
+                            SpecialInstructions = "Comfortable",
+                            WeightPerItem = 50.00m
                         },
                         new
                         {
@@ -881,7 +732,8 @@ namespace Backend.Migrations
                             ItemName = "Phone",
                             OrderPlacementId = 6,
                             Quantity = 1,
-                            SpecialInstructions = "New model"
+                            SpecialInstructions = "New model",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -889,7 +741,8 @@ namespace Backend.Migrations
                             ItemName = "Charger",
                             OrderPlacementId = 7,
                             Quantity = 1,
-                            SpecialInstructions = "Fast charging"
+                            SpecialInstructions = "Fast charging",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -897,7 +750,8 @@ namespace Backend.Migrations
                             ItemName = "Couch",
                             OrderPlacementId = 8,
                             Quantity = 1,
-                            SpecialInstructions = "Delivery on ground floor only"
+                            SpecialInstructions = "Delivery on ground floor only",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -905,7 +759,8 @@ namespace Backend.Migrations
                             ItemName = "Coffee Table",
                             OrderPlacementId = 9,
                             Quantity = 1,
-                            SpecialInstructions = "Glass top"
+                            SpecialInstructions = "Glass top",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -913,7 +768,8 @@ namespace Backend.Migrations
                             ItemName = "T-Shirt",
                             OrderPlacementId = 10,
                             Quantity = 5,
-                            SpecialInstructions = "Various colors"
+                            SpecialInstructions = "Various colors",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -921,7 +777,8 @@ namespace Backend.Migrations
                             ItemName = "Jeans",
                             OrderPlacementId = 11,
                             Quantity = 2,
-                            SpecialInstructions = "Brand: XYZ"
+                            SpecialInstructions = "Brand: XYZ",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -929,7 +786,8 @@ namespace Backend.Migrations
                             ItemName = "Fruits Basket",
                             OrderPlacementId = 12,
                             Quantity = 1,
-                            SpecialInstructions = "Seasonal fruits"
+                            SpecialInstructions = "Seasonal fruits",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -937,7 +795,8 @@ namespace Backend.Migrations
                             ItemName = "Vegetable Basket",
                             OrderPlacementId = 13,
                             Quantity = 1,
-                            SpecialInstructions = "Organic"
+                            SpecialInstructions = "Organic",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -945,7 +804,8 @@ namespace Backend.Migrations
                             ItemName = "Cookbook",
                             OrderPlacementId = 14,
                             Quantity = 1,
-                            SpecialInstructions = "Best seller"
+                            SpecialInstructions = "Best seller",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -953,7 +813,8 @@ namespace Backend.Migrations
                             ItemName = "Spices Set",
                             OrderPlacementId = 15,
                             Quantity = 1,
-                            SpecialInstructions = "Variety pack"
+                            SpecialInstructions = "Variety pack",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -961,7 +822,8 @@ namespace Backend.Migrations
                             ItemName = "Headphones",
                             OrderPlacementId = 16,
                             Quantity = 1,
-                            SpecialInstructions = "Noise cancelling"
+                            SpecialInstructions = "Noise cancelling",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -969,7 +831,8 @@ namespace Backend.Migrations
                             ItemName = "Bluetooth Speaker",
                             OrderPlacementId = 17,
                             Quantity = 1,
-                            SpecialInstructions = "Waterproof"
+                            SpecialInstructions = "Waterproof",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -977,7 +840,8 @@ namespace Backend.Migrations
                             ItemName = "Backpack",
                             OrderPlacementId = 18,
                             Quantity = 1,
-                            SpecialInstructions = "For travel"
+                            SpecialInstructions = "For travel",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -985,7 +849,8 @@ namespace Backend.Migrations
                             ItemName = "Water Bottle",
                             OrderPlacementId = 19,
                             Quantity = 1,
-                            SpecialInstructions = "Insulated"
+                            SpecialInstructions = "Insulated",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -993,7 +858,8 @@ namespace Backend.Migrations
                             ItemName = "Camera",
                             OrderPlacementId = 20,
                             Quantity = 1,
-                            SpecialInstructions = "Includes accessories"
+                            SpecialInstructions = "Includes accessories",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -1001,7 +867,8 @@ namespace Backend.Migrations
                             ItemName = "Tripod",
                             OrderPlacementId = 21,
                             Quantity = 1,
-                            SpecialInstructions = "Adjustable height"
+                            SpecialInstructions = "Adjustable height",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -1009,7 +876,8 @@ namespace Backend.Migrations
                             ItemName = "Blanket",
                             OrderPlacementId = 22,
                             Quantity = 1,
-                            SpecialInstructions = "Soft and warm"
+                            SpecialInstructions = "Soft and warm",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -1017,7 +885,8 @@ namespace Backend.Migrations
                             ItemName = "Pillow",
                             OrderPlacementId = 23,
                             Quantity = 2,
-                            SpecialInstructions = "Memory foam"
+                            SpecialInstructions = "Memory foam",
+                            WeightPerItem = 60.00m
                         },
                         new
                         {
@@ -1025,7 +894,8 @@ namespace Backend.Migrations
                             ItemName = "Rug",
                             OrderPlacementId = 24,
                             Quantity = 1,
-                            SpecialInstructions = "Non-slip"
+                            SpecialInstructions = "Non-slip",
+                            WeightPerItem = 60.00m
                         });
                 });
 
@@ -1060,6 +930,9 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
+
+                    b.Property<decimal>("Distance")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("DriverId")
                         .HasColumnType("int");
@@ -1101,9 +974,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
                             DeliveryContact = "Jane Smith",
-                            DeliveryUpAddress = "456 Elm St",
+                            DeliveryUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             Description = "Electronics",
-                            PickUpAddress = "123 Main St",
+                            Distance = 0m,
+                            PickUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             PickUpContact = "John Doe",
                             Price = 300.00m,
                             ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1116,9 +990,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
                             DeliveryContact = "Alice Brown",
-                            DeliveryUpAddress = "789 Oak St",
+                            DeliveryUpAddress = "Lenina Street, 1, Ufa, Republic of Bashkortostan, Russia, 450000",
                             Description = "Computers",
-                            PickUpAddress = "123 Main St",
+                            Distance = 0m,
+                            PickUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             PickUpContact = "John Doe",
                             Price = 500.00m,
                             ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1131,9 +1006,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
                             DeliveryContact = "Bob White",
-                            DeliveryUpAddress = "101 Pine St",
+                            DeliveryUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             Description = "Accessories",
-                            PickUpAddress = "123 Main St",
+                            Distance = 0m,
+                            PickUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000",
                             PickUpContact = "John Doe",
                             Price = 150.00m,
                             ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1146,9 +1022,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
                             DeliveryContact = "Lucy Green",
-                            DeliveryUpAddress = "202 Maple St",
+                            DeliveryUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             Description = "Furniture",
-                            PickUpAddress = "123 Main St",
+                            Distance = 0m,
+                            PickUpAddress = "Lenina Street, 1, Ufa, Republic of Bashkortostan, Russia, 450000",
                             PickUpContact = "John Doe",
                             Price = 600.00m,
                             ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1161,9 +1038,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
                             DeliveryContact = "Tom Brown",
-                            DeliveryUpAddress = "30 Center St",
+                            DeliveryUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             Description = "Fresh Produce",
-                            PickUpAddress = "25 Market St",
+                            Distance = 0m,
+                            PickUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             PickUpContact = "Alice Green",
                             Price = 200.00m,
                             ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1176,9 +1054,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
                             DeliveryContact = "Sarah White",
-                            DeliveryUpAddress = "35 Park Ave",
+                            DeliveryUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000",
                             Description = "Dairy Products",
-                            PickUpAddress = "25 Market St",
+                            Distance = 0m,
+                            PickUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             PickUpContact = "Alice Green",
                             Price = 300.00m,
                             ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1191,9 +1070,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
                             DeliveryContact = "Daniel Black",
-                            DeliveryUpAddress = "40 Broadway",
+                            DeliveryUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             Description = "Packaged Goods",
-                            PickUpAddress = "25 Market St",
+                            Distance = 0m,
+                            PickUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             PickUpContact = "Alice Green",
                             Price = 250.00m,
                             ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1206,9 +1086,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
                             DeliveryContact = "Emma Red",
-                            DeliveryUpAddress = "45 Fifth St",
+                            DeliveryUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             Description = "Beverages",
-                            PickUpAddress = "25 Market St",
+                            Distance = 0m,
+                            PickUpAddress = "Lenina Street, 1, Ufa, Republic of Bashkortostan, Russia, 450000",
                             PickUpContact = "Alice Green",
                             Price = 400.00m,
                             ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1221,9 +1102,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
                             DeliveryContact = "Jim Doe",
-                            DeliveryUpAddress = "50 Snack Ave",
+                            DeliveryUpAddress = "Lenina Street, 1, Ufa, Republic of Bashkortostan, Russia, 450000",
                             Description = "Fast Food Order",
-                            PickUpAddress = "45 Fast Food Rd",
+                            Distance = 0m,
+                            PickUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000",
                             PickUpContact = "Alice Johnson",
                             Price = 50.00m,
                             ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1236,9 +1118,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
                             DeliveryContact = "Kate Brown",
-                            DeliveryUpAddress = "55 Snack Ave",
+                            DeliveryUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             Description = "Burger Order",
-                            PickUpAddress = "45 Fast Food Rd",
+                            Distance = 0m,
+                            PickUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             PickUpContact = "Alice Johnson",
                             Price = 30.00m,
                             ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1251,9 +1134,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
                             DeliveryContact = "Ben White",
-                            DeliveryUpAddress = "60 Snack Ave",
+                            DeliveryUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             Description = "Pizza Order",
-                            PickUpAddress = "45 Fast Food Rd",
+                            Distance = 0m,
+                            PickUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             PickUpContact = "Alice Johnson",
                             Price = 40.00m,
                             ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1266,9 +1150,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
                             DeliveryContact = "Beth Green",
-                            DeliveryUpAddress = "65 Snack Ave",
+                            DeliveryUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             Description = "Dessert Order",
-                            PickUpAddress = "45 Fast Food Rd",
+                            Distance = 0m,
+                            PickUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             PickUpContact = "Alice Johnson",
                             Price = 20.00m,
                             ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1281,9 +1166,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
                             DeliveryContact = "Alice Johnson",
-                            DeliveryUpAddress = "110 Library Lane",
+                            DeliveryUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             Description = "Books",
-                            PickUpAddress = "100 Book St",
+                            Distance = 0m,
+                            PickUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             PickUpContact = "John Smith",
                             Price = 25.00m,
                             ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1296,9 +1182,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
                             DeliveryContact = "Bob White",
-                            DeliveryUpAddress = "120 Library Lane",
+                            DeliveryUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000",
                             Description = "Textbooks",
-                            PickUpAddress = "100 Book St",
+                            Distance = 0m,
+                            PickUpAddress = "Lenina Street, 1, Ufa, Republic of Bashkortostan, Russia, 450000",
                             PickUpContact = "John Smith",
                             Price = 45.00m,
                             ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1311,9 +1198,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
                             DeliveryContact = "Charlie Black",
-                            DeliveryUpAddress = "130 Library Lane",
+                            DeliveryUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             Description = "Novels",
-                            PickUpAddress = "100 Book St",
+                            Distance = 0m,
+                            PickUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000",
                             PickUpContact = "John Smith",
                             Price = 50.00m,
                             ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1326,9 +1214,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
                             DeliveryContact = "David Green",
-                            DeliveryUpAddress = "140 Library Lane",
+                            DeliveryUpAddress = "Lenina Street, 1, Ufa, Republic of Bashkortostan, Russia, 450000",
                             Description = "Magazines",
-                            PickUpAddress = "100 Book St",
+                            Distance = 0m,
+                            PickUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             PickUpContact = "John Smith",
                             Price = 30.00m,
                             ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1341,9 +1230,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
                             DeliveryContact = "James Black",
-                            DeliveryUpAddress = "160 Home Lane",
+                            DeliveryUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             Description = "Home Goods",
-                            PickUpAddress = "150 Home St",
+                            Distance = 0m,
+                            PickUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             PickUpContact = "Emily White",
                             Price = 200.00m,
                             ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1356,9 +1246,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
                             DeliveryContact = "Sarah Green",
-                            DeliveryUpAddress = "170 Home Lane",
+                            DeliveryUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000",
                             Description = "Furniture",
-                            PickUpAddress = "150 Home St",
+                            Distance = 0m,
+                            PickUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             PickUpContact = "Emily White",
                             Price = 800.00m,
                             ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1371,9 +1262,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
                             DeliveryContact = "Paul Red",
-                            DeliveryUpAddress = "180 Home Lane",
+                            DeliveryUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             Description = "Kitchenware",
-                            PickUpAddress = "150 Home St",
+                            Distance = 0m,
+                            PickUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             PickUpContact = "Emily White",
                             Price = 150.00m,
                             ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1386,9 +1278,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 5,
                             DeliveryContact = "Jessica Blue",
-                            DeliveryUpAddress = "190 Home Lane",
+                            DeliveryUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             Description = "Decorations",
-                            PickUpAddress = "150 Home St",
+                            Distance = 0m,
+                            PickUpAddress = "Lenina Street, 1, Ufa, Republic of Bashkortostan, Russia, 450000",
                             PickUpContact = "Emily White",
                             Price = 100.00m,
                             ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1401,9 +1294,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
                             DeliveryContact = "Anna Green",
-                            DeliveryUpAddress = "210 Gym Lane",
+                            DeliveryUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             Description = "Gym Equipment",
-                            PickUpAddress = "200 Fitness St",
+                            Distance = 0m,
+                            PickUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000t",
                             PickUpContact = "Mike Brown",
                             Price = 500.00m,
                             ScheduledAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1416,9 +1310,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
                             DeliveryContact = "Laura Black",
-                            DeliveryUpAddress = "220 Gym Lane",
+                            DeliveryUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             Description = "Fitness Apparel",
-                            PickUpAddress = "200 Fitness St",
+                            Distance = 0m,
+                            PickUpAddress = "Palace Square, 2, St. Petersburg, Russia, 191186",
                             PickUpContact = "Mike Brown",
                             Price = 150.00m,
                             ScheduledAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1431,9 +1326,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
                             DeliveryContact = "Cathy White",
-                            DeliveryUpAddress = "230 Gym Lane",
+                            DeliveryUpAddress = "Minin and Pozharsky Square, 1, Nizhny Novgorod, Russia, 603000",
                             Description = "Health Supplements",
-                            PickUpAddress = "200 Fitness St",
+                            Distance = 0m,
+                            PickUpAddress = "Red Square, 1, Moscow, Russia, 101000",
                             PickUpContact = "Mike Brown",
                             Price = 300.00m,
                             ScheduledAt = new DateTime(2023, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1446,9 +1342,10 @@ namespace Backend.Migrations
                             CreatedAt = new DateTime(2023, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 6,
                             DeliveryContact = "Sarah Blue",
-                            DeliveryUpAddress = "240 Gym Lane",
+                            DeliveryUpAddress = "Bauman Street, 1, Kazan, Republic of Tatarstan, Russia, 420111",
                             Description = "Yoga Mats",
-                            PickUpAddress = "200 Fitness St",
+                            Distance = 0m,
+                            PickUpAddress = "Kuibysheva Street, 1, Samara, Russia, 443000",
                             PickUpContact = "Mike Brown",
                             Price = 100.00m,
                             ScheduledAt = new DateTime(2023, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1501,240 +1398,240 @@ namespace Backend.Migrations
                         new
                         {
                             Id = 1,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "59.9343,30.3351",
                             Notes = "Picked up from warehouse",
                             OrderPlacementId = 1,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7558,37.6173",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "54.7349,55.9579",
                             Notes = "Delivered to customer",
                             OrderPlacementId = 2,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7961,49.1064",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "54.7261,55.9475",
                             Notes = "On the way",
                             OrderPlacementId = 3,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "56.3269,44.0075",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7961,49.1064",
                             Notes = "Received by customer",
                             OrderPlacementId = 4,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7349,55.9579",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7558,37.6173",
                             Notes = "Awaiting pickup",
                             OrderPlacementId = 5,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "59.9343,30.3351",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "56.3269,44.0075",
                             Notes = "Picked up",
                             OrderPlacementId = 6,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7261,55.9475",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7558,37.6173",
                             Notes = "On the way to destination",
                             OrderPlacementId = 7,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7961,49.1064",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "59.9343,30.3351",
                             Notes = "Delivered successfully",
                             OrderPlacementId = 8,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7349,55.9579",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "54.7349,55.9579",
                             Notes = "Waiting for dispatch",
                             OrderPlacementId = 9,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "56.3269,44.0075",
                             Status = "In Warehouse",
                             TimeStamps = new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "54.7261,55.9475",
                             Notes = "On route to delivery",
                             OrderPlacementId = 10,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "59.9343,30.3351",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 11,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7961,49.1064",
                             Notes = "Awaiting confirmation",
                             OrderPlacementId = 11,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7558,37.6173",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 12,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7558,37.6173",
                             Notes = "Picked up",
                             OrderPlacementId = 12,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7261,55.9475",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 13,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "54.7261,55.9475",
                             Notes = "On the way",
                             OrderPlacementId = 13,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7961,49.1064",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 11, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 14,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "56.3269,44.0075",
                             Notes = "Delivered to customer",
                             OrderPlacementId = 14,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7349,55.9579",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 15,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "59.9343,30.3351",
                             Notes = "On the way",
                             OrderPlacementId = 15,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "56.3269,44.0075",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 11, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 16,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "54.7349,55.9579",
                             Notes = "Received by customer",
                             OrderPlacementId = 16,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7558,37.6173",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 17,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7961,49.1064",
                             Notes = "Awaiting pickup",
                             OrderPlacementId = 17,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "59.9343,30.3351",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 18,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "56.3269,44.0075",
                             Notes = "Picked up",
                             OrderPlacementId = 18,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7261,55.9475",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 19,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "59.9343,30.3351",
                             Notes = "On the way to destination",
                             OrderPlacementId = 19,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7961,49.1064",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 20,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7558,37.6173",
                             Notes = "Delivered successfully",
                             OrderPlacementId = 20,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7349,55.9579",
                             Status = "Delivered",
                             TimeStamps = new DateTime(2023, 9, 15, 13, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 21,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "54.7261,55.9475",
                             Notes = "Waiting for dispatch",
                             OrderPlacementId = 21,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "56.3269,44.0075",
                             Status = "In Warehouse",
                             TimeStamps = new DateTime(2023, 9, 15, 8, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 22,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7558,37.6173",
                             Notes = "On route to delivery",
                             OrderPlacementId = 22,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "59.9343,30.3351",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 23,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "56.3269,44.0075",
                             Notes = "Awaiting confirmation",
                             OrderPlacementId = 23,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "55.7558,37.6173",
                             Status = "Pending",
                             TimeStamps = new DateTime(2023, 9, 15, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 24,
-                            DeliveryLocation = "-118.2437",
+                            DeliveryLocation = "55.7961,49.1064",
                             Notes = "Picked up",
                             OrderPlacementId = 24,
-                            PickUpLocation = "34.0522",
+                            PickUpLocation = "54.7261,55.9475",
                             Status = "In Transit",
                             TimeStamps = new DateTime(2023, 9, 15, 12, 30, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -2085,13 +1982,9 @@ namespace Backend.Migrations
                     b.Property<DateTime?>("EstimatedDuration")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("OrderPlacementId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RouteData")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TotalDistance")
                         .IsRequired()
@@ -2102,227 +1995,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("DriverId");
 
-                    b.HasIndex("OrderPlacementId");
-
                     b.ToTable("Routes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DriverId = 1,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 1,
-                            RouteData = "Route 1 Data",
-                            TotalDistance = "15.2 km"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DriverId = 2,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 2,
-                            RouteData = "Route 2 Data",
-                            TotalDistance = "22.8 km"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DriverId = 3,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 45, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 3,
-                            RouteData = "Route 3 Data",
-                            TotalDistance = "18.5 km"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DriverId = 4,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 30, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 4,
-                            RouteData = "Route 4 Data",
-                            TotalDistance = "27.3 km"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DriverId = 5,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 1, 50, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 5,
-                            RouteData = "Route 5 Data",
-                            TotalDistance = "12.1 km"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DriverId = 6,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 6,
-                            RouteData = "Route 6 Data",
-                            TotalDistance = "19.7 km"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DriverId = 1,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 20, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 7,
-                            RouteData = "Route 7 Data",
-                            TotalDistance = "24.9 km"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            DriverId = 2,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 25, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 8,
-                            RouteData = "Route 8 Data",
-                            TotalDistance = "16.4 km"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            DriverId = 3,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 5, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 9,
-                            RouteData = "Route 9 Data",
-                            TotalDistance = "21.2 km"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            DriverId = 4,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 15, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 10,
-                            RouteData = "Route 10 Data",
-                            TotalDistance = "14.8 km"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            DriverId = 5,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 40, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 11,
-                            RouteData = "Route 11 Data",
-                            TotalDistance = "23.6 km"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            DriverId = 6,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 40, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 12,
-                            RouteData = "Route 12 Data",
-                            TotalDistance = "17.9 km"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            DriverId = 1,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 35, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 13,
-                            RouteData = "Route 13 Data",
-                            TotalDistance = "26.1 km"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            DriverId = 2,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 10, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 14,
-                            RouteData = "Route 14 Data",
-                            TotalDistance = "13.5 km"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            DriverId = 3,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 0, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 15,
-                            RouteData = "Route 15 Data",
-                            TotalDistance = "20.3 km"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            DriverId = 4,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 45, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 16,
-                            RouteData = "Route 16 Data",
-                            TotalDistance = "25.7 km"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            DriverId = 5,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 35, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 17,
-                            RouteData = "Route 17 Data",
-                            TotalDistance = "15.9 km"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            DriverId = 6,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 25, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 18,
-                            RouteData = "Route 18 Data",
-                            TotalDistance = "22.4 km"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            DriverId = 1,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 50, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 19,
-                            RouteData = "Route 19 Data",
-                            TotalDistance = "18.2 km"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            DriverId = 2,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 30, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 20,
-                            RouteData = "Route 20 Data",
-                            TotalDistance = "24.3 km"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            DriverId = 3,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 30, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 21,
-                            RouteData = "Route 21 Data",
-                            TotalDistance = "16.7 km"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            DriverId = 4,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 3, 15, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 22,
-                            RouteData = "Route 22 Data",
-                            TotalDistance = "21.9 km"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            DriverId = 5,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 20, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 23,
-                            RouteData = "Route 23 Data",
-                            TotalDistance = "14.3 km"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            DriverId = 6,
-                            EstimatedDuration = new DateTime(2024, 1, 1, 2, 55, 0, 0, DateTimeKind.Unspecified),
-                            OrderPlacementId = 24,
-                            RouteData = "Route 24 Data",
-                            TotalDistance = "19.8 km"
-                        });
                 });
 
             modelBuilder.Entity("Backend.Models.User", b =>
@@ -2491,11 +2164,32 @@ namespace Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<int>("DriverId")
                         .HasColumnType("int");
 
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
                     b.Property<decimal>("Height")
                         .HasColumnType("decimal(8,2)");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("VARBINARY(MAX)");
 
                     b.Property<decimal>("Length")
                         .HasColumnType("decimal(8,2)");
@@ -2516,6 +2210,9 @@ namespace Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("UploadedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("Width")
                         .HasColumnType("decimal(8,2)");
 
@@ -2531,13 +2228,18 @@ namespace Backend.Migrations
                             Id = 1,
                             Brand = "Ford",
                             Color = "White",
+                            ContentType = "",
                             DriverId = 1,
+                            FileName = "",
+                            FileSize = 0L,
                             Height = 250m,
+                            ImageData = new byte[0],
                             Length = 620m,
                             LicensePlate = "LU1 VAN",
                             MakeYear = new DateOnly(2021, 1, 1),
                             MaxWeight = 1500.00m,
                             Model = "Transit Luton",
+                            UploadedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Width = 230m
                         },
                         new
@@ -2545,13 +2247,18 @@ namespace Backend.Migrations
                             Id = 2,
                             Brand = "Mercedes-Benz",
                             Color = "Silver",
+                            ContentType = "",
                             DriverId = 2,
+                            FileName = "",
+                            FileSize = 0L,
                             Height = 260m,
+                            ImageData = new byte[0],
                             Length = 650m,
                             LicensePlate = "LU2 VAN",
                             MakeYear = new DateOnly(2020, 1, 1),
                             MaxWeight = 1700.00m,
                             Model = "Sprinter Luton",
+                            UploadedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Width = 240m
                         },
                         new
@@ -2559,13 +2266,18 @@ namespace Backend.Migrations
                             Id = 3,
                             Brand = "Iveco",
                             Color = "Blue",
+                            ContentType = "",
                             DriverId = 3,
+                            FileName = "",
+                            FileSize = 0L,
                             Height = 270m,
+                            ImageData = new byte[0],
                             Length = 680m,
                             LicensePlate = "LU3 VAN",
                             MakeYear = new DateOnly(2022, 1, 1),
                             MaxWeight = 2000.00m,
                             Model = "Daily Luton",
+                            UploadedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Width = 240m
                         },
                         new
@@ -2573,13 +2285,18 @@ namespace Backend.Migrations
                             Id = 4,
                             Brand = "Volkswagen",
                             Color = "Red",
+                            ContentType = "",
                             DriverId = 4,
+                            FileName = "",
+                            FileSize = 0L,
                             Height = 265m,
+                            ImageData = new byte[0],
                             Length = 660m,
                             LicensePlate = "LU4 VAN",
                             MakeYear = new DateOnly(2021, 1, 1),
                             MaxWeight = 1800.00m,
                             Model = "Crafter Luton",
+                            UploadedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Width = 235m
                         },
                         new
@@ -2587,13 +2304,18 @@ namespace Backend.Migrations
                             Id = 5,
                             Brand = "Renault",
                             Color = "Yellow",
+                            ContentType = "",
                             DriverId = 5,
+                            FileName = "",
+                            FileSize = 0L,
                             Height = 255m,
+                            ImageData = new byte[0],
                             Length = 630m,
                             LicensePlate = "LU5 VAN",
                             MakeYear = new DateOnly(2023, 1, 1),
                             MaxWeight = 1600.00m,
                             Model = "Master Luton",
+                            UploadedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Width = 230m
                         },
                         new
@@ -2601,13 +2323,18 @@ namespace Backend.Migrations
                             Id = 6,
                             Brand = "Peugeot",
                             Color = "Green",
+                            ContentType = "",
                             DriverId = 6,
+                            FileName = "",
+                            FileSize = 0L,
                             Height = 270m,
+                            ImageData = new byte[0],
                             Length = 670m,
                             LicensePlate = "LU6 VAN",
                             MakeYear = new DateOnly(2022, 1, 1),
                             MaxWeight = 1900.00m,
                             Model = "Boxer Luton",
+                            UploadedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Width = 240m
                         });
                 });
@@ -2684,11 +2411,29 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Notification", b =>
                 {
-                    b.HasOne("Backend.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("Backend.Models.Customer", "Customer")
+                        .WithMany("NotificationsPlaced")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("Backend.Models.Driver", "Driver")
+                        .WithMany("NotificationsPlaced")
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Models.OrderPlacement", "OrderPlacement")
+                        .WithMany("NotificationsPlaced")
+                        .HasForeignKey("OrderPlacementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("OrderPlacement");
                 });
 
             modelBuilder.Entity("Backend.Models.OrderItems", b =>
@@ -2749,13 +2494,7 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Models.OrderPlacement", "OrderPlacement")
-                        .WithMany()
-                        .HasForeignKey("OrderPlacementId");
-
                     b.Navigation("Driver");
-
-                    b.Navigation("OrderPlacement");
                 });
 
             modelBuilder.Entity("Backend.Models.Vehicle", b =>
@@ -2771,11 +2510,15 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Customer", b =>
                 {
+                    b.Navigation("NotificationsPlaced");
+
                     b.Navigation("OrdersPlaced");
                 });
 
             modelBuilder.Entity("Backend.Models.Driver", b =>
                 {
+                    b.Navigation("NotificationsPlaced");
+
                     b.Navigation("OrdersPlaced");
                 });
 
@@ -2786,6 +2529,8 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.OrderPlacement", b =>
                 {
+                    b.Navigation("NotificationsPlaced");
+
                     b.Navigation("OrderItems");
 
                     b.Navigation("OrderTrackings");

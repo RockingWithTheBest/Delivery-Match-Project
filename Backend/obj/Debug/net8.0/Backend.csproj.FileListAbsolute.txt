@@ -361,5 +361,6 @@ E:\Desktop\Delivery-Match-Project\Backend\obj\Debug\net8.0\refint\Backend.dll
 E:\Desktop\Delivery-Match-Project\Backend\obj\Debug\net8.0\Backend.pdb
 E:\Desktop\Delivery-Match-Project\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 E:\Desktop\Delivery-Match-Project\Backend\obj\Debug\net8.0\ref\Backend.dll
-E:\Desktop\Delivery-Match-Project\Backend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 E:\Desktop\Delivery-Match-Project\Backend\obj\Debug\net8.0\swae.build.ex.cache
+E:\Desktop\Delivery-Match-Project\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\Desktop\Delivery-Match-Project\Backend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Backend",
-    "\\Backend\\Controllers",
-    "\\FrontEnd",
-    "\\FrontEnd\\app",
-    "\\FrontEnd\\app\\src"
+    ""
   ],
-  "SelectedNode": "\\Backend\\Controllers\\UserController.cs",
+  "SelectedNode": "\\Backend.sln",
   "PreviewInSolutionExplorer": false
 }
