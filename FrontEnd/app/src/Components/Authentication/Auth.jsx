@@ -2,13 +2,16 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import BackArrow from './Icons/arrow-back.svg'
-// import { yupResolver } from '@hookform/resolvers/yup';
+import RequestEmail from './RequestEmail'
+import PasswordChanger from './PasswordChanger'
 import * as yup from 'yup';
 import './AuthStyle.css'
-import { Percent } from 'lucide-react';
+
 
 const Registration=()=>{
 
+    const [openEmailRequest, setEmailRequest] = useState(false)
+    const [openPasswordChanger, setPasswordChanger] = useState(false)
     const [loginbool, setLoginBool] = useState(true)
     const [regirsterbool, setRegisterBool] = useState(false)
     const [userType, setUserType] = useState('Client'); // State to manage user type\
@@ -170,12 +173,11 @@ const Registration=()=>{
     });
 
     const currentSchema =(userType)=>{
-         console.log(" user type",userType)
+        console.log(" user type",userType)
         if(userType === 'Client'){
             return clientSchema
         }
         else if(userType === 'Driver'){
-            console.log("Driver user type")
             return driverSchema
         }
     }
@@ -190,32 +192,28 @@ const Registration=()=>{
                 email: email,
                 phoneNumber: phone_number,
                 password: password,
-                confirmPassword: confirm_password,
-                businessName: businessNameField,
-                businessType: businessTypeField,
-                taxIdentification: tax_dentification_Field,
-                driversLicense: driverLicenseField,
-                licenseExpiry: licenseExpiryField,
+                confirmPassword: confirm_password,           
+                //Client & Driver
                 termsAccepted: termsAccepted
-            };
+            };        
+
+            if (userType === 'Client') {
+                //Client
+                formData.businessName = businessNameField
+                formData.businessType = businessTypeField
+                formData.taxIdentification = tax_dentification_Field
+
+            } else if(userType === 'Driver'){
+                //Driver
+                formData.driversLicense = driverLicenseField
+                formData.licenseExpiry = licenseExpiryField
+            }
 
             // Update the field being changed
             formData[fieldName] = value;
 
-            // Create data to validate based on user type
-            const dataToValidate = {...formData};
-
-            if (userType === 'Client') {
-                delete dataToValidate.driversLicense;
-                delete dataToValidate.licenseExpiry;
-            } else if(userType === 'Driver'){
-                delete dataToValidate.businessName;
-                delete dataToValidate.businessType;
-                delete dataToValidate.taxIdentification;
-            }
-
             // Validate only the specific field
-            await yup.reach(currentSchema, fieldName).validate(value)
+            await yup.reach(currentSchema(userType), fieldName).validate(value)
 
             // Clear error for this field
             setErrors(pev=>({...prev, [fieldName]:undefined}));
@@ -243,38 +241,33 @@ const Registration=()=>{
                 phoneNumber: phone_number,
                 password: password,
                 confirmPassword: confirm_password,
-                businessName: businessNameField,
-                businessType: businessTypeField,
-                taxIdentification: tax_dentification_Field,
-                driversLicense: driverLicenseField,
-                licenseExpiry: licenseExpiryField
+                termsAccepted: termsAccepted
             };
 
-            //Remove undefined values for conditional fields
-            const dataToValidate = {...formData} 
-            // Remove undefined values for conditional fields
             if (userType === 'Client') {
-                delete dataToValidate.driversLicense;
-                delete dataToValidate.licenseExpiry;
+                formData.businessName = businessNameField
+                formData.businessType = businessTypeField
+                formData.taxIdentification  = tax_dentification_Field                
             } 
             else if(userType === 'Driver'){
-                delete dataToValidate.businessName;
-                delete dataToValidate.businessType;
-                delete dataToValidate.taxIdentification;
+                formData.driversLicense = driverLicenseField
+                formData.licenseExpiry = licenseExpiryField                
             }
 
+            console.log("validating data for",userType, formData) 
             
-            await currentSchema(userType).validate(dataToValidate, {abortEarly:false});
-            console.log("DRIVER", userType) 
+            await currentSchema(userType).validate(formData, {abortEarly:false});
             setErrors({});
             setIsValid(true);
             return true;
         }
         catch (error) {
+            console.log("Validation error", error)
             const newErrors = {};
             if (error.inner) {
                 error.inner.forEach(err => {
                     newErrors[err.path] = err.message;
+                    console.log(`Field : ${err.path}, Error: ${err.message}`)
                 });
             }
             setErrors(newErrors);
@@ -351,6 +344,7 @@ const Registration=()=>{
                     }
                 }
                 
+                console.log("DATE_ DRIVER",Driver)
                 const response = await axios.post(`${api_url}/User/Register-User-Record`,Driver)
                 showNotification("Successfully registrated Driver ", 'success');
 
@@ -407,13 +401,11 @@ const Registration=()=>{
      
         if(userType =='Client'){
             try{
-
                 const loginResponse = await axios.post("https://localhost:7216/api/JWTControllerTakeThisToUser/login-jwt", {
                             email:email,
                             password : password
                         }
                 )
-
                 const token =  loginResponse.data.Token
 
                 // Set the token in Authorization header for subsequent requests
@@ -488,6 +480,16 @@ const Registration=()=>{
     const handleClient = (event) => {
         event.preventDefault()
         setUserType('Client');
+
+        //clear all driver specific fields
+        setDriverLicense(null)
+        setLicenseExpiry(null)
+
+        //Keep client fields if needed, but clear them for fresh start
+        setBusinessName(null)
+        setBusinessType(null)
+        setTaxIdentification(null)
+
         showNotification("You are about to continue as Client", 'success')
         resetForm();
     };
@@ -495,6 +497,16 @@ const Registration=()=>{
     const handleDriver=(event)=>{
         event.preventDefault()
         setUserType('Driver');
+
+        //clear all client specific fields
+        setBusinessName(null)
+        setBusinessType(null)
+        setTaxIdentification(null)
+
+        //Keep driver fields if needed, but clear them for fresh start
+        setDriverLicense(null)
+        setLicenseExpiry(null)
+
         showNotification("You are about to continue as Driver", 'success')
         resetForm(); 
     }
@@ -632,7 +644,8 @@ const Registration=()=>{
                                 <button type='button' onClick={()=>handleSignIn()} className='submit-button'>auth.signin</button>
                             </div>
                             <div className="form-footer">
-                                <p className="forgot-password">Forgot your password?</p>
+                                <button className="forgot-password" type="button" onClick={()=>setEmailRequest(true)}>Request for password Change?</button>
+                                <button className="forgot-password" type="button"  onClick={()=>setPasswordChanger(true)}>Procced to change password</button>
                                 <p className="signup-prompt">Don't have an account?  <a href="/signup">Sign Up</a></p>
                             </div>
                         </>
@@ -830,7 +843,25 @@ const Registration=()=>{
                     )}                                 
                 </form>
             </div>
+                        
+            {openEmailRequest &&
+                <div className='email-requester-div'>
+                    <RequestEmail 
+                        openEmail={openEmailRequest}
+                        setOpenEmail={setEmailRequest}/>
+                </div>
+            }          
 
+            
+            {openPasswordChanger &&
+                <div className='password-changer-div'>
+                    <PasswordChanger 
+                        openPassword={openPasswordChanger}
+                        setOpenPassword={setPasswordChanger}
+                    />
+                </div>
+            }
+            
             {/* Notification */}
             <div className={`notificationNew ${notification.show ? 'show' : ''}`} id="notification">
                 <div className="d-flex justify-content-between align-items-start mb-2">
