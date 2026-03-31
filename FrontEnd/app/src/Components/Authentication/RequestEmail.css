@@ -1,0 +1,41 @@
+form.email-js-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    cursor: pointer;
+    margin-left: 246px;
+}
+
+.email-name-input {
+    width: 23rem;
+    border-radius: 3px;
+    border: 1px solid #b7b2b2;
+    transition: all 0.3s ease;
+}
+
+.email-name-input:hover{
+    width: 24rem;
+    height: 2rem;
+    border-radius: 7px;
+    border: 1px solid #007bff;
+}
+
+.button-type {
+    margin-top: 4px;
+    background: #5ed55e;
+    color: white;
+    border: 2px solid #5ed55e;
+    border-radius: 4px;
+    text-align: center;
+    width: 10rem;
+    margin-left: 101px;
+    transition: all 0.3s ease;
+}
+
+.button-type:hover {
+    background: #09e84c;
+    border: 2px solid #fff;
+    width: 11rem;
+    height: 2rem;
+}
