@@ -17,13 +17,13 @@ namespace Backend.Models
         public string TaxIdentification { get; set; }
         [StringLength(20)]
         public string Rating { get;set; }
-        public int? TotalOrders { get; set; }
+        public int TotalOrders { get; set; }
         [Column(TypeName ="decimal(10,2)")]
         public decimal? TotalSpent { get; set; }
         [Required]
         public int UserId {  get; set; }
         public List<OrderPlacement>? OrdersPlaced { get; set; } = new List<OrderPlacement>();
-
+        public List<Notification> NotificationsPlaced { get; set; } = new List<Notification>();
         public virtual User? User { get; set; }
     }
 }

@@ -1,17 +1,24 @@
-﻿using Backend.AdditionalClasses;
-using Backend.DatabasContext;
+﻿using Backend.DatabasContext;
 using Backend.Models;
 using Backend.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 
 namespace Backend.Repository.Implementation
 {
     public class OrderPLacementRepository : IOrderPlacement
     {
         private ApplicationDatabaseContext databaseContext;
-        public OrderPLacementRepository(ApplicationDatabaseContext databaseContext)
+        private readonly HttpClient _httpClient;
+        private readonly ILogger<OrderPlacement> logger;
+        public OrderPLacementRepository(ApplicationDatabaseContext databaseContext, ILogger<OrderPlacement>log)
         {
             this.databaseContext = databaseContext;
+            _httpClient = new HttpClient();
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "BackendApp/1.0");
+            logger = log;
         }
         public int AddOrderPlacementRecord(OrderPlacement order_Placement)
         {
@@ -73,46 +80,81 @@ namespace Backend.Repository.Implementation
         }
         public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByCustomerId(int CustomerId)
         {
-            return databaseContext.OrderPlacements.Where(x=>x.CustomerId==CustomerId).ToList();
+            return databaseContext.OrderPlacements
+                .Where(x=>x.CustomerId==CustomerId && x.DriverId != null)
+                .Include(i => i.OrderItems)
+                .ThenInclude(i => i.OrderDimension)
+                .ToList();
         }
 
         public IEnumerable<OrderPlacement> GetAllOrderPlacementRecordsByDriverId(int DriverId)
         {
-            return databaseContext.OrderPlacements.Where(x => x.DriverId == DriverId).ToList();
+            return databaseContext.OrderPlacements
+                .Where(x => x.DriverId == DriverId  && x.CustomerId != null)
+                .ToList();
         }
         public OrderPlacement GetSingleRecord(int Id)
         {
-            return databaseContext.OrderPlacements.Where(temp => temp.Id == Id).FirstOrDefault();
+            return databaseContext.OrderPlacements
+                .Where(temp => temp.Id == Id)
+                .Include(i=>i.OrderItems)
+                .ThenInclude(i=>i.OrderDimension)
+                .FirstOrDefault();
         }
         public int UpdateOrderPlacementRecord(int Id, OrderPlacement record)
         {
-            int testValue = -1;
-            if (Id <= 0 || record == null)
+            try
             {
+                int testValue = -1;
+                if (Id <= 0 || record == null)
+                {
+                    return testValue;
+                }
+                else
+                {
+                    OrderPlacement updatedRecord = databaseContext.OrderPlacements
+                        .Where(temp => temp.Id == Id)
+                        .FirstOrDefault();
+
+                    updatedRecord.PickUpContact = record.PickUpContact;
+                    updatedRecord.DeliveryContact = record.DeliveryContact;
+                    updatedRecord.DeliveryUpAddress = record.DeliveryUpAddress;
+                    updatedRecord.Status = record.Status;
+                    updatedRecord.Price = record.Price;
+                    updatedRecord.Description = record.Description;
+                    updatedRecord.CreatedAt = record.CreatedAt;
+                    updatedRecord.ScheduledAt = record.ScheduledAt;
+                    updatedRecord.CompletedOn = record.CompletedOn;
+                    updatedRecord.DriverId = record.DriverId;
+                    databaseContext.SaveChanges();
+
+                    //var notification = new Notification()
+                    //{
+                    //    Type = "order update",
+                    //    Message = record.Status,
+                    //    CreatedAt = DateTime.Now,
+                    //    IsRead = false,
+                    //    CustomerId = record.CustomerId,
+                    //    DriverId = (int)record.DriverId,
+                    //    OrderPlacementId = Id,
+                    //    DriverCommentry = "Driver updated the order status"
+                    //};
+
+                    //databaseContext.Notifications.Add(notification);
+                    databaseContext.SaveChanges();
+                    testValue = Id;              
+                }
                 return testValue;
             }
-            else
+            catch(Exception ex)
             {
-                OrderPlacement updatedRecord = databaseContext.OrderPlacements.Where(temp => temp.Id == Id).FirstOrDefault();
-                updatedRecord.PickUpContact = record.PickUpContact;
-                updatedRecord.DeliveryContact = record.DeliveryContact;
-                updatedRecord.DeliveryUpAddress = record.DeliveryUpAddress;
-                updatedRecord.Status = record.Status;
-                updatedRecord.Price = record.Price;
-                updatedRecord.Description = record.Description;
-                updatedRecord.CreatedAt = record.CreatedAt;
-                updatedRecord.ScheduledAt = record.ScheduledAt;
-                updatedRecord.CompletedOn = record.CompletedOn;
-                updatedRecord.DriverId = record.DriverId;
-                databaseContext.SaveChanges();
-                testValue = record.Id;
+                logger.LogWarning($"Error Message {ex.Message} \n Error Stack {ex.StackTrace}");
+                return -1;
             }
-            return testValue;
         }
 
         public string AddBulkOrdersWithItems(List<OrderPlacement> orders, List<OrderItems> orderItems, int ClientId)
-        {
-            
+        {            
             {
                 try
                 {
@@ -203,6 +245,62 @@ namespace Backend.Repository.Implementation
                 }
             }
             
+        }
+
+        public async Task<OrderPlacement> SettingDeliveryAddressName(int OrderPlacementId, OrderPlacement orderPlacement)
+        {
+            var OrderPlacement = databaseContext.OrderPlacements
+                                    .Where(i=>i.Id == OrderPlacementId)
+                                    .FirstOrDefault();
+
+            var OrderTrackingDeliveryLocation = databaseContext.OrderTrackings
+                                    .Where(i=>i.OrderPlacementId == OrderPlacementId)
+                                    //.Select(o => o.DeliveryLocation)
+                                    .FirstOrDefault();
+
+            string[] addressParts = OrderTrackingDeliveryLocation.DeliveryLocation.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            if (addressParts.Length < 2)
+            {
+                throw new InvalidOperationException($"Invalid delivery location format: '{OrderTrackingDeliveryLocation.DeliveryLocation}'");
+            }
+            if (OrderPlacement == null)
+            {
+                return new OrderPlacement();
+            }
+            else
+            {
+                double lat = double.Parse(addressParts[0].Trim());
+                double lon = double.Parse(addressParts[1].Trim());
+
+                string url = $"https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={lon}&format=json";
+                HttpResponseMessage response = await _httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+
+
+                using JsonDocument document = JsonDocument.Parse(jsonResponse);
+                JsonElement root = document.RootElement;
+
+
+                if (root.TryGetProperty("display_name", out JsonElement displayName))
+                {
+                    OrderPlacement.PickUpContact = orderPlacement.PickUpContact;
+                    OrderPlacement.DeliveryContact = orderPlacement.DeliveryContact;
+                    OrderPlacement.Status = orderPlacement.Status;
+                    OrderPlacement.Price = orderPlacement.Price;
+                    OrderPlacement.Description = orderPlacement.Description;
+                    OrderPlacement.CreatedAt = orderPlacement.CreatedAt;
+                    OrderPlacement.ScheduledAt = orderPlacement.ScheduledAt;
+                    OrderPlacement.CompletedOn = orderPlacement.CompletedOn;
+                    OrderPlacement.DriverId = orderPlacement.DriverId;
+
+                    OrderPlacement.PickUpAddress = orderPlacement.PickUpAddress;
+                    OrderPlacement.DeliveryUpAddress = displayName.GetString();
+                    databaseContext.SaveChanges();
+                }
+                return OrderPlacement;
+            }
         }
     }
 }

@@ -33,9 +33,20 @@ namespace Backend.Models
         [Required]
         [Column(TypeName = "decimal(8,2)")]
         public decimal Height { get; set; }
-
+        //[Required]
+        [MaxLength(255)]
+        public string FileName { get; set; } = string.Empty;
+        //[Required]
+        [MaxLength(100)]
+        public string ContentType { get; set; } = string.Empty;
+        //[Required]
+        [Column(TypeName = "VARBINARY(MAX)")]
+        public byte[] ImageData { get; set; } = Array.Empty<byte>();
+        public long FileSize { get; set; }
+        public DateTime UploadedDate { get; set; }
+        [MaxLength(500)]
+        public string? Description { get; set; }
         public int DriverId {  get; set; }
-
         public virtual Driver? Driver { get; set; }
     }
 }

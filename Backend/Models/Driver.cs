@@ -17,7 +17,7 @@ namespace Backend.Models
         [Required]
         public bool IsAvailable { get; set; }
         [StringLength(10)]
-        public string Rating {  get; set; }
+        public string Rating {  get; set; } 
         [StringLength(30)]
         public string CompletionRate {  get; set; }
         [Column(TypeName ="decimal(10,2)")]
@@ -25,7 +25,7 @@ namespace Backend.Models
         [Required]
         public int UserId {  get; set; }
         public List<OrderPlacement>? OrdersPlaced { get; set; } = new List<OrderPlacement>();
-
+        public List<Notification> NotificationsPlaced { get; set; } = new List<Notification>();
         public virtual User? User { get; set; }
     }
 }

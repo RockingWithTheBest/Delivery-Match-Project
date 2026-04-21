@@ -16,7 +16,7 @@ namespace Backend.Models
         [Required]
         [StringLength(20)]
         public string Status {  get; set; }
-        [StringLength(50)]
+        [StringLength(150)]
         public string RejectionReason { get; set; }
         public DateTime UploadedAt {  get; set; }
         [StringLength(30)]

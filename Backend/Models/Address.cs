@@ -2,19 +2,19 @@
 
 namespace Backend.Models
 {
-    public class Address
+    public class Address// Add GeoCoordinate
     {
         [Key]
         public int Id { get; set; }
         [Required]
         [StringLength(30)]
         public string Label { get; set; }
-        [Required]
-        [StringLength(50)]
-        public string AddressLine { get; set; }
-        [Required]
-        [StringLength(40)]
-        public string City { get; set; }
+        [StringLength(200)]
+        public string? Location { get; set; }
+        [StringLength(100)]
+        public string? Latitude { get; set; }
+        [StringLength(100)]
+        public string? Longitude { get; set; }
         [Required]
         public int UserId {  get; set; }
         public virtual User? User {  get; set; }

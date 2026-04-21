@@ -75,14 +75,14 @@
         }
       }
     },
-    "/api/Address/Get-Addresses-By-Id": {
+    "/api/Address/Get-Addresses-By-UserId": {
       "get": {
         "tags": [
           "Address"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "UserId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1444,6 +1444,198 @@
         }
       }
     },
+    "/api/Notification/Notification-Made-On-A-Particular-Order-ByCustomer": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "parameters": [
+          {
+            "name": "CustomerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "OrderPlacedId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notification"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notification"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notification"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Notification/Get-Notifications-Of-Particular-OrderPlaced": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "parameters": [
+          {
+            "name": "OrderPlacementId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Notification/Send-Client-Message": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Notification/Send-Driver-Message": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Notification/Mark-Notification-Read": {
+      "put": {
+        "tags": [
+          "Notification"
+        ],
+        "parameters": [
+          {
+            "name": "notificationId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Notification/Mark-All-Notifications-Read": {
+      "put": {
+        "tags": [
+          "Notification"
+        ],
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/OrderItems/Get-All-OrderItems": {
       "get": {
         "tags": [
@@ -1868,6 +2060,52 @@
         }
       }
     },
+    "/api/OrderPlacement/SettingDeliveryAddressName": {
+      "put": {
+        "tags": [
+          "OrderPlacement"
+        ],
+        "parameters": [
+          {
+            "name": "OrderPlacementId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPlacement"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPlacement"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPlacement"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPlacement"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/OrderTracking/Get-All-Order-Tracking": {
       "get": {
         "tags": [
@@ -2246,6 +2484,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "TravelinSequency",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -2829,6 +3074,13 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "TravelinSequency",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -3625,14 +3877,41 @@
           }
         }
       }
+    },
+    "/api/User/PasswordChanger": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "Address": {
         "required": [
-          "addressLine",
-          "city",
           "label",
           "userId"
         ],
@@ -3644,11 +3923,6 @@
           },
           "label": {
             "maxLength": 30,
-            "minLength": 0,
-            "type": "string"
-          },
-          "addressLine": {
-            "maxLength": 50,
             "minLength": 0,
             "type": "string"
           },
@@ -3669,11 +3943,6 @@
             "minLength": 0,
             "type": "string",
             "nullable": true
-          },
-          "city": {
-            "maxLength": 40,
-            "minLength": 0,
-            "type": "string"
           },
           "userId": {
             "type": "integer",
@@ -3745,8 +4014,7 @@
           },
           "totalOrders": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "totalSpent": {
             "type": "number",
@@ -4157,7 +4425,6 @@
           "createdAt",
           "customerId",
           "deliveryContact",
-          "deliveryUpAddress",
           "description",
           "distance",
           "pickUpAddress",
@@ -4178,9 +4445,10 @@
             "type": "string"
           },
           "deliveryUpAddress": {
-            "maxLength": 100,
+            "maxLength": 500,
             "minLength": 0,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "pickUpContact": {
             "maxLength": 40,
@@ -4369,6 +4637,24 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SendMessageRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
             "type": "string",
             "nullable": true
           }

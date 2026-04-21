@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDatabaseContext))]
-    [Migration("20260225144252_UI1")]
-    partial class UI1
+    [Migration("20260303182859_Increase")]
+    partial class Increase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,34 +24,6 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Backend.AdditionalClasses.OrderDimension", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Height")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.Property<decimal>("Length")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.Property<int>("OrderItemsId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Width")
-                        .HasColumnType("decimal(8,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderItemsId")
-                        .IsUnique();
-
-                    b.ToTable("OrderDimension");
-                });
 
             modelBuilder.Entity("Backend.Models.Address", b =>
                 {
@@ -608,7 +580,7 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CustomerId")
@@ -647,6 +619,34 @@ namespace Backend.Migrations
                     b.HasIndex("OrderPlacementId");
 
                     b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("Backend.Models.OrderDimension", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Height")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<decimal>("Length")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<int>("OrderItemsId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Width")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderItemsId")
+                        .IsUnique();
+
+                    b.ToTable("OrderDimension");
                 });
 
             modelBuilder.Entity("Backend.Models.OrderItems", b =>
@@ -926,8 +926,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("DeliveryUpAddress")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -2342,17 +2342,6 @@ namespace Backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Backend.AdditionalClasses.OrderDimension", b =>
-                {
-                    b.HasOne("Backend.Models.OrderItems", "OrderItems")
-                        .WithOne("OrderDimension")
-                        .HasForeignKey("Backend.AdditionalClasses.OrderDimension", "OrderItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OrderItems");
-                });
-
             modelBuilder.Entity("Backend.Models.Address", b =>
                 {
                     b.HasOne("Backend.Models.User", "User")
@@ -2437,6 +2426,17 @@ namespace Backend.Migrations
                     b.Navigation("Driver");
 
                     b.Navigation("OrderPlacement");
+                });
+
+            modelBuilder.Entity("Backend.Models.OrderDimension", b =>
+                {
+                    b.HasOne("Backend.Models.OrderItems", "OrderItems")
+                        .WithOne("OrderDimension")
+                        .HasForeignKey("Backend.Models.OrderDimension", "OrderItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("Backend.Models.OrderItems", b =>
