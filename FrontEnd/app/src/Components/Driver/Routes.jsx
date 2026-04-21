@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import RoutesViewOnMap from "./RoutesViewOnMap"
+import NoRouteIcon from "./Icons/no-route-icon.png"
 import './Routes.css'
 
 const Routes=()=>{
@@ -136,7 +138,6 @@ const Routes=()=>{
     },[DriverId])
     return(
         <div className="route-container">
-            {/* {Header Seaction} */}
             <div className="route-header">
                 <h1 className="route-title">🚚 Route Optimization</h1>
                 <button 
@@ -177,13 +178,13 @@ const Routes=()=>{
                                 </div>
                             </div>
 
-                            <div className="driver-card">
+                            {/* <div className="driver-card">
                                 <div className="card-icon">📧</div>
                                 <div className="card-content">
                                     <span className="card-label">Email</span>
-                                    <span className="card-value">{driverDetails.User?.Email}</span>
+                                    <span className="card-value">{(driverDetails.User?.Email).substring(0, 19) + '...'}</span>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="driver-card">
                                 <div className="card-icon">📱</div>
                                 <div className="card-content">
@@ -230,8 +231,7 @@ const Routes=()=>{
                             <div className="address-icon">🏢</div>
                             <div className="address-details">
                                 <div className="address-label">{address.Label}</div>
-                                <div className="address-line">{address.AddressLine}</div>
-                                <div className="address-line">{address.City}, {address.Location}</div>
+                                <div className="address-location">{address.Location}</div>
                                 <div className="address-coords">
                                     <span>Lat: {address.Latitude}</span>
                                     <span>Lng: {address.Longitude}</span>
@@ -242,6 +242,10 @@ const Routes=()=>{
                     
                 )}
             </div>
+
+
+
+            
 
             {/* {Route list} */}
             {/* <div className="route-list">
@@ -311,7 +315,8 @@ const Routes=()=>{
 
             {/* Route Timeline */}
             <div className="route-timeline">
-                {routeStops.map((stop,index)=>{
+                {routeStops && routeStops.length>0 ? 
+                    routeStops.map((stop,index)=>{
                     const orderNumber = extractOrderNumber(stop);
                     const address = extractAddress(stop);
                      return (
@@ -331,7 +336,12 @@ const Routes=()=>{
                                     </div>
                                 </div>
                             );
-                })}
+                }):(
+                    <div className="no-routes-available">
+                        <h3 className="no-routes">There are not created routes available</h3>
+                        <img src={NoRouteIcon} alt="" />
+                    </div>
+                )}
             </div>
         </div>
     )

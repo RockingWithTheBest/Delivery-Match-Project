@@ -1,0 +1,124 @@
+/* Marker Styles */
+
+.tracking-pin {
+  font-size: 18px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+.RoutesViewOnMap {
+    height: 109vh;
+    width: 80%;
+    display: flex;
+}
+
+.map-routes{
+    height: 100%;
+    width: 100%;
+    position: static;
+}
+
+.tracking-pin:hover {
+  transform: scale(1.1);
+}
+
+.pickup-marker.tracking-pin {
+  background-color: #4a6fdc;
+  border: 2px solid white;
+}
+
+.delivery-marker.tracking-pin {
+  background-color: #28a745;
+  border: 2px solid white;
+}
+
+.marker-label {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: white;
+  color: #333;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.marker-popup {
+  min-width: 220px;
+}
+
+.marker-popup h6 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.marker-popup p {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.marker-popup small {
+  color: #666;
+}
+
+/* Tracking List */
+.tracking-list .card {
+  border-left: 4px solid #4a6fdc;
+  transition: all 0.2s;
+}
+
+.tracking-list .card:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Notification */
+.notification {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 15px;
+  max-width: 350px;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  border-left: 4px solid #4a6fdc;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification.error {
+  border-left-color: #dc3545;
+}
+
+.notification.success {
+  border-left-color: #28a745;
+}
+
+.notification.warning {
+  border-left-color: #ffc107;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .map-container {
+    height: 60vh !important;
+  }
+  
+  .sidebar {
+    height: 40vh !important;
+  }
+}
