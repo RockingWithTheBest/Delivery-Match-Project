@@ -14,6 +14,9 @@ span.ordser-status {
     padding-right: 13px;
     padding-left: 13px;
     border-radius: 7px;
+    height: 140vh;
+    overflow: auto;
+    width: 27rem;
 }
 
 .order-container {

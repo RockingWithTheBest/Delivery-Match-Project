@@ -4,6 +4,7 @@ import axios from "axios";
 import ViewParticularOrder from "./ViewParticularOrder";
 import './DriverStyles.css'
 import './OrderTimeLineView.css'
+import NoOrders from "./Icons/no-orders.jpg"
 
 const OrderTimeLineView=()=>{
     const {DriverId} =useParams()
@@ -107,43 +108,53 @@ const OrderTimeLineView=()=>{
     },[DriverId])
 
 
+
     return(
         <div className="ordertimeline-main">
-            <div className="all-order-list">
-                <p className="myorders">My Orders</p>
-                {driverOrders.map((order,index)=>{
-                    const customer = (customerDetails.find(customer=>customer.Id==order.CustomerId))
-                    const user = userDetails.find(u => u.Id == customer.UserId)
+            {driverOrders && driverOrders >0 ?(
+                <div>            
+                    <div className="all-order-list">
+                        <p className="myorders">My Orders</p>
+                        {driverOrders.map((order,index)=>{
+                            const customer = (customerDetails.find(customer=>customer.Id==order.CustomerId))
+                            const user = userDetails.find(u => u.Id == customer.UserId)
 
-                    return(
-                        <div 
-                            className="order-container" 
-                            key={order.Id} 
-                            onClick={()=>handleOrderPlacementId(order.Id)}>
+                            return(
+                                <div 
+                                    className="order-container" 
+                                    key={order.Id} 
+                                    onClick={()=>handleOrderPlacementId(order.Id)}>
 
-                            <div className="order-header">
-                                <h3>ORD-{order.Id}</h3>
-                                <span className={`status-badge status-${order.Order?.Status?.toLowerCase()}`}>
-                                    {getStatusIcon(order.Order?.Status)} {order.Status}
-                                </span>
-                            </div>
-                            <div  className="order-content">
-                              
-                                    <p className="customer-namee">
-                                        {user ? `${user.FirstName} ${user.LastName}` : "Customer not found"}
-                                    </p>
-                                    <p className="order-price">
-                                        {user ? `$${order.Price}` : "Customer not found"}
-                                    </p>
-                          
-                            </div>                            
-                        </div>
-                    );
-                    })}
-            </div>
-            <ViewParticularOrder 
-                orderPlacementId ={orderPlacementId}
-            />
+                                    <div className="order-header">
+                                        <h3>ORD-{order.Id}</h3>
+                                        <span className={`status-badge status-${order.Order?.Status?.toLowerCase()}`}>
+                                            {getStatusIcon(order.Order?.Status)} {order.Status}
+                                        </span>
+                                    </div>
+                                    <div  className="order-content">
+                                    
+                                            <p className="customer-namee">
+                                                {user ? `${user.FirstName} ${user.LastName}` : "Customer not found"}
+                                            </p>
+                                            <p className="order-price">
+                                                {user ? `$${order.Price}` : "Customer not found"}
+                                            </p>
+                                
+                                    </div>                            
+                                </div>
+                            );
+                            })}
+                    </div>
+                    <ViewParticularOrder 
+                        orderPlacementId ={orderPlacementId}
+                    />
+                </div>
+                ):(
+                <div className="norders-available">
+                    <h3>No Orders have been placed</h3>
+                    <img src={NoOrders} alt="" />
+                </div>
+            )}
         </div>
         
     );
