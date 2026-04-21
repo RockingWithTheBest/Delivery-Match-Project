@@ -163,5 +163,24 @@ namespace Backend.Controllers
                 return Ok($"Record with ID = {Id} has been successfully deleted");
             }
         }
+
+        [HttpPut]
+        [Route("SettingDeliveryAddressName")]
+        public async Task<IActionResult> SettingUpDeliveryAddressName(int OrderPlacementId, OrderPlacement order)
+        {
+            if (OrderPlacementId <= 0)
+            {
+                return BadRequest("Id cant be less than zero");
+            }
+            else if(order == null)
+            {
+                return BadRequest("OrderPlacement body is required");
+            }
+            else
+            {
+                var result = await orderPlacement.SettingDeliveryAddressName(OrderPlacementId, order);
+                return Ok(result);
+            }
+        }
     }
 }

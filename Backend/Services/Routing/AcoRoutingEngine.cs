@@ -23,7 +23,8 @@ namespace Backend.Services.Routing
         private const double Q = 100.0; // Pheromone deposit factor
         private const int AntCount = 30;
         private const int MaxIterations = 100;
-        
+        private const double InitialPheromone = 0.1;
+
 
         public AcoRoutingEngine(
             ApplicationDatabaseContext _context,
@@ -67,7 +68,7 @@ namespace Backend.Services.Routing
                     _distances[i, j] = coords[i].DistanceTo(coords[j]);
                     // i  represents the "from" location
                     // j represents the "to" location
-                    _pheromones[i, j] = 1.0 / _distances[i,j];
+                    _pheromones[i, j] = InitialPheromone; 
                     _heuristics[i, j] = 1.0 / _distances[i,j];
                 }
             }
@@ -88,6 +89,10 @@ namespace Backend.Services.Routing
                   o.UserId == users
             ).FirstOrDefault();
 
+            if(address == null)
+            {
+                throw new Exception("The particular driver doesn't have an Address");
+            }
             // Implement based on driver's home base or first pickup location
             return new GeoCoordinate { Latitude = double.Parse(address.Latitude), Longitude = double.Parse(address.Longitude) }; 
         }
@@ -235,10 +240,10 @@ namespace Backend.Services.Routing
                     return false;
 
                 // Check volume capacity (simplified - use actual dimension math)
-                //var itemVolume = demand.volume;
-                //var vehicleVolume = (double)_vehicle.Length * (double)_vehicle.Width * (double)_vehicle.Height;
-                //if (currentVolume + itemVolume > vehicleVolume * 0.85) // 85% utilization limit
-                //    return false;
+                var itemVolume = demand.volume;
+                var vehicleVolume = (double)_vehicle.Length * (double)_vehicle.Width * (double)_vehicle.Height;
+                if (currentVolume + itemVolume > vehicleVolume * 0.85) // 85% utilization limit
+                    return false;
 
             }
             return true;
@@ -274,8 +279,7 @@ namespace Backend.Services.Routing
 
                 for(int i = 0;i<route.Count - 1; i++)
                 {
-                    _pheromones[route[i], route[i + 1] ] += deposit;
-                    _pheromones[route[i + 1], route[i ]] += deposit;// Symmetric
+                    _pheromones[route[i], route[i + 1] ] += deposit;// Asymetric
                 }
             }
         }

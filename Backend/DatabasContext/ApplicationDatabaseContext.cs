@@ -1,5 +1,4 @@
-﻿using Backend.AdditionalClasses;
-using Backend.Models;
+﻿using Backend.Models;
 using Backend.TrainingData;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +23,14 @@ namespace Backend.DatabasContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Vehicle>(entity =>
+            //{
+            //    entity.Property(e => e.FileName).IsRequired().HasMaxLength(255);
+            //    entity.Property(e => e.ContentType).IsRequired().HasMaxLength(100);
+            //    entity.Property(e => e.ImageData).IsRequired();
+            //    entity.Property(e => e.UploadedDate).HasDefaultValueSql("GETDATE()");
+            //});
+
             //modelBuilder.Entity<OrderDimension>()
             //    .HasNoKey();
             modelBuilder.Entity<OrderPlacement>()
@@ -44,20 +51,37 @@ namespace Backend.DatabasContext
                 .HasForeignKey<OrderDimension>(z => z.OrderItemsId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.ApplyConfiguration(new AddressData());
-            modelBuilder.ApplyConfiguration(new CustomerData());
-            modelBuilder.ApplyConfiguration(new DocumentData());
-            modelBuilder.ApplyConfiguration(new DriversData());
-            modelBuilder.ApplyConfiguration(new EarningsData());
-            //modelBuilder.ApplyConfiguration(new NotificationData());
-            modelBuilder.ApplyConfiguration(new OrderItemsData());
-            modelBuilder.ApplyConfiguration(new OrderTrackingData());
-            modelBuilder.ApplyConfiguration(new OrderPlacmentData());
-            modelBuilder.ApplyConfiguration(new PaymentData());
-            modelBuilder.ApplyConfiguration(new TrainingData.RouteData());
-            modelBuilder.ApplyConfiguration(new UserData());
-            modelBuilder.ApplyConfiguration(new VehicleData());
-            modelBuilder.ApplyConfiguration(new OrderDimensionsData());
+            modelBuilder.Entity<Notification>()
+                .HasOne(o => o.Driver)
+                .WithMany(d => d.NotificationsPlaced)
+                .HasForeignKey(z => z.DriverId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(o => o.Customer)
+                .WithMany(d => d.NotificationsPlaced)
+                .HasForeignKey(z => z.CustomerId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Notification>()
+               .HasOne(n => n.OrderPlacement)
+               .WithMany(o => o.NotificationsPlaced)
+               .HasForeignKey(n => n.OrderPlacementId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.ApplyConfiguration(new AddressData());
+            //modelBuilder.ApplyConfiguration(new CustomerData());
+            //modelBuilder.ApplyConfiguration(new DocumentData());
+            //modelBuilder.ApplyConfiguration(new DriversData());
+            //modelBuilder.ApplyConfiguration(new EarningsData());
+            ////modelBuilder.ApplyConfiguration(new NotificationData());
+            //modelBuilder.ApplyConfiguration(new OrderItemsData());
+            //modelBuilder.ApplyConfiguration(new OrderTrackingData());
+            //modelBuilder.ApplyConfiguration(new OrderPlacmentData());
+            //modelBuilder.ApplyConfiguration(new PaymentData());
+            //modelBuilder.ApplyConfiguration(new UserData());
+            //modelBuilder.ApplyConfiguration(new VehicleData());
+            //modelBuilder.ApplyConfiguration(new OrderDimensionsData());
         }
     }
 }

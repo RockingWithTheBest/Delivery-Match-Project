@@ -2,6 +2,7 @@
 using Backend.Models;
 using Backend.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -118,6 +119,43 @@ namespace Backend.Controllers
             {
                 user.DeleteUserRecord(Id);
                 return Ok($"Record with ID = {Id} has been successfully deleted");
+            }
+        }
+
+        [HttpPost]
+        [Route("Register-User-Record")]
+        public IActionResult Register([FromBody] User userInstance)
+        {
+            try
+            {
+                var userRecord = user.RegisterUser(userInstance);
+                return Ok(new { Success = true, Message = "User registered successfully", UserId = userRecord.Id });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Success = false, Message = ex.Message });
+            }
+        }
+        
+        [HttpPut]
+        [Route("PasswordChanger")]
+        public IActionResult ChangePassword(int UserId, string Password)
+        {
+            if(UserId <= 0 || Password == "")
+            {
+                return BadRequest("The process of changing password cannot proceed because the values you provided are not correct");
+            }
+            else
+            {   
+                if(user.UserPasswordChanger(UserId, Password))
+                {
+                    return Ok(user.UserPasswordChanger(UserId, Password));
+                }
+                else
+                {
+                    return BadRequest("The process of changing password cannot proceed because the values you provided are not correct");
+                }
+                
             }
         }
     }

@@ -47,7 +47,8 @@ namespace Backend.Controllers
                     DriverId = result.DriverId,
                     RouteData = result.RouteData,
                     TotalDistance = result.TotalDistanceKm.ToString("F2"),
-                    EstimatedDuration = DateTime.Now + result.EstimatedDuration
+                    EstimatedDuration = DateTime.Now + result.EstimatedDuration,
+                    TravelinSequency = string.Join("-", result.OrderSequence)
                 };
                 var DriverIds = _context.Routes.Where(i => i.DriverId == request.DriverId).ToList();
                 _context.Routes.RemoveRange(DriverIds);
@@ -63,7 +64,7 @@ namespace Backend.Controllers
                         .ToList(),
                     sequence = result.OrderSequence,
                     distanceKm = result.TotalDistanceKm,
-                    estimatedDuration = result.EstimatedDuration
+                    estimatedDuration = FormatedDuration(result.EstimatedDuration)
                 });
             }
             catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("FOREIGN KEY") == true)
@@ -83,6 +84,18 @@ namespace Backend.Controllers
 
         }
 
+        private string FormatedDuration(TimeSpan duration)
+        {
+            //TimeSpan duration = TimeSpan.FromHours(hours);
+            if (duration.TotalHours >= 1)//if more than an hour, show  mintures and hours
+            {
+                //e.g 21hr 15m
+                return $"{(int)duration.TotalHours}hr {duration.Minutes}m";
+            }
+
+            //Just show minutes
+            return $"{duration.Minutes:FO}m";
+        }
         public class OptimizeRouteRequest
         {
             public int DriverId { get; set; }

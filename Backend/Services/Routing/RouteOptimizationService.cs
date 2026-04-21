@@ -44,17 +44,17 @@ namespace Backend.Services.Routing
 
             // Resolve coordinates (critical step - cache in production)
             var locations = new Dictionary<int, GeoCoordinate>();
-            var demands = new Dictionary<int, (double weight, double volume)>();
+            var demands = new Dictionary<int, (double weight, double volume)>();//Capacity coonstraints of the vehcile
 
             foreach (var order in orders)
             {
                 // Calculate demand
-                var weight = order.OrderItems?.Quantity * (double)(order.OrderItems?.WeightPerItem ?? 0)??50;
-                //var volume = order.OrderItems?.OrderDimension != null
-                //    ? (double)order.OrderItems.OrderDimension.Length *
-                //      (double)order.OrderItems.OrderDimension.Width *
-                //      (double)order.OrderItems.OrderDimension.Height
-                //    : 0;
+                var weight = order.OrderItems?.Quantity * (double)(order.OrderItems?.WeightPerItem ?? 0) ?? 50;
+                var volume = order.OrderItems?.OrderDimension != null
+                    ? (double)order.OrderItems.OrderDimension.Length *
+                      (double)order.OrderItems.OrderDimension.Width *
+                      (double)order.OrderItems.OrderDimension.Height
+                    : 0;
 
                 demands[order.Id] = (weight, 0);
 
@@ -64,10 +64,13 @@ namespace Backend.Services.Routing
                 {
                     // ✅ FALLBACK: Use Minsk city center if geocoding fails (prevents empty routes)
                     _logger.LogWarning("Geocoding failed for address '{Address}', using fallback coordinates", order.PickUpAddress);
-                    coord = new GeoCoordinate { Latitude = 53.9045, Longitude = 27.5615 }; // Minsk center
+                    throw new Exception($"Geocoding failed for address '{order.PickUpAddress}', using fallback coordinates");
+                    //coord = new GeoCoordinate { Latitude = 53.9045, Longitude = 27.5615 }; // Minsk center
                 }
+                //HERE CLYDE WORK ON THIS
+                //locations[order.Id] = coord ?? new GeoCoordinate { Latitude = 53.9045, Longitude = 27.5615 };
 
-                locations[order.Id] = coord ?? new GeoCoordinate { Latitude = 53.9045, Longitude = 27.5615 };
+                locations[order.Id] = coord;
             }
             if (locations.Count != orders.Count)
                 throw new InvalidOperationException("Failed to resolve coordinates for all orders");
@@ -114,7 +117,8 @@ namespace Backend.Services.Routing
             };
         }
 
-        private double CalculateTotalDistance(List<OrderPlacement> orders, Dictionary<int, GeoCoordinate> locations)
+        private double CalculateTotalDistance(List<OrderPlacement> orders, Dictionary<int, 
+            GeoCoordinate> locations)
         {
             if (!orders.Any()) return 0;
 
@@ -130,11 +134,34 @@ namespace Backend.Services.Routing
             return Math.Round(total, 2);
         }
 
-        private TimeSpan CalculateEstimatedDuration(List<OrderPlacement> orders, Dictionary<int, GeoCoordinate> locations)
+        private TimeSpan CalculateEstimatedDuration(List<OrderPlacement> orders, 
+            Dictionary<int, GeoCoordinate> locations)
         {
             var distance = CalculateTotalDistance(orders, locations);
-            return TimeSpan.FromHours(distance * 1.5);// 40 km/h ≈ 1.5 min per km
+            var averageSpeedKmPerHour = 40;// 1.5 min per km
+            var hours = distance / averageSpeedKmPerHour;
+            return TimeSpan.FromHours(hours);
         }
+
+        private string FormatedDuration(List<OrderPlacement> orders, 
+            Dictionary<int, GeoCoordinate> locations)
+        {
+            var distance = CalculateTotalDistance(orders, locations);
+            var averageSpeedKmPerHour = 40;// 1.5 min per km
+            var hours = distance / averageSpeedKmPerHour;
+
+            TimeSpan duration = TimeSpan.FromHours(hours);
+            if (duration.TotalHours >= 1)//if more than an hour, show  mintures and hours
+            {
+                //e.g 21hr 15m
+                return $"{(int)duration.TotalHours}hr {duration.Minutes}m";
+            }
+
+            //Just show minutes
+            return $"{duration.Minutes:FO}m";
+        }
+
+
     }
 
     public class OptimizedRouteResult

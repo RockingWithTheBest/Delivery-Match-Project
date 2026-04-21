@@ -38,7 +38,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("Get-Route-By-DriverId")]
-        public IActionResult GetByDriverId(int id)
+        public IActionResult GetRouteByDriverId(int id)
         {
             var result = route.GetSingleRecordByDriverId(id);
             if (result == null)
