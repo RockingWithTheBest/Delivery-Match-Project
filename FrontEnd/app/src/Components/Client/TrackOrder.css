@@ -18,6 +18,21 @@ p.myorders-track-client {
     font-size: 18px;
 }
 
+.norders-available {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 19px;
+    background: #e9ecef;
+    width: 100%;
+    border-radius: 8px;
+    padding: 18px;
+}
+
+.norders-available img {
+    border-radius: 50%;
+    width: 643px;
+}
 .order-container-track-client {
     width: 13rem;
     padding: 12px;

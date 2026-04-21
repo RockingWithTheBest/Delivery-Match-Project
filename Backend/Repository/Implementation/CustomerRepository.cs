@@ -1,6 +1,7 @@
 ﻿using Backend.DatabasContext;
 using Backend.Models;
 using Backend.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementation
 {
@@ -20,6 +21,7 @@ namespace Backend.Repository.Implementation
             }
             else
             {
+                customer.TotalOrders = 0;
                 databaseContext.Customers.Add(customer);
                 databaseContext.SaveChanges();
                 testValue = customer.Id;
@@ -60,7 +62,22 @@ namespace Backend.Repository.Implementation
 
         public Customer GetCustomerDetails(int Id)
         {
-            return databaseContext.Customers.Where(x => x.Id == Id).FirstOrDefault();
+            var customer = databaseContext.Customers
+                .Where(x => x.Id == Id)
+                .Include(i => i.User)
+                .FirstOrDefault();
+
+            customer.TotalOrders = databaseContext.OrderPlacements.Where(i => i.CustomerId == Id).Count();
+            var collection = databaseContext.OrderPlacements.Where(i => i.CustomerId == Id).ToList();
+            decimal price = 0;
+            foreach (var item in collection)
+            {
+                price = price + item.Price;
+            }
+
+            customer.TotalSpent = price;
+            databaseContext.SaveChanges();
+            return customer; 
         }
         //public User GetSingleUserRecordByCustomerId(int UserId)
         //{

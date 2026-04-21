@@ -14,7 +14,7 @@ const NewOrder=()=>{
     const [deliveryContact, setDeliveryContact]=useState(null)
     const [volume, setVolume]=useState(null)
     const [desciption, setDescription]=useState(null)
-    const [status, setStatus]=useState("")
+    const [status, setStatus]=useState("Confirmed")
     const [createdAt, setCreatedAt]=useState(null)
     const [scheduledForDeliveryOn, setScheduledForDeliveryOn]=useState(null)
     const [price, setPrice]=useState(null)
@@ -35,7 +35,34 @@ const NewOrder=()=>{
         setShowItemModal(true)
     };
     
-     const handleCheckboxChange = (instruction) => {
+    const mockPickUpRoutes = [
+          {
+            id: 1,
+            name: 'Kremlin, Moscow',
+            lat:55.75100000000001,
+            long:37.61760000000001
+          },
+          {
+            id: 2,
+            name: 'Samson Fountain, Saint Petersburg',
+            lat:59.88520000000001,
+            long:29.90910000000001
+          },
+          {
+            id: 3,
+            name: 'Temple of all Religions, Kazan',
+            lat:55.80060000000001,
+            long:48.97470000000001
+          },
+          {
+            id: 4,
+            name: 'Ice Palace, Moscow',
+            lat:55.76670000000001,
+            long:37.43520000000001
+          }      
+    ]
+
+    const handleCheckboxChange = (instruction) => {
         setSpecialInstructions(prev => ({
             ...prev,
             [instruction]: !prev[instruction]
@@ -47,16 +74,22 @@ const NewOrder=()=>{
         setTimeout(() => {
           setNotification(prev=>({ ...prev, show: false }));
         }, 5000);
-      };
+    };
 
     const handleSubmit = async()=>{
         const currentDateTime = new Date();
         const formattedDateTime = format(currentDateTime, 'yyyy-MM-dd HH:mm:ss')
 
+        const response = await axios.get(`${url}/Customer/Get-GetCustomerDetails-By-Id`,{
+            params:{
+                id:parseInt(ClientId)
+            }
+        })
+
         try{
             const orderPlacements={
-                PickUpAddress:pickupAddress,
-                DeliveryUpAddress:deliveryAddress,
+                PickUpAddress:"pickupAddress",
+                DeliveryUpAddress:"deliveryAddress",
                 PickUpContact:pickupContact,
                 DeliveryContact:deliveryContact,
                 Description:desciption,
@@ -98,7 +131,6 @@ const NewOrder=()=>{
                 setItemQuantity("")
                 setItemWeight("")
                 setSpecialInstructions("")
-                setStatus("")
                 setItemWidth("")
             }          
 
@@ -117,12 +149,24 @@ const NewOrder=()=>{
             setOptimizationMap(true);
         }    
     }
+    
+    const automaticDataUpload = async()=>{
+        const response = await axios.get(`${url}/Customer/Get-GetCustomerDetails-By-Id`,{
+            params:{
+                id:parseInt(ClientId)
+            }
+        })
+
+        setPickUpContact(response.data.User.Phone)
+    }
 
     useEffect(() => {
         window.hideNotification = () => setNotification({ ...notification, show: false });
     }, [notification]);   
 
-
+    useEffect(()=>{
+        automaticDataUpload()
+    })
     return(
         <div className="new-order">
             
@@ -138,8 +182,25 @@ const NewOrder=()=>{
             </div>
             
             <form onSubmit={handleSubmit}className="order-details-grid">
-                    <div className="input-group">
-                        <label htmlFor="">Pickup Address</label>
+                    {/* <div className="input-group"> */}
+                        {/* <select 
+                            id="pickup-address"
+                            onChange={(e)=>{
+                                const selectedId = parseInt(e.target.value)
+                                const pickUpAddress = mockPickUpRoutes.find(location=>location.id = selectedId)
+                                console.log("SELECTED PICK UP",pickUpAddress.name)
+                                if(pickUpAddress){
+                                    setPickUpAddress(pickUpAddress.name)
+                                }
+                            }}> 
+                            <option value="">Select Pickup address</option>
+                            {mockPickUpRoutes.map(location=>(
+                                <option key={location.id} value={location.id}>
+                                    {location.name}
+                                </option>
+                            ))}
+                        </select> */}
+                        {/* <label htmlFor="">Pickup Address</label>
                         <input 
                             id="pickup-address"
                             type="text"
@@ -147,9 +208,24 @@ const NewOrder=()=>{
                             placeholder="Enter pick up address"
                             onChange={(e)=>setPickUpAddress(e.target.value)}
                             required
-                        />
-                    </div>
+                        /> */}
+                    {/* </div> */}
+
                     <div className="input-group">
+                        <label htmlFor="">Select Special Instructions</label>
+                        <select 
+                            name="" 
+                            id=""
+                            onChange={(e)=>setSpecialInstructions(e.target.value)}
+                        >
+                            <option value="">Special Instructions</option>
+                            <option value="Fragile Items">Fragile Items</option>
+                            <option value="Refrigirated transport">Refrigirated transport</option>
+                            <option value="Oversized item">Oversized item</option>
+                        </select>
+                    </div>
+
+                    {/* <div className="input-group">
                         <label htmlFor="">Delivery Address</label>
                         <input 
                             id="delivery-address"
@@ -159,7 +235,7 @@ const NewOrder=()=>{
                             onChange={(e)=>setDeliverAddress(e.target.value)}
                             required
                         />
-                    </div>
+                    </div> */}
                     <div className="input-group">
                         <label htmlFor="">Pickup Contact</label>
                         <input
@@ -282,37 +358,26 @@ const NewOrder=()=>{
                             onChange={(e) => setItemWeight(e.target.value)}
                         />
                     </div>
-                    <div className="input-group">
-                        <label htmlFor="">Choose Special Instructions</label>
+
+
+                    {/* <div className="input-group">
+                        <label htmlFor="">Choose Status</label>
                         <select 
-                            name="" 
-                            id=""
-                            onChange={(e)=>setSpecialInstructions(e.target.value)}
+                            type="text"
+                            id="status" 
+                            placeholder="Enter status"
+                            value={status}
+                            onChange={(e)=>setStatus(e.target.value)}
+                            required
                         >
-                            <option value="">Special Instructions</option>
-                            <option value="Fragile Items">Fragile Items</option>
-                            <option value="Refrigirated transport">Refrigirated transport</option>
-                            <option value="Oversized item">Oversized item</option>
+                            <option value="">Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
                         </select>
-                    </div>
-                    <div className="input-group">
-                    <label htmlFor="">Choose Status</label>
-                    <select 
-                        type="text"
-                        id="status" 
-                        placeholder="Enter status"
-                        value={status}
-                        onChange={(e)=>setStatus(e.target.value)}
-                        required
-                    >
-                        <option value="">Select Status</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Confirmed">Confirmed</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
-                    </select>
-                </div>
+                    </div> */}
 
             </form>
 

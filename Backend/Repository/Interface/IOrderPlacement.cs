@@ -13,5 +13,6 @@ namespace Backend.Repository.Interface
         int DeleteOrderPlacementRecord(int Id);
         string AddBulkOrdersWithItems(List<OrderPlacement> orders, List<OrderItems> orderItems, int ClientId);
         int AddBulkOrdersWithClientId(List<OrderPlacement> BulkOrders, int ClientId);
+        Task<OrderPlacement> SettingDeliveryAddressName(int OrderPlacementId, OrderPlacement orderPlacement);
     }
 }

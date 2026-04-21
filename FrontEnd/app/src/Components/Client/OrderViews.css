@@ -130,7 +130,7 @@ img.truck2-icon {
 
 .status-pending { background: #ffd700; color: #333; }
 .status-intransit { background: #007bff; color: white; }
-.status-delivered { background: #28a745; color: white; }
+.status-delivered { background: #5f28b8; color: white; }
 .status-cancelled { background: #dc3545; color: white; }
 
 /* Progress Bar */
@@ -150,9 +150,10 @@ img.truck2-icon {
 }
 
 .progress-bar.pending { background: #ffd700; }
-.progress-bar.intransit { background: #007bff; }
-.progress-bar.delivered { background: #28a745; }
+.progress-bar.in-transit { background: #007bff; }
+.progress-bar.delivered { background: #5f28b8; }
 .progress-bar.cancelled { background: #dc3545; }
+.progress-bar.confirmed { background: #28a745; }
 
 .progress-percentage {
     text-align: right;
@@ -254,10 +255,13 @@ img.truck2-icon {
     border-radius: 8px;
     font-size: 14px;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 200px;
+    justify-content: center;
     margin-top: 10px;
+    margin-left: 40px;
+}
+
+.PickUpAddress-div {
+    width: 44%;
 }
 
 .order-meta p {
@@ -271,12 +275,12 @@ img.truck2-icon {
 
 .order-meta strong{
     color: #000;
-    font-size: 21px;
+    font-size: 17px;
     font-weight: 500;
 }
 
-.order-meta p{
-    font-size: 21px;
+.order-meta p.DeliveryUpAddress{
+    font-size: 15px;
 }
 
 .border-line {

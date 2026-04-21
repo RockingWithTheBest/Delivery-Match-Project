@@ -22,6 +22,7 @@
     // State variables
       const [mapDisplay, setMap] = useState(null);
       const [currentView, setCurrentView] = useState('customer');
+      const [pickUpLocationName, setPickUpLocationName] = useState('')
       const [pickupMarker, setPickupMarker] = useState(null);
       const [deliveryMarkers, setDeliveryMarkers] = useState([]);
       const [deliveryPoints, setDeliveryPoints] = useState([0])
@@ -125,8 +126,8 @@
           }).addTo(mapInstance);
 
           setMap(mapInstance);
-          setOrders(mockOrders);
-          setRoutes(mockRoutes);
+          //setOrders(mockOrders);
+          //setRoutes(mockRoutes);
 
           // Mark map as initialized
           mapInitializedRef.current = true;
@@ -549,13 +550,30 @@
                 TimeStamps:currentDateTime
               }
               console.log("orderTrackingInstance", orderTrackingInstance)
+
               const newIntance = await axios.post(`${url}/OrderTracking/Add-Order-Tracking`,orderTrackingInstance)
+
+              const orderPlacementResponse = await axios.get(`${url}/OrderPlacement/Get-Order-Single-Record-Placements-By-Id`,{
+                  params:{
+                      id:parseInt(Order_PlacementId)
+                  }
+              })
+              const orderPlacementOld = orderPlacementResponse.data; 
+              console.log("orderPlacementOld",orderPlacementOld)
+              orderPlacementOld.PickUpAddress = pickUpLocationName;
+              
+              const orderPlacementUpdated = await axios.put(`${url}/OrderPlacement/SettingDeliveryAddressName`,orderPlacementOld,{
+                  params:{
+                      OrderPlacementId:parseInt(Order_PlacementId)
+                  }
+              })
+              console.log("orderPlacement",orderPlacementUpdated.data)
               showNotification("Succuessfully saved the recently added details")
 
           }
           catch(error){
             // Handle all errors here
-            console.log("ERROR MESSAGE:", error.message);
+            console.log("ERROR MESSAGE:", error);
             
             if (error.message === "Order_PlacementId is required") {
                 showNotification("You can't do anything because you haven't entered the ORDER details",'error');
@@ -697,8 +715,8 @@
                                           }
                                       }}
                                   >
-                                    <option value="pickup-delivery">Pickup & Delivery</option>
-                                    <option value="home-pickup">Home Pickup</option>
+                                    <option value="pickup-delivery">Pickup Point</option>
+                                    {/* <option value="home-pickup">Home Pickup</option> */}
                                   </select>
                                 </div>
 
@@ -718,6 +736,8 @@
                                                 const LatLng = L.latLng(selectedLocation.lat, selectedLocation.long);
                                                 console.log("LLL",LatLng)
                                                 setPickUpLocation(`${selectedLocation.lat},${selectedLocation.long}`)
+
+                                                setPickUpLocationName(selectedLocation.name)
                                                 placePickupPin(LatLng)
                                             }
                                         }}

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import axios from "axios";
 import OrderViews from "./OrderViews";
 import './TrackOrder.css'
+import NoOrders from "./Icons/no-orders.jpg"
 
 const TrackOrder=()=>{
     const {ClientId} =useParams()
@@ -43,22 +44,31 @@ const TrackOrder=()=>{
 
     return(
         <div className="ordertimeline-main-track-client">
-            <div className="all-order-list-track-client">
-                <p className="myorders-track-client">My Orders</p>
-                {clientOrders.map((order,index)=>(
-                    <div 
-                        className="order-container-track-client" 
-                        key={order.Id} 
-                        onClick={()=>handleOrderPlacementId(order.Id)}>
-                        <div className="order-header-track-client">
-                            <h3>ORD-{order.Id}</h3>
-                        </div>                                                
+            {orderPlacementId ? (  
+                <div>                         
+                    <div className="all-order-list-track-client">
+                        <p className="myorders-track-client">My Orders</p>
+                        {clientOrders.map((order,index)=>(
+                            <div 
+                                className="order-container-track-client" 
+                                key={order.Id} 
+                                onClick={()=>handleOrderPlacementId(order.Id)}>
+                                <div className="order-header-track-client">
+                                    <h3>ORDER - {order.Id}</h3>
+                                </div>                                                
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            <OrderViews 
-                orderPlacementId ={orderPlacementId}
-            />
+                    <OrderViews 
+                        orderPlacementId ={parseInt(orderPlacementId)}
+                    />
+                </div> 
+            ):(
+                <div className="norders-available">
+                    <h3>No Orders have been placed</h3>
+                    <img src={NoOrders} alt="" />
+                </div>
+            )}
         </div>
         
     );

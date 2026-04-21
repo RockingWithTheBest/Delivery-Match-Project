@@ -4,56 +4,63 @@ import PickUpIcon from "../Icons/pickup-location-pin-svgrepo-com.svg"
 import DeliveryIcon from "../Icons/delivery-location-marker-svgrepo-com.svg"
 import axios from "axios"
 import './OrderViews.css'
+import { useParams } from "react-router-dom"
 
 
 const OrderViews=({orderPlacementId})=>{
     const [order, setOrder] = useState(null)
-    const urlGetOrdePlacement = "https://localhost:7216/api/OrderPlacement/Get-Order-Single-Record-Placements-By-Id"
-    const urlGetCustomer = "https://localhost:7216/api/Customer/Get-GetCustomerDetails-By-Id"
-    const urlGetUser = "https://localhost:7216/api/User/Get-Users-By-Id"
+    const url = "https://localhost:7216/api"
+    const {ClientId} = useParams()
+    const [loading, setLoading]=useState("")
+
+    console.log("orderPlacementId",orderPlacementId)
 
     const getOrderPlacements=async()=>{
+        if(!orderPlacementId) return;
+        
+        setLoading(true)
         try{          
             if(orderPlacementId!=null){
- 
-                const response = await axios.get(urlGetOrdePlacement, {
+                const response = await axios.get(`${url}/OrderPlacement/Get-Order-Single-Record-Placements-By-Id`, {
                     params:{
                         id:parseInt(orderPlacementId)
                     }
                 })
 
-                const customer = await axios.get(urlGetCustomer,{
-                    params:{
-                        id:parseInt(response.data.CustomerId)
-                    }
-                })
+                    const customer = await axios.get(`${url}/Customer/Get-GetCustomerDetails-By-Id`,{
+                        params:{
+                            id:parseInt(response.data.CustomerId)
+                        }
+                    })
 
-                const user = await axios.get(urlGetUser,{
-                    params:{
-                        id:parseInt(customer.data.UserId)
+                    const user = await axios.get(`${url}/User/Get-Users-By-Id`,{
+                        params:{
+                            id:parseInt(customer.data.UserId)
+                        }
+                    })
+                    
+                    const userInformation = {
+                        Order:response.data,
+                        Customer:customer.data,
+                        User:user.data
                     }
-                })
-                
-                const userInformation = {
-                    Order:response.data,
-                    Customer:customer.data,
-                    User:user.data
-                }
-                setOrder(userInformation)   
-                console.log("USER", userInformation)        
+                    setOrder(userInformation)  
             }           
         }
         catch(e){
-            console.log("ERROR MESSAGE", e.Message)
+            console.log("ERROR MESSAGE", e)
         }
-
+        finally{
+            setLoading(false)
+        }
     }
 
      const getProgressInfo = (status) => {
         const progressMap = {
-            'Pending': { percentage: 25, steps: ['Pending', 'InTransit', 'Delivered'], currentStep: 0 },
-            'In Transit': { percentage: 66, steps: ['Pending', 'InTransit', 'Delivered'], currentStep: 1 },
-            'Delivered': { percentage: 100, steps: ['Pending', 'InTransit', 'Delivered'], currentStep: 2 },
+            'Confirmed': { percentage: 10, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 0 },
+            'Pending': { percentage: 25, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 1 },
+            'In-Transit': { percentage: 66, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 2 },
+            'Delivered': { percentage: 100, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 3 },
             'Cancelled': { percentage: 0, steps: ['Cancelled'], currentStep: 0 }
         };
         return progressMap[status] || { percentage: 0, steps: [], currentStep: 0 };
@@ -75,13 +82,13 @@ const OrderViews=({orderPlacementId})=>{
             },
             { 
                 label: "Order Picked Up", 
-                completed: order?.Order?.Status === "In Transit" || order?.Order?.Status === "Delivered",
+                completed: order?.Order?.Status === "Pending" || order?.Order?.Status === "In-Transit" || order?.Order?.Status === "Delivered",
                 date: order?.Order?.Scheduled_At,
                 description: "Driver picked up the package"
             },
             { 
-                label: "In Transit", 
-                completed: order?.Order?.Status === "In Transit" || order?.Order?.Status === "Delivered",
+                label: "In-Transit", 
+                completed: order?.Order?.Status === "In-Transit" || order?.Order?.Status === "Delivered",
                 date: order?.Order?.Scheduled_At,
                 description: "Package is on the way"
             },
@@ -96,13 +103,19 @@ const OrderViews=({orderPlacementId})=>{
         return timelineSteps;
     }
 
+    const truncateText = (text, maxLength) => {
+        if (!text) return text;
+        return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+    };
 
     useEffect(()=>{
-        getOrderPlacements()         
+        getOrderPlacements()      
     },[orderPlacementId])
+
     return(
         <div className="each-order-line-track-order">    
-            {order ? (
+            {orderPlacementId ? (
+                order ? (
                 <div className="order-details-container">
                     <div className="order-header">
                         <div>
@@ -118,15 +131,15 @@ const OrderViews=({orderPlacementId})=>{
                     <div className="customer-info">
                         <div className="customer-header">
                             <div className="customer-avatar">
-                                {order.User.First_Name?.charAt(0).toUpperCase()}
-                                {order.User.Last_Name?.charAt(0).toUpperCase()}
+                                {order.User.FirstName?.charAt(0).toUpperCase()}
+                                {order.User.LastName?.charAt(0).toUpperCase()}
                             </div>
                             <div className="customer-details">
                                 <p className="customer-name">
-                                    {order.User.First_Name} {order.User.Last_Name}
+                                    {order.User.FirstName} {order.User.LastName}
                                 </p>
                                 <p className="business-name">
-                                    <strong>Business:</strong> {order.Customer.Business_Name}
+                                    <strong>Business:</strong> {order.Customer.BusinessName}
                                 </p>
                                 {order.Customer.Rating && (
                                     <div className="customer-rating">
@@ -141,9 +154,9 @@ const OrderViews=({orderPlacementId})=>{
                     <div className="progress-section">
                         <div className="progress-header">
                             <h4>Delivery Progress</h4>
-                            <span className={`status-badge status-${order.Order.Status.toLowerCase()}`}>
+                            {/* <span className={`status-badge status-${order.Order.Status.toLowerCase()}`}>
                                 {order.Order.Status}
-                            </span>
+                            </span> */}
                         </div>
                     </div>
 
@@ -167,11 +180,15 @@ const OrderViews=({orderPlacementId})=>{
                     )}
                     <div className="border-line"></div>
                     <div className="order-meta">
-                        <div>
-                            <img src={PickUpIcon} alt="" /><strong>Pickup Address:</strong><p>{order.Order.Pick_Up_Address}</p>
+                        <div className="PickUpAddress-div">
+                            <img src={PickUpIcon} alt="" /><strong>Pickup Address:</strong><p className="PickUpAddress">{order.Order.PickUpAddress}</p>
                         </div>
                         <div>
-                            <img src={DeliveryIcon} alt="" /><strong>Delivery Address:</strong> <p>{order.Order.Delivery_Up_Address}</p>
+                            <img src={DeliveryIcon} alt="" />
+                            <strong>Delivery Address:</strong> 
+                            <p className="DeliveryUpAddress">
+                                {truncateText(order.Order.DeliveryUpAddress,100)}
+                            </p>
                         </div>                        
                     </div>
                     
@@ -179,15 +196,15 @@ const OrderViews=({orderPlacementId})=>{
                     <div className="item-details">
                         <div>
                             <p>Weight</p>
-                            <strong>{order.Order.Weight} kg</strong>
+                            <strong>{order.Order.OrderItems.WeightPerItem.toFixed(2)} kg</strong>
                         </div>
                         <div>
                             <p>Volume</p>
-                            <strong>{order.Order.Weight} m³</strong>
+                            <strong>{(order.Order.OrderItems.OrderDimension.Height*order.Order.OrderItems.OrderDimension.Width*order.Order.OrderItems.OrderDimension.Length).toFixed(2)} m³</strong>
                         </div>
                         <div>
                             <p>Cost</p>
-                            <strong className="cost">${order.Order.Price}</strong>
+                            <strong className="cost">₽{order.Order.Price.toFixed(2)}</strong>
                         </div>
                         <div>
                             <p>Status</p>
@@ -230,7 +247,14 @@ const OrderViews=({orderPlacementId})=>{
                           
                 ):(
                     <p>Loading order data...</p>
-                )}
+                )
+            ):(
+                <div className="no-order-selected">
+                    <img src="" alt="" />
+                    <h3>No Order Selected</h3>
+                    <p>Please select an order from the list</p>
+                </div>
+            )}
         </div>
     )
 

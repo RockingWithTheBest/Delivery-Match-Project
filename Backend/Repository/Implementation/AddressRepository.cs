@@ -59,7 +59,7 @@ namespace Backend.Repository.Implementation
 
         public Address GetSingleRecord(int Id)
         {
-            return databaseContext.Addresses.Where(temp => temp.Id == Id).FirstOrDefault();
+            return databaseContext.Addresses.Where(temp => temp.UserId == Id).FirstOrDefault();
         }
 
         public int UpdateAddressRecord(int Id, Address record)
@@ -71,12 +71,13 @@ namespace Backend.Repository.Implementation
             }
             else
             {
-                Address updatedRecord = databaseContext.Addresses.Where(temp => temp.Id == Id).FirstOrDefault();
+                Address updatedRecord = databaseContext.Addresses.Where(temp => temp.UserId == Id).FirstOrDefault();
                 updatedRecord.Label = record.Label;
-                updatedRecord.AddressLine = record.AddressLine;
-                updatedRecord.City = record.City;
+                updatedRecord.Latitude = record.Latitude;
+                updatedRecord.Longitude = record.Longitude;
+                updatedRecord.Location = record.Location;
                 databaseContext.SaveChanges();
-                testValue = record.Id;
+                testValue = updatedRecord.Id;
             }
             return testValue;
         }
