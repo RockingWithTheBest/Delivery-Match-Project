@@ -77,7 +77,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
             setIsActiveCancelled(false)
                         // Here you can also make an API call to update the driver status in your backend
             //console.log(`Driver status changed to: ${!isActiveConfirmed ? 'Active' : 'Inactive'}`);
-            updatingStatus('InTransit')
+            updatingStatus('In-Transit')
     }
     
     const handleDeliveredToggle=()=>{
@@ -208,10 +208,10 @@ const ViewParticularOrder=({orderPlacementId})=>{
 
      const getProgressInfo = (status) => {
         const progressMap = {
-            'Confirmed': { percentage: 10, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 0 },
-            'Pending': { percentage: 25, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 1 },
-            'In Transit': { percentage: 66, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 2 },
-            'Delivered': { percentage: 100, steps: ['Confirmed','Pending', 'InTransit', 'Delivered'], currentStep: 3 },
+            'Confirmed': { percentage: 10, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 0 },
+            'Pending': { percentage: 25, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 1 },
+            'In-Transit': { percentage: 66, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 2 },
+            'Delivered': { percentage: 100, steps: ['Confirmed','Pending', 'In-Transit', 'Delivered'], currentStep: 3 },
             'Cancelled': { percentage: 0, steps: ['Cancelled'], currentStep: 0 }
         };
         return progressMap[status] || { percentage: 0, steps: [], currentStep: 0 };
@@ -233,13 +233,13 @@ const ViewParticularOrder=({orderPlacementId})=>{
             },
             { 
                 label: "Order Picked Up", 
-                completed: order?.Order?.Status === "Pending" || order?.Order?.Status === "InTransit" || order?.Order?.Status === "Delivered",
+                completed: order?.Order?.Status === "Pending" || order?.Order?.Status === "In-Transit" || order?.Order?.Status === "Delivered",
                 date: order?.Order?.Scheduled_At,
                 description: "Driver picked up the package"
             },
             { 
-                label: "In Transit", 
-                completed: order?.Order?.Status === "InTransit" || order?.Order?.Status === "Delivered",
+                label: "In-Transit", 
+                completed: order?.Order?.Status === "In-Transit" || order?.Order?.Status === "Delivered",
                 date: order?.Order?.Scheduled_At,
                 description: "Package is on the way"
             },
@@ -269,7 +269,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
             if((response.data.Status).toLowerCase() === 'pending'){
                 handlePendingToggle()
             }
-             if((response.data.Status).toLowerCase() === 'intransit'){
+             if((response.data.Status).toLowerCase() === 'in-transit'){
                 handleInTransitToggle()
             }
 
@@ -289,7 +289,7 @@ const ViewParticularOrder=({orderPlacementId})=>{
     const toggleItems = [
         { key: 'confirmed', label: 'Confirmed', icon: '' },
         { key: 'pending', label: 'Pending', icon: '⏳' },
-        { key: 'inTransit', label: 'In Transit', icon: '🚚' },
+        { key: 'in-Transit', label: 'In-Transit', icon: '🚚' },
         { key: 'delivered', label: 'Delivered', icon: '📦' },
         { key: 'cancelled', label: 'Cancelled', icon: '❌' }
     ];

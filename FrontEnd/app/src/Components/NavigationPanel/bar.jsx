@@ -8,7 +8,6 @@ const Bar=()=>{
     const navigate = useNavigate()
 
     const navigateToAuthenticationPage=()=>{
-        alert("BRO")
         navigate("/authpage")
     }
     return(

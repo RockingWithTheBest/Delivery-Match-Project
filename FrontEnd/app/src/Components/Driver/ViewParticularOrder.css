@@ -311,7 +311,7 @@ img.truck2-icon {
 
 .status-confirmed { background: #f55b09; color: white; }
 .status-pending { background: #ffd700; color: #333; }
-.status-intransit { background: #007bff; color: white; }
+.status-in-transit { background: #007bff; color: white; }
 .status-delivered { background: #28a745; color: white; }
 .status-cancelled { background: #dc3545; color: white; }
 
