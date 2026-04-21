@@ -129,5 +129,125 @@ namespace Backend.Controllers
                 return Ok(notifications.GetCustomersWithIds(CustomerIds));
             }
         }
+
+        [HttpPost]
+        [Route("Notification-Made-On-A-Particular-Order-ByCustomer")]
+        public IActionResult NotificationMadeOnOrderByCustomer(int CustomerId,
+            int OrderPlacedId, Notification notify)
+        {
+            if(CustomerId <= 0 || OrderPlacedId <= 0 || notify == null)
+            {
+                return BadRequest("The notification cannot be created");
+            }
+
+            else
+            {
+                return Ok(notifications.NotificationMadeOnAParticularOrderByCustomer(CustomerId,
+                    OrderPlacedId, notify));
+            }
+        }
+
+
+        [HttpGet]
+        [Route("Get-Notifications-Of-Particular-OrderPlaced")]
+        public IActionResult GetNotificationsOfOrderPlaced(int OrderPlacementId)
+        {
+            if(OrderPlacementId <= 0)
+            {
+                return NotFound("The Notifications where not found");
+            }
+            else
+            {
+                return Ok(notifications.GetNotificationsOfParticularOrderPlaced(OrderPlacementId));
+            }
+        }
+
+        [HttpPost]
+        [Route("Send-Client-Message")]
+        public IActionResult SendClientMessageRoute([FromBody] SendMessageRequest request)
+        {
+            try
+            {
+                var notification = notifications.SendClientMessage(
+                    request.Id,
+                    request.OrderId,
+                    request.Message
+                    );
+
+                return Ok(notification);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPost]
+        [Route("Send-Driver-Message")]
+        public IActionResult SendDriverMessage([FromBody] SendMessageRequest request)
+        {
+            try
+            {
+                var notification = notifications.SendDriverMessage(
+                    request.Id,
+                    request.OrderId,
+                    request.Message
+                    );
+                
+                return Ok(notification);
+            }
+            catch(ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new {message = ex.Message});
+            }
+        }
+
+
+        [HttpPut]
+        [Route("Mark-Notification-Read")]
+        public IActionResult MarkNotificationRead(int notificationId)
+        {
+            try
+            {
+                notifications.MarkNotificationAsRead(notificationId);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        [HttpPut]
+        [Route("Mark-All-Notifications-Read")]
+        public IActionResult MarkAllNotificationsRead(int customerId)
+        {
+            try
+            {
+                notifications.MarkAllAsRead(customerId);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+        //int GetUnreadNotificationCount(int CustomerId);      
     }
+}
+
+public class SendMessageRequest
+{
+    public int Id {  get; set; }
+    public int OrderId {  get; set; }
+    public string Message { get; set; }
 }
