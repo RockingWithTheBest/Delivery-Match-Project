@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom'
 import {useState} from 'react'
 import Dashboard from './Dashboard'
 import ActiveOrder from './ActiveOrder'
-import Notifications from './Notification'
+import Notifications from './NotificationTab'
 import Profile from './Profile'
 import Routes from './Routes'
+import RoutesViewOnMap from './RoutesViewOnMap'
 
 const DriverMainComponent=()=>{
     const navigate = useNavigate()
@@ -16,6 +17,7 @@ const DriverMainComponent=()=>{
     const [activateRoutes, setRoutes] = useState(false);
     const [activateNotifications, setNotifications] = useState(false);
     const [activateProfile, setProfile] = useState(false);
+    const [activateRoutePath, setRoutePath] = useState(false);
 
 
     const LogOut=()=>{
@@ -28,35 +30,54 @@ const DriverMainComponent=()=>{
         setRoutes(false)
         setNotifications(false)
         setProfile(false)
+        setRoutePath(false)
     }
+    
+    const handleRoutePath=()=>{
+        setRoutePath(true)
+        setDashboard(false)
+        setActiveOrders(false)
+        setRoutes(false)
+        setNotifications(false)
+        setProfile(false)
+    }
+
     const handleActivateOrderActivation=()=>{
         setDashboard(false)
         setActiveOrders(true)
         setRoutes(false)
         setNotifications(false)
         setProfile(false)
+        setRoutePath(false)
     }
+
     const handleRoutesActivation=()=>{
         setDashboard(false)
         setActiveOrders(false)
         setRoutes(true)
         setNotifications(false)
         setProfile(false)
+        setRoutePath(false)
     }
+
     const handleNotificationActivation=()=>{
         setDashboard(false)
         setActiveOrders(false)
         setRoutes(false)
         setNotifications(true)
         setProfile(false)
+        setRoutePath(false)
     }
+
     const handleProfileActivation=()=>{
         setDashboard(false)
         setActiveOrders(false)
         setRoutes(false)
         setNotifications(false)
         setProfile(true)
+        setRoutePath(false)
     }
+
     return(
         <div className='driver-component'>
             <div className="header-nav-driver">
@@ -83,8 +104,9 @@ const DriverMainComponent=()=>{
                     <nav onClick={()=>handleDashboardActivation()}>Dashboard</nav>
                     <nav onClick={()=>handleActivateOrderActivation()}>Active Orders</nav>
                     <nav onClick={()=>handleRoutesActivation()}>Routes</nav>
-                    <nav onClick={()=>handleNotificationActivation()}>Notifications</nav>
+                    <nav onClick={()=>handleRoutePath()}>Destinations</nav>
                     <nav onClick={()=>handleProfileActivation()}>Profile</nav>
+                    <nav onClick={()=>handleNotificationActivation()}>Notifications</nav>
                 </div>
             
                 {activateDashboard && (
@@ -101,6 +123,9 @@ const DriverMainComponent=()=>{
                 )}
                 {activateProfile && (
                     <Profile/>
+                )}
+                {activateRoutePath &&(
+                    <RoutesViewOnMap/>
                 )}
             </div>
           

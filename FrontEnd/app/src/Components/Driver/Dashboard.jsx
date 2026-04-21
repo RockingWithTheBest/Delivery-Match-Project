@@ -326,7 +326,7 @@ const Dashboard = () => {
         <div className='dashboard-component'>
             <div className="dashboard-status">
                 
-                <div className="toggle-container">
+                <div className="toggle-container-dash">
                         <h2>Driver Status</h2>
                         <label className="toggle-label">
                             <input 
