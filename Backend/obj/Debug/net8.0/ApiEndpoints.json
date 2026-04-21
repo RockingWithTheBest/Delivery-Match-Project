@@ -87,13 +87,13 @@
   {
     "ContainingType": "Backend.Controllers.AddressController",
     "Method": "GetById",
-    "RelativePath": "api/Address/Get-Addresses-By-Id",
+    "RelativePath": "api/Address/Get-Addresses-By-UserId",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "UserId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -822,6 +822,112 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "GetNotificationsOfOrderPlaced",
+    "RelativePath": "api/Notification/Get-Notifications-Of-Particular-OrderPlaced",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "OrderPlacementId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "MarkAllNotificationsRead",
+    "RelativePath": "api/Notification/Mark-All-Notifications-Read",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "MarkNotificationRead",
+    "RelativePath": "api/Notification/Mark-Notification-Read",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notificationId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "NotificationMadeOnOrderByCustomer",
+    "RelativePath": "api/Notification/Notification-Made-On-A-Particular-Order-ByCustomer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CustomerId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OrderPlacedId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "notify",
+        "Type": "Backend.Models.Notification",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "SendClientMessageRoute",
+    "RelativePath": "api/Notification/Send-Client-Message",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SendMessageRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.NotificationController",
+    "Method": "SendDriverMessage",
+    "RelativePath": "api/Notification/Send-Driver-Message",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "SendMessageRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Backend.Controllers.OrderItemsController",
     "Method": "AddOrderItems",
     "RelativePath": "api/OrderItems/Add-OrderItems",
@@ -1054,6 +1160,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Backend.Controllers.OrderPlacementController",
+    "Method": "SettingUpDeliveryAddressName",
+    "RelativePath": "api/OrderPlacement/SettingDeliveryAddressName",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "OrderPlacementId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "order",
+        "Type": "Backend.Models.OrderPlacement",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Backend.Controllers.OrderTrackingController",
     "Method": "AddOrderTracking",
     "RelativePath": "api/OrderTracking/Add-Order-Tracking",
@@ -1245,6 +1372,11 @@
         "IsRequired": false
       },
       {
+        "Name": "TravelinSequency",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "Driver.Id",
         "Type": "System.Int32",
         "IsRequired": false
@@ -1416,7 +1548,7 @@
       },
       {
         "Name": "Driver.User.Customer.TotalOrders",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {
@@ -1592,6 +1724,11 @@
         "IsRequired": false
       },
       {
+        "Name": "TravelinSequency",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "Driver.Id",
         "Type": "System.Int32",
         "IsRequired": false
@@ -1763,7 +1900,7 @@
       },
       {
         "Name": "Driver.User.Customer.TotalOrders",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {
@@ -1896,7 +2033,7 @@
   },
   {
     "ContainingType": "Backend.Controllers.RouteController",
-    "Method": "GetByDriverId",
+    "Method": "GetRouteByDriverId",
     "RelativePath": "api/Route/Get-Route-By-DriverId",
     "HttpMethod": "GET",
     "IsController": true,
@@ -2032,6 +2169,27 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/User/PasswordChanger",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
