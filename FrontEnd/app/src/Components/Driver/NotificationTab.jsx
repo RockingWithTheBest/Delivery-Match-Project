@@ -407,39 +407,38 @@ const NotificationTab=()=>{
                                 </option>
                             ))}
                         </select>
-
-                        {selectedOrdersNotifications.map(notify=>(
-                            <div className="notifications-list">
-                                <div
-                                    key={notify.Id}
-                                    className={`notification-item ${!notify.IsRead ? 'unread':''}`}
-                                >
-                                    <div className="arrange-notification">
-                                        <div 
-                                            className="notification-icon"
-                                            style={{backgroundColor:getNotificationColor(notify.Type)}}
-                                        >
-                                            {getNotificationIcon(notify.Type)}
+                        <div   className="notifications-list">   
+                            {selectedOrdersNotifications.map(notify=>(
+                                    <div
+                                        key={notify.Id}
+                                        className={`notification-item ${!notify.IsRead ? 'unread':''}`}
+                                    >
+                                        <div className="arrange-notification">
+                                            <div 
+                                                className="notification-icon"
+                                                style={{backgroundColor:getNotificationColor(notify.Type)}}
+                                            >
+                                                {getNotificationIcon(notify.Type)}
+                                            </div>
+                                            <div className="notification-content">
+                                                <span className="notification-header">{notify.Type}</span>
+                                                <span className="notification-time">
+                                                    {new Date(notify.CreatedAt).toLocaleString()}
+                                                </span>
+                                            </div>
+                                            <p className="notification-message">{notify.Message}</p>
+                                            {notify.DriverCommentry && (
+                                                <p className="notification-commentry">
+                                                    {notify.DriverCommentry}
+                                                </p>
+                                            )}
                                         </div>
-                                        <div className="notification-content">
-                                            <span className="notification-header">{notify.Type}</span>
-                                            <span className="notification-time">
-                                                {new Date(notify.CreatedAt).toLocaleString()}
-                                            </span>
+                                        <div className="delete-icon" onClick={()=>handleDeleteNotification(notify.Id)}>
+                                            🗑️
                                         </div>
-                                        <p className="notification-message">{notify.Message}</p>
-                                        {notify.DriverCommentry && (
-                                            <p className="notification-commentry">
-                                                {notify.DriverCommentry}
-                                            </p>
-                                        )}
                                     </div>
-                                    <div className="delete-icon" onClick={()=>handleDeleteNotification(notify.Id)}>
-                                        🗑️
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                 </div>
             }
         </div>

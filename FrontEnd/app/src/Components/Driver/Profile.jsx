@@ -5,6 +5,7 @@ import PersonalInfo from "./PersonalInfo";
 import Vehicle from "./Vehicle"
 import Statistics from "./Statistics"
 import Documents from "./Documents"
+import Address from "./Address";
 import './Profile.css'
 
 
@@ -17,6 +18,7 @@ const Profile=()=>{
     const [activateVehicleInfo, setVehicleInfo] = useState(false);
     const [activateDocuments, setDocuments] = useState(false);
     const [activateStatistics, setStatistics] = useState(false);
+    const [activateAddress, setAddress] = useState(false)
 
 
     const url = "https://localhost:7216/api"
@@ -71,12 +73,20 @@ const Profile=()=>{
         setCompletionPercentage(parseInt(details.CompletionRate))
     }
 
-   
+    const handleAddressInfo =()=>{
+        setAddress(true)
+        setPersonalInfo(false)
+        setVehicleInfo(false)
+        setDocuments(false)
+        setStatistics(false)
+    }
+
     const handlePersonalInfo =()=>{
         setPersonalInfo(true)
         setVehicleInfo(false)
         setDocuments(false)
         setStatistics(false)
+        setAddress(false)
     }
 
     const handleVehicleInfo =()=>{
@@ -84,6 +94,7 @@ const Profile=()=>{
         setVehicleInfo(true)
         setDocuments(false)
         setStatistics(false)
+        setAddress(false)
     }
 
     const handleDocuments =()=>{
@@ -91,6 +102,7 @@ const Profile=()=>{
         setVehicleInfo(false)
         setDocuments(true)
         setStatistics(false)
+        setAddress(false)
     }
 
     const handleStatistics =()=>{
@@ -98,6 +110,7 @@ const Profile=()=>{
         setVehicleInfo(false)
         setDocuments(false)
         setStatistics(true)
+        setAddress(false)
     }    
 
 
@@ -135,6 +148,7 @@ const Profile=()=>{
             <div className="driver-sub-nav">
                 <nav onClick={()=>handlePersonalInfo()}>Personal Info</nav>
                 <nav onClick={()=>handleVehicleInfo()}>Vehicle Info</nav>
+                <nav onClick={()=>handleAddressInfo()}>Address Info</nav>
                 <nav onClick={()=>handleDocuments()}>Documents</nav>
                 <nav onClick={()=>handleStatistics()}>Statistics</nav>
             </div>
@@ -142,6 +156,7 @@ const Profile=()=>{
             {activateVehicleInfo && <Vehicle driverDetails={driverDetails}/>}
             {activateDocuments && <Documents/>}
             {activateStatistics && <Statistics/>}
+            {activateAddress && <Address/>}
          
         </div>
     )

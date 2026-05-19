@@ -1,0 +1,41 @@
+{
+  "ConnectionStrings": {
+    "DeliveryMatchString": "Server=ROCKINWITHEBEST\\SQLEXPRESS;Database=Delivery Match;Integrated Security=True;Persist Security Info=False;TrustServerCertificate=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "Jwt": {
+    "Secret": "e95225f3f8256b131604239280819d391747274c436d08497f1106c8c4345f51269aecce7995e7f9aaef2b39ec2527a9b4ac723bd503ea2ffa9ff48f575f6524",
+    "Issuer": "Backend",
+    "Audience": "BackendUser",
+    "ExpirationInMinutes": "60"
+  }
+}
+
+
+----------------------------------------------------------------
+docker cp "C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\Backup\DeliveryMatchDB.bak" clyde-delivery-server:/var/opt/mssql/data/
+Successfully copied 9.01MB to clyde-delivery-server:/var/opt/mssql/data/
+----------------------------------------------------------------
+docker run -it --rm --network clydedelivery-network mcr.microsoft.com/mssql-tools:latest ^
+/opt/mssql-tools/bin/sqlcmd -S clyde-delivery-server -U sa -P "yourStrong(!)Password" -Q ^
+"RESTORE DATABASE DeliveryMatchDB FROM DISK = '/var/opt/mssql/data/DeliveryMatchDB.bak' WITH MOVE 'Delivery Match' TO '/var/opt/mssql/data/DeliveryMatchDB.mdf', MOVE 'Delivery Match_log' TO '/var/opt/mssql/data/DeliveryMatchDB_log.ldf', REPLACE;"
+
+----------------------------------------------------------------
+docker build -t backendclydedelivery .
+----------------------------------------------------------------
+
+docker run -d --name backendclydedelivery --network clydedelivery-network ^
+  -e "ASPNETCORE_ENVIRONMENT=Development" ^
+-e "ConnectionStrings__DeliveryMatchString=Server=clyde-delivery-server;Database=DeliveryMatchDB;User Id=sa;Password=yourStrong(!)Password;TrustServerCertificate=true;MultipleActiveResultSets=true;Encrypt=false;" ^
+  -e "Jwt__Secret=e95225f3f8256b131604239280819d391747274c436d08497f1106c8c4345f51269aecce7995e7f9aaef2b39ec2527a9b4ac723bd503ea2ffa9ff48f575f6524" ^
+  -e "Jwt__Issuer=Backend" ^
+  -e "Jwt__Audience=BackendUser" ^
+  -e "Jwt__ExpirationInMinutes=60" ^
+  -p 4081:8080  ^
+  backendclydedelivery

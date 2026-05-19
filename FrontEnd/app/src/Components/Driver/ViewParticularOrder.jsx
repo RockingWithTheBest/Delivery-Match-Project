@@ -3,6 +3,7 @@ import TruckIcon from "../Icons/2truck-svgrepo-com.svg"
 import PickUpIcon from "../Icons/pickup-location-pin-svgrepo-com.svg"
 import DeliveryIcon from "../Icons/delivery-location-marker-svgrepo-com.svg"
 import axios from "axios"
+import OrderNotYetSelectedIcon from "./Icons/no-order-selected-yet.png"
 import { format } from 'date-fns';
 import './ViewParticularOrder.css'
 
@@ -534,7 +535,11 @@ const ViewParticularOrder=({orderPlacementId})=>{
                 </div>                          
                           
                 ):(
-                    <p>Loading order data...</p>
+                    <div className="no-order-selected">
+                        <h3>No Order Selected</h3>
+                        <p>Please select an order from the list</p>
+                        <img src={OrderNotYetSelectedIcon} alt="" />
+                    </div>                   
                 )}
         </div>
     )

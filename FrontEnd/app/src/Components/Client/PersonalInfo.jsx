@@ -6,7 +6,6 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 
 const PersonalInfo=({customerDetails})=>{
-    const {password}=useParams()
     const {ClientId}=useParams()
     const [disableTrue,setDisableToTrue] = useState(true)
     const [firstName, setFirstName] = useState(customerDetails.Customer_FirstName || "")
@@ -42,8 +41,8 @@ const PersonalInfo=({customerDetails})=>{
                     BusinessType:businessTypeName,
                     TaxIdentification:businessTax,
                     Rating:customerResponse.data.Rating,
-                    TotalOrders:customerResponse.data.Total_Orders,
-                    TotalSpent:customerResponse.data.Total_Spent,
+                    TotalOrders:customerResponse.data.TotalOrders,
+                    TotalSpent:customerResponse.data.TotalSpent,
                     UserId:customerResponse.data.UserId
                 }
 
@@ -52,12 +51,12 @@ const PersonalInfo=({customerDetails})=>{
                     Phone:phone,
                     FirstName:firstName,
                     LastName:lastName,
-                    Password:password
+                    Password:customerResponse.data.User.Password
                 }
 
                 await axios.put(`${url}/User/Editing-User`,user,{
                     params:{
-                        Id:parseInt(parseInt(customerResponse.data.UserId))
+                        Id:parseInt(customerResponse.data.UserId)
                     }
                 })
 

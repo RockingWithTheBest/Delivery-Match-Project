@@ -84,7 +84,7 @@ const KnapsackAlgorithm=()=>{
                 };
             }
             
-            // Create DP table with n+1 rows and capacity+1 columns
+            // DP table with n+1 rows and capacity+1 columns
             const dp1 = Array.from({length:n+1}, 
                 ()=>Array(intCapacity+1).fill(0))
             
@@ -410,10 +410,10 @@ const KnapsackAlgorithm=()=>{
                             <p className="sub-value">of {(solution.weightCapacity).toFixed(2)} kg</p>
                         </div>
 
-                        <div className="stat-card">
+                        {/* <div className="stat-card">
                             <h3>Total Weight</h3>
                             <p className="value">{(solution.totalWeight).toFixed(2)} kg</p>
-                        </div>
+                        </div> */}
 
                          <div className="stat-card">
                             <h3>Total Volume</h3>

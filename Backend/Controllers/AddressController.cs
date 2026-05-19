@@ -43,10 +43,10 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("Get-Addresses-By-Id")]
-        public IActionResult GetById(int id)
+        [Route("Get-Addresses-By-UserId")]
+        public IActionResult GetById(int UserId)
         {
-            var result = address.GetSingleRecord(id);
+            var result = address.GetSingleRecord(UserId);
             if(result == null)
             {
                 return NotFound();

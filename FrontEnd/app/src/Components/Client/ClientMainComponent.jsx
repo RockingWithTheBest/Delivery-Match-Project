@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import Profile from './Profile'
 import NewOrder from './NewOrder'
-import Notifications from './Notification'
+import Notifications from './Notifications'
 import TrackOrders from './TrackOrder'
 import OrderViewOnMap from './OrderViewOnMap'
 import BulkOrders from './BulkOrders'
@@ -81,15 +81,12 @@ const ClientMainComponent=()=>{
         setNewOrder(false)
         setProfile(false)            
     }
-    useEffect(()=>{
-        console.log("BOY")
-    })
     return(
         <div className='client-component'>
             <div className="header-nav">
                 <div className='title-descript'>
                     <img  className='mytruck-icon'  src={TruckIcon} />
-                    <h2>DeliveryMatch</h2>
+                    <h2>ClydeDelivery</h2>
                     <p className='driver-tag'>Client</p>
                 </div>
                 
@@ -144,6 +141,14 @@ const ClientMainComponent=()=>{
                 >
                     {activeNav === 'Order Map View' && <span className="nav-indicator"></span>}
                     Order Map View
+                </nav>
+
+                    <nav 
+                    className={activeNav === 'Notification' ? 'active' : ''}
+                    onClick={()=>handleNotification()}
+                >
+                    {activeNav === 'Notification' && <span className="nav-indicator"></span>}
+                    Notification
                 </nav>
             </div>
             

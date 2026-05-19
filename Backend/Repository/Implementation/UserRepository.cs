@@ -2,6 +2,7 @@
 using Backend.Models;
 using Backend.Repository.Implementation;
 using Backend.Repository.Interface;
+using Backend.Services.Routing;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,12 @@ namespace Backend.Repository.Implementation
     {
         private ApplicationDatabaseContext databaseContext;
         private readonly IPasswordHasher<User> passwordHasher;
-        public UserRepository(ApplicationDatabaseContext databaseContext, IPasswordHasher<User> passwordHasher)
+        private readonly ILogger<UserRepository> _logger;
+        public UserRepository(ApplicationDatabaseContext databaseContext, IPasswordHasher<User> passwordHasher, ILogger<UserRepository>logger)
         {
             this.databaseContext = databaseContext;
             this.passwordHasher = passwordHasher;
+            _logger = logger;
         }
         public int AddUserRecord(User user)
         {
@@ -53,6 +56,8 @@ namespace Backend.Repository.Implementation
             }
             else
             {
+                client.Customer.TotalOrders = 0;
+                client.Customer.TotalSpent = 0;
                 databaseContext.Users.Add(client);
                 databaseContext.SaveChanges();
                 return client;
@@ -161,11 +166,43 @@ namespace Backend.Repository.Implementation
                 updatedRecord.Phone = record.Phone;
                 updatedRecord.FirstName = record.FirstName;
                 updatedRecord.LastName = record.LastName;
-                updatedRecord.Password = record.Password;
+                //updatedRecord.Password = record.Password;
                 databaseContext.SaveChanges();
                 testValue = record.Id;
             }
             return testValue;
+        }
+
+        public bool UserPasswordChanger(int UserId, string password)
+        {
+            try
+            {   
+                var LastId = databaseContext.Users
+                    .Select(o=>o.Id)
+                    .OrderBy(Id=> Id).LastOrDefault();
+                
+                if (UserId <= 0 || UserId >= LastId+1)
+                {
+                    _logger.LogWarning("The Id you provided isnt Valid", UserId);
+                    return false;
+                }
+                
+               
+                
+                var user = databaseContext.Users.Where(i=>i.Id == UserId).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Password = passwordHasher.HashPassword(user, password);
+                    databaseContext.SaveChanges();
+                    return true;
+                }
+               return false;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogWarning("The Id you provided isnt Valid", UserId);
+                return false;
+            }
         }
     }
 }

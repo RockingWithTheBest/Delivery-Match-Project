@@ -27,13 +27,13 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("Get-Single-Doc")]
-        public IActionResult GetSingleDoc(int DriverId)
+        public IActionResult GetSingleDoc(int Id)
         {
-            if ((documents.GetSingleDocumentDetails(DriverId)) == null)
+            if ((documents.GetSingleDocumentDetails(Id)) == null)
             {
                 return NotFound();
             }
-            return Ok(documents.GetSingleDocumentDetails(DriverId));
+            return Ok(documents.GetSingleDocumentDetails(Id));
         }
 
         [HttpPost]

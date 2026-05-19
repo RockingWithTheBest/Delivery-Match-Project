@@ -12,5 +12,6 @@ namespace Backend.Repository.Interface
         User AddUserWithDriver(User driver);
         User AddUserWithClient(User client);
         User RegisterUser(User user);
+        bool UserPasswordChanger(int UserId, string password);
     }
 }

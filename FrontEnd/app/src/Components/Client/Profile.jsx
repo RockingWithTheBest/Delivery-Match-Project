@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-// import PersonalInfo from "../Icons/personal-info.svg"
 import BusinessInfo from "../Icons/businessman-personal-data-paper-svgrepo-com.svg"
 import PersonalInfo from "./PersonalInfo"
 import Address from "./Address"

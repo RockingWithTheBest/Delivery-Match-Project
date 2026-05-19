@@ -43,9 +43,9 @@ const TrackOrder=()=>{
 
 
     return(
-        <div className="ordertimeline-main-track-client">
-            {orderPlacementId ? (  
-                <div>                         
+        <div >
+            {clientOrders && clientOrders.length > 0 ? (  
+                <div className="ordertimeline-main-track-client">                         
                     <div className="all-order-list-track-client">
                         <p className="myorders-track-client">My Orders</p>
                         {clientOrders.map((order,index)=>(
