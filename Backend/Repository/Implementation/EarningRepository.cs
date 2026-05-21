@@ -1,4 +1,5 @@
 ﻿using Backend.DatabasContext;
+using Backend.DTOs;
 using Backend.Models;
 using Backend.Repository.Implementation;
 using Backend.Repository.Interface;
@@ -11,73 +12,123 @@ namespace Backend.Repository.Implementation
         public EarningRepository(ApplicationDatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
-        }
-        public int AddEarningsRecord(Earnings earns)
-        {
-            int textVariable = -1;
-            if (earns == null)
-            {
-                return textVariable;
-            }
-            else
-            {
-                databaseContext.Earnings.Add(earns);
-                databaseContext.SaveChanges();
-                textVariable = earns.Id;
-            }
-            return textVariable;
-        }
-
-        public int DeleteEarningsRecord(int Id)
-        {
-            int testValue = -1;
-            if (Id <= 0)
-            {
-                return testValue;
-            }
-            var record = databaseContext.Earnings.Find(Id);
-            if (record == null)
-            {
-                return testValue;
-            }
-            else
-            {
-                databaseContext.Earnings.Remove(record);
-                databaseContext.SaveChanges();
-                testValue = record.Id;
-            }
-            return testValue;
-        }
+        }       
 
         public IEnumerable<Earnings> GetAllEarnings()
         {
             return databaseContext.Earnings.ToList();
         }
-
-        public Earnings GetSingleRecord(int Id)
+        
+        public IEnumerable<Earnings> GetAListOfEarningsByDriverId(int DriverId)
         {
-            return databaseContext.Earnings.Where(temp => temp.Id == Id).FirstOrDefault();
+            return databaseContext.Earnings
+                .Where(e=>e.DriverId == DriverId)
+                .ToList();
         }
 
-        public int UpdateEarningsRecord(int Id, Earnings record)
+        public void PopularEarnings()
         {
-            int testValue = -1;
-            if (Id <= 0 || record == null)
+            var orders = databaseContext.OrderPlacements
+                .ToList();
+
+            foreach (var order in orders)
             {
-                return testValue;
+                if(order.DriverId> 0)
+                {                
+                    databaseContext.Earnings.Add(
+                        new Earnings()
+                        {
+                            GrossAmount = order.Price,
+                            EarnedAt = new DateOnly(),
+                            Status = order.Status,
+                            DriverId = order.DriverId,
+                            OrderPlacementId = order.Id
+                        }
+                    );
+                }
             }
-            else
+            databaseContext.SaveChanges();
+        }
+        public EarningsDivisionDto EarningDivionsByStatus(int DriverId)
+        {
+            var orders = databaseContext.OrderPlacements
+                .Where(o=>o.DriverId == DriverId)
+                .ToList();
+
+            var deliveredOrders = new List<OrderStatusEarningsDto>();
+            var intransitOrders = new List<OrderStatusEarningsDto>();
+            var pendingOrders = new List<OrderStatusEarningsDto>();
+            var cancelledOrders = new List<OrderStatusEarningsDto>();
+            var confirmedOrders = new List<OrderStatusEarningsDto>();
+
+
+            foreach (var orderItem in orders)
             {
-                Earnings updatedRecord = databaseContext.Earnings.Where(temp => temp.Id == Id).FirstOrDefault();
-                updatedRecord.GrossAmount = record.GrossAmount;
-                updatedRecord.PlatformFee = record.PlatformFee;
-                updatedRecord.NetEarnings = record.NetEarnings;
-                updatedRecord.IsPaidOut = record.IsPaidOut;
-                updatedRecord.EarnedAt = record.EarnedAt;
-                databaseContext.SaveChanges();
-                testValue = record.Id;
+                if (orderItem.Status == "Delivered")
+                {
+                    deliveredOrders.Add(
+                        new OrderStatusEarningsDto()
+                        {
+                            Status = orderItem.Status, 
+                            Amount = orderItem.Price, 
+                            StatusEarningId = orderItem.Id
+                        }
+                    );
+                }
+                else if(orderItem.Status =="In Transit")
+                {
+                    intransitOrders.Add(
+                        new OrderStatusEarningsDto()
+                        {
+                            Status = orderItem.Status,
+                            Amount = orderItem.Price,
+                            StatusEarningId = orderItem.Id
+                        }
+                    );
+                }
+                else if(orderItem.Status == "Pending")
+                {
+                    pendingOrders.Add(
+                        new OrderStatusEarningsDto()
+                        {
+                            Status = orderItem.Status,
+                            Amount = orderItem.Price,
+                            StatusEarningId = orderItem.Id
+                        }
+                    );
+                }
+                else if(orderItem.Status == "Cancelled")
+                {
+                    cancelledOrders.Add(
+                        new OrderStatusEarningsDto()
+                        {
+                            Status = orderItem.Status,
+                            Amount = orderItem.Price,
+                            StatusEarningId = orderItem.Id
+                        }
+                    );
+                }
+                else if(orderItem.Status == "Confirmed")
+                {
+                    confirmedOrders.Add(
+                        new OrderStatusEarningsDto()
+                        {
+                            Status = orderItem.Status,
+                            Amount = orderItem.Price,
+                            StatusEarningId = orderItem.Id
+                        }
+                    );
+                }
             }
-            return testValue;
+
+            return new EarningsDivisionDto()
+            {
+                deliveredOrders = deliveredOrders,
+                intransitOrders = intransitOrders,
+                pendingOrders = pendingOrders,
+                cancelledOrders = cancelledOrders,
+                confirmedOrders = confirmedOrders
+            };
         }
     }
 }

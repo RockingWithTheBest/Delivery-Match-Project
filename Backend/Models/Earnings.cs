@@ -9,13 +9,9 @@ namespace Backend.Models
         public int Id { get; set; }
         [Column(TypeName ="decimal(10,2)")]
         public decimal GrossAmount {  get; set; }
-        [Column(TypeName = "decimal(10,2)")]
-        public decimal PlatformFee { get; set; }
-        [Column(TypeName = "decimal(10,2)")]
-        public decimal NetEarnings { get;  set; }
-        [StringLength(30)]
-        public string IsPaidOut {  get; set; }
         public DateOnly EarnedAt {  get; set; }
+        [StringLength(50)]
+        public string Status {  get; set; }
         public int? DriverId {  get; set; }
         public int? OrderPlacementId { get; set; }
 
