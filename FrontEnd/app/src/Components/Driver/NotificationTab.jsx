@@ -26,9 +26,16 @@ const NotificationTab=()=>{
     const fetchNotification=async()=>{
         try{
             setLoading(true)
+            
+            const driverRecord = await axios.get("https://localhost:7216/api/Driver/get-driver-byUserId",{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
             const response = await axios.get(`${apiUrl}/Notification/Get-Notification-Placed-ByDriver`,{
                     params:{
-                        DriverId:parseInt(DriverId)
+                        DriverId:parseInt(driverRecord.data.Id)
                     }
                 }
             );
@@ -57,9 +64,15 @@ const NotificationTab=()=>{
 
     const fetchOrders = async()=>{
         try{
+            const driverRecord = await axios.get("https://localhost:7216/api/Driver/get-driver-byUserId",{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
             const response = await axios.get(`${apiUrl}/OrderPlacement/Get-All-Order-Placement-Records-By-DriverId`,{
                 params:{
-                    id:parseInt(DriverId)
+                    id:parseInt(driverRecord.data.Id)
                 }
             });
 
@@ -76,8 +89,14 @@ const NotificationTab=()=>{
         }
         try{
             setSending(true);
+            const driverRecord = await axios.get("https://localhost:7216/api/Driver/get-driver-byUserId",{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
             const message = {
-                Id: DriverId,
+                Id: driverRecord.data.Id,
                 orderId: orderId,
                 message: messageText
             }

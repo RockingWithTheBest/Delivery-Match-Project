@@ -92,12 +92,21 @@ const PersonalInfo =({driverDetails})=>{
     };
 
 
-    const handleReloadz=async()=>{        
+    const handleReloadz=async()=>{ 
+        // alert("Welcome")
+        const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+            params:{
+                UserId:parseInt(DriverId)
+            }
+        }) 
+        console.log("driver", driver.data.Id)
+
         const responseDriver = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
             params:{
-                Id:parseInt(DriverId)
+                Id:parseInt(driver.data.Id)
             }
         })
+        console.log("response driver", responseDriver)
 
         const responseUser = await axios.get(`${url}/User/Get-Users-By-Id`,{
             params:{
@@ -114,6 +123,7 @@ const PersonalInfo =({driverDetails})=>{
 
     useEffect(()=>{
         handleReloadz()
+        console.log("Welcome to Personal Profile")
     },[DriverId])
 
     useEffect(() => {    

@@ -5,7 +5,7 @@ import SectionTwo from '../Components/SectionTwo/sectiontwo.jsx'
 import SectionThree from '../Components/SectionThree/sectionthree.jsx'
 import SectionFour from '../Components/SectionFour/sectionfour.jsx'
 import Footer from '../Components/Footer/footer.jsx'
-import './mainpage.css'
+import './MainPage.css'
 const MainPage=()=>{
     return(
         <div className='mainpage'>

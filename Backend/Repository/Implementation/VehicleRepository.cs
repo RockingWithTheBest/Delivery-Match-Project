@@ -28,6 +28,8 @@ namespace Backend.Repository.Implementation
             }
             else
             {
+                var driver = databaseContext.Drivers.Where(i => i.UserId == vehicle.DriverId).FirstOrDefault();
+                vehicle.DriverId = driver.Id;
                 databaseContext.Vehicles.Add(vehicle);
                 databaseContext.SaveChanges();
                 textVariable = vehicle.Id;
@@ -68,6 +70,7 @@ namespace Backend.Repository.Implementation
 
         public Vehicle GetVehicleByDriverId(int DriverId)
         {
+            //var driver = databaseContext.Drivers.Where(i => i.UserId == DriverId).FirstOrDefault();
             return databaseContext.Vehicles.Where(temp => temp.DriverId == DriverId).FirstOrDefault();
         }
 

@@ -80,7 +80,7 @@ namespace Backend.Repository.Implementation
             }
             if(driver != null && Id > 0)
             {
-                var record = databaseContext.Drivers.Where(x=>x.Id==Id).FirstOrDefault();
+                var record = databaseContext.Drivers.Where(x=>x.UserId==Id).FirstOrDefault();
                 record.DriversLicense = driver.DriversLicense;
                 record.LicenseExpiry = driver.LicenseExpiry;
                 record.IsVerified = driver.IsVerified;
@@ -112,6 +112,13 @@ namespace Backend.Repository.Implementation
                 result = OrdersPlaced.ToList();
             }
             return result;
+        }
+
+        Driver IDriver.GetDriverByUserId(int UserId)
+        {
+            return databaseContext.Drivers
+                .Where(i => i.UserId == UserId)
+                .FirstOrDefault();
         }
     }
 }

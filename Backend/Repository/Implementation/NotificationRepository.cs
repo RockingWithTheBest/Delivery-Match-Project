@@ -25,6 +25,8 @@ namespace Backend.Repository.Implementation
             }
             else
             {
+                Driver driver = databaseContext.Drivers.Where(i => i.UserId == notify.DriverId).FirstOrDefault();
+                notify.DriverId = driver.Id;
                 databaseContext.Notifications.Add(notify);
                 databaseContext.SaveChanges();
                 textVariable = notify.Id;

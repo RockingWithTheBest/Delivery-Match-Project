@@ -37,10 +37,21 @@ const OrderTimeLineView=()=>{
     //fetch specific driver data
     const specificDriverOrders =async()=>{
         try{
+            const driverRecord = await axios.get("https://localhost:7216/api/Driver/get-driver-byUserId",{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
+            const driver = await axios.get("https://localhost:7216/api/Driver/Get-Single-Driver-Details",{
+                params:{
+                    Id:parseInt(driverRecord.data.Id)
+                }
+            })
             const response = await axios.get(urlDriverById,
                 {
                     params:{
-                        id:parseInt(DriverId)
+                        id:parseInt(driver.data.Id)
                     }
                 })
             setDriverOrders(response.data)

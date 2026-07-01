@@ -25,21 +25,23 @@ const Profile=()=>{
   
 
     const getDriverDetails = async()=>{
-        const driver = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
-            params:{
-                Id:parseInt(DriverId)
-            }
-        })
 
         const user = await axios.get(`${url}/User/Get-Users-By-Id`,{
                 params:{
-                    id:parseInt(driver.data.UserId)
+                    id:parseInt(DriverId)
                 }
         })
+        console.log("User",user.data)
+        const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+            params:{
+                UserId:parseInt(DriverId)
+            }
+        })
+        console.log("DRIVER", driver)
         
         const vehicle = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
             params:{
-                DriverId:parseInt(DriverId)
+                DriverId:parseInt(user.data.Driver.Id)
             }
         })
        
@@ -149,12 +151,12 @@ const Profile=()=>{
                 <nav onClick={()=>handlePersonalInfo()}>Personal Info</nav>
                 <nav onClick={()=>handleVehicleInfo()}>Vehicle Info</nav>
                 <nav onClick={()=>handleAddressInfo()}>Address Info</nav>
-                <nav onClick={()=>handleDocuments()}>Documents</nav>
+                {/* <nav onClick={()=>handleDocuments()}>Documents</nav> */}
                 <nav onClick={()=>handleStatistics()}>Statistics</nav>
             </div>
             {activatePersonalInfo && <PersonalInfo driverDetails={driverDetails}/>}
             {activateVehicleInfo && <Vehicle driverDetails={driverDetails}/>}
-            {activateDocuments && <Documents/>}
+            {/* {activateDocuments && <Documents/>} */}
             {activateStatistics && <Statistics/>}
             {activateAddress && <Address/>}
          

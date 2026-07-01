@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:docker": "vite --host 0.0.0.0 --port 4606",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -17,10 +18,13 @@
     "@hookform/resolvers": "^5.2.2",
     "@mui/material": "^7.3.4",
     "autoprefixer": "^10.4.21",
+    "axios": "^1.17.0",
     "bootstrap": "^5.3.8",
     "date-fns": "^4.1.0",
     "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "lucide-react": "^0.546.0",

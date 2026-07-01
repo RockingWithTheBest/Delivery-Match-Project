@@ -206,85 +206,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Backend.Controllers.DocumentController",
-    "Method": "AddDoc",
-    "RelativePath": "api/Document/Add-Docs",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "docRecord",
-        "Type": "Backend.Models.Documents",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.DocumentController",
-    "Method": "DeleteDoc",
-    "RelativePath": "api/Document/Delete-A-Doc-Record",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.DocumentController",
-    "Method": "UpdateDoc",
-    "RelativePath": "api/Document/Editing-Docs",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "docRecord",
-        "Type": "Backend.Models.Documents",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.DocumentController",
-    "Method": "GetAllDocs",
-    "RelativePath": "api/Document/Get-All-Docs",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.DocumentController",
-    "Method": "GetSingleDoc",
-    "RelativePath": "api/Document/Get-Single-Doc",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Backend.Controllers.DriverController",
     "Method": "AddDriver",
     "RelativePath": "api/Driver/Add-Driver",
@@ -491,6 +412,22 @@
   },
   {
     "ContainingType": "Backend.Controllers.DriverController",
+    "Method": "GetDriverRecordByUserId",
+    "RelativePath": "api/Driver/get-driver-byUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.DriverController",
     "Method": "GetSingleDriverDetails",
     "RelativePath": "api/Driver/Get-Single-Driver-Details",
     "HttpMethod": "GET",
@@ -591,59 +528,6 @@
   },
   {
     "ContainingType": "Backend.Controllers.EarningController",
-    "Method": "AddEarnings",
-    "RelativePath": "api/Earning/Add-Earnings",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "earningsRecord",
-        "Type": "Backend.Models.Earnings",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.EarningController",
-    "Method": "DeleteAddress",
-    "RelativePath": "api/Earning/Delete-An-Address-Record",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.EarningController",
-    "Method": "UpdateEarnings",
-    "RelativePath": "api/Earning/Editing-Earnings",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "earningsRecord",
-        "Type": "Backend.Models.Earnings",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.EarningController",
     "Method": "GetAll",
     "RelativePath": "api/Earning/Get-All-Earnings",
     "HttpMethod": "GET",
@@ -654,19 +538,51 @@
   },
   {
     "ContainingType": "Backend.Controllers.EarningController",
-    "Method": "GetById",
-    "RelativePath": "api/Earning/Get-Earnings-By-Id",
+    "Method": "GetAllByDriverId",
+    "RelativePath": "api/Earning/get-list-of-earningsBy-driverId",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "DriverId",
         "Type": "System.Int32",
         "IsRequired": false
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.EarningController",
+    "Method": "GetOrderEarningsDivisions",
+    "RelativePath": "api/Earning/getting-earning-divisions-by-driverId-orderplacements",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DriverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.EarningController",
+    "Method": "PopularEarningsByAdding",
+    "RelativePath": "api/Earning/popular-earnings-by-adding",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Backend.Controllers.JWTControllerTakeThisToUser",

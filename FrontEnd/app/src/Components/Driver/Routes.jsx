@@ -19,16 +19,22 @@ const Routes=()=>{
     const postRoutes =async()=>{
         setLoading(true);
         try{
+            
             // const orderIds;
             if(!orderPlacements || orderPlacements.length === 0){
-                // alert("No orders found for this driver");
+                alert("No orders found for this driver");
                 //Add notifications here
                 setLoading(false);
                 return;
             }
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
 
             const requestBody = {
-                DriverId: DriverId,
+                DriverId: driver.data.Id,
                 OrderIds: orderPlacements
             }
             console.log("requestBody",requestBody)
@@ -49,9 +55,15 @@ const Routes=()=>{
     const getRoutes = async()=>{
 
         try{
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+            console.log("HEY", driver)
             const routedata = await axios.get(`${url}/Route/Get-Route-By-DriverId`,{
                 params:{
-                    id:parseInt(DriverId)
+                    id:parseInt(driver.data.Id)
                 }
             })
             
@@ -85,9 +97,16 @@ const Routes=()=>{
     
     const getDriverDetails =async()=>{
         try{
+            
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                    params:{
+                        UserId:parseInt(DriverId)
+                    }
+                })
+
             const responseDriver = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
                 params:{
-                    Id:parseInt(DriverId)
+                    Id:parseInt(driver.data.Id)
                 }
             })
 
@@ -108,9 +127,18 @@ const Routes=()=>{
 
     const getOrderPlacmenetsByDriverId = async()=>{
         try{
+
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
+            console.log("You",driver)
+
             const response = await axios.get(`${url}/OrderPlacement/Get-All-Order-Placement-Records-By-DriverId`,{
                 params:{
-                    id:parseInt(DriverId)
+                    id:parseInt(driver.data.Id)
                 }
             })
             
@@ -122,8 +150,16 @@ const Routes=()=>{
     }
 
     useEffect(()=>{
-        getRoutes()
+       
+        const intervalId = setInterval(() => {
+            getRoutes()
+        }, 2000); // 2000ms = 2 seconds
+
+        // Clean up interval on component unmount
+        return () => clearInterval(intervalId);
+
     },[DriverId])
+
     useEffect(()=>{
         // const intervalId = new setInterval(()=>{
         //     getDriverDetails()

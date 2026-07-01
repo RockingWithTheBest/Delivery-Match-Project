@@ -45,11 +45,20 @@ const Dashboard = () => {
 
     const handleDriverRecord=async()=>{
         try{
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
+            console.log("HEY", driver)
+
             const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
                 params:{
-                    Id:parseInt(DriverId)
+                    Id:parseInt(driver.data.Id)
                 }
             })
+            console.log("HEY", response.data)
             setDriverRecord(response.data)
         }
         catch (error) {
@@ -60,9 +69,15 @@ const Dashboard = () => {
     
     const setOrderStatus = async()=>{
         try{
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
             const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
                 params:{
-                    Id:parseInt(DriverId)
+                    Id:parseInt(driver.data.Id)
                 }
             })
             setIsActive(response.data.IsAvailable)
@@ -127,9 +142,15 @@ const Dashboard = () => {
 
     const fetchDisplay=async()=>{
         try{
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
             const responseDriverRecord = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
                 params:{
-                    DriverId:parseInt(DriverId)
+                    DriverId:parseInt(driver.data.Id)
                 }
             })
             const response = await axios.get(`${url}/Driver/images-list`);
@@ -203,9 +224,15 @@ const Dashboard = () => {
         formData.append('description', description);
 
         try {
+            const driver = await axios.get(`{url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            })            
+            
             const vehicle = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
                 params:{
-                    DriverId:parseInt(DriverId)
+                    DriverId:parseInt(driver.data.Id)
                 }
             })
             console.log("vehicle",vehicle.data)
@@ -278,10 +305,16 @@ const Dashboard = () => {
     const fetchVehicle = async()=>{
         
         try{
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            })
+
             const response = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,
                 {
                     params:{
-                        DriverId:parseInt(DriverId)
+                        DriverId:parseInt(driver.data.Id)
                     }
             })
             setVehicle(response.data)
@@ -300,6 +333,7 @@ const Dashboard = () => {
         handleDriverRecord()
         setOrderStatus()
         fetchDisplay()
+        
     },[DriverId])
 
     useEffect(() => {    

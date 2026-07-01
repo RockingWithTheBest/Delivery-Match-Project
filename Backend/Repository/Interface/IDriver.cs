@@ -11,5 +11,6 @@ namespace Backend.Repository.Interface
         IEnumerable<OrderPlacement> GetAllOrdersClaimedByDriverID(int DriverId);
         IEnumerable<OrderPlacement> AddCollectionOfOrdersPlaced(IEnumerable<OrderPlacement> OrdersPlaced, int DriverId);
         Driver GetDriverDetails(int Id);
+        Driver GetDriverByUserId(int UserId);
     }
 }

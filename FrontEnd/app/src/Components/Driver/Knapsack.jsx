@@ -28,12 +28,19 @@ const KnapsackAlgorithm=()=>{
 
     const getAllDriverRecords=async()=>{
         try{
+            const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
             const response = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
                 params:{
-                    DriverId:parseInt(DriverId)
+                    DriverId:parseInt(driver.data.Id)
                 }
             })
             setSelectedVehicle(response.data)
+            console.log("Vehicle")
 
         }
         catch(err){
@@ -234,9 +241,22 @@ const KnapsackAlgorithm=()=>{
         }
        
         const ClaimMyOrders =async()=>{
+
             if(selectedOrders!=null){
+
+                const driver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                    params:{
+                        UserId:parseInt(DriverId)
+                    }
+                })
+
                 const PlacementIds = selectedOrders.map(order=>order.Id)
                 try{
+                    const response = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
+                        params:{
+                            Id:parseInt(driver.data.Id)
+                        }
+                    })
                     const id = selectedOrders[0].Id;
         
                     for(const item of selectedOrders){
@@ -253,7 +273,7 @@ const KnapsackAlgorithm=()=>{
                             Price:item.Price,
                             ScheduledAt:item.ScheduledAt,
                             Status:item.Status,
-                            DriverId:parseInt(DriverId)
+                            DriverId:parseInt(response.data.Id)
                         }
                         await axios.put(`${url}/OrderPlacement/Editing-Order-PlacementAddresses`,updateItem,{
                             params:{

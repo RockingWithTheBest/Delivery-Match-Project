@@ -361,144 +361,6 @@
         }
       }
     },
-    "/api/Document/Get-All-Docs": {
-      "get": {
-        "tags": [
-          "Document"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Document/Get-Single-Doc": {
-      "get": {
-        "tags": [
-          "Document"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Document/Add-Docs": {
-      "post": {
-        "tags": [
-          "Document"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Document/Editing-Docs": {
-      "put": {
-        "tags": [
-          "Document"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Documents"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Document/Delete-A-Doc-Record": {
-      "delete": {
-        "tags": [
-          "Document"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Driver/Get-All-Drivers": {
       "get": {
         "tags": [
@@ -519,6 +381,28 @@
         "parameters": [
           {
             "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Driver/get-driver-byUserId": {
+      "get": {
+        "tags": [
+          "Driver"
+        ],
+        "parameters": [
+          {
+            "name": "UserId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1036,14 +920,14 @@
         }
       }
     },
-    "/api/Earning/Get-Earnings-By-Id": {
+    "/api/Earning/get-list-of-earningsBy-driverId": {
       "get": {
         "tags": [
           "Earning"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "DriverId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1058,35 +942,11 @@
         }
       }
     },
-    "/api/Earning/Add-Earnings": {
-      "post": {
+    "/api/Earning/popular-earnings-by-adding": {
+      "get": {
         "tags": [
           "Earning"
         ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1094,60 +954,14 @@
         }
       }
     },
-    "/api/Earning/Editing-Earnings": {
-      "put": {
+    "/api/Earning/getting-earning-divisions-by-driverId-orderplacements": {
+      "get": {
         "tags": [
           "Earning"
         ],
         "parameters": [
           {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Earnings"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Earning/Delete-An-Address-Record": {
-      "delete": {
-        "tags": [
-          "Earning"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
+            "name": "DriverId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -2643,7 +2457,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "maxLength": 150,
+              "maxLength": 500,
               "minLength": 0,
               "type": "string"
             }
@@ -2896,7 +2710,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "maxLength": 150,
+              "maxLength": 500,
               "minLength": 0,
               "type": "string"
             }
@@ -3233,7 +3047,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "maxLength": 150,
+              "maxLength": 500,
               "minLength": 0,
               "type": "string"
             }
@@ -3486,7 +3300,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "maxLength": 150,
+              "maxLength": 500,
               "minLength": 0,
               "type": "string"
             }
@@ -4045,68 +3859,6 @@
         },
         "additionalProperties": false
       },
-      "Documents": {
-        "required": [
-          "documentType",
-          "driverId",
-          "fileUrl",
-          "status"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "documentType": {
-            "maxLength": 30,
-            "minLength": 0,
-            "type": "string"
-          },
-          "fileUrl": {
-            "maxLength": 300,
-            "minLength": 0,
-            "type": "string"
-          },
-          "expiryDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "status": {
-            "maxLength": 20,
-            "minLength": 0,
-            "type": "string"
-          },
-          "rejectionReason": {
-            "maxLength": 150,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
-          },
-          "uploadedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "reviewedBy": {
-            "maxLength": 30,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
-          },
-          "reviewedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "driverId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "driver": {
-            "$ref": "#/components/schemas/Driver"
-          }
-        },
-        "additionalProperties": false
-      },
       "Driver": {
         "required": [
           "driversLicense",
@@ -4171,54 +3923,6 @@
           },
           "user": {
             "$ref": "#/components/schemas/User"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Earnings": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "grossAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "platformFee": {
-            "type": "number",
-            "format": "double"
-          },
-          "netEarnings": {
-            "type": "number",
-            "format": "double"
-          },
-          "isPaidOut": {
-            "maxLength": 30,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
-          },
-          "earnedAt": {
-            "type": "string",
-            "format": "date"
-          },
-          "driverId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "orderPlacementId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "orderPlacement": {
-            "$ref": "#/components/schemas/OrderPlacement"
-          },
-          "driver": {
-            "$ref": "#/components/schemas/Driver"
           }
         },
         "additionalProperties": false
@@ -4609,11 +4313,6 @@
             "format": "date-time",
             "nullable": true
           },
-          "platformFee": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
           "driverEarnings": {
             "type": "number",
             "format": "double",
@@ -4696,7 +4395,7 @@
             "type": "string"
           },
           "password": {
-            "maxLength": 150,
+            "maxLength": 500,
             "minLength": 0,
             "type": "string"
           },

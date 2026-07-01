@@ -31,6 +31,17 @@ namespace Backend.Repository.Implementation
             {
                 databaseContext.OrderPlacements.Add(order_Placement);
                 databaseContext.SaveChanges();
+
+                //databaseContext.Earnings.Add(new Earnings()
+                //{
+                //    Status = order_Placement.Status,
+                //    GrossAmount = order_Placement.Price,
+                //    OrderPlacementId = order_Placement.Id,
+                //    DriverId = order_Placement.DriverId,
+                //    EarnedAt = new DateOnly()
+                //});
+
+
                 textVariable = order_Placement.Id;
             }
             return textVariable;
@@ -40,7 +51,20 @@ namespace Backend.Repository.Implementation
             if (BulkOrders != null)
             {  
                 databaseContext.OrderPlacements.AddRange(BulkOrders);
-                databaseContext.SaveChanges(); // This only saves OrderPlacements
+                //foreach (OrderPlacement order_Placement in BulkOrders)
+                //{                
+                //    databaseContext.Earnings.Add(
+                //        new Earnings()
+                //        {
+                //            Status = order_Placement.Status,
+                //            GrossAmount = order_Placement.Price,
+                //            OrderPlacementId = order_Placement.Id,
+                //            DriverId = order_Placement.DriverId,
+                //            EarnedAt = new DateOnly()
+                //        }
+                //    );
+                //}
+                databaseContext.SaveChanges(); 
                 return ClientId;
             }
             else
@@ -116,6 +140,7 @@ namespace Backend.Repository.Implementation
                         .Where(temp => temp.Id == Id)
                         .FirstOrDefault();
 
+                    //Order placements
                     updatedRecord.PickUpContact = record.PickUpContact;
                     updatedRecord.DeliveryContact = record.DeliveryContact;
                     updatedRecord.DeliveryUpAddress = record.DeliveryUpAddress;
@@ -126,6 +151,19 @@ namespace Backend.Repository.Implementation
                     updatedRecord.ScheduledAt = record.ScheduledAt;
                     updatedRecord.CompletedOn = record.CompletedOn;
                     updatedRecord.DriverId = record.DriverId;
+
+                    databaseContext.SaveChanges();
+
+                    var earnings = new Earnings()
+                    {
+                        GrossAmount = record.Price,
+                        EarnedAt = new DateOnly(),
+                        Status = record.Status,
+                        DriverId = record.DriverId,
+                        OrderPlacementId = Id
+                    };
+
+                    databaseContext.Earnings.Add(earnings);
                     databaseContext.SaveChanges();
 
                     //var notification = new Notification()
@@ -141,7 +179,7 @@ namespace Backend.Repository.Implementation
                     //};
 
                     //databaseContext.Notifications.Add(notification);
-                    databaseContext.SaveChanges();
+                    
                     testValue = Id;              
                 }
                 return testValue;

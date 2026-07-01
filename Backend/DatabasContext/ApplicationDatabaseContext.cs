@@ -9,7 +9,6 @@ namespace Backend.DatabasContext
         public ApplicationDatabaseContext(DbContextOptions<ApplicationDatabaseContext> options) : base(options) { }
         public DbSet<Address>Addresses { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Documents> Documents { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Earnings> Earnings { get; set; }
         public DbSet<Notification> Notifications { get; set; }  
@@ -71,17 +70,15 @@ namespace Backend.DatabasContext
 
             //modelBuilder.ApplyConfiguration(new AddressData());
             //modelBuilder.ApplyConfiguration(new CustomerData());
-            //modelBuilder.ApplyConfiguration(new DocumentData());
             //modelBuilder.ApplyConfiguration(new DriversData());
             //modelBuilder.ApplyConfiguration(new EarningsData());
-            ////modelBuilder.ApplyConfiguration(new NotificationData());
-            modelBuilder.ApplyConfiguration(new OrderItemsData());
-            modelBuilder.ApplyConfiguration(new OrderTrackingData());
-            modelBuilder.ApplyConfiguration(new OrderPlacmentData());
+            //modelBuilder.ApplyConfiguration(new OrderItemsData());
+            //modelBuilder.ApplyConfiguration(new OrderTrackingData());
+            //modelBuilder.ApplyConfiguration(new OrderPlacmentData());
             //modelBuilder.ApplyConfiguration(new PaymentData());
             //modelBuilder.ApplyConfiguration(new UserData());
             //modelBuilder.ApplyConfiguration(new VehicleData());
-            modelBuilder.ApplyConfiguration(new OrderDimensionsData());
+            //modelBuilder.ApplyConfiguration(new OrderDimensionsData());
         }
     }
 }

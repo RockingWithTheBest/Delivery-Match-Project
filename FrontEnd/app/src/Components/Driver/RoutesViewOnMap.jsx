@@ -39,16 +39,23 @@ const RoutesViewOnMap=()=>{
         setIsLoading(true);
         try{
 
+            const driverRecord = await axios.get("https://localhost:7216/api/Driver/get-driver-byUserId",{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
+
             const responseRoutes = await axios.get(`${url}/Route/Get-Route-By-DriverId`,{
                 params:{
-                  id:parseInt(DriverId)
+                  id:parseInt(driverRecord.data.Id)
                 }
             })
 
             console.log("SEARCH",responseRoutes.data.TravelinSequency.split('-').map(Number))
             const responseOfOrdersPlacedByDriver = await axios.get(`${url}/OrderPlacement/Get-All-Order-Placement-Records-By-DriverId`,{
                 params:{
-                    id:parseInt(DriverId)
+                    id:parseInt(driverRecord.data.Id)
                 }
             })
 

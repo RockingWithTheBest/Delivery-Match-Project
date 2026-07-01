@@ -79,7 +79,6 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("Add-Bulk-OrderPlacement")]
-
         public IActionResult AddBulkOrderPlacement(List<OrderPlacement>BulkOrderList, int ClientId)
         {
             if (BulkOrderList == null || ClientId ==null)
@@ -130,6 +129,7 @@ namespace Backend.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        
         [HttpPut]
         [Route("Editing-Order-PlacementAddresses")]
         public IActionResult UpdateOrderPlacement(int Id, OrderPlacement orderPlacementRecord)

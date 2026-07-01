@@ -49,6 +49,17 @@ namespace Backend.Controllers
             }
             return Ok(result);
         }
+        [HttpGet]
+        [Route("get-driver-byUserId")]
+        public IActionResult GetDriverRecordByUserId(int UserId)
+        {
+            var result = driver.GetDriverByUserId(UserId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
 
         [HttpPost]
         [Route("Add-Driver")]
@@ -91,7 +102,7 @@ namespace Backend.Controllers
             var driverRecord = driver.GetDriverDetails(Id);
             if(driverRecord == null)
             {
-                return BadRequest("The Id you provided is LESS THAN OR EQUAL to Zero");
+                return BadRequest("The Id you provided gives the output of a null value");
             }
             else
             {

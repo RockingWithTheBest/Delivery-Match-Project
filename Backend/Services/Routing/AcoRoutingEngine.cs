@@ -12,8 +12,10 @@ namespace Backend.Services.Routing
         private readonly List<OrderPlacement> _orders;
         private readonly Vehicle _vehicle;
         private readonly Driver _driver;
-        private readonly Dictionary<int, GeoCoordinate> _locations;// orderId -> coordinate
-        private readonly Dictionary<int, (double weight, double volume)> _demands;
+        // orderId -> coordinate
+        private readonly Dictionary<int, GeoCoordinate> _locations;        
+        private readonly Dictionary<int, (double weight, 
+            double volume)> _demands;
         private readonly ApplicationDatabaseContext context;
 
         // ACO Parameters (tunable)
@@ -97,12 +99,14 @@ namespace Backend.Services.Routing
             return new GeoCoordinate { Latitude = double.Parse(address.Latitude), Longitude = double.Parse(address.Longitude) }; 
         }
 
-        public async Task<List<int>>OptimizeAsync(CancellationToken cancellationToken= default)
+        public async Task<List<int>>OptimizeAsync(CancellationToken 
+            cancellationToken= default)
         {
             var bestRoute = new List<int>();
             var bestDistance = double.MaxValue;
 
-            for(int iteration = 0; iteration < MaxIterations && !cancellationToken.IsCancellationRequested; iteration++)
+            for(int iteration = 0; iteration < MaxIterations && 
+                !cancellationToken.IsCancellationRequested; iteration++)
             {
                 var antRoutes = await GenerateAntRouteAsync(cancellationToken);
 

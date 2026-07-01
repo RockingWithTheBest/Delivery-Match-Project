@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import jsPDF from 'jspdf'
+import { format } from 'date-fns';
+import autoTable from 'jspdf-autotable';
 import './Statistics.css'
 
 const Statistics =()=>{
@@ -17,10 +20,17 @@ const Statistics =()=>{
 
     const gettingEarningsByDriver = async()=>{
         try{  
-            setLoading(true)      
+            setLoading(true)     
+            
+            const driverRecord = await axios.get("https://localhost:7216/api/Driver/get-driver-byUserId",{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            }) 
+
             const response = await axios.get(`${api}/Earning/getting-earning-divisions-by-driverId-orderplacements`,{
                 params:{
-                    DriverId: parseInt(DriverId)
+                    DriverId: parseInt(driverRecord.data.Id)
                 }
             })
             setEarnings(response.data)
@@ -34,6 +44,128 @@ const Statistics =()=>{
         }
     }
 
+    const exportToPDF = ()=>{
+        try{
+            const doc = new jsPDF('landscape')
+
+            //Add header
+            doc.setFontSize(20)
+            doc.setTextColor(40, 40, 40)
+            doc.text('Earnings report', 14, 22)
+
+            //Adding logo
+            doc.setFontSize(10)
+            doc.text('ClydeDelivery', 14, 42)
+            doc.text(`Generated: ${format(new Date(), 'MMM dd, yyyy HH:mm')}`, 14, 48);
+
+            const tableData = []
+
+            earnings.confirmedOrders.forEach(order=>{
+                tableData.push({
+                    Amount:order.Amount,
+                    Status:order.Status,
+                    StatusEarningId:order.StatusEarningId
+                })
+            })
+            console.log("Es",tableData)
+
+            earnings.cancelledOrders.forEach(order=>{
+                tableData.push({
+                    Amount:order.Amount,
+                    Status:order.Status,
+                    StatusEarningId:order.StatusEarningId
+                })
+            })
+
+            earnings.pendingOrders.forEach(order=>{
+                tableData.push({
+                    Amount:order.Amount,
+                    Status:order.Status,
+                    StatusEarningId:order.StatusEarningId
+                })
+            })
+
+            earnings.intransitOrders.forEach(order=>{
+                tableData.push({
+                    Amount:order.Amount,
+                    Status:order.Status,
+                    StatusEarningId:order.StatusEarningId
+                })
+            })
+
+            earnings.deliveredOrders.forEach(order=>{
+                tableData.push({
+                    Amount:order.Amount,
+                    Status:order.Status,
+                    StatusEarningId:order.StatusEarningId
+                })
+            })
+
+            const finalData = tableData.map(record=>[
+                record.StatusEarningId,
+                record.Status,
+                record.Amount
+            ])
+            autoTable(doc,{
+                startY:55,
+                head:[['No.Earnings', 'Amount', 'Status']],
+                body:finalData,
+                theme:'grid',
+                headStyles: {
+                    fillColor: [41, 128, 185],
+                    textColor: 255,
+                    fontStyle: 'bold'
+                },
+                columnStyles: {
+                    0: { cellWidth: 40 },
+                    1: { cellWidth: 30 },
+                    2: { cellWidth: 35 },
+                },
+                margin: { top: 10 },
+                styles: {
+                    fontSize: 9,
+                    cellPadding: 3
+                },
+                idDrawPage: function (data) {
+                    // Footer
+                    const pageCount = doc.internal.getNumberOfPages();
+                    doc.setFontSize(8);
+                    doc.setTextColor(150, 150, 150);
+                    doc.text(
+                        `Page ${data.pageNumber} of ${pageCount}`,
+                        data.settings.margin.left,
+                        doc.internal.pageSize.height - 10
+                    );
+                    doc.text(
+                        '© Clyde Delivery - Confidential',
+                        doc.internal.pageSize.width - 60,
+                        doc.internal.pageSize.height - 10
+                    );
+                }
+            })
+
+            // Add summary
+            const finalY = doc.lastAutoTable.finalY || 55;
+            doc.setFontSize(11);
+            doc.setTextColor(40, 40, 40);
+            doc.text(`Total Transactions: ${tableData.length}`, 14, finalY + 15);
+
+            console.log("FINAL", tableData)
+            // let totalAmount = 0;
+            // for(let i = 0; i<= tableData.length; i++){
+            //     totalAmount = totalAmount + tableData[i].Amount
+            // }
+            doc.text(`Total Amount: $${grandTotal}`, 14, finalY + 25);
+            
+            // Save PDF
+            const fileName = `transactions_${format(new Date(), 'yyyy-MM-dd_HHmm')}.pdf`;
+            doc.save(fileName);
+
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
     useEffect(()=>{
         gettingEarningsByDriver()
     },[DriverId])
@@ -72,6 +204,7 @@ const Statistics =()=>{
                 <div className="statistics-container-earning">
                     <div className="statistics-header-earning">
                         <h1>Earnings Overview</h1>
+                        <button onClick={()=>exportToPDF()}>Earnings Report</button>
                         <div className="grand-total-card-earning">
                             <span className="grand-total-label-earning">Total Earnings</span>
                             <span className="grand-total-amount-earning">{grandTotal.toFixed(2)}</span>

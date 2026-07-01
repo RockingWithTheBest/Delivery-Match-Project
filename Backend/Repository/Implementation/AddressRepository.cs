@@ -17,6 +17,10 @@ namespace Backend.Repository.Implementation
             
             if(address!=null)
             {
+                var record = databaseContext.Addresses.Where(i => i.UserId == address.UserId).FirstOrDefault();
+                databaseContext.Addresses.Remove(record);
+                databaseContext.SaveChanges();
+
                 databaseContext.Addresses.Add(address);
                 databaseContext.SaveChanges();
                 textVariable = address.Id;

@@ -60,6 +60,12 @@ const Vehicle =({driverDetails})=>{
     
     const putVehicle=async()=>{
         try{
+            const user = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+                params:{
+                    UserId:parseInt(DriverId)
+                }
+            })
+
             const vehicleInfo ={
                 Brand:brand,
                 Model:model,
@@ -67,7 +73,7 @@ const Vehicle =({driverDetails})=>{
                 Color:color,
                 LicensePlate:licensePlate,
                 MaxWeight:parseFloat(maxWeight),
-                DriverId:parseInt(DriverId),
+                DriverId:parseInt(user.data.Id),
                 Length : length,
                 Height : height,
                 Width : width,
@@ -102,9 +108,14 @@ const Vehicle =({driverDetails})=>{
     };
 
     const handleReloads=async()=>{
+        const user = await axios.get(`${url}/Driver/get-driver-byUserId`,{
+            params:{
+                UserId:parseInt(DriverId)
+            }
+        })
         const response = await axios.get(`${url}/Driver/Get-Vehicle-By-DriverId`,{
                 params:{
-                    DriverId:parseInt(DriverId)
+                    DriverId:parseInt(user.data.Id)
                 }
             })
 

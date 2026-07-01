@@ -19,7 +19,7 @@ namespace Backend.Models
         [StringLength(20)]
         public string LastName { get; set; }
         [Required]
-        [StringLength(150)]
+        [StringLength(500)]
         public string Password { get; set; }
 
         public virtual Driver? Driver { get; set; }

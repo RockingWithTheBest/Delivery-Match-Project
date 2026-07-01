@@ -21,8 +21,6 @@ namespace Backend.Models
         public string TransactionIdentification { get; set; }
         public DateTime? ProcessedAt { get; set; }
         [Column(TypeName = "decimal(10,2)")]
-        public decimal? PlatformFee { get; set; }
-        [Column(TypeName = "decimal(10,2)")]
         public decimal? DriverEarnings { get; set; }
         [Required]
         public int OrderPlacementId {  get; set; }

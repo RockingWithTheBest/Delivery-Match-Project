@@ -464,7 +464,8 @@ const Registration=()=>{
 
                 if(userProfile.Driver!=null){
                     // const client = allClients.find(d=>d.UserId === user.Id)
-                    navigate(`/driver/${userProfile.Email}/${userProfile.Driver.Id}`)
+                    // navigate(`/driver/${userProfile.Email}/${userProfile.Driver.Id}`)
+                    navigate(`/driver/${userProfile.Email}/${userProfile.Driver.UserId}`)
                     showNotification("You have successfully logged in", 'success')
                 }
                 else {

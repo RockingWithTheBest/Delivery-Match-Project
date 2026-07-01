@@ -13,6 +13,13 @@ const Address =()=>{
     const [btnName, setBtnName] =  useState("Edit Address")
     const [userId, setUserId] = useState("")
     const [disableTrue,setDisableToTrue] = useState(true)
+
+    //state variables
+    const [longitudeA, setLongitudeA] = useState("")
+    const [locationA, setLocationA] = useState("")
+    const [latitudeA, setLatitudeA] = useState("")
+    const [labelA, setLabelA] = useState("")
+    const [openModal, setOpenModal] = useState(false)
     
     //Notifications
     const [notification, setNotification] = useState({ show: false, message: '', type: 'info' });
@@ -54,10 +61,27 @@ const Address =()=>{
     const url ="https://localhost:7216/api"
     //params
     const {DriverId} = useParams()
+
+    const addAddress = async() =>{
+        try{        
+            const record = {
+                Label:labelA,
+                Location:locationA,
+                Latitude:latitudeA,
+                Longitude:longitudeA,
+                UserId:parseInt(DriverId)
+            }
+
+            axios.post(`${url}/Address/Add-Addresses`,record)
+        }
+        catch(err){
+            console.log("Message", err)
+        }
+    }
     const getAddressesByDriverId = async()=>{
-        const responseDriver = await axios.get(`${url}/Driver/Get-Single-Driver-Details`,{
+        const responseDriver = await axios.get(`${url}/Driver/get-driver-byUserId`,{
             params:{
-                Id:parseInt(DriverId)
+                UserId:parseInt(DriverId)
             }
         })
 
@@ -82,6 +106,7 @@ const Address =()=>{
 
     const handleDriverLocationSetting =async(value)=>{
         try{
+            console.log("Data",data)
             const addressData = data.find(f=>f.Id == value)
             const address = {
                 Label: label,
@@ -114,6 +139,7 @@ const Address =()=>{
             setBtnName("Edit Address")
         }
     }
+
     useEffect(()=>{
         getAddressesByDriverId()
         console.log("DATA", location)
@@ -130,7 +156,13 @@ const Address =()=>{
                         <img src={AddressIcon} className="address-iicon" alt="" />
                         <p>Address Information</p>
                     </div>                    
+                    
+                <div className="address-add">
                     <button onClick={()=>handleEditAndDisableAddressData()}>{btnName}</button>
+                    <button className="add-address-btn">
+                        Add Address
+                    </button>
+                </div>
                 </div> 
             <form action="" className="driver-address-form">
                 
@@ -180,6 +212,13 @@ const Address =()=>{
                     </select>
                 </div>
             </form>
+            {openModal &&
+                <div onClick={()=>setOpenModal(false)}>
+                    <div onClick={(e)=>e.stopPropagation()}>
+                        <h3>Add New Address</h3>
+                    </div>
+                </div>
+            }
         </div>
     )
 }

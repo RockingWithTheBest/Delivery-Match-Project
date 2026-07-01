@@ -73,7 +73,6 @@ namespace Backend.Repository.Implementation
                 updatedRecord.Status = record.Status;
                 updatedRecord.TransactionIdentification = record.TransactionIdentification;
                 updatedRecord.ProcessedAt = record.ProcessedAt;
-                updatedRecord.PlatformFee = record.PlatformFee;
                 updatedRecord.DriverEarnings = record.DriverEarnings;
                 databaseContext.SaveChanges();
                 testValue = record.Id;

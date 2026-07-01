@@ -35,6 +35,11 @@
     animation: spin-earning 1s linear infinite;
 }
 
+.statistics-header-earning button{
+    background:black;
+    color: white;
+    border-radius: 3px;
+}
 @keyframes spin-earning {
     to { transform: rotate(360deg); }
 }

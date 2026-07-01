@@ -34,13 +34,12 @@ internal class Program
 
         //Dependancy injection
         builder.Services.AddDbContext<ApplicationDatabaseContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DeliveryMatchString")));
+           options.UseSqlServer(builder.Configuration.GetConnectionString("DeliveryMatchString")));
 
 
         // Register implementation
         builder.Services.AddScoped<IAddress, AddressRepository>();
         builder.Services.AddScoped<ICustomer, CustomerRepository>();
-        builder.Services.AddScoped<IDocuments, DocumentRepository>();
         builder.Services.AddScoped<IDriver, DriverRepository>();
         builder.Services.AddScoped<IEarnings, EarningRepository>();
         builder.Services.AddScoped<INotifications, NotificationRepository>();
@@ -56,6 +55,19 @@ internal class Program
         builder.Services.AddScoped<TokenProvider>();
         builder.Services.AddScoped<LoginUser>();
         builder.Services.AddAuthorization();
+
+        var jwtSettings = builder.Configuration.GetSection("Jwt");
+        Console.WriteLine($"jSON = {jwtSettings.GetSection("Jwt")["ExpirationInMinutes"]}");
+        var jwtSecret = jwtSettings["Secret"];
+        var jwtIssuer = jwtSettings["Issuer"];
+        var jwtAudience = jwtSettings["Audience"];
+
+        // Validate JWT configuration
+        if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
+        {
+            throw new InvalidOperationException("JWT Secret is missing or too short. Please check your appsettings.json");
+        }
+
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer
             (
