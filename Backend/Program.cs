@@ -57,7 +57,7 @@ internal class Program
         builder.Services.AddAuthorization();
 
         var jwtSettings = builder.Configuration.GetSection("Jwt");
-        Console.WriteLine($"jSON = {jwtSettings.GetSection("Jwt")["ExpirationInMinutes"]}");
+        Console.WriteLine($"jSON = Clyde Delivery App");
         var jwtSecret = jwtSettings["Secret"];
         var jwtIssuer = jwtSettings["Issuer"];
         var jwtAudience = jwtSettings["Audience"];
